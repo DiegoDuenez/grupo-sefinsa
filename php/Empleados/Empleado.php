@@ -75,7 +75,7 @@ class Empleado extends Database{
 
         try{
 
-            if(!$this->existsData('empleados', 'usuario', $usuario, $id)){
+            if(!$this->existsData('empleados', 'usuario', trim($usuario), $id)){
 
                 if($changePassword){
 
