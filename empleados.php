@@ -66,13 +66,13 @@
                         <input class="form-control mt-2" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group">
-                        <input class="form-control mt-2" id="inp_empleado" placeholder="empleado" required/>
+                        <input class="form-control mt-2" id="inp_usuario" placeholder="empleado" required/>
                     </div>
                     <div class="form-group">
                         <input class="form-control mt-2" id="inp_password" type="password" placeholder="Contraseña" required/>
                     </div>
                     <select class="form-control select_perfiles" >
-                        <option selected >Seleccionar perfil</option>
+                        <option selected value="0" >Seleccionar perfil</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -97,10 +97,10 @@
                         <input class="form-control mt-2" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_empleado" placeholder="empleado" required/>
+                        <input class="form-control mt-2" id="inp_editar_usuario" placeholder="empleado" required/>
                     </div>
                     <div class="form-group">
-                        <select class="form-control select_perfiles">
+                        <select class="form-control select_perfiles editar">
                         </select>
                     </div>
                    

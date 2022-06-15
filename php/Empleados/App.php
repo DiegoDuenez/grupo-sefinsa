@@ -27,4 +27,35 @@ switch($func){
     case 'perfiles':
         echo $Empleado->perfiles();
     break;
+
+    case 'edit':
+
+        $user = $_DATA['usuario'];
+        $nombre = $_DATA['nombre_completo'];
+        $id = $_DATA['id'];
+        $perfil_id = $_DATA['perfil_id'];
+        $pwd = null;
+        $changePassword = $_DATA['changePassword'];
+        if($changePassword){
+            $pwd = $_DATA['password'];
+        }
+
+        echo $Empleado->edit($nombre, $user, $pwd, $perfil_id, $id, $changePassword);
+
+    break;
+
+    
+    case 'activar':
+
+        $id = $_DATA['id'];
+        echo $Empleado->activar($id);
+
+    break;
+
+    case 'desactivar':
+
+        $id = $_DATA['id'];
+        echo $Empleado->desactivar($id);
+
+    break;
 }

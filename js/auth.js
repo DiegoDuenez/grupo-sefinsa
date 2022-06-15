@@ -32,10 +32,6 @@ function loggedIn(){
     return !! localStorage.getItem('usuario')
 }
 
-
-
-
-
 function authGuard(){
     if(loggedIn()){
         return true
@@ -48,13 +44,17 @@ function authGuard(){
 
 function clearInputs(){
 
+    $(`.select_perfiles option[value="0"]`).attr('selected','selected');
     $('#inp_nombre_completo').val("")
     $('#inp_usuario').val("")
-   $('#inp_password').val("")
+    $('#inp_password').val("")
 
     $('#inp_editar_nombre_completo').val("")
     $('#inp_editar_usuario').val("")
     $('#inp_editar_password').val("")
+
+    $('#cb_password').prop("checked", false)
+    $('#inp_editar_password').addClass('d-none')
 
 }
 
