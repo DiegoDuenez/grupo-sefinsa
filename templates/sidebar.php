@@ -67,7 +67,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
                 </li>
             </ul>
             <li class="nav-item"> 
-                <a  class="nav-link" id="cerrarSesion" style="cursor: pointer;">
+                <a  class="nav-link" id="cerrarSesion" style="cursor: pointer;" onclick="logout()">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <p>Cerrar sesión</p>
                 </a>
@@ -78,3 +78,4 @@ $ruta = basename($_SERVER['PHP_SELF']);
     </nav>
     </div>
 </aside>
+

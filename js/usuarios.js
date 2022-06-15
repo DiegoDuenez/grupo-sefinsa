@@ -20,32 +20,8 @@ $(document).ready(function(){
 
     getUsuarios();
 
-    if(localStorage.getItem('usuario') !== null){
-
-        var usuario =  JSON.parse(localStorage.getItem('usuario'))
-        $('#usuario').text(usuario.usuario)
-        
-    }
-    
-    
-    $("#search_filter").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#table_body tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
 });
 
-
-function clearInputs(){
-    inp_nombre_completo.val("")  
-    inp_usuario.val("")
-    inp_password.val("") 
-    inp_editar_nombre_completo.val("")
-    inp_editar_password.val("")
-    inp_editar_usuario.val("")
-}
 
 function getUsuarios(){
 
