@@ -13,7 +13,8 @@ class Ruta extends Database{
         INNER JOIN ruta_localidades ON $this->table.id = ruta_localidades.ruta_id 
         INNER JOIN localidades ON localidades.id = ruta_localidades.localidad_id";*/
 
-        $query  = "SELECT * FROM $this->table ";
+        $query  = "SELECT * FROM $this->table ORDER BY $this->table.id DESC";
+
         $rutas =  $this->Select($query);
         /*$rutas = json_decode($rutas, TRUE);
         $rutas[] = ['id' => '9999', 'name' => 'Name'];

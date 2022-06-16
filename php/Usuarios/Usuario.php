@@ -10,7 +10,7 @@ class Usuario extends Database{
     public function index()
     {
 
-        $query  = "SELECT * FROM $this->table ORDER BY id Desc";
+        $query  = "SELECT * FROM $this->table ORDER BY $this->table.id DESC";
         return json(
             [
                 'status' => 'success',

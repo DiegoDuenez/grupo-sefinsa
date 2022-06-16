@@ -10,7 +10,10 @@ class Empleado extends Database{
     public function index()
     {
 
-        $query  = "SELECT $this->table.*, perfiles.nombre_perfil FROM $this->table INNER JOIN perfiles on perfiles.id = $this->table.perfil_id ORDER BY $this->table.id DESC";
+        $query  = "SELECT $this->table.*, perfiles.nombre_perfil FROM $this->table 
+        INNER JOIN perfiles on perfiles.id = $this->table.perfil_id 
+        ORDER BY $this->table.id DESC";
+        
         return json(
             [
                 'status' => 'success',

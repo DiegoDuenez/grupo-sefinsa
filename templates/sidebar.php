@@ -48,7 +48,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="localidades.php" class="nav-link <?php if($ruta == 'localidades.php') echo ' active'; ?>">
                         <i class="fa-solid fa-map-location-dot"></i>
                         <p>Localidades</p>
                     </a>
