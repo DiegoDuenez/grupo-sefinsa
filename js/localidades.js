@@ -13,6 +13,11 @@ $(document).ready(function(){
     getLocalidades();
     getRutas();
 
+    $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_localidad')});
+    $('#select_rutas_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_localidad')});
+
+
+
 });
 
 
@@ -44,6 +49,7 @@ function getLocalidades(){
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
                     <td> 
                         <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \' ${response.data[i].nombre_ruta}'\)" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
+                       
                     </td>
     
                     </tr>
@@ -74,7 +80,7 @@ function getRutas(){
 
 
     var datasend = {
-        func: "index"
+        func: "rutasActivas"
     };
 
     $.ajax({
@@ -225,9 +231,7 @@ function editarLocalidad(nombre_localidad, ruta_id, id){
         nombre_localidad,
         ruta_id,
         id, 
-      
     }
-
 
     $.ajax({
 
@@ -259,5 +263,102 @@ function editarLocalidad(nombre_localidad, ruta_id, id){
         }
         
     })
+
+}
+
+
+
+function desactivar(id){
+
+    Swal.fire({
+        title: '¿Quieres desactivar la localidad?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'desactivar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Localidad desactivada',
+                            text: 'Se ha desactivado la localidad',
+                        })
+                        getEmpleados()
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+
+    })
+    
+
+}
+
+
+function activar(id){
+
+    Swal.fire({
+        title: '¿Quieres activar la localidad?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'activar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Localidad activada',
+                            text: 'Se ha activado la localidad',
+                        })
+                        getEmpleados()
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+    })
+
+    
 
 }

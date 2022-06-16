@@ -13,6 +13,10 @@ switch($func){
         echo $Empleado->index();
     break;
 
+    case 'empleadosActivos':
+        echo $Empleado->empleadosActivos();
+    break;
+
     case 'create':
 
         $user = $_DATA['usuario'];
@@ -46,17 +50,13 @@ switch($func){
 
     
     case 'activar':
-
         $id = $_DATA['id'];
         echo $Empleado->activar($id);
-
     break;
 
     case 'desactivar':
-
         $id = $_DATA['id'];
         echo $Empleado->desactivar($id);
-
     break;
 
     default:

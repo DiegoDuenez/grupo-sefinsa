@@ -20,61 +20,91 @@ $ruta = basename($_SERVER['PHP_SELF']);
 
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-                <i class="nav-icon fa-solid fa-book"></i>
-                <p>
-                Catálogos
-                <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                <!--<a href="#" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Active Page</p>
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa-solid fa-book"></i>
+                    <p>
+                    Catálogos
+                    <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
-                </li>-->
-                <li class="nav-item">
-                    <a href="usuarios.php " class="nav-link <?php if($ruta == 'usuarios.php') echo ' active'; ?>">
-                        <i class="fa-solid fa-users"></i>
-                        <p>Usuarios</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="rutas.php" class="nav-link <?php if($ruta == 'rutas.php') echo ' active'; ?>">
-                        <i class="fa-solid fa-route"></i>
-                        <p>Rutas</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="localidades.php" class="nav-link <?php if($ruta == 'localidades.php') echo ' active'; ?>">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        <p>Localidades</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="empleados.php" class="nav-link <?php if($ruta == 'empleados.php') echo ' active'; ?>">
-                        <i class="fa-solid fa-users"></i>
-                        <p>Empleados</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa-solid fa-handshake"></i>
-                        <p>Clientes</p>
-                    </a>
-                </li>
-            </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a href="usuarios.php " class="nav-link <?php if($ruta == 'usuarios.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="rutas.php" class="nav-link <?php if($ruta == 'rutas.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-route"></i>
+                                <p>Rutas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="localidades.php" class="nav-link <?php if($ruta == 'localidades.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <p>Localidades</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="empleados.php" class="nav-link <?php if($ruta == 'empleados.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Empleados</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-handshake"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li>
+                    </li>
+                </ul>
+            </li>
+
+
+            <!--
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="fa-solid fa-route"></i>
+                    <p>
+                    Rutas
+                    <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a href="rutas_empleado.php" class="nav-link <?php if($ruta == 'rutas_empleado.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-route"></i>
+                                <p>Rutas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-user"></i>
+                                <p>Rutas por empleado</p>
+                            </a>
+                        </li>
+                    </li>
+                </ul>
+            </li>-->
+
+
+
             <li class="nav-item"> 
                 <a  class="nav-link" id="cerrarSesion" style="cursor: pointer;" onclick="logout()">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <p>Cerrar sesión</p>
                 </a>
             </li>
-            </li>
-            
+
+
         </ul>
+
+        
     </nav>
     </div>
 </aside>

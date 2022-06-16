@@ -8,12 +8,71 @@ btn_guardar_editar_ruta = $("#btn_guardar_editar_ruta")
 
 
 idRutaEditar = 0
+rutaEmpleado = ""
 
 $(document).ready(function(){
 
     getRutas();
+    getEmpleados();
+
+    $('#select_empleados_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_ruta')});
+    $('#select_empleados_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_ruta')});
 
 });
+
+
+
+function getEmpleados(){
+
+    var datasend = {
+        func: "empleadosActivos"
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Empleados/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('.select_empleados').empty()
+                $('.select_empleados').append(`
+                    <option value="0" >Seleccionar empleado</option>
+                `)
+                for(var i = 0; i < response.data.length; i++ ){
+                    
+                    $('.select_empleados').append(`
+                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                    `)
+
+                    if(rutaEmpleado != ""){
+                        $(`.select_empleados.editar option[name=${rutaEmpleado}]`).attr('selected','selected');
+                    }
+
+
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
 
 
 function getRutas(){
@@ -41,8 +100,14 @@ function getRutas(){
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
+                    <td class="status"> ${ response.data[i].status == 1 ? 'Activa': 'Inactiva'  } </td>
+
                     <td> 
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id})" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].nombre_completo}\')" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_desactivar_ruta" onclick="desactivar( ${response.data[i].id})" title="Desactivar ruta"><i class="fa-solid fa-ban" ></i></button>`
+                        : `<button class="btn btn-success btn_activar_ruta" onclick="activar(${response.data[i].id})" title="Activar ruta"><i class="fa-regular fa-circle-check"></i></button>`  }
+                          
+                    
                     </td>
     
                     </tr>
@@ -69,19 +134,21 @@ function getRutas(){
 
 }
 
-function modalEditarRuta(e, id){
+function modalEditarRuta(e, id, nombre_empleado){
 
     var nombre_ruta = $(e).closest("tr") 
     .find(".nombre_ruta") 
     .text();    
     inp_editar_nombre_ruta.val($.trim(nombre_ruta))
     idRutaEditar = id
+    rutaEmpleado = nombre_empleado
+    getEmpleados()
 }
 
 
 btn_guardar_ruta.click(function(){
 
-    if(inp_nombre_ruta.val() == ""){
+    if(inp_nombre_ruta.val() == "" || $(`.select_empleados option:selected`).val() == 0){
 
         Swal.fire({
             icon: 'warning',
@@ -91,18 +158,20 @@ btn_guardar_ruta.click(function(){
 
     }
     else{
-        registrarRuta(inp_nombre_ruta.val())
+        empleado_id = $(`.select_empleados option:selected`).val()
+        registrarRuta(inp_nombre_ruta.val(), empleado_id)
        
     }
 
 })
 
 
-function registrarRuta(nombre_ruta){
+function registrarRuta(nombre_ruta, empleado_id){
 
     var datasend ={
         func: 'create',
-        nombre_ruta
+        nombre_ruta,
+        empleado_id
     }
 
     $.ajax({
@@ -139,7 +208,7 @@ function registrarRuta(nombre_ruta){
 
 btn_guardar_editar_ruta.click(function(){
 
-    if(inp_editar_nombre_ruta.val() == ""){
+    if(inp_editar_nombre_ruta.val() == "" || $(`.select_empleados.editar option:selected`).val() == 0){
 
         Swal.fire({
             icon: 'warning',
@@ -150,17 +219,19 @@ btn_guardar_editar_ruta.click(function(){
 
     }
     else{
-        editarRuta(inp_editar_nombre_ruta.val(), idRutaEditar)
+        empleado_id = $(`.select_empleados.editar option:selected`).val()
+        editarRuta(inp_editar_nombre_ruta.val(), empleado_id, idRutaEditar)
     }
 
 })
 
 
-function editarRuta(nombre_ruta, id){
+function editarRuta(nombre_ruta, empleado_id, id){
 
     ruta = {
         func: 'edit',
         nombre_ruta,
+        empleado_id,
         id
     }
 
@@ -194,5 +265,101 @@ function editarRuta(nombre_ruta, id){
         }
         
     })
+
+}
+
+
+function desactivar(id){
+
+    Swal.fire({
+        title: '¿Quieres desactivar la ruta?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'desactivar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Ruta desactivada',
+                            text: 'Se ha desactivado la ruta ',
+                        })
+                        getRutas()
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+
+    })
+    
+
+}
+
+
+function activar(id){
+
+    Swal.fire({
+        title: '¿Quieres activar la ruta?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'activar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Ruta activada',
+                            text: 'Se ha activado la ruta',
+                        })
+                        getRutas()
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+    })
+
+    
 
 }

@@ -13,20 +13,36 @@ switch($func){
         echo $Ruta->index();
     break;
 
+    case 'rutasActivas':
+        echo $Ruta->rutasActivas();
+    break;
+
     case 'create':
         $nombre = $_DATA['nombre_ruta'];
-        echo $Ruta->create($nombre);
+        $empleado_id = $_DATA['empleado_id'];
+        echo $Ruta->create($nombre, $empleado_id);
     break;
 
     case 'edit':
         $id = $_DATA['id'];
         $nombre = $_DATA['nombre_ruta'];
-        echo $Ruta->edit($nombre, $id);
+        $empleado_id = $_DATA['empleado_id'];
+        echo $Ruta->edit($nombre, $empleado_id, $id);
     break;
 
     case 'localidadesRuta':
         $id = $_DATA['id'];
         echo $Ruta->localidadesRuta($id);
+    break;
+
+    case 'activar':
+        $id = $_DATA['id'];
+        echo $Ruta->activar($id);
+    break;
+
+    case 'desactivar':
+        $id = $_DATA['id'];
+        echo $Ruta->desactivar($id);
     break;
 
     default:

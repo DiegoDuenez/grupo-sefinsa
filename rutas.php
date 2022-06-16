@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 </head>
 
@@ -34,6 +36,8 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
+                    <!--<th scope="col">Empleado</th>-->
+                    <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -61,6 +65,9 @@
                     <div class="form-group">
                         <input class="form-control mt-2" id="inp_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
+                    <select class="form-control select_empleados" id="select_empleados_registrar" >
+                        <option selected value="0" >Seleccionar empleado</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_ruta">Guardar</button>
@@ -83,6 +90,9 @@
                     <div class="form-group">
                         <input class="form-control mt-2" id="inp_editar_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
+                    <select class="form-control select_empleados editar" id="select_empleados_editar" >
+                        <option selected value="0" >Seleccionar empleado</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_ruta">Guardar</button>
@@ -98,6 +108,7 @@
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="dist/js/adminlte.min.js"></script>
+  <script src="plugins/select2/js/select2.full.min.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/rutas.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>

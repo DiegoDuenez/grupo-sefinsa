@@ -24,6 +24,25 @@ class Empleado extends Database{
 
     }
 
+    public function empleadosActivos()
+    {
+
+        $query  = "SELECT $this->table.*, perfiles.nombre_perfil FROM $this->table 
+        INNER JOIN perfiles on perfiles.id = $this->table.perfil_id 
+        WHERE status = 1
+        ORDER BY $this->table.id DESC";
+        
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
+
     public function create($nombre, $usuario, $password, $perfil_id){
 
         try{
@@ -217,4 +236,5 @@ class Empleado extends Database{
 
 
     }
+
 }

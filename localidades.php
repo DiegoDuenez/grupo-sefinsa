@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 
 </head>
 
@@ -62,7 +65,7 @@
                     <div class="form-group">
                         <input class="form-control mt-2" id="inp_nombre_localidad" placeholder="Nombre localidad" autofocus required/>
                     </div>
-                    <select class="form-control select_rutas"  >
+                    <select class="form-control select_rutas" id="select_rutas_registrar" >
                         <option selected value="0" >Seleccionar ruta</option>
                     </select>
                 </div>
@@ -87,7 +90,7 @@
                     <div class="form-group">
                         <input class="form-control mt-2" id="inp_editar_nombre_localidad" placeholder="Nombre localidad" autofocus required/>
                     </div>
-                    <select class="form-control select_rutas editar" >
+                    <select class="form-control select_rutas editar" id="select_rutas_editar">
                         <option selected value="0" >Seleccionar ruta</option>
                     </select>
                 </div>
@@ -105,12 +108,13 @@
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="dist/js/adminlte.min.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/localidades.js"></script>
+  <script src="plugins/select2/js/select2.full.min.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>
   <script src="plugins/blockui/jquery.blockui.min.js"></script>
   <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/localidades.js"></script>
 
 </body>
 
