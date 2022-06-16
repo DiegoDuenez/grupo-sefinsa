@@ -62,4 +62,8 @@ switch($func){
 
     break;
 
+    default:
+        echo notDefine();
+    break;
+
 }

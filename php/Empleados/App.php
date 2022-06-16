@@ -58,4 +58,8 @@ switch($func){
         echo $Empleado->desactivar($id);
 
     break;
+
+    default:
+        echo notDefine();
+    break;
 }

@@ -99,7 +99,7 @@ class Database{
 		}
 	}
 
-	function ultimoId()
+	function lastInsertId()
 	{
 		$id = $this->dbh->lastInsertId();
 		return $id;

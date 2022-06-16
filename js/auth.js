@@ -55,6 +55,8 @@ function clearInputs(){
 
     $('#cb_password').prop("checked", false)
     $('#inp_editar_password').addClass('d-none')
+    $("#inp_nombre_ruta").val("")
+
 
 }
 

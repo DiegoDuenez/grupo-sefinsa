@@ -25,7 +25,7 @@ class Usuario extends Database{
 
         try{
 
-            if(!$this->existsData('users', 'usuario', $usuario)){
+            if(!$this->existsData('users', 'usuario', trim($usuario))){
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = "INSERT INTO $this->table (nombre_completo, usuario, password) VALUES (?, ? ,?)";
@@ -75,7 +75,7 @@ class Usuario extends Database{
 
         try{
 
-            if(!$this->existsData('users', 'usuario', $usuario, $id)){
+            if(!$this->existsData('users', 'usuario', trim($usuario), $id)){
 
                 if($changePassword){
 
