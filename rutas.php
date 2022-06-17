@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <!--<th scope="col">Empleado</th>-->
+                    <th scope="col">Empleado</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                 </tr>

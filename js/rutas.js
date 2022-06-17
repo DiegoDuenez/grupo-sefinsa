@@ -49,7 +49,7 @@ function getEmpleados(){
                     `)
 
                     if(rutaEmpleado != ""){
-                        $(`.select_empleados.editar option[name=${rutaEmpleado}]`).attr('selected','selected');
+                        $(`.select_empleados.editar option[name='${rutaEmpleado}']`).attr('selected','selected');
                     }
 
 
@@ -100,6 +100,7 @@ function getRutas(){
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
+                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
                     <td class="status"> ${ response.data[i].status == 1 ? 'Activa': 'Inactiva'  } </td>
 
                     <td> 

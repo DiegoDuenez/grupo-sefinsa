@@ -30,8 +30,8 @@
                 
             
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control w-25" id="search_filter" placeholder="Buscar localidad..."/>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar localidad</button>
+                <input class="form-control w-25" id="search_filter" placeholder="Buscar población..."/>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar población</button>
             </div>
             <table class="table mt-2" id="tabla_localidades" >
             <thead>
@@ -56,14 +56,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar localidad</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Registrar población</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control mt-2" id="inp_nombre_localidad" placeholder="Nombre localidad" autofocus required/>
+                        <input class="form-control mt-2" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
                     <select class="form-control select_rutas" id="select_rutas_registrar" >
                         <option selected value="0" >Seleccionar ruta</option>
@@ -81,14 +81,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar localidad</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar población</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_nombre_localidad" placeholder="Nombre localidad" autofocus required/>
+                        <input class="form-control mt-2" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
                     <select class="form-control select_rutas editar" id="select_rutas_editar">
                         <option selected value="0" >Seleccionar ruta</option>

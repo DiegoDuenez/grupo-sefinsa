@@ -22,9 +22,22 @@ $(document).ready(function(){
 
 function logout(){
 
+    
     if(loggedIn()){
-        localStorage.removeItem('usuario')
-        window.location = "index.php";
+        Swal.fire({
+            title: '¿Esta seguro de salir de la plataforma?',
+            showCancelButton: true,
+            allowOutsideClick: false
+        }).then((result) => {
+            
+            if (result.isConfirmed) {
+                localStorage.removeItem('usuario')
+                window.location = "index.php";
+            } 
+            else if (result.isDenied) {
+            }
+        })
+        
     }
 }
 

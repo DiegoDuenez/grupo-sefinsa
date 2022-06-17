@@ -20,8 +20,8 @@ $ruta = basename($_SERVER['PHP_SELF']);
 
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item has-treeview ">
-                <a href="#" class="nav-link">
+            <li class="nav-item has-treeview menu-open ">
+                <a href="#" class="nav-link ">
                     <i class="nav-icon fa-solid fa-book"></i>
                     <p>
                     Catálogos
@@ -43,15 +43,21 @@ $ruta = basename($_SERVER['PHP_SELF']);
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="localidades.php" class="nav-link <?php if($ruta == 'localidades.php') echo ' active'; ?>">
+                            <a href="poblaciones.php" class="nav-link <?php if($ruta == 'poblaciones.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-map-location-dot"></i>
-                                <p>Localidades</p>
+                                <p>Poblaciones</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="empleados.php" class="nav-link <?php if($ruta == 'empleados.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-users"></i>
                                 <p>Empleados</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="colocadoras.php" class="nav-link <?php if($ruta == 'colocadoras.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Colocadoras</p>
                             </a>
                         </li>
                         <li class="nav-item">

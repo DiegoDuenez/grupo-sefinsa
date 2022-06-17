@@ -45,7 +45,7 @@ function getLocalidades(){
                 for(var i = 0; i < response.data.length; i++ ){
                     $('#table_body').append(`
                     <tr>
-                    <td class="nombre_localidad"> ${response.data[i].nombre_localidad} </td>
+                    <td class="nombre_localidad"> ${response.data[i].nombre_poblacion} </td>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
                     <td> 
                         <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \' ${response.data[i].nombre_ruta}'\)" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
