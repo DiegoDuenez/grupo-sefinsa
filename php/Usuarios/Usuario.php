@@ -29,7 +29,7 @@ class Usuario extends Database{
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = "INSERT INTO $this->table (nombre_completo, usuario, password) VALUES (?, ? ,?)";
-                $user = $this->ExecuteQuery($insert, [$nombre, $usuario, $password]);
+                $user = $this->ExecuteQuery($insert, [trim($nombre), trim($usuario), trim($password)]);
 
                if($user) {
 
@@ -81,12 +81,12 @@ class Usuario extends Database{
 
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, password = ? WHERE users.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [$usuario, $nombre, $password]);
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre), trim($password)]);
 
                 }
                 else{
                     $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ? WHERE users.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [$usuario, $nombre]);
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre)]);
                 }
 
 

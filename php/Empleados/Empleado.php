@@ -47,11 +47,11 @@ class Empleado extends Database{
 
         try{
 
-            if(!$this->existsData('empleados', 'usuario', $usuario)){
+            if(!$this->existsData('empleados', 'usuario', trim($usuario))){
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $insert = "INSERT INTO $this->table (nombre_completo, usuario, password, perfil_id) VALUES (?, ? ,?, ?)";
-                $user = $this->ExecuteQuery($insert, [$nombre, $usuario, $password, $perfil_id]);
+                $user = $this->ExecuteQuery($insert, [trim($nombre), trim($usuario), trim($password), trim($perfil_id)]);
 
                if($user) {
 
@@ -103,12 +103,12 @@ class Empleado extends Database{
 
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, password = ?, perfil_id = ? WHERE $this->table.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [$usuario, $nombre, $password, $perfil_id]);
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre), trim($password), trim($perfil_id)]);
 
                 }
                 else{
                     $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, perfil_id = ? WHERE $this->table.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [$usuario, $nombre, $perfil_id]);
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre),trim($perfil_id)]);
                 }
 
                 if($user) {
