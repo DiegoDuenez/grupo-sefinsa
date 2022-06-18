@@ -1,4 +1,4 @@
-URL = 'php/Localidades/App.php'
+URL = 'php/Poblaciones/App.php'
 
 inp_editar_nombre_localidad = $("#inp_editar_nombre_localidad")
 inp_nombre_localidad = $("#inp_nombre_localidad")

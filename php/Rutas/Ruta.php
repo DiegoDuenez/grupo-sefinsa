@@ -9,19 +9,12 @@ class Ruta extends Database{
 
     public function index(){
 
-        /*$query  = "SELECT $this->table.*, localidades.id as localidad_id, localidades.nombre_localidad FROM $this->table 
-        INNER JOIN ruta_localidades ON $this->table.id = ruta_localidades.ruta_id 
-        INNER JOIN localidades ON localidades.id = ruta_localidades.localidad_id";*/
-
         $query  = "SELECT $this->table.*, empleados.nombre_completo FROM $this->table  
-        INNER JOIN rutas_empleado ON rutas_empleado.ruta_id = $this->table.id
-        INNER JOIN empleados ON rutas_empleado.empleado_id = empleados.id
+        INNER JOIN empleados ON $this->table.empleado_id = empleados.id
         ORDER BY $this->table.id DESC";
 
         $rutas =  $this->Select($query);
-        /*$rutas = json_decode($rutas, TRUE);
-        $rutas[] = ['id' => '9999', 'name' => 'Name'];
-        $json = json_encode($rutas);*/
+        
         return json(
             [
                 'status' => 'success',
@@ -33,7 +26,9 @@ class Ruta extends Database{
     }
 
     public function rutasActivas(){
-        $query  = "SELECT * FROM $this->table WHERE $this->table.status = 1 ORDER BY $this->table.id DESC";
+
+        $query  = "SELECT * FROM $this->table WHERE $this->table.status = 1 
+        ORDER BY $this->table.id DESC";
 
         $rutas =  $this->Select($query);
         
@@ -52,13 +47,10 @@ class Ruta extends Database{
 
             if(!$this->existsData('rutas', 'nombre_ruta', trim($nombre))){
 
-                $insert = "INSERT INTO $this->table (nombre_ruta) VALUES (?)";
-                $ruta = $this->ExecuteQuery($insert, [$nombre]);
+                $insert = "INSERT INTO $this->table (nombre_ruta, empleado_id) VALUES (?,?)";
+                $ruta = $this->ExecuteQuery($insert, [$nombre, $empleado_id]);
 
-                $insert2 = "INSERT INTO rutas_empleado (empleado_id, ruta_id) VALUES (?, ?)";
-                $ruta_empleado = $this->ExecuteQuery($insert2, [$empleado_id, $this->lastInsertId()]);
-
-               if($ruta && $ruta_empleado) {
+               if($ruta) {
 
                     return json([
                         'status' => 'success', 

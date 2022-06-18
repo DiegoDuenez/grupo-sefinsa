@@ -101,19 +101,17 @@ function getRutas(){
                     <tr>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="status"> ${ response.data[i].status == 1 ? 'Activa': 'Inactiva'  } </td>
+                    
 
                     <td> 
                         <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].nombre_completo}\')" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_desactivar_ruta" onclick="desactivar( ${response.data[i].id})" title="Desactivar ruta"><i class="fa-solid fa-ban" ></i></button>`
-                        : `<button class="btn btn-success btn_activar_ruta" onclick="activar(${response.data[i].id})" title="Activar ruta"><i class="fa-regular fa-circle-check"></i></button>`  }
+                        
                           
                     
                     </td>
     
                     </tr>
                     `)
-    
                 }
 
             }
