@@ -19,9 +19,9 @@ switch($func){
 
     case 'create':
 
-        $user = $_DATA['usuario'];
-        $nombre = $_DATA['nombre_completo'];
-        $pwd = $_DATA['password'];
+        $nombre = sanitize($_DATA['nombre_completo']);
+        $user = sanitize($_DATA['usuario']);
+        $pwd = sanitize($_DATA['password']);
         $perfil_id = $_DATA['perfil_id'];
 
         echo $Empleado->create($nombre, $user, $pwd, $perfil_id);
@@ -34,14 +34,15 @@ switch($func){
 
     case 'edit':
 
-        $user = $_DATA['usuario'];
-        $nombre = $_DATA['nombre_completo'];
+        $nombre = sanitize($_DATA['nombre_completo']);
+        $user = sanitize($_DATA['usuario']);
         $id = $_DATA['id'];
         $perfil_id = $_DATA['perfil_id'];
         $pwd = null;
         $changePassword = $_DATA['changePassword'];
+
         if($changePassword){
-            $pwd = $_DATA['password'];
+            $pwd = sanitize($_DATA['password']);
         }
 
         echo $Empleado->edit($nombre, $user, $pwd, $perfil_id, $id, $changePassword);

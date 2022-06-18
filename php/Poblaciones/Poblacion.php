@@ -24,6 +24,26 @@ class Poblacion extends Database{
 
     }
 
+    public function poblacionesRuta($id)
+    {
+
+        $query = "SELECT  $this->table.*, rutas.nombre_ruta FROM $this->table
+        INNER JOIN rutas ON rutas.id = $this->table.ruta_id 
+        WHERE rutas.id = '$id'
+        ORDER BY $this->table.id DESC";
+
+        $rutas =  $this->Select($query);
+        
+        return json(
+            [
+                'status' => 'success',
+                'data' => $rutas,
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
     public function create($nombre, $ruta_id){
 
         try{

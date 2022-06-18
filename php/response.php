@@ -1,6 +1,14 @@
 <?php
 
 
+/**
+ * Sanitiza los datos de entrada para evitar injecciones de html
+ * @param mixed $input
+ * @return String
+ */
+function sanitize($input){
+    return trim(htmlspecialchars($input));
+}
 
 function json($data, $status_code = 200){
 

@@ -71,6 +71,14 @@ function clearInputs(){
     $("#inp_nombre_ruta").val("")
     $("#inp_nombre_localidad").val("")
 
+    // COLOCADORA INPUTS
+    $('#inp_nombre_completo').val("")
+    $('#inp_direccion').val("")
+    $('#inp_telefono').val("")
+    $('#inp_editar_nombre_completo').val("")
+    $('#inp_editar_direccion').val("")
+    $('#inp_editar_telefono').val("")
+    
 
 }
 

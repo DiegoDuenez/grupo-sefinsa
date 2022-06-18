@@ -12,7 +12,6 @@ inp_editar_password = $('#inp_editar_password')
 btn_guardar_empleado = $("#btn_guardar_empleado")
 btn_editar_empleado = $(".btn_editar_empleado")
 btn_guardar_editar_empleado = $("#btn_guardar_editar_empleado")
-
 btn_modal_registrar_empleado = $('.btn_modal_registrar_empleado')
 
 cambiarContraseña = false
@@ -120,7 +119,7 @@ function getPerfiles(){
                     `)
 
                     if(empleadoPerfil != ""){
-                        $(`.select_perfiles option[name=${empleadoPerfil}]`).attr('selected','selected');
+                        $(`.select_perfiles option[name='${empleadoPerfil}']`).attr('selected','selected');
                     }
 
 

@@ -100,16 +100,10 @@ function getRutas(){
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    
-
+                     ${response.data[i].empleado_status == 0 ? `<td class="nombre_completo text-danger" title='Este usuario fue deshabilidato'> ${response.data[i].nombre_completo}</td>` : `<td class="nombre_completo"> ${response.data[i].nombre_completo}</td>`}
                     <td> 
                         <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].nombre_completo}\')" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        
-                          
-                    
                     </td>
-    
                     </tr>
                     `)
                 }

@@ -105,7 +105,7 @@ function getRutas(){
                     `)
 
                     if(rutaLocalidad != ""){
-                        $(`.select_rutas.editar option[name=${rutaLocalidad}]`).attr('selected','selected');
+                        $(`.select_rutas.editar option[name='${rutaLocalidad}']`).attr('selected','selected');
                     }
 
 

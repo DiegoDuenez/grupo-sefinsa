@@ -9,7 +9,7 @@ class Ruta extends Database{
 
     public function index(){
 
-        $query  = "SELECT $this->table.*, empleados.nombre_completo FROM $this->table  
+        $query  = "SELECT $this->table.*, empleados.nombre_completo, empleados.status as 'empleado_status'  FROM $this->table  
         INNER JOIN empleados ON $this->table.empleado_id = empleados.id
         ORDER BY $this->table.id DESC";
 
@@ -96,17 +96,10 @@ class Ruta extends Database{
 
             if(!$this->existsData('rutas', 'nombre_ruta', trim($nombre), $id)){
 
-                $update = "UPDATE $this->table SET nombre_ruta = ? WHERE id = '$id'";
-                $ruta = $this->ExecuteQuery($update, [$nombre]);
+                $update = "UPDATE $this->table SET nombre_ruta = ?, empleado_id = ? WHERE id = '$id'";
+                $ruta = $this->ExecuteQuery($update, [$nombre, $empleado_id]);
 
-                $select = "SELECT $this->table.id FROM $this->table WHERE nombre_ruta = '$nombre' LIMIT 1";
-                $id = $this->SelectOne($select);
-
-                $update2 = "UPDATE rutas_empleado SET empleado_id = ? WHERE ruta_id = '" . $id['id']. "'";
-                $ruta_empleado= $this->ExecuteQuery($update2, [$empleado_id]);
-
-
-               if($ruta && $ruta_empleado) {
+               if($ruta) {
 
                     return json([
                         'status' => 'success', 
