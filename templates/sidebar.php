@@ -61,7 +61,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="clientes.php"  class="nav-link <?php if($ruta == 'clientes.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-handshake"></i>
                                 <p>Clientes</p>
                             </a>

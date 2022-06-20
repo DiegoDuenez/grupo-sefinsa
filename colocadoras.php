@@ -38,7 +38,7 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Dirección</th>
-                    <th scope="col">Telefono</th>
+                    <th scope="col">Teléfono</th>
                     <th scope="col">Ruta</th>
                     <th scope="col">Población</th>
                     <th scope="col">Estatus</th>
@@ -75,8 +75,8 @@
                         <input class="form-control" id="inp_direccion" placeholder="Dirección" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_telefono">Telefono</label>
-                        <input class="form-control" type="number" id="inp_telefono" placeholder="Telefono" required/>
+                        <label for="inp_telefono">Teléfono</label>
+                        <input class="form-control" type="number" id="inp_telefono" placeholder="Teléfono" required/>
                     </div>
                     <div class="form-group mt-2">
                         <label for="select_rutas_registrar">Ruta</label>
@@ -118,8 +118,8 @@
                         <input class="form-control" id="inp_editar_direccion" placeholder="Dirección" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_telefono">Telefono</label>
-                        <input class="form-control" type="number" id="inp_editar_telefono" placeholder="Telefono" required/>
+                        <label for="inp_editar_telefono">Teléfono</label>
+                        <input class="form-control" type="number" id="inp_editar_telefono" placeholder="Teléfono" required/>
                     </div>
                     <div class="form-group mt-2">
                         <label for="select_rutas_editar">Ruta</label>
