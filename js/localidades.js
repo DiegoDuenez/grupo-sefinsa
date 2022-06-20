@@ -2,6 +2,13 @@ URL = 'php/Poblaciones/App.php'
 
 inp_editar_nombre_localidad = $("#inp_editar_nombre_localidad")
 inp_nombre_localidad = $("#inp_nombre_localidad")
+inp_primer_hora = $("#inp_primer_hora")
+inp_segunda_hora = $("#inp_segunda_hora")
+inp_monto_multa = $("#inp_monto_multa")
+inp_editar_primer_hora = $("#inp_editar_primer_hora")
+inp_editar_segunda_hora = $("#inp_editar_segunda_hora")
+inp_editar_monto_multa = $("#inp_editar_monto_multa")
+
 btn_guardar_localidad = $("#btn_guardar_localidad")
 btn_guardar_editar_localidad = $("#btn_guardar_editar_localidad")
 
@@ -17,6 +24,29 @@ $(document).ready(function(){
     $('#select_rutas_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_localidad')});
 
 
+    inp_primer_hora.datetimepicker({
+		format:'HH:mm:ss',
+		date : globalFechaInicial,
+		locale: 'es-MX'
+	});
+
+    inp_segunda_hora.datetimepicker({
+		format:'HH:mm:ss',
+		date : globalFechaFinal,
+		locale: 'es-MX'
+	});
+
+    inp_editar_primer_hora.datetimepicker({
+		format:'HH:mm:ss',
+		date : globalFechaFinal,
+		locale: 'es-MX'
+	});
+
+    inp_editar_segunda_hora.datetimepicker({
+		format:'HH:mm:ss',
+		date : globalFechaFinal,
+		locale: 'es-MX'
+	});
 
 });
 
@@ -25,7 +55,7 @@ function getLocalidades(){
 
     clearInputs()
 
-    $.blockUI({ message: '<h4> TRAYENDO LOCALIDADES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+    $.blockUI({ message: '<h4> TRAYENDO POBLACIONES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
 
     var datasend = {
         func: "index"
@@ -47,8 +77,11 @@ function getLocalidades(){
                     <tr>
                     <td class="nombre_localidad"> ${response.data[i].nombre_poblacion} </td>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
+                    <td class="hora_limite_cobro"> ${response.data[i].primer_hora_limite} - ${response.data[i].segunda_hora_limite}  </td>
+                    <td class="monto_multa">$ ${response.data[i].monto_multa} </td>
+
                     <td> 
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \' ${response.data[i].nombre_ruta}'\)" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\ )" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
                        
                     </td>
     
@@ -127,16 +160,17 @@ function getRutas(){
 
 }
 
-function modalEditarLocalidad(e, id, ruta){
+function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa){
 
     var nombre_localidad = $(e).closest("tr") 
     .find(".nombre_localidad") 
-    .text();    
-   /* var usuario = $(e).closest("tr") 
-    .find(".") 
-    .text();   */ 
+    .text();   
+   
     inp_editar_nombre_localidad.val($.trim(nombre_localidad))
-    //inp_editar_usuario.val($.trim(usuario))
+    inp_editar_monto_multa.val($.trim(monto_multa))
+    inp_editar_primer_hora.val($.trim(primer_hora_limite))
+    inp_editar_segunda_hora.val($.trim(segunda_hora_limite))
+    inp_editar_monto_multa.val($.trim(monto_multa))
     idLocalidadEditar = id
     rutaLocalidad = ruta
     getRutas()
@@ -145,7 +179,7 @@ function modalEditarLocalidad(e, id, ruta){
 
 btn_guardar_localidad.click(function(){
 
-    if(inp_nombre_localidad.val() == "" || $(`.select_rutas option:selected`).val() == 0){
+    if(inp_nombre_localidad.val() == "" || $(`.select_rutas option:selected`).val() == 0 || inp_primer_hora.val() == "" || inp_segunda_hora.val() == "" || inp_monto_multa.val() < 0){
 
         Swal.fire({
             icon: 'warning',
@@ -157,18 +191,22 @@ btn_guardar_localidad.click(function(){
     }
     else{
         ruta_id = $(`.select_rutas option:selected`).val()
-        registrarLocalidad(inp_nombre_localidad.val(), ruta_id)
+        registrarLocalidad(inp_nombre_localidad.val(), ruta_id, inp_primer_hora.val(), inp_segunda_hora.val(), inp_monto_multa.val())
 
     }
 
 })
 
-function registrarLocalidad(nombre_localidad, ruta_id){
+function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa){
 
     var datasend ={
         func: 'create',
         nombre_localidad,
-        ruta_id
+        ruta_id,
+        primer_hora_limite,
+        segunda_hora_limite,
+        monto_multa
+        
     }
 
     $.ajax({
@@ -205,7 +243,7 @@ function registrarLocalidad(nombre_localidad, ruta_id){
 
 btn_guardar_editar_localidad.click(function(){
 
-    if(inp_editar_nombre_localidad.val() == "" || $(`.select_rutas.editar option:selected`).val() == 0){
+    if(inp_editar_nombre_localidad.val() == "" || $(`.select_rutas.editar option:selected`).val() == 0 || inp_editar_primer_hora.val() == "" || inp_editar_segunda_hora.val() == "" || inp_editar_monto_multa.val() < 0){
 
         Swal.fire({
             icon: 'warning',
@@ -217,20 +255,23 @@ btn_guardar_editar_localidad.click(function(){
     }
     else{
         ruta_id = $(`.select_rutas.editar option:selected`).val()
-        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar)
+        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar, inp_editar_primer_hora.val(), inp_editar_segunda_hora.val(), inp_editar_monto_multa.val())
 
     }
 
 })
 
 
-function editarLocalidad(nombre_localidad, ruta_id, id){
+function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segunda_hora_limite, monto_multa){
 
     localidad = {
         func: 'edit',
         nombre_localidad,
         ruta_id,
         id, 
+        primer_hora_limite,
+        segunda_hora_limite,
+        monto_multa
     }
 
     $.ajax({

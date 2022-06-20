@@ -66,21 +66,26 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_nombre_completo">Nombre completo</label>
+                        <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_direccion" placeholder="Dirección" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_direccion">Dirección</label>
+                        <input class="form-control" id="inp_direccion" placeholder="Dirección" required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" type="tel" id="inp_telefono" placeholder="Telefono" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_telefono">Telefono</label>
+                        <input class="form-control" type="number" id="inp_telefono" placeholder="Telefono" required/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
+                        <label for="select_rutas_registrar">Ruta</label>
                         <select class="form-control select_rutas" id="select_rutas_registrar">
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
+                        <label for="select_poblaciones_registrar">Población</label>
                         <select class="form-control select_poblaciones" id="select_poblaciones_registrar" disabled >
                             <option selected value="0" >Seleccionar población</option>
                         </select>
@@ -104,21 +109,26 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_nombre_completo">Nombre completo</label>
+                        <input class="form-control" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_direccion" placeholder="Dirección" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_direccion">Dirección</label>
+                        <input class="form-control" id="inp_editar_direccion" placeholder="Dirección" required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" type="tel" id="inp_editar_telefono" placeholder="Telefono" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_telefono">Telefono</label>
+                        <input class="form-control" type="number" id="inp_editar_telefono" placeholder="Telefono" required/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
+                        <label for="select_rutas_editar">Ruta</label>
                         <select class="form-control select_rutas editar" id="select_rutas_editar">
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
+                        <label for="select_poblaciones_editar">Población</label>
                         <select class="form-control select_poblaciones editar" id="select_poblaciones_editar">
                             <option selected value="0" >Seleccionar población</option>
                         </select>

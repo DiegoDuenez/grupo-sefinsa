@@ -44,14 +44,14 @@ class Poblacion extends Database{
 
     }
 
-    public function create($nombre, $ruta_id){
+    public function create($nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa){
 
         try{
 
             if(!$this->existsData($this->table, 'nombre_poblacion', trim($nombre))){
 
-                $insert = "INSERT INTO $this->table (nombre_poblacion, ruta_id) VALUES (?, ?)";
-                $localidad = $this->ExecuteQuery($insert, [$nombre, $ruta_id]);
+                $insert = "INSERT INTO $this->table (nombre_poblacion, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa) VALUES (?, ?, ?, ?, ?)";
+                $localidad = $this->ExecuteQuery($insert, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa]);
 
                 /*$insert2 = "INSERT INTO ruta_localidades (ruta_id, localidad_id) VALUES (?,?)";
                 $localidad_ruta = $this->ExecuteQuery($insert2, [$ruta_id, $this->lastInsertId()]);*/
@@ -96,20 +96,15 @@ class Poblacion extends Database{
 
     }
 
-    public function edit($nombre, $ruta_id, $id){
+    public function edit($nombre, $ruta_id, $id, $primer_hora_limite, $segunda_hora_limite, $monto_multa){
 
         try{
 
             if(!$this->existsData($this->table, 'nombre_poblacion', trim($nombre), $id)){
 
-                $update = "UPDATE $this->table SET nombre_poblacion = ?, ruta_id = ? WHERE id = '$id'";
-                $localidad = $this->ExecuteQuery($update, [$nombre, $ruta_id]);
+                $update = "UPDATE $this->table SET nombre_poblacion = ?, ruta_id = ?, primer_hora_limite = ?, segunda_hora_limite = ?, monto_multa = ? WHERE id = '$id'";
+                $localidad = $this->ExecuteQuery($update, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa]);
 
-                /*$select = "SELECT $this->table.id FROM $this->table WHERE nombre_poblacion = '$nombre' LIMIT 1";
-                $id = $this->SelectOne($select);
-
-                $update2 = "UPDATE ruta_localidades SET ruta_id = ? WHERE localidad_id = '" . $id['id']. "'";
-                $localidad_ruta = $this->ExecuteQuery($update2, [$ruta_id]);*/
 
                if($localidad) {
 

@@ -1,4 +1,27 @@
 
+var dateToday = new Date();
+var dateLastWeek = new Date();
+
+dateLastWeek.setDate(dateLastWeek.getDate());  
+
+var day = addZero(dateToday.getDate());
+var month = addZero(dateToday.getMonth() + 1);
+var year = addZero(dateToday.getFullYear());
+
+var hour = addZero(dateToday.getHours());
+var minutes = addZero(dateToday.getMinutes());
+var seconds = addZero(dateToday.getSeconds());
+
+var dayLastWeek = addZero(dateLastWeek.getDate());
+var monthLastWeek = addZero(dateLastWeek.getMonth() + 1);
+var yearLastWeek = addZero(dateLastWeek.getFullYear());
+
+var hourLastWeek = addZero(dateLastWeek.getHours());
+var minutesLastWeek = addZero(dateLastWeek.getMinutes());
+var secondsLastWeek = addZero(dateLastWeek.getSeconds());
+
+var globalFechaInicial = `${yearLastWeek}-${monthLastWeek}-${dayLastWeek} 00:00:00`;
+var globalFechaFinal = `${year}-${month}-${day} 23:59:59`;
 
 
 $(document).ready(function(){
@@ -18,6 +41,14 @@ $(document).ready(function(){
     });
 
 });
+
+function addZero(number){
+    var valorReturn = number;
+    if (number < 9) {
+        valorReturn = `0${number}`;
+    }
+    return valorReturn;
+}
 
 
 function logout(){

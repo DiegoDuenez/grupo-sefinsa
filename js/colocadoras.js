@@ -80,8 +80,8 @@ function getColocadoras(){
                     <td> 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarColocadora(this, ${response.data[i].id},  ${response.data[i].ruta_id} , \'${response.data[i].nombre_ruta}\',  \'${response.data[i].nombre_poblacion}\')" title="Editar colocadora" data-toggle="modal" data-target="#modal_editar_colocadora"><i class="fa-solid fa-pen-to-square" ></i></button>
                         
-                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar usuario"><i class="fa-solid fa-ban" ></i></button>`
-                        : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar usuario"><i class="fa-regular fa-circle-check"></i></button>`  }
+                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar colocadora"><i class="fa-solid fa-ban" ></i></button>`
+                        : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar colocadora"><i class="fa-regular fa-circle-check"></i></button>`  }
                             
     
                     </td>
@@ -358,11 +358,6 @@ function editarColocadora(nombre_completo, direccion, telefono, ruta_id, poblaci
 
 }
 
-
-
-
-
-
 $('.select_rutas').on('change', function() {
     $('.select_poblaciones').prop( "disabled", false );
     getPoblaciones(this.value);
@@ -391,4 +386,97 @@ function modalEditarColocadora(e, id, ruta_id, ruta, poblacion){
 
 }
 
+
+function desactivar(id){
+
+    Swal.fire({
+        title: '¿Quieres desactivar a la colocadora?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'desactivar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Colocadora desactivada',
+                            text: 'Se ha desactivado a la colocadora',
+                        })
+                        getColocadoras()
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+
+    })
+    
+
+}
+
+
+function activar(id){
+
+    Swal.fire({
+        title: '¿Quieres activar a la colocadora?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'activar',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Colocadora activada',
+                            text: 'Se ha activado a la colocadora',
+                        })
+                        getColocadoras();
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+    })
+
+}
 

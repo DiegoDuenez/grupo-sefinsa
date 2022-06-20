@@ -88,11 +88,13 @@ $('#cb_password').change(function() {
 
     if(this.checked) {
         inp_editar_password.removeClass('d-none')
+        $('#lb_password').removeClass('d-none')
         inp_editar_password.prop('required',false);
         cambiarContraseña = true
     }
     else{
         inp_editar_password.addClass('d-none')
+        $('#lb_password').addClass('d-none')
         inp_editar_password.prop('required',true);
         cambiarContraseña = false
     }
@@ -362,3 +364,4 @@ function activar(id){
     
 
 }
+

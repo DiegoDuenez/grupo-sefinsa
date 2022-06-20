@@ -62,18 +62,24 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_nombre_completo">Nombre completo</label>
+                        <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_usuario" placeholder="Usuario" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_usuario">Usuario</label>
+                        <input class="form-control" id="inp_usuario" placeholder="Usuario" required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_password" type="password" placeholder="Contraseña" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_password">Contraseña</label>
+                        <input class="form-control" id="inp_password" type="password" placeholder="Contraseña" required/>
                     </div>
-                    <select class="form-control select_perfiles" >
-                        <option selected value="0" >Seleccionar perfil</option>
-                    </select>
+                    <div class="form-group mt-2">
+                        <label for="select_perfiles_registrar">Perfil</label>
+                        <select class="form-control select_perfiles" id="select_perfiles_registrar" >
+                            <option selected value="0" >Seleccionar perfil</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_empleado">Guardar</button>
@@ -93,18 +99,21 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_nombre_completo">Nombre completo</label>
+                        <input class="form-control" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_usuario" placeholder="Usuario" required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_usuario">Usuario</label>
+                        <input class="form-control" id="inp_editar_usuario" placeholder="Usuario" required/>
                     </div>
-                    <div class="form-group">
-                        <select class="form-control select_perfiles editar">
+                    <div class="form-group mt-2">
+                        <label for="select_perfiles_editar">Perfil</label>
+                        <select class="form-control select_perfiles editar"  id="select_perfiles_editar">
                         </select>
                     </div>
                    
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="false" id="cb_password">
                             <label class="form-check-label" for="cb_password">
@@ -112,8 +121,9 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <input class="form-control mt-2 d-none" id="inp_editar_password" type="password" placeholder="Contraseña"/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_password" class="d-none" id="lb_password">Nueva contraseña</label>
+                        <input class="form-control d-none" id="inp_editar_password" type="password" placeholder="Contraseña"/>
                     </div>
                 </div>
                 <div class="modal-footer">

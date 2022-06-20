@@ -12,7 +12,21 @@ class Database{
 			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 		];
-		$this->dbh = new PDO($dsn, $env['user'],  $env['password'], $options);
+
+		try {
+			$this->dbh = new PDO($dsn, $env['user'],  $env['password'], $options);
+		}
+		catch(PDOException $e) {
+			//header('Content-Type', 'application/json');
+			echo json(
+				[
+					'status' => 'error',
+					'data' => null,
+					'message' => 'No se pudo establecer conexión, intentelo más tarde.'
+				]
+			, 500);
+			die();
+		}
 	}
 
 

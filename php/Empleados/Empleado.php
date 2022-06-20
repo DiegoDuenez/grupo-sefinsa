@@ -202,8 +202,6 @@ class Empleado extends Database{
 
     public function activar($id ){
 
-      
-
         try{
 
             $update = "UPDATE $this->table SET status = 1 WHERE $this->table.id = ? and status = 0";
@@ -233,7 +231,6 @@ class Empleado extends Database{
             die();
 
         }
-
 
     }
 

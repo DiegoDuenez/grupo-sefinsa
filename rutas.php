@@ -62,12 +62,16 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_nombre_ruta">Nombre de ruta</label>
+                        <input class="form-control" id="inp_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
-                    <select class="form-control select_empleados" id="select_empleados_registrar" >
-                        <option selected value="0" >Seleccionar empleado</option>
-                    </select>
+                    <div class="form-group mt-2">
+                        <label for="select_empleados_registrar">Empleado</label>
+                        <select class="form-control select_empleados" id="select_empleados_registrar" >
+                            <option selected value="0" >Seleccionar empleado</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_ruta">Guardar</button>
@@ -87,12 +91,16 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_nombre_ruta">Nombre de ruta</label>
+                        <input class="form-control" id="inp_editar_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
-                    <select class="form-control select_empleados editar" id="select_empleados_editar" >
-                        <option selected value="0" >Seleccionar empleado</option>
-                    </select>
+                    <div class="form-group mt-2">
+                        <label for="select_empleados_editar">Empleado</label>
+                        <select class="form-control select_empleados editar" id="select_empleados_editar" >
+                            <option selected value="0" >Seleccionar empleado</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_ruta">Guardar</button>

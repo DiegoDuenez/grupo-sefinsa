@@ -132,7 +132,8 @@ class Usuario extends Database{
 
     public function login($usuario, $password){
 
-        $query = "SELECT * FROM $this->table WHERE usuario = '$usuario' and status = 1 limit 1";
+
+            $query = "SELECT * FROM $this->table WHERE usuario = '$usuario' and status = 1 limit 1";
         $user =  $this->SelectOne($query);
 
         if($user){
@@ -164,6 +165,9 @@ class Usuario extends Database{
                 ]
             , 404);
         }
+
+        
+        
 
 
     }

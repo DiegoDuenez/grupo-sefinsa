@@ -61,8 +61,8 @@ function getEmpleados(){
                     <td> 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarUsuario(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Editar empleado" data-toggle="modal" data-target="#modal_editar_empleado"><i class="fa-solid fa-pen-to-square" ></i></button>
                         
-                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar usuario"><i class="fa-solid fa-ban" ></i></button>`
-                        : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar usuario"><i class="fa-regular fa-circle-check"></i></button>`  }
+                        ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar empleado"><i class="fa-solid fa-ban" ></i></button>`
+                        : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar empleado"><i class="fa-regular fa-circle-check"></i></button>`  }
                             
     
                     </td>
@@ -208,11 +208,13 @@ $('#cb_password').change(function() {
 
     if(this.checked) {
         inp_editar_password.removeClass('d-none')
+        $('#lb_password').removeClass('d-none')
         inp_editar_password.prop('required',false);
         cambiarContraseña = true
     }
     else{
         inp_editar_password.addClass('d-none')
+        $('#lb_password').addClass('d-none')
         inp_editar_password.prop('required',true);
         cambiarContraseña = false
     }
@@ -426,7 +428,5 @@ function activar(id){
 
         } 
     })
-
-    
 
 }

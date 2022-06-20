@@ -38,6 +38,8 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Ruta</th>
+                    <th scope="col">Hora limite de cobro </th>
+                    <th scope="col">Monto de multa</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -62,12 +64,28 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                    <div class="form-group mt-2">
+                        <label for="inp_nombre_localidad">Nombre población</label>
+                        <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
-                    <select class="form-control select_rutas" id="select_rutas_registrar" >
-                        <option selected value="0" >Seleccionar ruta</option>
-                    </select>
+                    <div class="form-group mt-2">
+                        <label for="select_rutas_registrar">Ruta</label>
+                        <select class="form-control select_rutas" id="select_rutas_registrar" >
+                            <option selected value="0" >Seleccionar ruta</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_primer_hora">Primer hora limite de cobro</label>
+                        <input class="form-control" id="inp_primer_hora" required  />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_segunda_hora">Segunda hora limite de cobro</label>
+                        <input class="form-control" id="inp_segunda_hora" required/>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_monto_multa">Monto de multa</label>
+                        <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_localidad">Guardar</button>
@@ -87,12 +105,29 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mt-2" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_nombre_localidad">Nombre población</label>
+                        <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
-                    <select class="form-control select_rutas editar" id="select_rutas_editar">
-                        <option selected value="0" >Seleccionar ruta</option>
-                    </select>
+                    <div class="form-group mt-2">
+                        <label for="select_rutas_editar">Ruta</label>
+                        <select class="form-control select_rutas editar" id="select_rutas_editar">
+                            <option selected value="0" >Seleccionar ruta</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_primer_hora">Primer hora limite de cobro</label>
+                        <input class="form-control" id="inp_editar_primer_hora" required  />
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_segunda_hora">Segunda hora limite de cobro</label>
+                        <input class="form-control" id="inp_editar_segunda_hora" required/>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_monto_multa">Monto de multa</label>
+                        <input  class="form-control" id="inp_editar_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_localidad">Guardar</button>
@@ -105,16 +140,19 @@
     <?php include 'templates/footer.php' ?>
   </div>
 
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="dist/js/adminlte.min.js"></script>
-  <script src="plugins/select2/js/select2.full.min.js"></script>
-  <script src="plugins/toastr/toastr.min.js"></script>
-  <script src="plugins/blockui/jquery.blockui.min.js"></script>
-  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/localidades.js"></script>
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="dist/js/adminlte.min.js"></script>
+    <script src="plugins/select2/js/select2.full.min.js"></script>
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/moment/moment-with-locales.js"></script>
+    <script src="plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="plugins/toastr/toastr.min.js"></script>
+    <script src="plugins/blockui/jquery.blockui.min.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/localidades.js"></script>
 
 </body>
 

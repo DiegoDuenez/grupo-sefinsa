@@ -36,7 +36,16 @@ switch($func){
         $id = $_DATA['id'];
 
         echo $Colocadora->edit($nombre, $direccion, $telefono, $ruta_id, $poblacion_id, $id);
+    break;
 
+    case 'activar':
+        $id = $_DATA['id'];
+        echo $Colocadora->activar($id);
+    break;
+
+    case 'desactivar':
+        $id = $_DATA['id'];
+        echo $Colocadora->desactivar($id);
     break;
 
 }

@@ -77,13 +77,84 @@ class Colocadora extends Database{
             } else {
 
                 return json([
+                    'status' => 'success', 
+                    'data'=>null, 
+                    'message'=>'No se actualizo nada nuevo'
+                ], 200);
+
+            }
+
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+
+    public function desactivar($id){
+
+
+        try{
+
+            $update = "UPDATE $this->table SET status = 0 WHERE $this->table.id = ? and status = 1";
+            $user = $this->ExecuteQuery($update, [$id]);
+
+            if($user) {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha desactivado a la colocadora'
+                ], 200);
+
+            } else {
+
+                return json([
                     'status' => 'error', 
                     'data'=>null, 
-                    'message'=>'Error al actualizar a la colocadora'
+                    'message'=>'Error inesperado'
                 ], 400);
 
             }
 
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+       
+
+
+    public function activar($id ){
+
+        try{
+
+            $update = "UPDATE $this->table SET status = 1 WHERE $this->table.id = ? and status = 0";
+            $user = $this->ExecuteQuery($update, [$id]);
+
+            if($user) {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha activado a la colocadora'
+                ], 200);
+
+            } else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error inesperado'
+                ], 400);
+
+            }
 
         } catch(Exception $e) {
 
