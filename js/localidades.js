@@ -77,7 +77,7 @@ function getLocalidades(){
                     <tr>
                     <td class="nombre_localidad"> ${response.data[i].nombre_poblacion} </td>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                    <td class="hora_limite_cobro"> ${response.data[i].primer_hora_limite} - ${response.data[i].segunda_hora_limite}  </td>
+                    <td class="hora_limite_cobro"> ${response.data[i].primer_hora_limite} ${ response.data[i].primer_hora_limite >= "00:00:00" && response.data[i].primer_hora_limite <= "11:59:59" ? 'AM' : 'PM'} - ${response.data[i].segunda_hora_limite} ${ response.data[i].segunda_hora_limite >= "00:00:00" && response.data[i].segunda_hora_limite <= "11:59:59" ? 'AM' : 'PM'}  </td>
                     <td class="monto_multa">$ ${response.data[i].monto_multa} </td>
 
                     <td> 
