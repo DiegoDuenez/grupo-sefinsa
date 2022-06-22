@@ -27,12 +27,12 @@ var inp_ine_aval = $('#inp_ine_aval')
 
 $(document).ready(function(){
 
-    getCliente()
+    getClientes()
 
 
 });
 
-function getCliente(){
+function getClientes(){
 
     //clearInputs()
 
@@ -59,8 +59,16 @@ function getCliente(){
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
                     <td class="direccion"> ${response.data[i].direccion} </td>
                     <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="garantias"> ${response.data[i].garantias_cliente}  </td>
-                    <td class="comprobantes"> ${response.data[i].comprobantes_cliente} </td>
+                    <td class="garantias"> ${/*response.data[i].garantias_cliente*/''}  </td>
+                    <td class="comprobantes"> 
+                        <a href='${response.data[i].comprobante_domicilio}'> ${response.data[i].comprobante_domicilio != '' ? 'Domicilio' : ''}</a>
+                        <a href='${response.data[i].comprobante_ine}'>${response.data[i].comprobante_ine != '' ? 'INE' : ''}
+                        <a href='${response.data[i].comprobante_tarjeton}'>${response.data[i].comprobante_tarjeton != '' ? 'Tarjetón' : ''}
+                        <a href='${response.data[i].comprobante_contrato}'>${response.data[i].comprobante_contrato != '' ? 'Contrato' : ''}
+                        <a href='${response.data[i].comprobante_pagare}'> ${response.data[i].comprobante_pagare != '' ? 'Pagaré' : ''}
+
+                    
+                    </td>
                     <td class="otras_referencias"> ${response.data[i].otras_referencias} </td>
                     <td class="nombre_aval"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" title='Ver aval del cliente'><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
 
@@ -113,11 +121,8 @@ btn_guardar_cliente.click(function(){
     }
     else
     {
-        Swal.fire({
-            icon: 'success',
-            title: 'Nada',
-            text: 'OKAS',
-        })
+        registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
+                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val())
     }
 
 
@@ -152,6 +157,76 @@ btn_guardar_cliente.click(function(){
 
 })
 
-function registrarCliente(){
+function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval){
+
+    var data = new FormData();
+    data.append('func', 'create');
+    data.append('nombre_cliente', nombre_cliente)
+    data.append('direccion_cliente', direccion_cliente)
+    data.append('telefono_cliente', telefono_cliente)
+    data.append('or_cliente', or_cliente)
+    data.append('nombre_aval', nombre_aval)
+    data.append('direccion_aval', direccion_aval)
+    data.append('telefono_aval', telefono_aval)
+    data.append('or_aval', or_aval)
+
+    $.each(inp_domicilio_cliente[0].files, function(i, file) {
+        data.append('domicilio_cliente', file);
+    });
+    $.each(inp_ine_cliente[0].files, function(i, file) {
+        data.append('ine_cliente', file);
+    });
+    $.each(inp_tarjeton_cliente[0].files, function(i, file) {
+        data.append('tarjeton_cliente', file);
+    });
+    $.each(inp_contrato_cliente[0].files, function(i, file) {
+        data.append('contrato_cliente', file);
+    });
+    $.each(inp_pagare_cliente[0].files, function(i, file) {
+        data.append('pagare_cliente', file);
+    });
+
+    $.each(inp_domicilio_aval[0].files, function(i, file) {
+        data.append('domicilio_aval', file);
+    });
+    $.each(inp_ine_aval[0].files, function(i, file) {
+        data.append('ine_aval', file);
+    });
+    
+
+    $.ajax({
+        url: URL,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function(response){
+            var jsonResponse = JSON.parse(response);
+            
+            if(jsonResponse.status == "success"){
+
+                $('#modal_registrar_cliente').modal('toggle');
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Nuevo cliente',
+                    text: 'Se ha registrado al cliente',
+                })
+
+                getClientes()
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
     
 }

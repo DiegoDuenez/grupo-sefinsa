@@ -3,14 +3,13 @@
 
 class FileManager{
 
-    public static $key = 'file';
 
-    public static function errors($key = 'file')
+    public static function errors($key)
     {
         return $_FILES[$key]['error'];
     }
 
-    public static function get($key = 'file',$property)
+    public static function get($key, $property)
     {
         return $_FILES[$key][$property];
     }

@@ -113,7 +113,7 @@ class Database{
 		}
 	}
 
-	function lastInsertId()
+	function lastId()
 	{
 		$id = $this->dbh->lastInsertId();
 		return $id;
