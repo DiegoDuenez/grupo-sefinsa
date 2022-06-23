@@ -35,6 +35,7 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Usuario</th>
+                    <th scope="col">Perfil</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -69,6 +70,11 @@
                         <input class="form-control" id="inp_usuario" placeholder="Usuario" required/>
                     </div>
                     <div class="form-group mt-2">
+                        <label for="select_perfiles_registrar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_perfiles registrar"  id="select_perfiles_registrar">
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="inp_password">Contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_password" type="password" placeholder="Contraseña" required/>
                     </div>
@@ -98,6 +104,11 @@
                     <div class="form-group mt-2">
                         <label for="inp_editar_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control " id="inp_editar_usuario" placeholder="Usuario" required/>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="select_perfiles_editar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_perfiles editar"  id="select_perfiles_editar">
+                        </select>
                     </div>
                     <div class="form-group mt-2">
                         <div class="form-check">

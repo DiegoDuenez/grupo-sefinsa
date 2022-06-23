@@ -15,11 +15,12 @@ switch($func){
 
     case 'create':
 
-        $user = $_DATA['usuario'];
-        $nombre = $_DATA['nombre_completo'];
-        $pwd = $_DATA['password'];
+        $user = sanitize($_DATA['usuario']);
+        $nombre = sanitize($_DATA['nombre_completo']);
+        $pwd = sanitize($_DATA['password']);
+        $perfil_id = $_DATA['perfil_id'];
 
-        echo $Usuario->create($nombre, $user, $pwd);
+        echo $Usuario->create($nombre, $user, $pwd, $perfil_id);
 
     break;
 
@@ -34,16 +35,17 @@ switch($func){
 
     case 'edit':
 
-        $user = $_DATA['usuario'];
-        $nombre = $_DATA['nombre_completo'];
+        $user = sanitize($_DATA['usuario']);
+        $nombre = sanitize($_DATA['nombre_completo']);
         $id = $_DATA['id'];
         $pwd = null;
+        $perfil_id = $_DATA['perfil_id'];
         $changePassword = $_DATA['changePassword'];
         if($changePassword){
             $pwd = $_DATA['password'];
         }
 
-        echo $Usuario->edit($nombre, $user, $pwd, $id, $changePassword);
+        echo $Usuario->edit($nombre, $user, $pwd, $id, $changePassword, $perfil_id);
 
     break;
 

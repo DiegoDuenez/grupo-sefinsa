@@ -23,9 +23,12 @@ switch($func){
         $nombre_localidad = sanitize($_DATA['nombre_localidad']);
         $primer_hora_limite = sanitize($_DATA['primer_hora_limite']);
         $segunda_hora_limite = sanitize($_DATA['segunda_hora_limite']);
+        $primer_dia_cobro = sanitize($_DATA['primer_dia_cobro']);
+        $segundo_dia_cobro = sanitize($_DATA['segundo_dia_cobro']);
         $monto_multa = $_DATA['monto_multa'];
 
-        echo $Poblacion->create($nombre_localidad, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa);
+        echo $Poblacion->create($nombre_localidad, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $primer_dia_cobro, $segundo_dia_cobro);
+
     break;
 
     case 'edit':
@@ -34,9 +37,11 @@ switch($func){
         $nombre_localidad = sanitize($_DATA['nombre_localidad']);
         $primer_hora_limite = sanitize($_DATA['primer_hora_limite']);
         $segunda_hora_limite = sanitize($_DATA['segunda_hora_limite']);
+        $primer_dia_cobro = sanitize($_DATA['primer_dia_cobro']);
+        $segundo_dia_cobro = sanitize($_DATA['segundo_dia_cobro']);
         $monto_multa = $_DATA['monto_multa'];
 
-        echo $Poblacion->edit($nombre_localidad, $ruta_id, $id,$primer_hora_limite, $segunda_hora_limite, $monto_multa);
+        echo $Poblacion->edit($nombre_localidad, $ruta_id, $id,$primer_hora_limite, $segunda_hora_limite, $monto_multa, $primer_dia_cobro, $segundo_dia_cobro);
     break;
 
     case 'localidadesRuta':

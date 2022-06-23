@@ -77,11 +77,11 @@ function getLocalidades(){
                     <tr>
                     <td class="nombre_localidad"> ${response.data[i].nombre_poblacion} </td>
                     <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                    <td class="hora_limite_cobro"> ${response.data[i].primer_hora_limite} ${ response.data[i].primer_hora_limite >= "00:00:00" && response.data[i].primer_hora_limite <= "11:59:59" ? 'AM' : 'PM'} - ${response.data[i].segunda_hora_limite} ${ response.data[i].segunda_hora_limite >= "00:00:00" && response.data[i].segunda_hora_limite <= "11:59:59" ? 'AM' : 'PM'}  </td>
+                    <td class="hora_limite_cobro"> ${response.data[i].primer_dia_cobro} ${response.data[i].primer_hora_limite} ${ response.data[i].primer_hora_limite >= "00:00:00" && response.data[i].primer_hora_limite <= "11:59:59" ? 'AM' : 'PM'} - ${response.data[i].segundo_dia_cobro} ${response.data[i].segunda_hora_limite} ${ response.data[i].segunda_hora_limite >= "00:00:00" && response.data[i].segunda_hora_limite <= "11:59:59" ? 'AM' : 'PM'}  </td>
                     <td class="monto_multa">$ ${response.data[i].monto_multa} </td>
 
                     <td> 
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\ )" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\, \'${response.data[i].primer_dia_cobro}'\, \'${response.data[i].segundo_dia_cobro}'\)" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
                        
                     </td>
     
@@ -160,7 +160,7 @@ function getRutas(){
 
 }
 
-function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa){
+function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, segundo_dia_cobro){
 
     var nombre_localidad = $(e).closest("tr") 
     .find(".nombre_localidad") 
@@ -173,6 +173,10 @@ function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limi
     inp_editar_monto_multa.val($.trim(monto_multa))
     idLocalidadEditar = id
     rutaLocalidad = ruta
+
+    $(`#select_editar_primer_dia option[value='${primer_dia_cobro}']`).prop('selected', true);
+    $(`#select_editar_segundo_dia option[value='${segundo_dia_cobro}']`).prop('selected', true);
+
     getRutas()
 
 }
@@ -185,19 +189,26 @@ btn_guardar_localidad.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
 
     }
     else{
+
         ruta_id = $(`.select_rutas option:selected`).val()
-        registrarLocalidad(inp_nombre_localidad.val(), ruta_id, inp_primer_hora.val(), inp_segunda_hora.val(), inp_monto_multa.val())
+        primer_dia_cobro = $('#select_primer_dia option:selected').val()
+        segundo_dia_cobro = $('#select_segundo_dia option:selected').val()
+
+        registrarLocalidad(inp_nombre_localidad.val(), ruta_id, inp_primer_hora.val(), inp_segunda_hora.val(), inp_monto_multa.val(), primer_dia_cobro, segundo_dia_cobro)
 
     }
 
 })
 
-function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa){
+function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, segundo_dia_cobro){
 
     var datasend ={
         func: 'create',
@@ -205,11 +216,13 @@ function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segun
         ruta_id,
         primer_hora_limite,
         segunda_hora_limite,
-        monto_multa
-        
+        monto_multa,
+        primer_dia_cobro,
+        segundo_dia_cobro
     }
 
     $.ajax({
+
         type: 'POST',
         url: URL,
         data : JSON.stringify(datasend),
@@ -217,17 +230,23 @@ function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segun
         success : function(response) {
 
             if(response.status == "success"){
+
                 $('#modal_registrar_localidad').modal('toggle');
                 Swal.fire({
                     icon: 'success',
                     title: 'Nueva localidad',
                     text: 'Se ha registrado la localidad',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getLocalidades()
+
             }
             
         },
         error : function(e){
+            
 
             Swal.fire({
                 icon: 'error',
@@ -249,20 +268,27 @@ btn_guardar_editar_localidad.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
 
     }
     else{
-        ruta_id = $(`.select_rutas.editar option:selected`).val()
-        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar, inp_editar_primer_hora.val(), inp_editar_segunda_hora.val(), inp_editar_monto_multa.val())
+
+        var ruta_id = $(`.select_rutas.editar option:selected`).val()
+        var primer_dia_cobro = $('#select_editar_primer_dia option:selected').val()
+        var segundo_dia_cobro = $('#select_editar_segundo_dia option:selected').val()
+
+        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar, inp_editar_primer_hora.val(), inp_editar_segunda_hora.val(), inp_editar_monto_multa.val(), primer_dia_cobro, segundo_dia_cobro)
 
     }
 
 })
 
 
-function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segunda_hora_limite, monto_multa){
+function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, segundo_dia_cobro){
 
     localidad = {
         func: 'edit',
@@ -271,7 +297,9 @@ function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segu
         id, 
         primer_hora_limite,
         segunda_hora_limite,
-        monto_multa
+        monto_multa,
+        primer_dia_cobro,
+        segundo_dia_cobro
     }
 
     $.ajax({
@@ -288,6 +316,9 @@ function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segu
                     icon: 'success',
                     title: 'Localidad actualizada',
                     text: 'Se ha editado la localidad',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getLocalidades();
             }
@@ -333,6 +364,9 @@ function desactivar(id){
                             icon: 'success',
                             title: 'Localidad desactivada',
                             text: 'Se ha desactivado la localidad',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getEmpleados()
                     }
@@ -381,6 +415,9 @@ function activar(id){
                             icon: 'success',
                             title: 'Localidad activada',
                             text: 'Se ha activado la localidad',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getEmpleados()
                     }

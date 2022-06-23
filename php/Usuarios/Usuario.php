@@ -10,7 +10,10 @@ class Usuario extends Database{
     public function index()
     {
 
-        $query  = "SELECT * FROM $this->table ORDER BY $this->table.id DESC";
+        $query  = "SELECT $this->table.*, perfiles.nombre_perfil FROM $this->table 
+        INNER JOIN perfiles ON perfiles.id = $this->table.perfil_id
+        ORDER BY $this->table.id DESC";
+        
         return json(
             [
                 'status' => 'success',
@@ -21,15 +24,15 @@ class Usuario extends Database{
 
     }
 
-    public function create($nombre, $usuario, $password){
+    public function create($nombre, $usuario, $password, $perfil_id){
 
         try{
 
             if(!$this->existsData('users', 'usuario', trim($usuario))){
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                $insert = "INSERT INTO $this->table (nombre_completo, usuario, password) VALUES (?, ? ,?)";
-                $user = $this->ExecuteQuery($insert, [trim($nombre), trim($usuario), trim($password)]);
+                $insert = "INSERT INTO $this->table (nombre_completo, usuario, password, perfil_id) VALUES (?, ? ,?, ?)";
+                $user = $this->ExecuteQuery($insert, [trim($nombre), trim($usuario), trim($password), trim($perfil_id)]);
 
                if($user) {
 
@@ -71,7 +74,7 @@ class Usuario extends Database{
 
     }
 
-    public function edit($nombre, $usuario, $password, $id, $changePassword){
+    public function edit($nombre, $usuario, $password, $id, $changePassword, $perfil_id){
 
         try{
 
@@ -80,13 +83,13 @@ class Usuario extends Database{
                 if($changePassword){
 
                     $password = password_hash($password, PASSWORD_DEFAULT);
-                    $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, password = ? WHERE users.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre), trim($password)]);
+                    $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, password = ?, perfil_id = ? WHERE users.id = '$id'";
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre), trim($password), trim($perfil_id)]);
 
                 }
                 else{
-                    $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ? WHERE users.id = '$id'";
-                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre)]);
+                    $update = "UPDATE $this->table SET usuario = ?, nombre_completo = ?, perfil_id = ? WHERE users.id = '$id'";
+                    $user = $this->ExecuteQuery($update, [trim($usuario), trim($nombre), trim($perfil_id)]);
                 }
 
 
@@ -133,7 +136,7 @@ class Usuario extends Database{
     public function login($usuario, $password){
 
 
-            $query = "SELECT * FROM $this->table WHERE usuario = '$usuario' and status = 1 limit 1";
+        $query = "SELECT * FROM $this->table WHERE usuario = '$usuario' and status = 1 limit 1";
         $user =  $this->SelectOne($query);
 
         if($user){

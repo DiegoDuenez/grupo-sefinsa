@@ -14,6 +14,14 @@ switch($func){
         echo $Colocadora->index();
     break;
 
+    case 'colocadorasRutaPoblacion':
+
+        $ruta_id = $_DATA['ruta_id'];
+        $poblacion_id = $_DATA['poblacion_id'];
+        echo $Colocadora->colocadorasRutaPoblacion($ruta_id, $poblacion_id);
+    break;
+
+
     case 'create':
 
         $nombre = sanitize($_DATA['nombre_completo']);

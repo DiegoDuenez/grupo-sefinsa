@@ -147,6 +147,9 @@ btn_guardar_ruta.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
     }
@@ -180,6 +183,9 @@ function registrarRuta(nombre_ruta, empleado_id){
                     icon: 'success',
                     title: 'Nueva ruta registrada',
                     text: 'Se ha registrado la ruta',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getRutas()
             }
@@ -207,6 +213,9 @@ btn_guardar_editar_ruta.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
 
@@ -242,6 +251,9 @@ function editarRuta(nombre_ruta, empleado_id, id){
                     icon: 'success',
                     title: 'Ruta actualizada',
                     text: 'Se ha editado la ruta',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getRutas();
             }
@@ -286,6 +298,9 @@ function desactivar(id){
                             icon: 'success',
                             title: 'Ruta desactivada',
                             text: 'Se ha desactivado la ruta ',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getRutas()
                     }
@@ -334,6 +349,9 @@ function activar(id){
                             icon: 'success',
                             title: 'Ruta activada',
                             text: 'Se ha activado la ruta',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getRutas()
                     }

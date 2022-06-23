@@ -207,6 +207,9 @@ function getPoblaciones(ruta_id){
                         icon: 'warning',
                         title: 'Aviso',
                         text: 'Esta ruta no tienen poblaciones asignadas aún',
+                        timer: 1000,
+                        showCancelButton: false,
+                        showConfirmButton: false
                     })
                 }
                 
@@ -236,6 +239,9 @@ btn_guardar_colocadora.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
     }
@@ -272,6 +278,9 @@ function registrarColocadora(nombre_completo, direccion, telefono, ruta_id, pobl
                     icon: 'success',
                     title: 'Nueva colocadora',
                     text: 'Se ha registrado a la colocadora',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getColocadoras()
             }
@@ -300,6 +309,9 @@ btn_guardar_editar_colocadora.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
 
@@ -339,6 +351,9 @@ function editarColocadora(nombre_completo, direccion, telefono, ruta_id, poblaci
                     icon: 'success',
                     title: 'Colocadora actualizada',
                     text: 'Se ha editado a la colocadora',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getColocadoras();
             }
@@ -411,6 +426,9 @@ function desactivar(id){
                             icon: 'success',
                             title: 'Colocadora desactivada',
                             text: 'Se ha desactivado a la colocadora',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getColocadoras()
                     }
@@ -459,6 +477,9 @@ function activar(id){
                             icon: 'success',
                             title: 'Colocadora activada',
                             text: 'Se ha activado a la colocadora',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getColocadoras();
                     }

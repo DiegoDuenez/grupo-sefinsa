@@ -45,13 +45,7 @@ switch($func){
 
     case 'create':
 
-        /*if ( 0 < $_FILES['file']['error'] ) {
-            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
-        }
-        else {
-            move_uploaded_file($_FILES['file']['tmp_name'], '../../resources/comprobantes/' . $_FILES['file']['name']);
-            
-        }*/
+        
         $nombre_cliente = $_POST['nombre_cliente'];
         $direccion_cliente = $_POST['direccion_cliente'];
         $telefono_cliente = $_POST['telefono_cliente'];
@@ -61,13 +55,54 @@ switch($func){
         $direccion_aval = $_POST['direccion_aval'];
         $telefono_aval = $_POST['telefono_aval'];
         $or_aval = $_POST['or_aval'];
+        $colocadora_id = $_POST['colocadora_id'];
+
+        
+        $nueva_carpeta_cliente  =  $Cliente->lastIdBeforeInsert('clientes') . '_'.$nombre_cliente;
+        $nueva_carpeta_aval  =  $Cliente->lastIdBeforeInsert('avales') . '_'.$nombre_aval;
+
+        FileManager::createFolder('../../resources/comprobantes/clientes/'.$nueva_carpeta_cliente);
+        FileManager::createFolder('../../resources/comprobantes/avales/'.$nueva_carpeta_aval);
 
 
-        if ( 0 < FileManager::errors('domicilio_cliente') || 0 < FileManager::errors('ine_cliente')  ) {
+        $ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$nueva_carpeta_cliente.'/';
+        FileManager::moveTo(FileManager::get('archivo_cliente_0','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_0','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_1','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_1','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_2','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_2','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_3','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_3','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_4','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_4','name'));
+
+        $ruta_archivos_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+        FileManager::moveTo(FileManager::get('archivo_aval_0','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_0','name'));
+        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
+
+
+        $archivos_cliente = "['$ruta_archivos_cliente". FileManager::get('archivo_cliente_0','name') . "', ".
+        "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_1','name') . "', ".
+        "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_2','name') . "', ".
+        "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_3','name') . "', ".
+        "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_4','name') . "', ".
+        "]";
+
+        $archivos_aval = "['$ruta_archivos_aval". FileManager::get('archivo_aval_0','name') . "', ".
+        "'$ruta_archivos_aval".FileManager::get('archivo_aval_1','name') . "', ".
+        "]";
+
+        echo $Cliente->create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente,
+        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id);
+
+        //FileManager::createFolder('../../resources/comprobantes/diego');
+
+        //FileManager::renameFolder('../../resources/comprobantes/diego/', '../../resources/comprobantes/diego03');
+
+
+       /* if ( 0 < FileManager::errors('domicilio_cliente') || 0 < FileManager::errors('ine_cliente')  ) {
             echo FileManager::errors('domicilio_cliente');
             die();
         }
         else {
+
+            //FileManager::createFolder('../../resources/comprobantes/diego');
 
             $c_domicilio_cliente =  'resources/comprobantes/'.FileManager::get('domicilio_cliente','name');
             $c_ine_cliente =  'resources/comprobantes/'.FileManager::get('ine_cliente','name');
@@ -91,7 +126,7 @@ switch($func){
                             $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $c_domicilio_aval, $c_ine_aval);
 
 
-        }
+        }*/
 
         
         

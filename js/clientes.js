@@ -14,7 +14,11 @@ var inp_direccion_aval = $('#inp_direccion_aval')
 var inp_telefono_aval = $('#inp_telefono_aval')
 var inp_otras_referencias_aval = $('#inp_otras_referencias_aval')
 
+var inp_archivos_cliente = $('#inp_archivos_cliente')
+var inp_archivos_aval = $('#inp_archivos_aval')
 
+
+/*
 var inp_domicilio_cliente = $('#inp_domicilio_cliente')
 var inp_ine_cliente = $('#inp_ine_cliente')
 var inp_tarjeton_cliente = $('#inp_tarjeton_cliente')
@@ -23,11 +27,18 @@ var inp_pagare_cliente = $('#inp_pagare_cliente')
 
 var inp_domicilio_aval = $('#inp_domicilio_aval')
 var inp_ine_aval = $('#inp_ine_aval')
-
+*/
 
 $(document).ready(function(){
 
     getClientes()
+    getRutas()
+
+    $('#select_colocadoras_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
+    $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
+    $('#select_poblaciones_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
+
+
 
 
 });
@@ -59,21 +70,13 @@ function getClientes(){
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
                     <td class="direccion"> ${response.data[i].direccion} </td>
                     <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="garantias"> ${/*response.data[i].garantias_cliente*/''}  </td>
-                    <td class="comprobantes"> 
-                        <a href='${response.data[i].comprobante_domicilio}'> ${response.data[i].comprobante_domicilio != '' ? 'Domicilio' : ''}</a>
-                        <a href='${response.data[i].comprobante_ine}'>${response.data[i].comprobante_ine != '' ? 'INE' : ''}
-                        <a href='${response.data[i].comprobante_tarjeton}'>${response.data[i].comprobante_tarjeton != '' ? 'Tarjetón' : ''}
-                        <a href='${response.data[i].comprobante_contrato}'>${response.data[i].comprobante_contrato != '' ? 'Contrato' : ''}
-                        <a href='${response.data[i].comprobante_pagare}'> ${response.data[i].comprobante_pagare != '' ? 'Pagaré' : ''}
-
-                    
-                    </td>
-                    <td class="otras_referencias"> ${response.data[i].otras_referencias} </td>
-                    <td class="nombre_aval"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" title='Ver aval del cliente'><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
-
-                    <td> 
+                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
+                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
+                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" title='Ver aval del cliente'><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                     </td>
     
                     </tr>
@@ -105,24 +108,48 @@ btn_guardar_cliente.click(function(){
 
 
     if(inp_nombre_cliente.val() == '' || inp_direccion_cliente.val() == '' || inp_telefono_cliente.val() == '' 
-        || inp_otras_referencias_cliente.val() == '' || inp_domicilio_cliente.get(0).files.length == 0 || inp_ine_cliente.get(0).files.length == 0
-        || inp_tarjeton_cliente.get(0).files.length == 0 || inp_contrato_cliente.get(0).files.length == 0 || inp_pagare_cliente.get(0).files.length == 0
-
+        || inp_otras_referencias_cliente.val() == '' || inp_archivos_cliente.get(0).files.length == 0 
         || inp_nombre_aval.val() == '' || inp_direccion_aval.val() == '' || inp_telefono_aval.val() == '' 
-        || inp_otras_referencias_aval.val() == '' || inp_domicilio_aval.get(0).files.length == 0 || inp_ine_aval.get(0).files.length == 0
+        || inp_otras_referencias_aval.val() == '' || inp_archivos_aval.get(0).files.length == 0
+        || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
+        || $('.select_colocadoras option:selected').val() == 0 
         ){
 
         Swal.fire({
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
     }
+    else if(inp_archivos_cliente.get(0).files.length < 5){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Archivos faltantes',
+            text: 'Necesitas subir todos los archivos del cliente',
+            timer: 1500,
+            showCancelButton: false,
+            showConfirmButton: false
+        })
+    }
+    else if(inp_archivos_aval.get(0).files.length < 2){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Archivos faltantes',
+            text: 'Necesitas subir todos los archivos del aval',
+            timer: 1500,
+            showCancelButton: false,
+            showConfirmButton: false
+        })
+    }
     else
     {
+        var colocadora_id = $('.select_colocadoras option:selected').val()
         registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
-                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val())
+                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val(), colocadora_id)
     }
 
 
@@ -157,7 +184,7 @@ btn_guardar_cliente.click(function(){
 
 })
 
-function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval){
+function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id){
 
     var data = new FormData();
     data.append('func', 'create');
@@ -169,8 +196,17 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     data.append('direccion_aval', direccion_aval)
     data.append('telefono_aval', telefono_aval)
     data.append('or_aval', or_aval)
+    data.append('colocadora_id', colocadora_id)
 
-    $.each(inp_domicilio_cliente[0].files, function(i, file) {
+    $.each(inp_archivos_cliente[0].files, function(i, file) {
+        data.append('archivo_cliente_'+i, file);
+    });
+
+    $.each(inp_archivos_aval[0].files, function(i, file) {
+        data.append('archivo_aval_'+i, file);
+    });
+
+   /* $.each(inp_domicilio_cliente[0].files, function(i, file) {
         data.append('domicilio_cliente', file);
     });
     $.each(inp_ine_cliente[0].files, function(i, file) {
@@ -191,10 +227,10 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     });
     $.each(inp_ine_aval[0].files, function(i, file) {
         data.append('ine_aval', file);
-    });
+    });*/
     
 
-    $.ajax({
+   $.ajax({
         url: URL,
         data: data,
         cache: false,
@@ -212,6 +248,9 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
                     icon: 'success',
                     title: 'Nuevo cliente',
                     text: 'Se ha registrado al cliente',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
 
                 getClientes()
@@ -229,4 +268,202 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
         }
     });
     
+}
+
+$('.select_rutas').on('change', function() {
+    $('.select_poblaciones').prop( "disabled", false );
+    getPoblaciones(this.value);
+});
+
+$('.select_poblaciones').on('change', function() {
+    $('.select_colocadoras').prop( "disabled", false);
+    getColocadoras($('.select_rutas option:selected').val(), this.value);
+});
+
+
+
+function getRutas(){
+
+
+    var datasend = {
+        func: "rutasActivas"
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Rutas/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+
+                $('.select_rutas').empty()
+                $('.select_rutas').append(`
+                    <option value="0" >Seleccionar ruta</option>
+                `)
+                for(var i = 0; i < response.data.length; i++ ){
+                    
+                    $('.select_rutas').append(`
+                        <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
+                    `)
+
+                    /*if(colocadoraRuta != ""){
+                        $(`.select_rutas.editar option[name='${colocadoraRuta}']`).attr('selected','selected');
+                    }*/
+
+
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
+function getPoblaciones(ruta_id){
+
+
+    var datasend = {
+        func: "poblacionesRuta",
+        ruta_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Poblaciones/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('.select_poblaciones').empty()
+                $('.select_poblaciones').append(`
+                    <option value="0" >Seleccionar población</option>
+                `)
+
+                if(response.data.length > 0){
+
+                    for(var i = 0; i < response.data.length; i++ ){
+                    
+                        $('.select_poblaciones').append(`
+                            <option name="${response.data[i].nombre_poblacion}" value="${response.data[i].id}">${response.data[i].nombre_poblacion}</option>
+                        `)
+    
+                       /* if(colocadoraPoblacion != ""){
+                            $(`.select_poblaciones.editar option[name='${colocadoraPoblacion}']`).attr('selected','selected');
+                        }*/
+    
+    
+                    }
+                }
+                else{
+                    $('.select_poblaciones').prop( "disabled", true );
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Aviso',
+                        text: 'Esta ruta no tienen poblaciones asignadas aún',
+                        timer: 1000,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    })
+                }
+                
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
+function getColocadoras(ruta_id, poblacion_id){
+
+    var datasend = {
+        func: "colocadorasRutaPoblacion",
+        ruta_id,
+        poblacion_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Colocadoras/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                if(response.data.length > 0){
+
+                    $('.select_colocadoras').empty()
+                    $('.select_colocadoras').append(`
+                        <option value="0" >Seleccionar colocadora</option>
+                    `)
+                    for(var i = 0; i < response.data.length; i++ ){
+                        
+                        $('.select_colocadoras').append(`
+                            <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                        `)
+
+                        /*if(rutaLocalidad != ""){
+                            $(`.select_rutas.editar option[name='${rutaLocalidad}']`).attr('selected','selected');
+                        }*/
+
+
+                    }
+                
+                }
+                else{
+                    $('.select_colocadoras').prop( "disabled", true );
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Aviso',
+                        text: 'Esta poblacion no tiene colcoadoras asignadas aún',
+                        timer: 1000,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    })
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
 }

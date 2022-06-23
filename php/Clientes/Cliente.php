@@ -18,9 +18,15 @@ class Cliente extends Database{
         ORDER BY $this->table.id DESC";*/
 
         
-        $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval'
+        $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
+        colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
         INNER JOIN avales ON $this->table.aval_id = avales.id
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = colocadoras.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = colocadoras.poblacion_id
         /*INNER JOIN garantias ON $this->table.id = garantias.cliente_id */
         ORDER BY $this->table.id DESC";
 
@@ -33,6 +39,19 @@ class Cliente extends Database{
         , 200);
  
 
+    }
+
+    public function lastIdBeforeInsert($table){
+
+        $query = "SELECT AUTO_INCREMENT
+        FROM  INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = 'proyecto_cobranza'
+        AND   TABLE_NAME   = '$table'";
+
+        $result = $this->SelectOne($query);
+
+        return $result['AUTO_INCREMENT'];
+               
     }
 
     public function avalCliente($id)
@@ -92,7 +111,7 @@ class Cliente extends Database{
     }
 
 
-    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $c_domicilio_cliente, $c_ine_cliente, $c_tarjeton_cliente, 
+    /*public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $c_domicilio_cliente, $c_ine_cliente, $c_tarjeton_cliente, 
         $c_contrato_cliente, $c_pagare_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $c_domicilio_aval, $c_ine_aval){
 
 
@@ -129,9 +148,50 @@ class Cliente extends Database{
 
             }
 
+        } catch(Exception $e) {
 
+            return $e->getMessage();
+            die();
+
+        }
+
+
+    }*/
+
+
+    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id){
+
+
+        try{
+
+
+            $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes) VALUES (?, ?, ?, ?, ?)";
+            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval]);
+
+            if($aval) {
+
+                $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobantes, colocadora_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $archivos_cliente, $colocadora_id]);
+
+                if($cliente){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha creado al cliente'
+                    ], 200);
+                }
             
-            
+
+            } else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error al crear al cliente'
+                ], 400);
+
+            }
 
         } catch(Exception $e) {
 

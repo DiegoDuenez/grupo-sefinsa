@@ -23,6 +23,24 @@ class Colocadora extends Database{
         , 200);
     }
 
+    public function colocadorasRutaPoblacion($ruta_id, $poblacion_id){
+
+        $query = "SELECT $this->table.*, rutas.nombre_ruta, poblaciones.nombre_poblacion FROM $this->table
+        INNER JOIN rutas ON rutas.id = $this->table.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
+        WHERE $this->table.ruta_id = '$ruta_id' AND $this->table.poblacion_id = '$poblacion_id' 
+        ORDER BY $this->table.id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
     public function create($nombre, $direccion, $telefono, $ruta_id, $poblacion_id){
 
         try{

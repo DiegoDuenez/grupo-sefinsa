@@ -74,14 +74,41 @@
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_primer_hora">Primer hora limite de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_primer_hora" required  />
+
+                    <label for="inp_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <select class="form-control" name="select_primer_dia" id="select_primer_dia">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miercoles">Miercoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sabado">Sabado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <select class="form-control" name="select_segundo_dia" id="select_segundo_dia">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miercoles">Miercoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes" >Viernes</option>
+                                <option value="Sabado" selected>Sabado</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_segunda_hora">Segunda hora limite de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_segunda_hora" required/>
+
+                    <label for="inp_primer_hora">Horario de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <input class="form-control" id="inp_primer_hora" required  />
+                        </div>
+                        <div class="form-group col mt-2">
+                            <input class="form-control" id="inp_segunda_hora" required/>
+                        </div>
                     </div>
+
                     <div class="form-group mt-2">
                         <label for="inp_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
@@ -116,13 +143,39 @@
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_primer_hora">Primer hora limite de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_editar_primer_hora" required  />
+
+                    <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <select class="form-control" name="select_editar_primer_dia" id="select_editar_primer_dia">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miercoles">Miercoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sabado">Sabado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <select class="form-control" name="select_editar_segundo_dia" id="select_editar_segundo_dia">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miercoles">Miercoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes" >Viernes</option>
+                                <option value="Sabado">Sabado</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_segunda_hora">Segunda hora limite de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_editar_segunda_hora" required/>
+
+                    <label for="inp_editar_primer_hora">Horario de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <input class="form-control" id="inp_editar_primer_hora" required  />
+                        </div>
+                        <div class="form-group col mt-2">
+                            <input class="form-control" id="inp_editar_segunda_hora" required/>
+                        </div>
                     </div>
                     <div class="form-group mt-2">
                         <label for="inp_editar_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>

@@ -25,4 +25,23 @@ class FileManager{
         return ($n === false) ? '' : substr($name, $n+1);
     }
 
+    public static function createFolder($path){
+
+        if (!is_dir($path)) {
+            mkdir($path);
+            return true;
+        }
+        return false;
+        
+    }
+
+    public static function renameFolder($old, $new){
+
+        if (is_dir($old)) {
+            rename($old, $new);
+            return true;
+        }
+        return false;
+    }
+
 }

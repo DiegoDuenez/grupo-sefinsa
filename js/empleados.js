@@ -150,6 +150,9 @@ btn_guardar_empleado.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
     }
@@ -185,6 +188,9 @@ function registrarEmpleado(nombre_completo, usuario, password, perfil_id){
                     icon: 'success',
                     title: 'Nuevo empleado',
                     text: 'Se ha registrado al empleado',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getEmpleados()
             }
@@ -252,6 +258,9 @@ btn_guardar_editar_empleado.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
 
@@ -262,6 +271,9 @@ btn_guardar_editar_empleado.click(function(){
             icon: 'warning',
             title: 'Campos vacios',
             text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
         })
 
     }
@@ -317,6 +329,9 @@ function editarEmpleado(nombre_completo, usuario, id, perfil_id, password = null
                     icon: 'success',
                     title: 'Empleado actualizado',
                     text: 'Se ha editado al empleado',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
                 })
                 getEmpleados();
             }
@@ -362,6 +377,9 @@ function desactivar(id){
                             icon: 'success',
                             title: 'Empleado desactivado',
                             text: 'Se ha desactivado al empleado',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getEmpleados()
                     }
@@ -410,6 +428,9 @@ function activar(id){
                             icon: 'success',
                             title: 'Empleado activado',
                             text: 'Se ha activado al empleado',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
                         })
                         getEmpleados()
                     }
