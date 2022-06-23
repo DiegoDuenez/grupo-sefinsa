@@ -63,11 +63,11 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_nombre_ruta">Nombre de ruta</label>
+                        <label for="inp_nombre_ruta">Nombre de ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_empleados_registrar">Empleado</label>
+                        <label for="select_empleados_registrar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_empleados" id="select_empleados_registrar" >
                             <option selected value="0" >Seleccionar empleado</option>
                         </select>
@@ -92,11 +92,11 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_ruta">Nombre de ruta</label>
+                        <label for="inp_editar_nombre_ruta">Nombre de ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_empleados_editar">Empleado</label>
+                        <label for="select_empleados_editar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_empleados editar" id="select_empleados_editar" >
                             <option selected value="0" >Seleccionar empleado</option>
                         </select>

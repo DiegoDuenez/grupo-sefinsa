@@ -63,19 +63,19 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_nombre_completo">Nombre completo</label>
+                        <label for="inp_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_usuario">Usuario</label>
+                        <label for="inp_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_usuario" placeholder="Usuario" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_password">Contraseña</label>
+                        <label for="inp_password">Contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_password" type="password" placeholder="Contraseña" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_perfiles_registrar">Perfil</label>
+                        <label for="select_perfiles_registrar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_perfiles" id="select_perfiles_registrar" >
                             <option selected value="0" >Seleccionar perfil</option>
                         </select>
@@ -100,15 +100,15 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_completo">Nombre completo</label>
+                        <label for="inp_editar_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_usuario">Usuario</label>
+                        <label for="inp_editar_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_usuario" placeholder="Usuario" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_perfiles_editar">Perfil</label>
+                        <label for="select_perfiles_editar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_perfiles editar"  id="select_perfiles_editar">
                         </select>
                     </div>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_password" class="d-none" id="lb_password">Nueva contraseña</label>
+                        <label for="inp_editar_password" class="d-none" id="lb_password">Nueva contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control d-none" id="inp_editar_password" type="password" placeholder="Contraseña"/>
                     </div>
                 </div>

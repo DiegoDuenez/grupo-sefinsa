@@ -67,25 +67,25 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_nombre_completo">Nombre completo</label>
+                        <label for="inp_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_direccion">Dirección</label>
+                        <label for="inp_direccion">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_direccion" placeholder="Dirección" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_telefono">Teléfono</label>
+                        <label for="inp_telefono">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" type="number" id="inp_telefono" placeholder="Teléfono" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_rutas_registrar">Ruta</label>
+                        <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_rutas" id="select_rutas_registrar">
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_poblaciones_registrar">Población</label>
+                        <label for="select_poblaciones_registrar">Población <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_poblaciones" id="select_poblaciones_registrar" disabled >
                             <option selected value="0" >Seleccionar población</option>
                         </select>
@@ -110,25 +110,25 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_completo">Nombre completo</label>
+                        <label for="inp_editar_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_direccion">Dirección</label>
+                        <label for="inp_editar_direccion">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_direccion" placeholder="Dirección" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_telefono">Teléfono</label>
+                        <label for="inp_editar_telefono">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" type="number" id="inp_editar_telefono" placeholder="Teléfono" required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_rutas_editar">Ruta</label>
+                        <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_rutas editar" id="select_rutas_editar">
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_poblaciones_editar">Población</label>
+                        <label for="select_poblaciones_editar">Población <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_poblaciones editar" id="select_poblaciones_editar">
                             <option selected value="0" >Seleccionar población</option>
                         </select>
