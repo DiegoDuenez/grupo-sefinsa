@@ -58,6 +58,8 @@ $(document).ready(function(){
 
     getClientes()
     getRutas()
+    getPoblaciones()
+    getColocadoras()
 
     $('#select_colocadoras_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
     $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
@@ -67,13 +69,18 @@ $(document).ready(function(){
     $('#select_rutas_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
     $('#select_poblaciones_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
 
+    
+    $('#select_rutas_filtro').select2({theme: 'bootstrap4', width: '15%'});
+    $('#select_poblaciones_filtro').select2({theme: 'bootstrap4', width: '15%'});
+    $('#select_colocadoras_filtro').select2({theme: 'bootstrap4', width: '20%'});
+
 
 
 });
 
 function getClientes(){
 
-    //clearInputs()
+    clearInputs()
 
     $.blockUI({ message: '<h4> TRAYENDO CLIENTES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
 
@@ -101,9 +108,9 @@ function getClientes(){
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
                     <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
-                    
 
                     <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
@@ -408,25 +415,44 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
 
 $('#select_rutas_registrar').on('change', function() {
     $('#select_poblaciones_registrar').prop( "disabled", false );
-    getPoblaciones(this.value);
+    getPoblacionesRuta(this.value);
 });
 
 $('#select_poblaciones_registrar').on('change', function() {
     $('#select_colocadoras_registrar').prop( "disabled", false);
-    getColocadoras($('#select_rutas_registrar option:selected').val(), this.value);
+    getColocadorasRutaPoblacion($('#select_rutas_registrar option:selected').val(), this.value);
 });
 
 
 $('#select_rutas_editar').on('change', function() {
     $('#select_poblaciones_editar').prop( "disabled", false );
-    getPoblaciones(this.value);
+    getPoblacionesRuta(this.value);
 });
 
 $('#select_poblaciones_editar').on('change', function() {
     $('#select_colocadoras_editar').prop( "disabled", false);
-    getColocadoras($('#select_rutas_editar option:selected').val(), this.value);
+    getColocadorasRutaPoblacion($('#select_rutas_editar option:selected').val(), this.value);
 });
 
+/* FILTROS */
+
+$('#select_rutas_filtro').on('change', function(){
+    $('#select_poblaciones_filtro').val(0).trigger('change.select2');
+    $('#select_colocadoras_filtro').val(0).trigger('change.select2');
+    getClientesRuta(this.value)
+})
+
+$('#select_poblaciones_filtro').on('change', function(){
+    $('#select_colocadoras_filtro').val(0).trigger('change.select2');
+    $('#select_rutas_filtro').val(0).trigger('change.select2');
+    getClientesPoblacion(this.value)
+})
+
+$('#select_colocadoras_filtro').on('change', function(){
+    $('#select_poblaciones_filtro').val(0).trigger('change.select2');
+    $('#select_rutas_filtro').val(0).trigger('change.select2');
+    getClientesColocadora(this.value)
+})
 
 
 function getRutas(){
@@ -463,6 +489,20 @@ function getRutas(){
 
                 }
 
+
+                $('#select_rutas_filtro').empty()
+                $('#select_rutas_filtro').append(`
+                    <option value="0" >Filtrar por ruta</option>
+                `)
+                for(var i = 0; i < response.data.length; i++ ){
+                    
+                    $('.select_rutas_filtro').append(`
+                        <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
+                    `)
+
+                }
+
+
             }
 
         },
@@ -480,7 +520,7 @@ function getRutas(){
 }
 
 
-function getPoblaciones(ruta_id){
+function getPoblacionesRuta(ruta_id){
 
 
     var datasend = {
@@ -550,7 +590,55 @@ function getPoblaciones(ruta_id){
 }
 
 
-function getColocadoras(ruta_id, poblacion_id){
+function getPoblaciones(){
+
+
+    var datasend = {
+        func: "index",
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Poblaciones/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#select_poblaciones_filtro').empty()
+                $('#select_poblaciones_filtro').append(`
+                    <option value="0" >Filtrar por población</option>
+                `)
+
+                for(var i = 0; i < response.data.length; i++ ){
+                
+                    $('#select_poblaciones_filtro').append(`
+                        <option name="${response.data[i].nombre_poblacion}" value="${response.data[i].id}">${response.data[i].nombre_poblacion}</option>
+                    `)
+
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
+
+function getColocadorasRutaPoblacion(ruta_id, poblacion_id){
 
     var datasend = {
         func: "colocadorasRutaPoblacion",
@@ -602,6 +690,53 @@ function getColocadoras(ruta_id, poblacion_id){
                         showConfirmButton: false
                     })
                 }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
+function getColocadoras(){
+
+
+    var datasend = {
+        func: "index",
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Colocadoras/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#select_colocadoras_filtro').empty()
+                $('#select_colocadoras_filtro').append(`
+                    <option value="0" >Filtrar por colocadora</option>
+                `)
+                for(var i = 0; i < response.data.length; i++ ){
+
+                    $('#select_colocadoras_filtro').append(`
+                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                    `)
+
+                }
+                
 
             }
 
@@ -699,10 +834,225 @@ function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
 
     
     getRutas()
-    getPoblaciones(ruta_id)
-    getColocadoras(ruta_id, poblacion_id)
+    getPoblacionesRuta(ruta_id)
+    getColocadorasRutaPoblacion(ruta_id, poblacion_id)
 
 }
+
+
+
+function getClientesRuta(ruta_id){
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO CLIENTES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "clientesRuta",
+        ruta_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#table_body').empty()
+                for(var i = 0; i < response.data.length; i++ ){
+                    $('#table_body').append(`
+                    <tr>
+                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
+                    <td class="direccion"> ${response.data[i].direccion} </td>
+                    <td class="telefono"> ${response.data[i].telefono} </td>
+                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
+                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
+                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    
+                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
+                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
+
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
+                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
+                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
+                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
+
+                    <td > 
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                    </td>
+    
+                    </tr>
+                    `)
+    
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+
+function getClientesPoblacion(poblacion_id){
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO CLIENTES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "clientesPoblacion",
+        poblacion_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#table_body').empty()
+                for(var i = 0; i < response.data.length; i++ ){
+                    $('#table_body').append(`
+                    <tr>
+                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
+                    <td class="direccion"> ${response.data[i].direccion} </td>
+                    <td class="telefono"> ${response.data[i].telefono} </td>
+                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
+                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
+                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    
+                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
+                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
+
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
+                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
+                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
+                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
+
+                    <td > 
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                    </td>
+    
+                    </tr>
+                    `)
+    
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+function getClientesColocadora(colocadora_id){
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO CLIENTES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "clientesColocadora",
+        colocadora_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#table_body').empty()
+                for(var i = 0; i < response.data.length; i++ ){
+                    $('#table_body').append(`
+                    <tr>
+                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
+                    <td class="direccion"> ${response.data[i].direccion} </td>
+                    <td class="telefono"> ${response.data[i].telefono} </td>
+                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
+                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
+                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    
+                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
+                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
+
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
+                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
+                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
+                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
+
+                    <td > 
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                    </td>
+    
+                    </tr>
+                    `)
+    
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+
 
 function modalVerAval(e){
 
@@ -736,8 +1086,6 @@ function modalVerAval(e){
     $('#telefono_aval').text($.trim(telefono_aval))
     $('#or_aval').text($.trim(or_aval))
     $('#garantias_aval').text($.trim(garantias_aval))
-
-
 
 
 }

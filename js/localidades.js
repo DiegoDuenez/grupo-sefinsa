@@ -234,8 +234,8 @@ function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segun
                 $('#modal_registrar_localidad').modal('toggle');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Nueva localidad',
-                    text: 'Se ha registrado la localidad',
+                    title: 'Nueva población',
+                    text: 'Se ha registrado la población',
                     timer: 1000,
                     showCancelButton: false,
                     showConfirmButton: false

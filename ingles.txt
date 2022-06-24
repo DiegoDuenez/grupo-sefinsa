@@ -1,0 +1,56 @@
+
+
+Diego: Hola francisco, bienvenido, como estas?
+
+Francisco: Bien, y tu?, Estoy aqui por la entrevista
+
+Diego: Claro te estaba esperando, dime, como supiste de la vacante disponible?
+
+Francisco: Estuve buscando en internet y me aparecio en un anuncio, me parecio
+interesante la vacante
+
+Diego: Si, es un gran responsabilidad
+
+Diego: Que documentos trajiste?
+
+Francisco: Bueno traje mi curriculum, mi certificación de estudios, certificado de salud, mi identificación
+y algunas referencias
+
+Diego: Oh eso es bueno, puedes dejarlos ahi y las checare en un momento, pero antes de eso 
+quisiera conocer más acerca de ti y tus habilidades
+¿Porque te intereso la vacante?
+
+Francisco: Bueno se me hizo una vacante interesante por las tecnologias que utilizan y el crecimeinto profesional que se ofrece
+
+Diego: Haz tenido experiencias previas con eso?
+
+Francisco: Si, claro, son con las que prefiero trabajar y me siento comodo
+
+Diego: Que fortalezas consideras tener?
+
+Francisco: Bueno, soy muy responsable, me gusta trabajar en equipo y disfruto 
+utilizar metodologias en cada proyecto que se vaya elaborar
+
+Diego: Muy bien, y que debilidades consideras que tienes?
+
+Francisco: No tengo debilidades, me gusta ahcer mi trabajo lo mejor posible
+
+Diego: Eso suena muy bien, y que expectativas tienes acerca del trabajo?
+
+Francisco: Espero que sea un buen ambiente laboral con compañeros profesionales
+para formar un buen equipo de trabajo
+
+Diego: Y en cuestion del salario, cual seria tu expectativa?
+
+Francisco: Bueno me gustaria un suelo entre 15,000 y 20,000, en mi anterior trabajo ganaba 
+un aproximado a eso, no me molestaria seguir asi.
+
+Diego: Bueno eso estaria bien, me gustaria que el proximo lunes a las 11 AM vengas a la entrevista tecnica
+y despues de eso podremos discutir el sueldo en base a tu resultado, te parece?
+
+Francisco: Si claro, esta perfecto
+
+Diego: Bueno esto seria todo por hoy, te espero el lunes
+
+Francisco: Ahi te veo, gracias hasta luego
+

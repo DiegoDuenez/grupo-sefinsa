@@ -10,14 +10,6 @@ class Cliente extends Database{
     public function index()
     {
 
-       
-
-        /*$query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval'
-        FROM $this->table 
-        INNER JOIN avales ON $this->table.aval_id = avales.id
-        ORDER BY $this->table.id DESC";*/
-
-        
         $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
         avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
         avales.garantias as 'garantias_aval',
@@ -29,7 +21,6 @@ class Cliente extends Database{
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = colocadoras.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = colocadoras.poblacion_id
-        /*INNER JOIN garantias ON $this->table.id = garantias.cliente_id */
         ORDER BY $this->table.id DESC";
 
         return json(
@@ -40,6 +31,84 @@ class Cliente extends Database{
             ]
         , 200);
  
+
+    }
+
+    public function clientesRuta($id){
+
+        $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
+        avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
+        avales.garantias as 'garantias_aval',
+        colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
+        FROM $this->table 
+        INNER JOIN avales ON $this->table.aval_id = avales.id
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = colocadoras.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = colocadoras.poblacion_id
+        WHERE rutas.id= '$id'
+        ORDER BY $this->table.id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
+    public function clientesPoblacion($id){
+
+        $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
+        avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
+        avales.garantias as 'garantias_aval',
+        colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
+        FROM $this->table 
+        INNER JOIN avales ON $this->table.aval_id = avales.id
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = colocadoras.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = colocadoras.poblacion_id
+        WHERE poblaciones.id= '$id'
+        ORDER BY $this->table.id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
+    public function clientesColocadora($id){
+
+        $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
+        avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
+        avales.garantias as 'garantias_aval',
+        colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
+        FROM $this->table 
+        INNER JOIN avales ON $this->table.aval_id = avales.id
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = colocadoras.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = colocadoras.poblacion_id
+        WHERE $this->table.colocadora_id = '$id'
+        ORDER BY $this->table.id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
 
     }
 
@@ -210,19 +279,12 @@ class Cliente extends Database{
 
         try{
 
-            /*$insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes, garantias) VALUES (?, ?, ?, ?, ?, ?)";
-            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $garantias_aval]);*/
-
             $updateAval = "UPDATE avales SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ? WHERE id = '$aval_id'";
             $aval = $this->ExecuteQuery($updateAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval]);
 
 
             if($aval) {
 
-               /* $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobantes, colocadora_id, garantias) 
-                VALUES (?, ?, ?, ?, ?, ?, ?,?)";
-                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $archivos_cliente, $colocadora_id, $garantias_cliente]);
-*/
                 $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ? WHERE id = '$cliente_id'";
                 $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id]);
 

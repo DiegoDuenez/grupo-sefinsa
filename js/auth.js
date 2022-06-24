@@ -88,7 +88,8 @@ function authGuard(){
 
 function clearInputs(){
 
-    $(`.select_perfiles option[value="0"]`).attr('selected','selected');
+    
+
     $('#inp_nombre_completo').val("")
     $('#inp_usuario').val("")
     $('#inp_password').val("")
@@ -96,11 +97,24 @@ function clearInputs(){
     $('#inp_editar_nombre_completo').val("")
     $('#inp_editar_usuario').val("")
     $('#inp_editar_password').val("")
-
     $('#cb_password').prop("checked", false)
+    $('#lb_password').addClass('d-none')
     $('#inp_editar_password').addClass('d-none')
     $("#inp_nombre_ruta").val("")
     $("#inp_nombre_localidad").val("")
+
+
+    //RUTAS INPUTS
+    $('#select_empleados_registrar').val(0).trigger('change.select2');
+
+    // POBLACIONES INPUTS
+    $('#select_primer_dia option[value=Lunes]').prop('selected',true);
+    $('#select_segundo_dia option[value=Sabado]').prop('selected',true);
+    $("#inp_primer_hora").val('00:00:00')
+    $('#inp_monto_multa').val('0.00')
+
+    // EMPLEADOS INPUTS
+    $(`.select_perfiles option[value="0"]`).prop('selected',true);
 
     // COLOCADORA INPUTS
     $('#inp_nombre_completo').val("")
@@ -109,6 +123,46 @@ function clearInputs(){
     $('#inp_editar_nombre_completo').val("")
     $('#inp_editar_direccion').val("")
     $('#inp_editar_telefono').val("")
+
+
+    // CLIENTES INPUT
+    $('#inp_nombre_cliente').val('')
+    $('#inp_direccion_cliente').val('')
+    $('#inp_telefono_cliente').val('')
+    $('#inp_otras_referencias_cliente').val('')
+    $('#inp_nombre_aval').val('')
+    $('#inp_direccion_aval').val('')
+    $('#inp_telefono_aval').val('')
+    $('#inp_otras_referencias_aval').val('')
+    $('#inp_garantias_cliente').val('')
+    $('#inp_garantias_aval').val('')
+    $('#inp_editar_nombre_cliente').val('')
+    $('#inp_editar_direccion_cliente').val('')
+    $('#inp_editar_telefono_cliente').val('')
+    $('#inp_editar_otras_referencias_cliente').val('')
+    $('#inp_editar_nombre_aval').val('')
+    $('#inp_editar_direccion_aval').val('')
+    $('#inp_editar_telefono_aval').val('')
+    $('#inp_editar_otras_referencias_aval').val('')
+    $('#inp_editar_garantias_cliente').val('')
+    $('#inp_editar_garantias_aval').val('')
+    $('#inp_archivos_cliente').val('')
+    $('#inp_archivos_aval').val('')
+    $('#inp_archivos_garantias_cliente').val('')
+    $('#inp_archivos_garantias_aval').val('')
+    $('#select_colocadoras_registrar').val(0).trigger('change.select2');
+    $('#select_rutas_registrar').val(0).trigger('change.select2');
+    $('#select_poblaciones_registrar').val(0).trigger('change.select2');
+    $('#select_colocadoras_editar').val(0).trigger('change.select2');
+    $('#select_rutas_editar').val(0).trigger('change.select2');
+    $('#select_poblaciones_editar').val(0).trigger('change.select2');
+    $('#select_poblaciones_registrar').prop( "disabled", true );
+    $('#select_colocadoras_registrar').prop( "disabled", true );
+
+
+
+
+
     
 
 }

@@ -19,7 +19,7 @@ colocadoraPoblacion = ""
 
 $(document).ready(function(){
 
-    getColocadoras();
+    getColocadorasRutaPoblacion();
     getRutas()
 
     $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_colocadora ')});
@@ -46,7 +46,7 @@ btn_modal_registrar_colocadora.click(function(){
 })
 
 
-function getColocadoras(){
+function getColocadorasRutaPoblacion(){
 
     clearInputs()
 
@@ -163,7 +163,7 @@ function getRutas(){
 }
 
 
-function getPoblaciones(ruta_id){
+function getPoblacionesRuta(ruta_id){
 
 
     var datasend = {
@@ -282,7 +282,7 @@ function registrarColocadora(nombre_completo, direccion, telefono, ruta_id, pobl
                     showCancelButton: false,
                     showConfirmButton: false
                 })
-                getColocadoras()
+                getColocadorasRutaPoblacion()
             }
             
         },
@@ -355,7 +355,7 @@ function editarColocadora(nombre_completo, direccion, telefono, ruta_id, poblaci
                     showCancelButton: false,
                     showConfirmButton: false
                 })
-                getColocadoras();
+                getColocadorasRutaPoblacion();
             }
             
         },
@@ -375,7 +375,7 @@ function editarColocadora(nombre_completo, direccion, telefono, ruta_id, poblaci
 
 $('.select_rutas').on('change', function() {
     $('.select_poblaciones').prop( "disabled", false );
-    getPoblaciones(this.value);
+    getPoblacionesRuta(this.value);
 });
 
 function modalEditarColocadora(e, id, ruta_id, ruta, poblacion){
@@ -396,7 +396,7 @@ function modalEditarColocadora(e, id, ruta_id, ruta, poblacion){
     colocadoraRuta = ruta
     colocadoraPoblacion = poblacion
     getRutas()
-    getPoblaciones(ruta_id)
+    getPoblacionesRuta(ruta_id)
 
 
 }
@@ -430,7 +430,7 @@ function desactivar(id){
                             showCancelButton: false,
                             showConfirmButton: false
                         })
-                        getColocadoras()
+                        getColocadorasRutaPoblacion()
                     }
                     
                 },
@@ -481,7 +481,7 @@ function activar(id){
                             showCancelButton: false,
                             showConfirmButton: false
                         })
-                        getColocadoras();
+                        getColocadorasRutaPoblacion();
                     }
                     
                 },
