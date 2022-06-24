@@ -50,12 +50,17 @@ switch($func){
         $direccion_cliente = $_POST['direccion_cliente'];
         $telefono_cliente = $_POST['telefono_cliente'];
         $or_cliente = $_POST['or_cliente'];
+        $colocadora_id = $_POST['colocadora_id'];
+        $garantias_cliente = $_POST['garantias_cliente'];
+
         
         $nombre_aval = $_POST['nombre_aval'];
         $direccion_aval = $_POST['direccion_aval'];
         $telefono_aval = $_POST['telefono_aval'];
         $or_aval = $_POST['or_aval'];
         $colocadora_id = $_POST['colocadora_id'];
+        $garantias_aval = $_POST['garantias_aval'];
+
 
         
         $nueva_carpeta_cliente  =  $Cliente->lastIdBeforeInsert('clientes') . '_'.$nombre_cliente;
@@ -77,7 +82,7 @@ switch($func){
         FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
 
 
-        $archivos_cliente = "['$ruta_archivos_cliente". FileManager::get('archivo_cliente_0','name') . "', ".
+        /*$archivos_cliente = "['$ruta_archivos_cliente". FileManager::get('archivo_cliente_0','name') . "', ".
         "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_1','name') . "', ".
         "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_2','name') . "', ".
         "'$ruta_archivos_cliente".FileManager::get('archivo_cliente_3','name') . "', ".
@@ -86,10 +91,13 @@ switch($func){
 
         $archivos_aval = "['$ruta_archivos_aval". FileManager::get('archivo_aval_0','name') . "', ".
         "'$ruta_archivos_aval".FileManager::get('archivo_aval_1','name') . "', ".
-        "]";
+        "]";*/
+
+        $archivos_cliente = "";
+        $archivos_aval = "";
 
         echo $Cliente->create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente,
-        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id);
+        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id, $garantias_cliente, $garantias_aval);
 
         //FileManager::createFolder('../../resources/comprobantes/diego');
 

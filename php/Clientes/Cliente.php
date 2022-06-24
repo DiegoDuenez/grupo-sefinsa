@@ -19,6 +19,8 @@ class Cliente extends Database{
 
         
         $query  = "SELECT $this->table.*, avales.id as 'aval_id', avales.nombre_completo as 'nombre_aval',
+        avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
+        avales.garantias as 'garantias_aval',
         colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
@@ -159,20 +161,21 @@ class Cliente extends Database{
     }*/
 
 
-    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id){
+    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente, $nombre_aval, 
+    $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id, $garantias_cliente, $garantias_aval){
 
 
         try{
 
 
-            $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes) VALUES (?, ?, ?, ?, ?)";
-            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval]);
+            $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes, garantias) VALUES (?, ?, ?, ?, ?, ?)";
+            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $garantias_aval]);
 
             if($aval) {
 
-                $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobantes, colocadora_id) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $archivos_cliente, $colocadora_id]);
+                $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobantes, colocadora_id, garantias) 
+                VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $archivos_cliente, $colocadora_id, $garantias_cliente]);
 
                 if($cliente){
                     return json([

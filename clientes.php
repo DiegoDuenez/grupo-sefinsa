@@ -88,24 +88,26 @@
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_telefono_cliente">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_telefono_cliente" placeholder="Teléfono cliente" required/>
+                            <input class="form-control" type="number" min="0" id="inp_telefono_cliente" placeholder="Teléfono cliente" required/>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label for="select_rutas_registrar">Rutas <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <select class="form-control select_rutas"  id="select_rutas_registrar">
                             </select>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="select_poblaciones_registrar">Población <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <select class="form-control select_poblaciones"  id="select_poblaciones_registrar" disabled>
+                                <option value="0">Seleccionar población</option>
                             </select>
                         </div>
                         <div class="form-group col mt-2">
-                            <label for="select_colocadoras_registrar">Colocadoras <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="select_colocadoras_registrar">Colocadora <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <select class="form-control select_colocadoras"  id="select_colocadoras_registrar" disabled>
+                                <option value="0">Seleccionar colocadora</option>
                             </select>
                         </div>
                        
@@ -117,7 +119,23 @@
                             <label for="inp_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_otras_referencias_cliente" rows="1" required></textarea>
                         </div>
-                        <div class="form-group col ml-5 mt-2">
+                        <div class="form-group col mt-2">
+                            <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_garantias_cliente" rows="1" required></textarea>
+                        </div>
+                        <div class="form-group col ml-3 mt-2">
+                            <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
                             <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
                                 <div class="form-group">
@@ -135,15 +153,15 @@
                     <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_nombre_aval">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_nombre_aval" placeholder="Nombre cliente" autofocus required/>
+                            <input class="form-control" id="inp_nombre_aval" placeholder="Nombre aval" autofocus required/>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_direccion_aval">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_direccion_aval" placeholder="Dirección cliente" required/>
+                            <input class="form-control" id="inp_direccion_aval" placeholder="Dirección aval" required/>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_telefono_aval">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_telefono_aval" placeholder="Teléfono cliente" required/>
+                            <input class="form-control"  type="number" min="0" id="inp_telefono_aval" placeholder="Teléfono aval" required/>
                         </div>
                     </div>
 
@@ -152,7 +170,23 @@
                             <label for="inp_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_otras_referencias_aval" rows="1" required></textarea>
                         </div>
-                        <div class="form-group col ml-5 mt-2">
+                        <div class="form-group col mt-2">
+                            <label for="inp_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_garantias_aval" rows="1" required></textarea>
+                        </div>
+                        <div class="form-group col ml-3 mt-2">
+                            <label for="inp_archivos_garantias_aval">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple >
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
                             <label for="inp_archivos_aval">Comprobante de domicilio e INE <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
                                 <div class="form-group">
@@ -200,7 +234,6 @@
                     </div> -->
 
 
-
                    
                     
                 </div>
@@ -213,7 +246,7 @@
 
     <!-- Modal Editar -->
     <div class="modal fade" id="modal_editar_cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>
@@ -223,15 +256,124 @@
             </div>
                 <div class="modal-body">
 
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_cliente">Nombre Cliente</label>
-                        <input class="form-control" id="inp_editar_nombre_cliente" placeholder="Nombre Cliente" autofocus required/>
+                <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_nombre_cliente">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_editar_nombre_cliente" placeholder="Nombre cliente" autofocus required/>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_direccion_cliente">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_editar_direccion_cliente" placeholder="Dirección cliente" required/>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_telefono_cliente">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" type="number" min="0" id="inp_editar_telefono_cliente" placeholder="Teléfono cliente" required/>
+                        </div>
                     </div>
-                    
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_rutas editar"  id="select_rutas_editar">
+                            </select>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="select_poblaciones_editar">Población <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_poblaciones editar"  id="select_poblaciones_editar" disabled>
+                                <option value="0">Seleccionar población</option>
+                            </select>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="select_colocadoras_editar">Colocadora <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_colocadoras editar"  id="select_colocadoras_editar" disabled>
+                                <option value="0">Seleccionar colocadora</option>
+                            </select>
+                        </div>
+                       
+                    </div>
+
+                    <div class="form-row">
+                        
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="1" required></textarea>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_editar_garantias_cliente" rows="1" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <hr>
+                    <h5>Información del aval</h5>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_nombre_aval">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_editar_nombre_aval" placeholder="Nombre aval" autofocus required/>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_direccion_aval">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_editar_direccion_aval" placeholder="Dirección aval" required/>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_telefono_aval">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control"  type="number" min="0" id="inp_editar_telefono_aval" placeholder="Teléfono aval" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_editar_otras_referencias_aval" rows="1" required></textarea>
+                        </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <textarea class="form-control" id="inp_editar_garantias_aval" rows="1" required></textarea>
+                        </div>
+                        
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_cliente">Guardar</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+     <!-- Modal Ver Informacion Aval -->
+     <div class="modal fade" id="modal_ver_aval" tabindex="-1" aria-labelledby="modal_ver_aval_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_ver_aval_label">Aval de</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <p class="text-bold">Nombre completo</p>
+                    <p id="nombre_aval"></p>
+
+                    <p class="text-bold">Dirección aval</p>
+                    <p id="direccion_aval"></p>
+
+                    <p class="text-bold">Teléfono aval</p>
+                    <p id="telefono_aval"></p>
+
+                    <p class="text-bold">Otras referencias</p>
+                    <p id="or_aval"></p>
+
+                    <p class="text-bold">Garantias</p>
+                    <p id="garantias_aval"></p>
+
+                </div>
+                
             </div>
         </div>
     </div>

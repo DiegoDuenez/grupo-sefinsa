@@ -3,6 +3,7 @@ URL = 'php/Clientes/App.php'
 
 
 var btn_guardar_cliente = $('#btn_guardar_cliente')
+var btn_guardar_editar_cliente = $('#btn_guardar_editar_cliente')
 
 var inp_nombre_cliente = $('#inp_nombre_cliente')
 var inp_direccion_cliente = $('#inp_direccion_cliente')
@@ -14,9 +15,31 @@ var inp_direccion_aval = $('#inp_direccion_aval')
 var inp_telefono_aval = $('#inp_telefono_aval')
 var inp_otras_referencias_aval = $('#inp_otras_referencias_aval')
 
+var inp_garantias_cliente = $('#inp_garantias_cliente')
+var inp_garantias_aval = $('#inp_garantias_aval')
+
 var inp_archivos_cliente = $('#inp_archivos_cliente')
 var inp_archivos_aval = $('#inp_archivos_aval')
+var inp_archivos_garantias_cliente = $('#inp_archivos_garantias_cliente')
+var inp_archivos_garantias_aval = $('#inp_archivos_garantias_aval')
 
+
+var inp_editar_nombre_cliente = $('#inp_editar_nombre_cliente')
+var inp_editar_direccion_cliente = $('#inp_editar_direccion_cliente')
+var inp_editar_telefono_cliente = $('#inp_editar_telefono_cliente')
+var inp_editar_otras_referencias_cliente = $('#inp_editar_otras_referencias_cliente')
+
+var inp_editar_nombre_aval = $('#inp_editar_nombre_aval')
+var inp_editar_direccion_aval = $('#inp_editar_direccion_aval')
+var inp_editar_telefono_aval = $('#inp_editar_telefono_aval')
+var inp_editar_otras_referencias_aval = $('#inp_editar_otras_referencias_aval')
+
+var inp_editar_garantias_cliente = $('#inp_editar_garantias_cliente')
+var inp_editar_garantias_aval = $('#inp_editar_garantias_aval')
+
+var rutaCliente = ""
+var poblacionCliente = ""
+var colocadoraCliente = ""
 
 /*
 var inp_domicilio_cliente = $('#inp_domicilio_cliente')
@@ -38,6 +61,9 @@ $(document).ready(function(){
     $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
     $('#select_poblaciones_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
 
+    $('#select_colocadoras_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
+    $('#select_rutas_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
+    $('#select_poblaciones_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
 
 
 
@@ -73,10 +99,19 @@ function getClientes(){
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
                     <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" title='Ver aval del cliente'><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
+                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
+                    
+
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
+                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
+                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
+                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
+
                     <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                     </td>
     
                     </tr>
@@ -109,8 +144,10 @@ btn_guardar_cliente.click(function(){
 
     if(inp_nombre_cliente.val() == '' || inp_direccion_cliente.val() == '' || inp_telefono_cliente.val() == '' 
         || inp_otras_referencias_cliente.val() == '' || inp_archivos_cliente.get(0).files.length == 0 
+        || inp_garantias_cliente.val() == '' || inp_archivos_garantias_cliente.get(0).files.length == 0
         || inp_nombre_aval.val() == '' || inp_direccion_aval.val() == '' || inp_telefono_aval.val() == '' 
         || inp_otras_referencias_aval.val() == '' || inp_archivos_aval.get(0).files.length == 0
+        || inp_garantias_aval.val() == '' || inp_archivos_garantias_aval.get(0).files.length == 0
         || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
         || $('.select_colocadoras option:selected').val() == 0 
         ){
@@ -149,7 +186,8 @@ btn_guardar_cliente.click(function(){
     {
         var colocadora_id = $('.select_colocadoras option:selected').val()
         registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
-                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val(), colocadora_id)
+                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val(), colocadora_id,
+                        inp_garantias_cliente.val(), inp_garantias_aval.val())
     }
 
 
@@ -184,7 +222,7 @@ btn_guardar_cliente.click(function(){
 
 })
 
-function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id){
+function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval){
 
     var data = new FormData();
     data.append('func', 'create');
@@ -197,6 +235,9 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     data.append('telefono_aval', telefono_aval)
     data.append('or_aval', or_aval)
     data.append('colocadora_id', colocadora_id)
+    data.append('garantias_cliente', garantias_cliente)
+    data.append('garantias_aval', garantias_aval)
+
 
     $.each(inp_archivos_cliente[0].files, function(i, file) {
         data.append('archivo_cliente_'+i, file);
@@ -270,20 +311,30 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     
 }
 
-$('.select_rutas').on('change', function() {
-    $('.select_poblaciones').prop( "disabled", false );
+$('#select_rutas_registrar').on('change', function() {
+    $('#select_poblaciones_registrar').prop( "disabled", false );
     getPoblaciones(this.value);
 });
 
-$('.select_poblaciones').on('change', function() {
-    $('.select_colocadoras').prop( "disabled", false);
-    getColocadoras($('.select_rutas option:selected').val(), this.value);
+$('#select_poblaciones_registrar').on('change', function() {
+    $('#select_colocadoras_registrar').prop( "disabled", false);
+    getColocadoras($('#select_rutas_registrar option:selected').val(), this.value);
+});
+
+
+$('#select_rutas_editar').on('change', function() {
+    $('#select_poblaciones_editar').prop( "disabled", false );
+    getPoblaciones(this.value);
+});
+
+$('#select_poblaciones_editar').on('change', function() {
+    $('#select_colocadoras_editar').prop( "disabled", false);
+    getColocadoras($('#select_rutas_editar option:selected').val(), this.value);
 });
 
 
 
 function getRutas(){
-
 
     var datasend = {
         func: "rutasActivas"
@@ -310,9 +361,9 @@ function getRutas(){
                         <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
                     `)
 
-                    /*if(colocadoraRuta != ""){
-                        $(`.select_rutas.editar option[name='${colocadoraRuta}']`).attr('selected','selected');
-                    }*/
+                    if(rutaCliente != ""){
+                        $(`.select_rutas.editar option[name='${rutaCliente}']`).attr('selected','selected');
+                    }
 
 
                 }
@@ -359,15 +410,17 @@ function getPoblaciones(ruta_id){
 
                 if(response.data.length > 0){
 
+                    $('.select_poblaciones.editar').prop( "disabled", false );
+
                     for(var i = 0; i < response.data.length; i++ ){
                     
                         $('.select_poblaciones').append(`
                             <option name="${response.data[i].nombre_poblacion}" value="${response.data[i].id}">${response.data[i].nombre_poblacion}</option>
                         `)
     
-                       /* if(colocadoraPoblacion != ""){
-                            $(`.select_poblaciones.editar option[name='${colocadoraPoblacion}']`).attr('selected','selected');
-                        }*/
+                        if(poblacionCliente != ""){
+                            $(`.select_poblaciones.editar option[name='${poblacionCliente}']`).attr('selected','selected');
+                        }
     
     
                     }
@@ -427,14 +480,17 @@ function getColocadoras(ruta_id, poblacion_id){
                         <option value="0" >Seleccionar colocadora</option>
                     `)
                     for(var i = 0; i < response.data.length; i++ ){
+
+                        $('.select_colocadoras.editar').prop( "disabled", false );
+
                         
                         $('.select_colocadoras').append(`
                             <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
                         `)
 
-                        /*if(rutaLocalidad != ""){
-                            $(`.select_rutas.editar option[name='${rutaLocalidad}']`).attr('selected','selected');
-                        }*/
+                        if(colocadoraCliente != ""){
+                            $(`.select_colocadoras.editar option[name='${colocadoraCliente}']`).attr('selected','selected');
+                        }
 
 
                     }
@@ -465,5 +521,127 @@ function getColocadoras(ruta_id, poblacion_id){
 
         }
     });
+
+}
+
+
+function modalEditarCliente(e, id, ruta_id, poblacion_id){
+
+    var nombre_completo = $(e).closest("tr") 
+    .find(".nombre_completo") 
+    .text();
+    
+    var direccion = $(e).closest("tr") 
+    .find(".direccion") 
+    .text();  
+
+    var telefono = $(e).closest("tr") 
+    .find(".telefono") 
+    .text();  
+
+    var ruta = $(e).closest("tr") 
+    .find(".ruta") 
+    .text();  
+
+    var poblacion = $(e).closest("tr") 
+    .find(".poblacion") 
+    .text();  
+   
+    var colocadora = $(e).closest("tr") 
+    .find(".colocadora") 
+    .text();  
+
+    var nombre_aval = $(e).closest("tr") 
+    .find(".nombre_aval") 
+    .text();  
+
+
+    /** CAMPOS OCULTOS */
+
+    var otras_referencias = $(e).closest("tr") 
+    .find(".or") 
+    .text();  
+
+    var garantias = $(e).closest("tr") 
+    .find(".garantias") 
+    .text();  
+
+    var direccion_aval = $(e).closest("tr") 
+    .find(".direccion_aval") 
+    .text();  
+
+    var telefono_aval = $(e).closest("tr") 
+    .find(".telefono_aval") 
+    .text();  
+
+    var or_aval = $(e).closest("tr") 
+    .find(".or_aval") 
+    .text();  
+
+    var garantias_aval = $(e).closest("tr") 
+    .find(".garantias_aval") 
+    .text();  
+
+
+    inp_editar_nombre_cliente.val($.trim(nombre_completo))
+    inp_editar_direccion_cliente.val($.trim(direccion))
+    inp_editar_telefono_cliente.val($.trim(telefono))
+    inp_editar_otras_referencias_cliente.val($.trim(otras_referencias))
+    inp_editar_garantias_cliente.val($.trim(garantias))
+    inp_editar_direccion_aval.val($.trim(direccion_aval))
+    inp_editar_telefono_aval.val($.trim(telefono_aval))
+    inp_editar_otras_referencias_aval.val($.trim(or_aval))
+    inp_editar_garantias_aval.val($.trim(garantias_aval))
+
+
+    idClienteEditar = id
+    rutaCliente = $.trim(ruta)
+    poblacionCliente = $.trim(poblacion)
+    colocadoraCliente = $.trim(colocadora)
+    inp_editar_nombre_aval.val($.trim(nombre_aval))
+
+
+    
+    getRutas()
+    getPoblaciones(ruta_id)
+    getColocadoras(ruta_id, poblacion_id)
+
+}
+
+function modalVerAval(e){
+
+    var nombre_completo = $(e).closest("tr") 
+    .find(".nombre_completo") 
+    .text();
+
+    var nombre_aval = $(e).closest("tr") 
+    .find(".nombre_aval") 
+    .text();
+
+    var direccion_aval = $(e).closest("tr") 
+    .find(".direccion_aval") 
+    .text();  
+
+    var telefono_aval = $(e).closest("tr") 
+    .find(".telefono_aval") 
+    .text();  
+
+    var or_aval = $(e).closest("tr") 
+    .find(".or_aval") 
+    .text();  
+
+    var garantias_aval = $(e).closest("tr") 
+    .find(".garantias_aval") 
+    .text();  
+
+    $('#modal_ver_aval_label').text("Aval de " + nombre_completo)
+    $('#nombre_aval').text($.trim(nombre_aval))
+    $('#direccion_aval').text($.trim(direccion_aval))
+    $('#telefono_aval').text($.trim(telefono_aval))
+    $('#or_aval').text($.trim(or_aval))
+    $('#garantias_aval').text($.trim(garantias_aval))
+
+
+
 
 }

@@ -37,7 +37,10 @@ function iniciarSesion(){
                     Swal.fire({
                         icon: 'success',
                         title: `Bienvenid@ ${response.data[0].nombre_completo}`,
-                        allowOutsideClick: false
+                        allowOutsideClick: false,
+						timer: 1000,
+						showCancelButton: false,
+						showConfirmButton: false
                     }).then(function() {
                         window.location = "usuarios.php";
                     });
