@@ -40,6 +40,8 @@ var inp_editar_garantias_aval = $('#inp_editar_garantias_aval')
 var rutaCliente = ""
 var poblacionCliente = ""
 var colocadoraCliente = ""
+var idClienteEditar = 0
+var idAvalEditar = 0
 
 /*
 var inp_domicilio_cliente = $('#inp_domicilio_cliente')
@@ -110,7 +112,7 @@ function getClientes(){
                     <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
 
                     <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
                         <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                     </td>
     
@@ -310,6 +312,99 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     });
     
 }
+
+
+btn_guardar_editar_cliente.click(function(){
+
+
+    if(inp_editar_nombre_cliente.val() == '' || inp_editar_direccion_cliente.val() == '' || inp_editar_telefono_cliente.val() == '' 
+        || inp_editar_otras_referencias_cliente.val() == '' || inp_editar_garantias_cliente.val() == ''
+        || inp_editar_nombre_aval.val() == '' || inp_editar_direccion_aval.val() == '' || inp_editar_telefono_aval.val() == '' 
+        || inp_editar_otras_referencias_aval.val() == '' || inp_editar_garantias_aval.val() == '' 
+        ){
+
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacios',
+            text: 'Necesitas llenar todos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
+        })
+
+    }
+    else{
+
+        var colocadora_id = $('#select_colocadoras_editar option:selected').val()
+        editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
+                        inp_editar_nombre_aval.val(), inp_editar_direccion_aval.val(), inp_editar_telefono_aval.val(), inp_editar_otras_referencias_aval.val(), colocadora_id,
+                        inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar)
+
+    }
+
+})
+
+function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, cliente_id, aval_id){
+
+    var data = new FormData();
+    data.append('func', 'edit');
+    data.append('nombre_cliente', nombre_cliente)
+    data.append('direccion_cliente', direccion_cliente)
+    data.append('telefono_cliente', telefono_cliente)
+    data.append('or_cliente', or_cliente)
+    data.append('nombre_aval', nombre_aval)
+    data.append('direccion_aval', direccion_aval)
+    data.append('telefono_aval', telefono_aval)
+    data.append('or_aval', or_aval)
+    data.append('colocadora_id', colocadora_id)
+    data.append('garantias_cliente', garantias_cliente)
+    data.append('garantias_aval', garantias_aval)
+    data.append('aval_id', aval_id)
+    data.append('cliente_id', cliente_id)
+
+
+    $.ajax({
+        url: URL,
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function(response){
+
+            var jsonResponse = JSON.parse(response);
+            
+            if(jsonResponse.status == "success"){
+
+                $('#modal_editar_cliente').modal('toggle');
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cliente actualizado',
+                    text: 'Se ha actualizado al cliente',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                })
+
+                getClientes()
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
 
 $('#select_rutas_registrar').on('change', function() {
     $('#select_poblaciones_registrar').prop( "disabled", false );
@@ -525,7 +620,7 @@ function getColocadoras(ruta_id, poblacion_id){
 }
 
 
-function modalEditarCliente(e, id, ruta_id, poblacion_id){
+function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
 
     var nombre_completo = $(e).closest("tr") 
     .find(".nombre_completo") 
@@ -594,7 +689,8 @@ function modalEditarCliente(e, id, ruta_id, poblacion_id){
     inp_editar_garantias_aval.val($.trim(garantias_aval))
 
 
-    idClienteEditar = id
+    idClienteEditar = cliente_id
+    idAvalEditar = aval_id
     rutaCliente = $.trim(ruta)
     poblacionCliente = $.trim(poblacion)
     colocadoraCliente = $.trim(colocadora)

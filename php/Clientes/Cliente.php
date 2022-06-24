@@ -164,9 +164,7 @@ class Cliente extends Database{
     public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id, $garantias_cliente, $garantias_aval){
 
-
         try{
-
 
             $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes, garantias) VALUES (?, ?, ?, ?, ?, ?)";
             $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $garantias_aval]);
@@ -193,6 +191,60 @@ class Cliente extends Database{
                     'data'=>null, 
                     'message'=>'Error al crear al cliente'
                 ], 400);
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+
+    }
+
+
+    public function edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nombre_aval, 
+    $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id){
+
+        try{
+
+            /*$insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobantes, garantias) VALUES (?, ?, ?, ?, ?, ?)";
+            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $garantias_aval]);*/
+
+            $updateAval = "UPDATE avales SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ? WHERE id = '$aval_id'";
+            $aval = $this->ExecuteQuery($updateAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval]);
+
+
+            if($aval) {
+
+               /* $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobantes, colocadora_id, garantias) 
+                VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $archivos_cliente, $colocadora_id, $garantias_cliente]);
+*/
+                $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ? WHERE id = '$cliente_id'";
+                $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id]);
+
+                if($cliente){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha actualizado al cliente'
+                    ], 200);
+                }
+            
+
+            } else {
+
+                $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ? WHERE id = '$cliente_id'";
+                $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id]);
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'No se actualizo nada nuevo'
+                ], 200);
 
             }
 

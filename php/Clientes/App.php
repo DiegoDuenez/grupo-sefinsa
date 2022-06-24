@@ -140,6 +140,32 @@ switch($func){
         
     break;
 
+
+    case 'edit':
+
+        $nombre_cliente = $_POST['nombre_cliente'];
+        $direccion_cliente = $_POST['direccion_cliente'];
+        $telefono_cliente = $_POST['telefono_cliente'];
+        $or_cliente = $_POST['or_cliente'];
+        $colocadora_id = $_POST['colocadora_id'];
+        $garantias_cliente = $_POST['garantias_cliente'];
+        $cliente_id = $_POST['cliente_id'];
+        
+        $nombre_aval = $_POST['nombre_aval'];
+        $direccion_aval = $_POST['direccion_aval'];
+        $telefono_aval = $_POST['telefono_aval'];
+        $or_aval = $_POST['or_aval'];
+        $colocadora_id = $_POST['colocadora_id'];
+        $garantias_aval = $_POST['garantias_aval'];
+        $aval_id = $_POST['aval_id'];
+
+
+        echo $Cliente->edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente,
+        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id);
+
+    break;
+
+
     default:
         echo notDefine();
     break;
