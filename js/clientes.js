@@ -107,8 +107,7 @@ function getClientes(){
                     <td class="telefono"> ${response.data[i].telefono} </td>
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
-
+                    ${response.data[i].status_colocadora == 0 ? `<td class="colocadora text-danger" title='Esta colocadora fue deshabilidata'> ${response.data[i].nombre_colocadora}</td>` : `<td class="colocadora"> ${response.data[i].nombre_colocadora}</td>`}
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
 
@@ -712,7 +711,7 @@ function getColocadoras(){
 
 
     var datasend = {
-        func: "index",
+        func: "colocadorasActivas",
     };
 
     $.ajax({

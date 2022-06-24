@@ -14,6 +14,10 @@ switch($func){
         echo $Colocadora->index();
     break;
 
+    case 'colocadorasActivas':
+        echo $Colocadora->colocadorasActivas();
+    break;
+
     case 'colocadorasRutaPoblacion':
 
         $ruta_id = $_DATA['ruta_id'];

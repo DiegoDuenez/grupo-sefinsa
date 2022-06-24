@@ -14,6 +14,7 @@ class Cliente extends Database{
         avales.direccion as 'direccion_aval', avales.telefono as 'telefono_aval', avales.otras_referencias as 'or_aval',
         avales.garantias as 'garantias_aval',
         colocadoras.id as 'colocadora_id', colocadoras.nombre_completo as 'nombre_colocadora', 
+        colocadoras.status as 'status_colocadora',
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
