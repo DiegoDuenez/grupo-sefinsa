@@ -438,19 +438,34 @@ $('#select_poblaciones_editar').on('change', function() {
 $('#select_rutas_filtro').on('change', function(){
     $('#select_poblaciones_filtro').val(0).trigger('change.select2');
     $('#select_colocadoras_filtro').val(0).trigger('change.select2');
-    getClientesRuta(this.value)
+    if(this.value == 0){
+        getClientes();
+    }
+    else{
+        getClientesRuta(this.value)
+    }
 })
 
 $('#select_poblaciones_filtro').on('change', function(){
     $('#select_colocadoras_filtro').val(0).trigger('change.select2');
     $('#select_rutas_filtro').val(0).trigger('change.select2');
-    getClientesPoblacion(this.value)
+    if(this.value == 0){
+        getClientes();
+    }
+    else{
+        getClientesPoblacion(this.value)
+    }
 })
 
 $('#select_colocadoras_filtro').on('change', function(){
     $('#select_poblaciones_filtro').val(0).trigger('change.select2');
     $('#select_rutas_filtro').val(0).trigger('change.select2');
-    getClientesColocadora(this.value)
+    if(this.value == 0){
+        getClientes();
+    }
+    else{
+        getClientesColocadora(this.value)
+    }
 })
 
 

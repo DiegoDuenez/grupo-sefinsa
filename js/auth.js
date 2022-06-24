@@ -55,7 +55,7 @@ function logout(){
 
     
     if(loggedIn()){
-        Swal.fire({
+        /*Swal.fire({
             title: '¿Esta seguro de salir de la plataforma?',
             showCancelButton: true,
             allowOutsideClick: false
@@ -67,7 +67,10 @@ function logout(){
             } 
             else if (result.isDenied) {
             }
-        })
+        })*/
+
+        localStorage.removeItem('usuario')
+        window.location = "index.php";
         
     }
 }
