@@ -55,7 +55,7 @@
 
             </div>
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control w-25" id="search_filter" placeholder="Buscar Cliente..."/>
+                <input class="form-control" id="search_filter" placeholder="Buscar Cliente..." style="width: 30%"/>
                 <!--<select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
                     <option value="0">Filtrar por ruta</option>
                 </select>

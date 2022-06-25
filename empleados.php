@@ -28,7 +28,7 @@
                 
             
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control w-25" id="search_filter" placeholder="Buscar empleado..."/>
+                <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar empleado..."/>
                 <button type="button" class="btn btn-success btn_modal_registrar_empleado" data-toggle="modal" data-target="#modal_registrar_empleado">Registrar empleado</button>
             </div>
             <table class="table mt-2" id="tabla_empleados" >

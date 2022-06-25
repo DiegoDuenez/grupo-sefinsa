@@ -30,7 +30,7 @@
                 
             
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control w-25" id="search_filter" placeholder="Buscar población..."/>
+                <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar población..."/>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar población</button>
             </div>
             <table class="table mt-2" id="tabla_localidades" >
