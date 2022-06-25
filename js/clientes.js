@@ -102,6 +102,7 @@ function getClientes(){
                 for(var i = 0; i < response.data.length; i++ ){
                     $('#table_body').append(`
                     <tr>
+                    <td class="id d-none"> ${response.data[i].id} </td>
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
                     <td class="direccion"> ${response.data[i].direccion} </td>
                     <td class="telefono"> ${response.data[i].telefono} </td>
@@ -119,7 +120,7 @@ function getClientes(){
 
                     <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        <button class="btn btn-danger btn_pdf_usuario" onclick="generatePDF(this)" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                     </td>
     
                     </tr>
@@ -1102,4 +1103,52 @@ function modalVerAval(e){
     $('#garantias_aval').text($.trim(garantias_aval))
 
 
+}
+
+
+function generatePDF(e){
+
+    var doc = new jsPDF;
+    
+    var nombre_completo = $(e).closest("tr") 
+    .find(".nombre_completo") 
+    .text();
+
+    var id = $(e).closest("tr") 
+    .find(".id") 
+    .text();
+
+    doc.text(20,20, id + " " + nombre_completo)
+    var base64string = doc.output('dataurlstring');
+    debugBase64( base64string );
+
+    //doc.save('ola.pdf')
+    //doc.output('dataurlnewwindow')
+    //doc.save('ola.pdf')
+   // window.open(doc.output('dataurlstring', { filename: 'ola.pdf'}), '_blank');
+    //doc.save('ola.pdf')
+   /* var url = doc.output('dataurlstring');
+    openDataUriWindow(url);*/
+   /* uri = doc.save('hola.pdf')
+    openDataUriWindow(uri);*/
+
+    /*window.jsPDF = window.jspdf.jsPDF;
+    var doc = new jspdf()
+    doc.setFontSize(5)
+    var nombre_completo = $(e).closest("tr") 
+    .find(".nombre_completo") 
+    .text();
+    doc.text(20,20, nombre_completo)*/
+    /* var cols = ["Cliente", "Servicio", "Inversión", "Pago de venta", "Pago proximo año", "Fecha pago inicial", "Fecha de vencimiento", "Status de pago"];
+    var data = [];*/
+    //doc.autoTable(cols, data,{ html: '#historialClon',margin: {top: 10}, headStyles: { fillColor: [70, 99, 180], tableWidth: '10px'}})
+    //doc.output('dataurlnewwindow', {filename: 'ola.pdf'})
+
+    
+}
+
+function debugBase64(base64URL){
+    var win = window.open(base64URL, '_blank');
+    //win.opener.location.reload();
+    //win.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
 }

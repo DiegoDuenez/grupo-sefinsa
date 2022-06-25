@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
+    
+
+
 
 </head>
 
@@ -38,7 +41,7 @@
                 </div>
 
                 <div class="form-group" style="width: 30%">
-                    <label for="select_poblacion_filtro">Filtrar por población</label>
+                    <label for="select_poblaciones_filtro">Filtrar por población</label>
                     <select class="form-control select_poblaciones_filtro"  id="select_poblaciones_filtro" style="width:auto;">
                     <option value="0">General</option>
                 </select>
