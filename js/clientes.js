@@ -287,9 +287,9 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
         processData: false,
         type: 'POST',
         success: function(response){
-            var jsonResponse = JSON.parse(response);
+            /*var jsonResponse = JSON.parse(response);
             
-            if(jsonResponse.status == "success"){
+            if(jsonResponse.status == "success"){*/
 
                 $('#modal_registrar_cliente').modal('toggle');
 
@@ -303,7 +303,7 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
                 })
 
                 getClientes()
-            }
+            //}
 
         },
         error : function(e){
@@ -378,9 +378,9 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
         type: 'POST',
         success: function(response){
 
-            var jsonResponse = JSON.parse(response);
+            /*var jsonResponse = JSON.parse(response);
             
-            if(jsonResponse.status == "success"){
+            if(jsonResponse.status == "success"){*/
 
                 $('#modal_editar_cliente').modal('toggle');
 
@@ -394,7 +394,7 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
                 })
 
                 getClientes()
-            }
+           // }
 
         },
         error : function(e){
