@@ -70,9 +70,9 @@ $(document).ready(function(){
     $('#select_poblaciones_editar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_cliente')});
 
     
-    $('#select_rutas_filtro').select2({theme: 'bootstrap4', width: '15%'});
-    $('#select_poblaciones_filtro').select2({theme: 'bootstrap4', width: '15%'});
-    $('#select_colocadoras_filtro').select2({theme: 'bootstrap4', width: '20%'});
+    $('#select_rutas_filtro').select2({theme: 'bootstrap4', width: '100%'});
+    $('#select_poblaciones_filtro').select2({theme: 'bootstrap4', width: '100%'});
+    $('#select_colocadoras_filtro').select2({theme: 'bootstrap4', width: '100%'});
 
 
 
@@ -506,7 +506,7 @@ function getRutas(){
 
                 $('#select_rutas_filtro').empty()
                 $('#select_rutas_filtro').append(`
-                    <option value="0" >Filtrar por ruta</option>
+                    <option value="0" >General</option>
                 `)
                 for(var i = 0; i < response.data.length; i++ ){
                     
@@ -623,7 +623,7 @@ function getPoblaciones(){
 
                 $('#select_poblaciones_filtro').empty()
                 $('#select_poblaciones_filtro').append(`
-                    <option value="0" >Filtrar por población</option>
+                    <option value="0" >General</option>
                 `)
 
                 for(var i = 0; i < response.data.length; i++ ){
@@ -741,7 +741,7 @@ function getColocadoras(){
 
                 $('#select_colocadoras_filtro').empty()
                 $('#select_colocadoras_filtro').append(`
-                    <option value="0" >Filtrar por colocadora</option>
+                    <option value="0" >General</option>
                 `)
                 for(var i = 0; i < response.data.length; i++ ){
 

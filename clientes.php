@@ -28,10 +28,35 @@
           <div class="container-fluid">
             <div class="row p-lg-5">
                 
+            <div class="d-flex mt-2 w-100 justify-content-between">
+
+                <div class="form-group" style="width: 30%">
+                    <label for="select_rutas_filtro">Filtrar por ruta</label>
+                    <select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
+                        <option value="0">General</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="width: 30%">
+                    <label for="select_poblacion_filtro">Filtrar por población</label>
+                    <select class="form-control select_poblaciones_filtro"  id="select_poblaciones_filtro" style="width:auto;">
+                    <option value="0">General</option>
+                </select>
+                </div>
+
+                <div class="form-group" style="width: 30%">
+                    <label for="select_colocadoras_filtro">Filtrar por colocadora</label>
+                    <select class="form-control select_colocadoras_filtro"  id="select_colocadoras_filtro" style="width:auto;">
+                    <option value="0">General</option>
+                </select>
+
+                </div>
             
+
+            </div>
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
                 <input class="form-control w-25" id="search_filter" placeholder="Buscar Cliente..."/>
-                <select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
+                <!--<select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
                     <option value="0">Filtrar por ruta</option>
                 </select>
 
@@ -41,7 +66,7 @@
 
                 <select class="form-control select_colocadoras_filtro"  id="select_colocadoras_filtro" style="width:auto;">
                     <option value="0">Filtrar por colocadora</option>
-                </select>
+                </select>-->
 
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_cliente">Registrar Cliente</button>
             </div>
