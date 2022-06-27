@@ -66,6 +66,8 @@ switch($func){
         $telefono_cliente = $_POST['telefono_cliente'];
         $or_cliente = $_POST['or_cliente'];
         $colocadora_id = $_POST['colocadora_id'];
+        $ruta_id = $_POST['ruta_id'];
+        $poblacion_id = $_POST['poblacion_id'];
         $garantias_cliente = $_POST['garantias_cliente'];
 
         
@@ -111,8 +113,9 @@ switch($func){
         $archivos_cliente = "";
         $archivos_aval = "";
 
-        echo $Cliente->create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $archivos_cliente,
-        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $archivos_aval, $colocadora_id, $garantias_cliente, $garantias_aval);
+        echo $Cliente->create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
+        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $nueva_carpeta_aval, $colocadora_id, $garantias_cliente, 
+        $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval);
 
         //FileManager::createFolder('../../resources/comprobantes/diego');
 
@@ -165,7 +168,9 @@ switch($func){
         $colocadora_id = $_POST['colocadora_id'];
         $garantias_cliente = $_POST['garantias_cliente'];
         $cliente_id = $_POST['cliente_id'];
-        
+        $ruta_id = $_POST['ruta_id'];
+        $poblacion_id = $_POST['poblacion_id'];
+
         $nombre_aval = $_POST['nombre_aval'];
         $direccion_aval = $_POST['direccion_aval'];
         $telefono_aval = $_POST['telefono_aval'];
@@ -175,9 +180,15 @@ switch($func){
         $aval_id = $_POST['aval_id'];
 
 
-        echo $Cliente->edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente,
-        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id);
+        $cliente = $Cliente->getCliente($cliente_id);
+        $aval = $Cliente->getAval($aval_id);
 
+        FileManager::renameFolder('../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes'], '../../resources/comprobantes/avales/'.$aval_id.'_'.$nombre_aval);
+        FileManager::renameFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'], '../../resources/comprobantes/clientes/'.$cliente_id.'_'.$nombre_cliente);
+
+        echo $Cliente->edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente,
+        $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id, $ruta_id, $poblacion_id);
+    
     break;
 
 

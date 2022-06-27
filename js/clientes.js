@@ -98,8 +98,38 @@ function getClientes(){
 
             if(response.status == 'success'){
 
+
+                
+
                 $('#table_body').empty()
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    var colocadoraTag = ""
+                    var colocadoraStatus = "";
+                    var colocadoraClass = ""
+
+                    if(response.data[i].status_colocadora == 0){
+                        colocadoraStatus = '(Colocadora deshabilitada)'
+                        colocadoraClass = 'text-danger'
+                    }
+                   
+
+                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
+                    }
+                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else{
+                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    }
+                    
+
                     $('#table_body').append(`
                     <tr>
                     <td class="id d-none"> ${response.data[i].id} </td>
@@ -108,10 +138,10 @@ function getClientes(){
                     <td class="telefono"> ${response.data[i].telefono} </td>
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    ${response.data[i].status_colocadora == 0 ? `<td class="colocadora text-danger" title='Esta colocadora fue deshabilidata'> ${response.data[i].nombre_colocadora}</td>` : `<td class="colocadora"> ${response.data[i].nombre_colocadora}</td>`}
+                    ${colocadoraTag}
+                    
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
-
                     <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
                     <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
@@ -194,9 +224,12 @@ btn_guardar_cliente.click(function(){
     else
     {
         var colocadora_id = $('.select_colocadoras option:selected').val()
+        var ruta_id = $('.select_rutas option:selected').val() 
+        var poblacion_id = $('.select_poblaciones option:selected').val() 
+
         registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
                         inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val(), colocadora_id,
-                        inp_garantias_cliente.val(), inp_garantias_aval.val())
+                        inp_garantias_cliente.val(), inp_garantias_aval.val(), ruta_id, poblacion_id)
     }
 
 
@@ -231,7 +264,7 @@ btn_guardar_cliente.click(function(){
 
 })
 
-function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval){
+function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, ruta_id, poblacion_id){
 
     var data = new FormData();
     data.append('func', 'create');
@@ -246,6 +279,8 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     data.append('colocadora_id', colocadora_id)
     data.append('garantias_cliente', garantias_cliente)
     data.append('garantias_aval', garantias_aval)
+    data.append('poblacion_id', poblacion_id)
+    data.append('ruta_id', ruta_id)
 
 
     $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -328,6 +363,8 @@ btn_guardar_editar_cliente.click(function(){
         || inp_editar_otras_referencias_cliente.val() == '' || inp_editar_garantias_cliente.val() == ''
         || inp_editar_nombre_aval.val() == '' || inp_editar_direccion_aval.val() == '' || inp_editar_telefono_aval.val() == '' 
         || inp_editar_otras_referencias_aval.val() == '' || inp_editar_garantias_aval.val() == '' 
+        || $('#select_rutas_editar option:selected').val() == 0  || $('#select_poblaciones_editar option:selected').val() == 0 
+        || $('#select_colocadoras_editar option:selected').val() == 0 
         ){
 
         Swal.fire({
@@ -343,15 +380,18 @@ btn_guardar_editar_cliente.click(function(){
     else{
 
         var colocadora_id = $('#select_colocadoras_editar option:selected').val()
+        var ruta_id = $('#select_rutas_editar option:selected').val() 
+        var poblacion_id = $('#select_poblaciones_editar option:selected').val() 
+
         editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
                         inp_editar_nombre_aval.val(), inp_editar_direccion_aval.val(), inp_editar_telefono_aval.val(), inp_editar_otras_referencias_aval.val(), colocadora_id,
-                        inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar)
+                        inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar, ruta_id, poblacion_id)
 
     }
 
 })
 
-function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, cliente_id, aval_id){
+function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, cliente_id, aval_id, ruta_id, poblacion_id){
 
     var data = new FormData();
     data.append('func', 'edit');
@@ -368,6 +408,9 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
     data.append('garantias_aval', garantias_aval)
     data.append('aval_id', aval_id)
     data.append('cliente_id', cliente_id)
+    data.append('ruta_id', ruta_id)
+    data.append('poblacion_id', poblacion_id)
+
 
 
     $.ajax({
@@ -878,7 +921,33 @@ function getClientesRuta(ruta_id){
             if(response.status == 'success'){
 
                 $('#table_body').empty()
+
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    var colocadoraTag = ``
+                    var colocadoraStatus = "";
+                    var colocadoraClass = ""
+
+                    if(response.data[i].status_colocadora == 0){
+                        colocadoraStatus = '(Colocadora deshabilitada)'
+                        colocadoraClass = 'text-danger'
+                    }
+
+                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
+                    }
+                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else{
+                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    }
+
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
@@ -886,7 +955,8 @@ function getClientesRuta(ruta_id){
                     <td class="telefono"> ${response.data[i].telefono} </td>
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    ${colocadoraTag}
+
                     
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
@@ -949,7 +1019,33 @@ function getClientesPoblacion(poblacion_id){
             if(response.status == 'success'){
 
                 $('#table_body').empty()
+
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    var colocadoraTag = ``
+                    var colocadoraStatus = "";
+                    var colocadoraClass = ""
+
+                    if(response.data[i].status_colocadora == 0){
+                        colocadoraStatus = '(Colocadora deshabilitada)'
+                        colocadoraClass = 'text-danger'
+                    }
+
+                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
+                    }
+                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else{
+                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    }
+
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
@@ -957,7 +1053,7 @@ function getClientesPoblacion(poblacion_id){
                     <td class="telefono"> ${response.data[i].telefono} </td>
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                     ${colocadoraTag}
                     
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
@@ -1019,7 +1115,33 @@ function getClientesColocadora(colocadora_id){
             if(response.status == 'success'){
 
                 $('#table_body').empty()
+
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    var colocadoraTag = ``
+                    var colocadoraStatus = "";
+                    var colocadoraClass = ""
+
+                    if(response.data[i].status_colocadora == 0){
+                        colocadoraStatus = '(Colocadora deshabilitada)'
+                        colocadoraClass = 'text-danger'
+                    }
+
+                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
+                    }
+                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else{
+                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    }
+
                     $('#table_body').append(`
                     <tr>
                     <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
@@ -1027,7 +1149,7 @@ function getClientesColocadora(colocadora_id){
                     <td class="telefono"> ${response.data[i].telefono} </td>
                     <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
                     <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    <td class="colocadora"> ${response.data[i].nombre_colocadora}</td>
+                    ${colocadoraTag}
                     
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
