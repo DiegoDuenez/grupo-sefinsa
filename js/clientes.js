@@ -281,6 +281,8 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
     data.append('garantias_aval', garantias_aval)
     data.append('poblacion_id', poblacion_id)
     data.append('ruta_id', ruta_id)
+    data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
+    data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
 
 
     $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -291,29 +293,14 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
         data.append('archivo_aval_'+i, file);
     });
 
-   /* $.each(inp_domicilio_cliente[0].files, function(i, file) {
-        data.append('domicilio_cliente', file);
-    });
-    $.each(inp_ine_cliente[0].files, function(i, file) {
-        data.append('ine_cliente', file);
-    });
-    $.each(inp_tarjeton_cliente[0].files, function(i, file) {
-        data.append('tarjeton_cliente', file);
-    });
-    $.each(inp_contrato_cliente[0].files, function(i, file) {
-        data.append('contrato_cliente', file);
-    });
-    $.each(inp_pagare_cliente[0].files, function(i, file) {
-        data.append('pagare_cliente', file);
+    $.each(inp_archivos_garantias_aval[0].files, function(i, file) {
+        data.append('garantia_aval_'+i, file);
     });
 
-    $.each(inp_domicilio_aval[0].files, function(i, file) {
-        data.append('domicilio_aval', file);
+    $.each(inp_archivos_garantias_cliente[0].files, function(i, file) {
+        data.append('garantia_cliente_'+i, file);
     });
-    $.each(inp_ine_aval[0].files, function(i, file) {
-        data.append('ine_aval', file);
-    });*/
-    
+
 
    $.ajax({
         url: URL,
