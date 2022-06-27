@@ -3,6 +3,7 @@
 
 require 'Cliente.php';
 require '../FileManager.php';
+require '../fpdf/fpdf.php';
 
 $_DATA = json_decode(file_get_contents('php://input'), true);
 
@@ -44,17 +45,129 @@ switch($func){
 
     break;
 
-    case 'garantiasCliente':
+    case 'comprobantesCliente':
+            
+        $id = $_DATA['id'];
+        $cliente = $Cliente->getCliente($id);
+        $path = "../../resources/comprobantes/clientes/".$cliente['carpeta_comprobantes'];
+
+        if(FileManager::getFiles($path)){
+
+            echo json([
+                'status'=>'success',
+                'data'=> FileManager::getFiles($path),
+                'message'=>''
+            ], 200);
+
+        }
+        else{
+
+            echo json([
+                'status'=>'error',
+                'data'=> "La ruta $path no fue encontrada.",
+                'message'=>''
+            ], 404);
+
+        }
+        
+
+    break;
+
+    case 'comprobantesAval':
 
         $id = $_DATA['id'];
-        echo $Cliente->garantiasCliente($id);
+        $aval = $Cliente->getAval($id);
+        $path = "../../resources/comprobantes/avales/".$aval['carpeta_comprobantes'];
+
+        if(FileManager::getFiles($path)){
+
+            echo json([
+                'status'=>'success',
+                'data'=> FileManager::getFiles($path),
+                'message'=>''
+            ], 200);
+
+        }
+        else{
+
+            echo json([
+                'status'=>'error',
+                'data'=> "La ruta $path no fue encontrada.",
+                'message'=>''
+            ], 404);
+
+        }
+
+    break;
+
+    case 'garantiasCliente':
+            
+        $id = $_DATA['id'];
+        $cliente = $Cliente->getCliente($id);
+        $path = "../../resources/garantias/clientes/".$cliente['carpeta_garantias'];
+
+        if(FileManager::getFiles($path)){
+
+            echo json([
+                'status'=>'success',
+                'data'=> FileManager::getFiles($path),
+                'message'=>''
+            ], 200);
+
+        }
+        else{
+
+            echo json([
+                'status'=>'error',
+                'data'=> "La ruta $path no fue encontrada.",
+                'message'=>''
+            ], 404);
+
+        }
+        
 
     break;
 
     case 'garantiasAval':
 
         $id = $_DATA['id'];
-        echo $Cliente->garantiasAval($id);
+        $aval = $Cliente->getAval($id);
+        $path = "../../resources/garantias/avales/".$aval['carpeta_garantias'];
+
+        if(FileManager::getFiles($path)){
+
+            echo json([
+                'status'=>'success',
+                'data'=> FileManager::getFiles($path),
+                'message'=>''
+            ], 200);
+
+        }
+        else{
+
+            echo json([
+                'status'=>'error',
+                'data'=> "La ruta $path no fue encontrada.",
+                'message'=>''
+            ], 404);
+
+        }
+
+    break;
+
+    case 'generarPDF':
+        
+
+        $pdf = new FPDF();
+
+        $pdf->AddPage();
+        // Set the font for the text
+        $pdf->SetFont('Arial', 'B', 18);
+        // Prints a cell with given text 
+        $pdf->Cell(60,20,'Hello GeeksforGeeks!');
+        // return the generated output
+        $pdf->Output('D','test.pdf');
+       
 
     break;
 

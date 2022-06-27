@@ -150,7 +150,10 @@ function getClientes(){
 
                     <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="generatePDF(this)" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <input type="hidden" value="${response.data[i].id}" name="id"/>
+                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        </form>
                     </td>
     
                     </tr>
@@ -1149,7 +1152,10 @@ function getClientesColocadora(colocadora_id){
 
                     <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        <form action="php/PDF/pdf.php" method="POST">
+                            <input type="hidden" value="hola" id="o"/>
+                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        </form>
                     </td>
     
                     </tr>
@@ -1215,10 +1221,15 @@ function modalVerAval(e){
 }
 
 
-function generatePDF(e){
+function savePDF(e){
 
-    var doc = new jsPDF;
     
+    var img  = 'http://localhost/proyecto_cobranza/resources/comprobantes/clientes/1_Diego%20Due%C3%B1ez/INE_1.jpeg';
+    var img2  = 'http://localhost/proyecto_cobranza/resources/comprobantes/clientes/1_Diego%20Due%C3%B1ez/Domicilio_1.jpeg';
+
+
+    var doc = new jsPDF('p', 'pt', 'a4');
+
     var nombre_completo = $(e).closest("tr") 
     .find(".nombre_completo") 
     .text();
@@ -1227,9 +1238,109 @@ function generatePDF(e){
     .find(".id") 
     .text();
 
-    doc.text(20,20, id + " " + nombre_completo)
+    doc.addImage(img, 'JPEG', 15, 40, 180, 160);
+    doc.addImage(img2, 'JPEG', 15, 40, 180, 160);
     var base64string = doc.output('dataurlstring');
     debugBase64( base64string );
+
+    /*var getImageFromUrl = function(url, callback) {
+
+        var img = new Image();
+        img.onError = function() {
+            alert('Cannot load image: "'+url+'"');
+        };
+        img.onload = function() {
+            callback(img);
+        };
+            img.src = url;
+    }
+
+    var createPDF = function(imgData) {
+
+        var width = doc.internal.pageSize.width;    
+        var height = doc.internal.pageSize.height;
+        var options = {
+            pagesplit: true
+        };
+        doc.text(10, 20, 'Crazy Monkey');
+        var h1=50;
+        var aspectwidth1= (height-h1)*(9/16);
+        doc.addImage(imgData, 'JPEG', 10, h1, aspectwidth1, (height-h1), 'monkey');
+
+        var base64string = doc.output('dataurlstring');
+        debugBase64( base64string );
+
+        
+    }
+    
+        
+        getImageFromUrl(`resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre_completo)}/Domicilio_1.jpeg`, createPDF);
+        getImageFromUrl(`resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre_completo)}/INE_1.jpeg`, createPDF);*/
+
+        
+    /*var img = new Image()
+    img.src = `resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre_completo)}/Domicilio_1.jpeg`
+    var img2 = new Image()
+    img2.src = `resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre_completo)}/INE_1.jpeg`
+
+    doc.text(20,20, id + " " + nombre_completo)
+
+    img.onload = function(){
+        doc.addImage(img, 'jpeg', 10, 78, 50, 50)
+        doc.addImage(img2, 'jpeg', 30, 100, 50, 50)
+        var base64string = doc.output('dataurlstring');
+        debugBase64( base64string );
+
+        
+    }*/
+    
+    
+    /*$.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                for(var i = 2; i < response.data.length; i++ ){
+                    console.log(response.data[i])
+
+                    var img = new Image()
+                    img.src = `resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre_completo)}/${response.data[i]}`
+
+
+                    img.onload = function(){
+                        doc.text(20,20, id + " " + nombre_completo)
+                        doc.addImage(img, 'jpeg', 10, 78, 50, 50)
+                        var base64string = doc.output('dataurlstring');
+                        debugBase64( base64string );
+                        
+                    }
+
+                    
+
+                }
+
+                
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });*/
+
+  
+    
 
     //doc.save('ola.pdf')
     //doc.output('dataurlnewwindow')
@@ -1261,3 +1372,82 @@ function debugBase64(base64URL){
     //win.opener.location.reload();
     //win.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
 }
+
+/*
+async function addImageProcess(src) {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.src = src;
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+    });
+  }
+  
+
+async function generatePDF(imageUrls, id, nombre) {
+    const doc = new jsPDF();
+    for (const [i, url] of imageUrls.entries()) {
+        const image = await addImageProcess(`resources/comprobantes/clientes/${$.trim(id)}_${$.trim(nombre)}/${url}`);
+        doc.addImage(image, "png", 5, 5, 0, 0);
+        if (i !== imageUrls.length - 1) {
+        doc.addPage();
+        }
+    }
+    return doc;
+}
+
+async function savePDF() {
+
+    var nombre_completo = $(e).closest("tr") 
+    .find(".nombre_completo") 
+    .text();
+
+    var id = $(e).closest("tr") 
+    .find(".id") 
+    .text();
+
+
+    var datasend = {
+        func: "comprobantesCliente",
+        id
+    };
+    var images = []
+    $.ajax({
+
+        async: true,
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                images =
+               
+                
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+    const pdf = await generatePdf(response.data, id, nombre_completo);
+
+    // generate dataURLString
+    const dataURLString = pdf.output("dataurlstring", "testing.pdf");
+    //console.log(dataURLString);
+
+    // save PDF (blocked in iFrame in chrome)
+    pdf.output("save", "testing.pdf");
+
+    
+}*/

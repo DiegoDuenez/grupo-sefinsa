@@ -1,6 +1,5 @@
 <?php
 
-
 class FileManager{
 
 
@@ -42,6 +41,20 @@ class FileManager{
             return true;
         }
         return false;
+    }
+
+    public static function getFiles($path){
+
+        if (is_dir($path)) {
+            $files = scandir($path);
+            return $files;
+        }
+        else{
+            return false;
+        }
+        
+        
+       
     }
 
 }
