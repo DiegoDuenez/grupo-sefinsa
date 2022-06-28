@@ -27,7 +27,6 @@
           <div class="container-fluid">
             <div class="row p-lg-5">
                 
-            
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">
                 <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar ruta..."/>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_ruta">Registrar ruta</button>
@@ -61,17 +60,21 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal_body_registrar_ruta">
                     <div class="form-group mt-2">
                         <label for="inp_nombre_ruta">Nombre de ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="select_empleados_registrar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_empleados" id="select_empleados_registrar" >
+                        <label for="select_empleados_registrar">Empleado(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_empleados" id="select_empleados_registrar_0" >
                             <option selected value="0" >Seleccionar empleado</option>
                         </select>
                     </div>
+                    
+                </div>
+                <div class="form-group mt-2 ml-2 mr-2">
+                        <button class="btn btn-success btn-block" id="btn_agregar_empleado">Agregar empleado</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_ruta">Guardar</button>
@@ -97,7 +100,7 @@
                     </div>
                     <div class="form-group mt-2">
                         <label for="select_empleados_editar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_empleados editar" id="select_empleados_editar" >
+                        <select class="form-control select_empleados_editar" id="select_empleados_editar" >
                             <option selected value="0" >Seleccionar empleado</option>
                         </select>
                     </div>

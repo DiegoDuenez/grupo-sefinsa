@@ -51,6 +51,9 @@
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="dist/js/adminlte.min.js"></script>
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables/jquery.dataTables.js"></script>
+
   <script src="js/index.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>
   <script src="plugins/blockui/jquery.blockui.min.js"></script>

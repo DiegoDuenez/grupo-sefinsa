@@ -164,7 +164,7 @@ class Cliente extends Database{
 
         $query = "SELECT AUTO_INCREMENT
         FROM  INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_SCHEMA = 'proyecto_cobranza'
+        WHERE TABLE_SCHEMA = 'bd_finanzas'
         AND   TABLE_NAME   = '$table'";
 
         $result = $this->SelectOne($query);
@@ -230,56 +230,51 @@ class Cliente extends Database{
     }
 
 
-    /*public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $c_domicilio_cliente, $c_ine_cliente, $c_tarjeton_cliente, 
-        $c_contrato_cliente, $c_pagare_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $c_domicilio_aval, $c_ine_aval){
+    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
+        $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval){
 
+            try{
 
-        try{
-
-
-            $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, comprobante_domicilio, comprobante_ine) VALUES (?, ?, ?, ?, ?, ?)";
-            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $c_domicilio_aval, $c_ine_aval]);
-
-            if($aval) {
-
-                $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id, comprobante_domicilio, comprobante_ine,
-                comprobante_tarjeton, comprobante_contrato, comprobante_pagare) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(), $c_domicilio_cliente, $c_ine_cliente, $c_tarjeton_cliente,
-                $c_contrato_cliente, $c_pagare_cliente]);
-
-                if($cliente){
+                $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, garantias, carpeta_comprobantes, carpeta_garantias) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, $carpeta_comp_aval, $carpeta_gar_aval]);
+    
+                if($aval) {
+    
+                    $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id,  colocadora_id, garantias, ruta_id, poblacion_id, carpeta_comprobantes, carpeta_garantias) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(),$colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $carpeta_comp_cliente, $carpeta_gar_cliente]);
+    
+                    if($cliente){
+                        return json([
+                            'status' => 'success', 
+                            'data'=> null, 
+                            'message'=> 'Se ha creado al cliente'
+                        ], 200);
+                    }
+                
+    
+                } else {
+    
                     return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha creado al cliente'
-                    ], 200);
+                        'status' => 'error', 
+                        'data'=>null, 
+                        'message'=>'Error al crear al cliente'
+                    ], 400);
+    
                 }
-            
-
-            } else {
-
-                return json([
-                    'status' => 'error', 
-                    'data'=>null, 
-                    'message'=>'Error al crear al cliente'
-                ], 400);
-
+    
+            } catch(Exception $e) {
+    
+                return $e->getMessage();
+                die();
+    
             }
 
-        } catch(Exception $e) {
-
-            return $e->getMessage();
-            die();
-
-        }
+    }
 
 
-    }*/
-
-
-    public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
-    $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval,){
+    /*public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
+    $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval){
 
         try{
 
@@ -319,7 +314,7 @@ class Cliente extends Database{
         }
 
 
-    }
+    }*/
 
     public function getCliente($id){
 

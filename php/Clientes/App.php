@@ -1,9 +1,8 @@
 <?php
 
-
 require 'Cliente.php';
 require '../FileManager.php';
-require '../fpdf/fpdf.php';
+
 
 $_DATA = json_decode(file_get_contents('php://input'), true);
 
@@ -155,21 +154,6 @@ switch($func){
 
     break;
 
-    case 'generarPDF':
-        
-
-        $pdf = new FPDF();
-
-        $pdf->AddPage();
-        // Set the font for the text
-        $pdf->SetFont('Arial', 'B', 18);
-        // Prints a cell with given text 
-        $pdf->Cell(60,20,'Hello GeeksforGeeks!');
-        // return the generated output
-        $pdf->Output('D','test.pdf');
-       
-
-    break;
 
     case 'create':
 

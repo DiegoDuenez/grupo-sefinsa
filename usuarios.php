@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -22,28 +23,29 @@
 
     <div class="content-wrapper">
         <div class="content">
-          <div class="container-fluid">
+          <div class="containery">
             <div class="row p-lg-5">
                 
-            
-            <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar usuario..."/>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
-            </div>
-            <table class="table mt-2" id="tabla_usuarios" >
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Perfil</th>
-                    <th scope="col">Estatus</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="table_body">
-               
-            </tbody>
-            </table>
+                <div class="d-flex mt-2 w-100 flex-row justify-content-between">
+                    <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar usuario..."/>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
+                </div>
+
+                <table class="table table-fluid mt-2" id="tabla_usuarios">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Perfil</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+                    
+                    </tbody>
+                </table>
+
             </div>
           </div>
         </div>
@@ -137,6 +139,8 @@
   <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="dist/js/adminlte.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/usuarios.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>

@@ -31,11 +31,12 @@ if(FileManager::getFiles($path)){
 }
 else{
 
-    echo json([
+    /*echo json([
         'status'=>'error',
         'data'=> "La ruta $path no fue encontrada.",
         'message'=>''
-    ], 404);
+    ], 404);*/
+    die();
 
 }
 
