@@ -75,7 +75,7 @@
                         </select>
                     </div>
 
-                    <label for="inp_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
                         <div class="form-group col mt-2">
                             <select class="form-control" name="select_primer_dia" id="select_primer_dia">
@@ -85,16 +85,6 @@
                                 <option value="Jueves">Jueves</option>
                                 <option value="Viernes">Viernes</option>
                                 <option value="Sabado">Sabado</option>
-                            </select>
-                        </div>
-                        <div class="form-group col mt-2">
-                            <select class="form-control" name="select_segundo_dia" id="select_segundo_dia">
-                                <option value="Lunes">Lunes</option>
-                                <option value="Martes">Martes</option>
-                                <option value="Miercoles">Miercoles</option>
-                                <option value="Jueves">Jueves</option>
-                                <option value="Viernes" >Viernes</option>
-                                <option value="Sabado" selected>Sabado</option>
                             </select>
                         </div>
                     </div>
@@ -153,16 +143,6 @@
                                 <option value="Miercoles">Miercoles</option>
                                 <option value="Jueves">Jueves</option>
                                 <option value="Viernes">Viernes</option>
-                                <option value="Sabado">Sabado</option>
-                            </select>
-                        </div>
-                        <div class="form-group col mt-2">
-                            <select class="form-control" name="select_editar_segundo_dia" id="select_editar_segundo_dia">
-                                <option value="Lunes">Lunes</option>
-                                <option value="Martes">Martes</option>
-                                <option value="Miercoles">Miercoles</option>
-                                <option value="Jueves">Jueves</option>
-                                <option value="Viernes" >Viernes</option>
                                 <option value="Sabado">Sabado</option>
                             </select>
                         </div>
