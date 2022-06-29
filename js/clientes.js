@@ -952,7 +952,7 @@ function getClientesRuta(ruta_id){
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
 
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval}  </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
                     <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
                     <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
@@ -1049,7 +1049,7 @@ function getClientesPoblacion(poblacion_id){
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
 
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
                     <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
                     <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
@@ -1057,7 +1057,10 @@ function getClientesPoblacion(poblacion_id){
 
                     <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <input type="hidden" value="${response.data[i].id}" name="id"/>
+                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        </form>
                     </td>
     
                     </tr>
@@ -1145,7 +1148,7 @@ function getClientesColocadora(colocadora_id){
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
 
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval}   </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
                     <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
                     <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
@@ -1153,8 +1156,8 @@ function getClientesColocadora(colocadora_id){
 
                     <td > 
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <form action="php/PDF/pdf.php" method="POST">
-                            <input type="hidden" value="hola" id="o"/>
+                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
                     </td>
