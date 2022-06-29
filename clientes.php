@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
-    
-
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -157,11 +153,11 @@
                         
                         <div class="form-group col mt-2">
                             <label for="inp_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_otras_referencias_cliente" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_otras_referencias_cliente" rows="3" required></textarea>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_garantias_cliente" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
                         </div>
                         <div class="form-group col ml-3 mt-2">
                             <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -208,11 +204,11 @@
                     <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_otras_referencias_aval" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_otras_referencias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_garantias_aval" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col ml-3 mt-2">
                             <label for="inp_archivos_garantias_aval">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -336,11 +332,11 @@
                         
                         <div class="form-group col mt-2">
                             <label for="inp_editar_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="3" required></textarea>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_editar_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_garantias_cliente" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_editar_garantias_cliente" rows="3" required></textarea>
                         </div>
 
                     </div>
@@ -366,11 +362,11 @@
                     <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_editar_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_otras_referencias_aval" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_editar_otras_referencias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_editar_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_garantias_aval" rows="1" required></textarea>
+                            <textarea class="form-control" id="inp_editar_garantias_aval" rows="3" required></textarea>
                         </div>
                         
                     </div>

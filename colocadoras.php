@@ -37,7 +37,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Dirección</th>
+                    <th scope="col">Dirección o referencias</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Ruta</th>
                     <th scope="col">Población</th>
@@ -71,8 +71,8 @@
                         <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_direccion">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_direccion" placeholder="Dirección" required/>
+                        <label for="inp_direccion">Dirección o referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" id="inp_direccion" placeholder="Dirección o referencias" required/>
                     </div>
                     <div class="form-group mt-2">
                         <label for="inp_telefono">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -114,8 +114,8 @@
                         <input class="form-control" id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_direccion">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_editar_direccion" placeholder="Dirección" required/>
+                        <label for="inp_editar_direccion">Dirección o referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" id="inp_editar_direccion" placeholder="Dirección o referencias" required/>
                     </div>
                     <div class="form-group mt-2">
                         <label for="inp_editar_telefono">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>

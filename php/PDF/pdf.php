@@ -11,32 +11,37 @@ $pdf = new FPDF();
 $Cliente = new Cliente;
 
 $cliente = $Cliente->getCliente($id);
-$path = "../../resources/comprobantes/clientes/".$cliente['carpeta_comprobantes'];
-    
-if(FileManager::getFiles($path)){
+$pathComprobantes = "../../resources/comprobantes/clientes/".$cliente['carpeta_comprobantes'];
+$pathGarantias = "../../resources/garantias/clientes/".$cliente['carpeta_garantias'];
 
     
-    for($i = 2; $i < count(FileManager::getFiles($path)); $i++){
+$nombre_archivo = "Informacion_".$cliente['nombre_completo'].".pdf";
+
+if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarantias)){
+
+    for($i = 2; $i < count(FileManager::getFiles($pathComprobantes)); $i++){
+
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 18);
+        $pdf->Cell(60,20,$id . " " . $cliente['nombre_completo']);
+        $pdf-> Image($pathComprobantes.'/'.FileManager::getFiles($pathComprobantes)[$i],35,35,150,150);
+
+    }
+    for($i = 2; $i < count(FileManager::getFiles($pathGarantias)); $i++){
 
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 18);
         $pdf->Cell(60,20,$id);
-        $pdf-> Image($path.'/'.FileManager::getFiles($path)[$i],35,35,150,150);
+        $pdf-> Image($pathGarantias.'/'.FileManager::getFiles($pathGarantias)[$i],35,35,150,150);
 
     }
-    $pdf->Output('D','test.pdf');
+    $pdf->Output('D', $nombre_archivo);
     
       
 
 }
 else{
-
-    /*echo json([
-        'status'=>'error',
-        'data'=> "La ruta $path no fue encontrada.",
-        'message'=>''
-    ], 404);*/
+    echo "No se encontro el directorio de archivo solicitado.";
     die();
-
 }
 

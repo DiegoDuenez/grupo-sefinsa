@@ -142,7 +142,7 @@ function getClientes(){
                     
                     <td class="or d-none"> ${response.data[i].otras_referencias}</td>
                     <td class="garantias d-none"> ${response.data[i].garantias}</td>
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} &nbsp;&nbsp;<button class="btn btn-info btn_ver_aval" onclick="modalVerAval(this)" title='Ver aval del cliente' data-toggle="modal" data-target="#modal_ver_aval" ><i class="fa-solid fa-eye" title='Ver información del aval'></i> </button>  </td>
+                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} </td>
                     <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
                     <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
                     <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
