@@ -18,16 +18,18 @@ switch($func){
     break;
 
     case 'create':
+        
         $nombre = $_DATA['nombre_ruta'];
-        $empleado_id = $_DATA['empleado_id'];
-        echo $Ruta->create($nombre, $empleado_id);
+        $empleados = $_DATA['empleados'];
+        echo $Ruta->create($nombre, $empleados);
+        
     break;
 
     case 'edit':
         $id = $_DATA['id'];
         $nombre = $_DATA['nombre_ruta'];
-        $empleado_id = $_DATA['empleado_id'];
-        echo $Ruta->edit($nombre, $empleado_id, $id);
+        $empleados = $_DATA['empleados'];
+        echo $Ruta->edit($nombre, $empleados, $id);
     break;
 
     case 'localidadesRuta':

@@ -35,7 +35,7 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Empleado</th>
+                    <th scope="col">Empleado(s)</th>
                     <!--<th scope="col">Estatus</th>-->
                     <th scope="col">Acciones</th>
                 </tr>
@@ -93,17 +93,15 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-body">
-                    <div class="form-group mt-2">
+                <div class="modal-body" id="modal_body_editar_ruta">
+                    <div class="form-group mt-2" id="contenedor_inp_editar_nombre_ruta">
                         <label for="inp_editar_nombre_ruta">Nombre de ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_nombre_ruta" placeholder="Nombre ruta" autofocus required/>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="select_empleados_editar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_empleados_editar" id="select_empleados_editar" >
-                            <option selected value="0" >Seleccionar empleado</option>
-                        </select>
-                    </div>
+                    
+                </div>
+                <div class="form-group mt-2 ml-2 mr-2">
+                        <button class="btn btn-success btn-block" id="btn_editar_agregar_empleado">Agregar empleado</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_ruta">Guardar</button>

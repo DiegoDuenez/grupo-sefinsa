@@ -9,9 +9,22 @@ class Ruta extends Database{
 
     public function index(){
 
-        $query  = "SELECT $this->table.*, empleados.nombre_completo, empleados.status as 'empleado_status'  FROM $this->table  
+        /*$query  = "SELECT $this->table.*, empleados.nombre_completo, empleados.status as 'empleado_status'  FROM $this->table  
         INNER JOIN empleados ON $this->table.empleado_id = empleados.id
-        ORDER BY $this->table.id DESC";
+        ORDER BY $this->table.id DESC";*/
+
+        $query = "SELECT $this->table.*,
+        GROUP_CONCAT(empleados.nombre_completo SEPARATOR ', ') as empleados,
+        GROUP_CONCAT(empleados.id SEPARATOR ', ') as empleados_id,
+        GROUP_CONCAT(concat('(',perfiles.nombre_perfil,')') SEPARATOR ', ') as perfiles,
+        empleados.status as 'empleado_status'
+        FROM $this->table 
+        INNER JOIN rutas_empleados as re ON re.ruta_id = $this->table.id
+        INNER JOIN empleados ON re.empleado_id = empleados.id
+        INNER JOIN perfiles ON empleados.perfil_id = perfiles.id
+        GROUP BY $this->table.id
+        ORDER BY $this->table.id DESC
+        ";
 
         $rutas =  $this->Select($query);
         
@@ -41,33 +54,32 @@ class Ruta extends Database{
         , 200);
     }
 
-    public function create($nombre, $empleado_id){
+    public function create($nombre, $empleados){
 
         try{
 
             if(!$this->existsData('rutas', 'nombre_ruta', trim($nombre))){
 
+
                 $insert = "INSERT INTO $this->table (nombre_ruta, empleado_id) VALUES (?,?)";
-                $ruta = $this->ExecuteQuery($insert, [$nombre, $empleado_id]);
+                $ruta = $this->ExecuteQuery($insert, [$nombre, 1]);
 
-               if($ruta) {
+                $query = "SELECT id FROM $this->table ORDER BY id DESC LIMIT 1";
+                $ruta = $this->SelectOne($query);
 
-                    return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha creado la ruta'
-                    ], 200);
-
-                } else {
-
-                    return json([
-                        'status' => 'error', 
-                        'data'=>null, 
-                        'message'=>'Error al crear ruta'
-                    ], 400);
-
+                for($i = 0; $i < count($empleados); $i++)
+                {
+                    $insertRE = "INSERT INTO rutas_empleados (ruta_id, empleado_id) VALUES (?, ?)";
+                    $rutaInserta = $this->ExecuteQuery($insertRE, [$ruta['id'], $empleados[$i]]);
                 }
 
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha creado la ruta'
+                ], 200);
+                
 
             }
             else{
@@ -90,32 +102,30 @@ class Ruta extends Database{
 
     }
 
-    public function edit($nombre, $empleado_id ,$id){
+    public function edit($nombre,  $empleados , $id){
 
         try{
 
             if(!$this->existsData('rutas', 'nombre_ruta', trim($nombre), $id)){
 
                 $update = "UPDATE $this->table SET nombre_ruta = ?, empleado_id = ? WHERE id = '$id'";
-                $ruta = $this->ExecuteQuery($update, [$nombre, $empleado_id]);
+                $r = $this->ExecuteQuery($update, [$nombre, 1]);
 
-               if($ruta) {
+                $dropQuery = "DELETE FROM rutas_empleados WHERE ruta_id = '$id'";
+                $r = $this->ExecuteQuery($dropQuery, []);
 
-                    return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha editado la ruta'
-                    ], 200);
-
-                } else {
-
-                    return json([
-                        'status' => 'success', 
-                        'data'=>null, 
-                        'message'=>'No se actualizo nada nuevo'
-                    ], 200);
-
+               for($i = 0; $i < count($empleados); $i++)
+                {
+                    $insertRE = "INSERT INTO rutas_empleados (ruta_id, empleado_id) VALUES (?, ?)";
+                    $rutaInserta = $this->ExecuteQuery($insertRE, [$id, $empleados[$i]]);
+                   
                 }
+                
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha editado la ruta'
+                ], 200);
 
 
             }
