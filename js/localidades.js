@@ -19,6 +19,8 @@ var table;
 $(document).ready(function(){
 
     table = $('#tabla_localidades').DataTable( {
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "No se encontro ningún registro",

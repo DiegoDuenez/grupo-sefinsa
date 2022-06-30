@@ -58,6 +58,8 @@ var table;
 $(document).ready(function(){
 
     table = $('#tabla_clientes').DataTable( {
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "No se encontro ningún registro",
@@ -254,7 +256,7 @@ btn_guardar_cliente.click(function(){
 
     if(inp_nombre_cliente.val() == '' || inp_direccion_cliente.val() == '' || inp_telefono_cliente.val() == '' 
         || inp_otras_referencias_cliente.val() == '' 
-        || inp_garantias_cliente.val() == '' || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
+        || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
         || $('.select_colocadoras option:selected').val() == 0 
         ){
 
@@ -296,7 +298,7 @@ btn_guardar_cliente.click(function(){
 
 
       registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
-        inp_garantias_cliente.val(), colocadora_id, ruta_id, poblacion_id)
+        "", colocadora_id, ruta_id, poblacion_id)
 
     }
 
@@ -481,7 +483,7 @@ btn_guardar_editar_cliente.click(function(){
 
 
     if(inp_editar_nombre_cliente.val() == '' || inp_editar_direccion_cliente.val() == '' || inp_editar_telefono_cliente.val() == '' 
-        || inp_editar_otras_referencias_cliente.val() == '' || inp_editar_garantias_cliente.val() == ''
+        || inp_editar_otras_referencias_cliente.val() == ''
         || $('#select_rutas_editar option:selected').val() == 0  || $('#select_poblaciones_editar option:selected').val() == 0 
         || $('#select_colocadoras_editar option:selected').val() == 0 
         ){
@@ -507,7 +509,7 @@ btn_guardar_editar_cliente.click(function(){
                         inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar, ruta_id, poblacion_id)*/
 
         editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
-        inp_editar_garantias_cliente.val(), colocadora_id, ruta_id, poblacion_id,idClienteEditar)
+        "", colocadora_id, ruta_id, poblacion_id,idClienteEditar)
     }
 
 })

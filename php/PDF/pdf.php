@@ -50,7 +50,7 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
 
 }
 else{
-    echo "No se encontro el directorio de archivo solicitado.";
+    echo "No se encontro el directorio solicitado.";
     die();
 }
 

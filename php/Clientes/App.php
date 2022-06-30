@@ -226,7 +226,7 @@ switch($func){
         $colocadora_id = $_DATA['colocadora_id'];
         $ruta_id = $_DATA['ruta_id'];
         $poblacion_id = $_DATA['poblacion_id'];
-        $garantias_cliente = sanitize($_DATA['garantias_cliente']);
+        $garantias_cliente = "";
         $nueva_carpeta_cliente  =  $Cliente->lastIdBeforeInsert('clientes') . '_'.$nombre_cliente;
         //$nueva_carpeta_aval  =  $Cliente->lastIdBeforeInsert('avales') . '_'.$nombre_aval;
 

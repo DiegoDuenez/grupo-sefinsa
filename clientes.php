@@ -148,10 +148,10 @@
                             <label for="inp_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_otras_referencias_cliente" rows="3" required></textarea>
                         </div>
-                        <div class="form-group col mt-2">
+                        <!--<div class="form-group col mt-2">
                             <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
-                        </div>
+                        </div>-->
                         <!--
                     va en otro form 
                         <div class="form-group col ml-3 mt-2">
@@ -294,10 +294,10 @@
                             <label for="inp_editar_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="3" required></textarea>
                         </div>
-                        <div class="form-group col mt-2">
+                        <!--<div class="form-group col mt-2">
                             <label for="inp_editar_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_editar_garantias_cliente" rows="3" required></textarea>
-                        </div>
+                        </div>-->
 
                     </div>
 
