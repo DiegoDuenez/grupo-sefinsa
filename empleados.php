@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
 
 </head>
 
@@ -31,6 +33,7 @@
                 <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar empleado..."/>
                 <button type="button" class="btn btn-success btn_modal_registrar_empleado" data-toggle="modal" data-target="#modal_registrar_empleado">Registrar empleado</button>
             </div>
+            
             <table class="table mt-2" id="tabla_empleados" >
             <thead>
                 <tr>

@@ -25,7 +25,7 @@ $(document).ready(function(){
             "zeroRecords": "No se encontro ningún registro",
             "info": "Mostrando pagina _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtered from _MAX_ total records)",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
             "sSearch": "Buscar",
             "paginate": {
                 "previous": "Anterior",
@@ -297,18 +297,6 @@ function getRutas(){
 
             if(response.status == 'success'){
 
-                /*$('#table_body').empty()
-                for(var i = 0; i < response.data.length; i++ ){
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                     ${response.data[i].empleado_status == 0 ? `<td class="nombre_completo text-danger" title='Este usuario fue deshabilidato'> ${response.data[i].nombre_completo}</td>` : `<td class="nombre_completo"> ${response.data[i].nombre_completo}</td>`}
-                    <td> 
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].nombre_completo}\')" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
-                    </td>
-                    </tr>
-                    `)
-                }*/
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
                     table.row.add([
@@ -321,21 +309,6 @@ function getRutas(){
                 }
                 table.draw();
 
-                /*$('#table_body').empty()
-                for(var i = 0; i < response.data.length; i++ ){
-                    $('#table_body').append(`
-                    <tr>
-                        <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                        <td class="empleados"> 
-                            ${response.data[i].empleados}
-                        </td>
-
-                        <td> 
-                            <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].empleados}\', \'${response.data[i].empleados_id}\')" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        </td>
-                    </tr>
-                    `)
-                }*/
 
             }
 

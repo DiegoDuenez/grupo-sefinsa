@@ -27,7 +27,7 @@ $(document).ready(function(){
             "zeroRecords": "No se encontro ningún registro",
             "info": "Mostrando pagina _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtered from _MAX_ total records)",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
             "sSearch": "Buscar",
             "paginate": {
                 "previous": "Anterior",

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
 </head>
 

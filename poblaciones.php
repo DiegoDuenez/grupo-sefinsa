@@ -13,42 +13,56 @@
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
 
-    <?php include 'templates/navbar.php' ?>
-    <?php include 'templates/sidebar.php' ?>
 
-    <div class="content-wrapper">
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row p-lg-5">
-                
-            
-            <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar población..."/>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar población</button>
+    <div class="wrapper">
+
+        <?php include 'templates/navbar.php' ?>
+        <?php include 'templates/sidebar.php' ?>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row p-lg-5">
+                        <div class="d-flex w-100 flex-row justify-content-end">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                            <div class="card-header">
+                            <h3 class="card-title">Poblaciones registradas</h3>
+                            </div>
+                                <div class="card-body">
+                                    <table class="table" id="tabla_localidades">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Ruta</th>
+                                            <th scope="col">Hora limite de cobro </th>
+                                            <th scope="col">Monto de multa</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_body">
+                                    
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <table class="table mt-2" id="tabla_localidades" >
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Ruta</th>
-                    <th scope="col">Hora limite de cobro </th>
-                    <th scope="col">Monto de multa</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="table_body">
-               
-            </tbody>
-            </table>
-            </div>
-          </div>
         </div>
     </div>
 

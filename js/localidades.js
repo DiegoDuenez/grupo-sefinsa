@@ -14,8 +14,24 @@ btn_guardar_editar_localidad = $("#btn_guardar_editar_localidad")
 
 idLocalidadEditar = 0
 rutaLocalidad = ""
+var table;
 
 $(document).ready(function(){
+
+    table = $('#tabla_localidades').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    })
 
     getLocalidades();
     getRutas();
@@ -71,7 +87,7 @@ function getLocalidades(){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
+                /*$('#table_body').empty()
                 for(var i = 0; i < response.data.length; i++ ){
                     $('#table_body').append(`
                     <tr>
@@ -87,7 +103,26 @@ function getLocalidades(){
     
                     </tr>
                     `)
+                }*/
+
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    var horario = 
+                    `
+                    ${response.data[i].primer_dia_cobro} de ${response.data[i].primer_hora_limite} ${ response.data[i].primer_hora_limite >= "00:00:00" && response.data[i].primer_hora_limite <= "11:59:59" ? 'AM' : 'PM'} a ${response.data[i].segunda_hora_limite} ${ response.data[i].segunda_hora_limite >= "00:00:00" && response.data[i].segunda_hora_limite <= "11:59:59" ? 'AM' : 'PM'}
+                    `
+
+                    table.row.add([
+                        response.data[i].nombre_poblacion,
+                        response.data[i].nombre_ruta,
+                        horario,
+                        "$ "+response.data[i].monto_multa,
+                        `
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\, \'${response.data[i].primer_dia_cobro}\', \'${response.data[i].nombre_poblacion}\')" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        `
+                    ]);
                 }
+                table.draw();
             }
 
         },
@@ -160,13 +195,10 @@ function getRutas(){
 
 }
 
-function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, segundo_dia_cobro){
+function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, nombre_poblacion){
 
-    var nombre_localidad = $(e).closest("tr") 
-    .find(".nombre_localidad") 
-    .text();   
    
-    inp_editar_nombre_localidad.val($.trim(nombre_localidad))
+    inp_editar_nombre_localidad.val($.trim(nombre_poblacion))
     inp_editar_monto_multa.val($.trim(monto_multa))
     inp_editar_primer_hora.val($.trim(primer_hora_limite))
     inp_editar_segunda_hora.val($.trim(segunda_hora_limite))
@@ -175,7 +207,6 @@ function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limi
     rutaLocalidad = ruta
 
     $(`#select_editar_primer_dia option[value='${primer_dia_cobro}']`).prop('selected', true);
-    $(`#select_editar_segundo_dia option[value='${segundo_dia_cobro}']`).prop('selected', true);
 
     getRutas()
 

@@ -16,52 +16,49 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
+    <div class="wrapper">
 
-    <?php include 'templates/navbar.php' ?>
-    <?php include 'templates/sidebar.php' ?>
+        <?php include 'templates/navbar.php' ?>
+        <?php include 'templates/sidebar.php' ?>
 
-    <div class="content-wrapper">
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row p-lg-5">
-                
-                <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                    <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar usuario..."/>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
-                </div>
-
-                
-
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                        <h3 class="card-title">Rutas registradas</h3>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row p-lg-5">
+                        
+                        <div class="d-flex w-100 flex-row justify-content-end">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
                         </div>
-                            <div class="card-body">
-                                <table class="table" id="tabla_usuarios">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Usuario</th>
-                                        <th scope="col">Perfil</th>
-                                        <th scope="col">Estatus</th>
-                                        <th scope="col">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table_body">
-                                
-                                </tbody>
-                            </table>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                            <div class="card-header">
+                            <h3 class="card-title">Usuarios registrados</h3>
+                            </div>
+                                <div class="card-body">
+                                    <table class="table" id="tabla_usuarios">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Perfil</th>
+                                            <th scope="col">Estatus</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_body">
+                                    
+                                    </tbody>
+                                </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          </div>
         </div>
     </div>
 
