@@ -19,7 +19,7 @@ $(document).ready(function(){
     getRutas();
     getEmpleados();
 
-    table = $('#table_rutas').DataTable( {
+    table = $('#tabla_rutas').DataTable( {
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "No se encontro ningún registro",

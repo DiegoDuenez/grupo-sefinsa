@@ -23,7 +23,7 @@
 
     <div class="content-wrapper">
         <div class="content">
-          <div class="containery">
+          <div class="container-fluid">
             <div class="row p-lg-5">
                 
                 <div class="d-flex mt-2 w-100 flex-row justify-content-between">
@@ -31,21 +31,35 @@
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
                 </div>
 
-                <table class="table table-fluid mt-2" id="tabla_usuarios">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Perfil</th>
-                            <th scope="col">Estatus</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table_body">
-                    
-                    </tbody>
-                </table>
+                
 
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        <h3 class="card-title">Rutas registradas</h3>
+                        </div>
+                            <div class="card-body">
+                                <table class="table" id="tabla_usuarios">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Perfil</th>
+                                        <th scope="col">Estatus</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_body">
+                                
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

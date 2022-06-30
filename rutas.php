@@ -23,14 +23,6 @@
     <?php include 'templates/navbar.php' ?>
     <?php include 'templates/sidebar.php' ?>
 
-    <!--<div class="content-wrapper">
-        <div class="content">
-          <div class="container-fluid">
-            
-          </div>
-        </div>
-    </div>-->
-
     <div class="content-wrapper">
     <section class="content">
     <div class="container-fluid">
@@ -46,7 +38,7 @@
                     <h3 class="card-title">Rutas registradas</h3>
                     </div>
                         <div class="card-body">
-                            <table id="table_rutas" class="table">
+                            <table id="tabla_rutas" class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre</th>
