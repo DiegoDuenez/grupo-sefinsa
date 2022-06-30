@@ -18,7 +18,25 @@ cambiarContraseña = false
 idEmpleadoEditar = 0
 empleadoPerfil = ""
 
+var table
+
 $(document).ready(function(){
+
+    table = $('#tabla_empleados').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    })
+
 
     getEmpleados();
     getPerfiles();
@@ -50,27 +68,25 @@ function getEmpleados(){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
+
+                table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="usuario"> ${response.data[i].usuario} </td>
-                    <td class="perfil"> ${response.data[i].nombre_perfil} </td>
-                    <td class="status"> ${ response.data[i].status == 1 ? 'Activo': 'Inactivo'  } </td>
-                    <td> 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarUsuario(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Editar empleado" data-toggle="modal" data-target="#modal_editar_empleado"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        
+                    var status = ""
+                    if(response.data[i].status == 1 ? status = 'Activo': status ='Inactivo' )
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].usuario,
+                        response.data[i].nombre_perfil,
+                        status,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarUsuario(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].usuario}\')" title="Editar empleado" data-toggle="modal" data-target="#modal_editar_empleado"><i class="fa-solid fa-pen-to-square" ></i></button>
                         ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar empleado"><i class="fa-solid fa-ban" ></i></button>`
                         : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar empleado"><i class="fa-regular fa-circle-check"></i></button>`  }
-                            
-    
-                    </td>
-    
-                    </tr>
-                    `)
-    
+
+                        `
+                    ]);
                 }
+                table.draw();
 
             }
 
@@ -228,14 +244,9 @@ $('#cb_password').change(function() {
 
 });
 
-function modalEditarUsuario(e, id, perfil){
+function modalEditarUsuario(e, id, perfil, nombre_completo, usuario){
 
-    var nombre_completo = $(e).closest("tr") 
-    .find(".nombre_completo") 
-    .text();    
-    var usuario = $(e).closest("tr") 
-    .find(".usuario") 
-    .text();    
+    
     inp_editar_nombre_completo.val($.trim(nombre_completo))
     inp_editar_usuario.val($.trim(usuario))
     idEmpleadoEditar = id
