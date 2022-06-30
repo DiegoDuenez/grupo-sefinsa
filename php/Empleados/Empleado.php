@@ -150,9 +150,11 @@ class Empleado extends Database{
 
     }
 
-    public function perfiles(){
+    public function perfiles($tipo){
 
-        $query  = "SELECT * FROM perfiles ORDER BY id DESC";
+        $query  = "SELECT * FROM perfiles
+        WHERE tipo_perfil = '$tipo'
+        ORDER BY id DESC";
         return json(
             [
                 'status' => 'success',

@@ -253,12 +253,8 @@ btn_guardar_cliente.click(function(){
 
 
     if(inp_nombre_cliente.val() == '' || inp_direccion_cliente.val() == '' || inp_telefono_cliente.val() == '' 
-        || inp_otras_referencias_cliente.val() == '' || inp_archivos_cliente.get(0).files.length == 0 
-        || inp_garantias_cliente.val() == '' || inp_archivos_garantias_cliente.get(0).files.length == 0
-        || inp_nombre_aval.val() == '' || inp_direccion_aval.val() == '' || inp_telefono_aval.val() == '' 
-        || inp_otras_referencias_aval.val() == '' || inp_archivos_aval.get(0).files.length == 0
-        || inp_garantias_aval.val() == '' || inp_archivos_garantias_aval.get(0).files.length == 0
-        || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
+        || inp_otras_referencias_cliente.val() == '' 
+        || inp_garantias_cliente.val() == '' || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
         || $('.select_colocadoras option:selected').val() == 0 
         ){
 
@@ -303,35 +299,6 @@ btn_guardar_cliente.click(function(){
                         inp_garantias_cliente.val(), inp_garantias_aval.val(), ruta_id, poblacion_id)
     }
 
-
-
-    
-    /*var data = new FormData();
-    data.append('func', 'create');
-
-    $.each(inp_domicilio_cliente[0].files, function(i, file) {
-        data.append('domicilio_cliente', file);
-    });
-    $.each(inp_ine_cliente[0].files, function(i, file) {
-        data.append('ine_cliente', file);
-    });
-*/
-
-    /*var other_data = $('form').serializeArray();
-    $.each(other_data,function(key,input){
-        data.append(input.name,input.value);
-    });*/
-   /* $.ajax({
-        url: URL,
-        data: data,
-        cache: false,
-        contentType: false,
-        processData: false,
-        type: 'POST',
-        success: function(response){
-            alert(response);
-        }
-    });*/
 
 })
 

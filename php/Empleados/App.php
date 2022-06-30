@@ -29,7 +29,8 @@ switch($func){
     break;
 
     case 'perfiles':
-        echo $Empleado->perfiles();
+        $tipo_perfil = $_DATA['tipo_perfil'];
+        echo $Empleado->perfiles($tipo_perfil);
     break;
 
     case 'edit':

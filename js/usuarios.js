@@ -412,7 +412,8 @@ function activar(id){
 function getPerfiles(){
 
     var datasend = {
-        func: "perfiles"
+        func: "perfiles",
+        tipo_perfil: 'usuario'
     };
 
     $.ajax({

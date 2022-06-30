@@ -111,7 +111,8 @@ function getEmpleados(){
 function getPerfiles(){
 
     var datasend = {
-        func: "perfiles"
+        func: "perfiles",
+        tipo_perfil: 'empleado'
     };
 
     $.ajax({

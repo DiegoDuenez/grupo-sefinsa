@@ -64,7 +64,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <h3 class="card-title">Clientez registrados</h3>
+                    <h3 class="card-title">Cliente registrados</h3>
                     </div>
                         <div class="card-body">
                             <table class="table mt-2" id="tabla_clientes" >
@@ -152,6 +152,8 @@
                             <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
                         </div>
+                        <!--
+                    va en otro form 
                         <div class="form-group col ml-3 mt-2">
                             <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
@@ -159,11 +161,13 @@
                                     <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
 
-                    <div class="form-row">
+                   <!-- 
+                   va en otro form 
+                   <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
@@ -173,10 +177,13 @@
                             </div>
                         </div>
                     </div>
+                -->
                     
                     
 
-                    <hr>
+                    <!--<hr>
+                   va en otro form 
+
                     <h5>Información del aval</h5>
 
                     <div class="form-row">
@@ -223,51 +230,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                   
-
-                    
-                   
-                    
-                    
-                    
-                    <!--<div class="form-group">
-                        <label for="inp_domicilio_cliente">Comprobante de domicilio <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_domicilio_cliente" required >
-                    </div>
-                    <div class="form-group">
-                        <label for="inp_ine_cliente">INE <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_ine_cliente" required >
-                    </div>
-                    <div class="form-group">
-                        <label for="inp_tarjeton_cliente">Tarjetón <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_tarjeton_cliente" required >
-                    </div>
-                    <div class="form-group">
-                        <label for="inp_contrato_cliente">Contrato <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_contrato_cliente" required >
-                    </div>
-                    <div class="form-group">
-                        <label for="inp_pagare_cliente">Pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_pagare_cliente" required >
                     </div>-->
 
-                    <!-- AVAL <div class="form-group col mt-2">
-                        <label for="inp_domicilio_aval">Comprobante de domicilio <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_domicilio_aval" required>
-                    </div>
-                    <div class="form-group col mt-2">
-                        <label for="inp_ine_aval">INE <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="file" class="form-control-file" id="inp_ine_aval" required >
-                    </div> -->
-
-
-                   
-                    
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_cliente">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_cliente">Generar prestamo</button>
                 </div>
             </div>
         </div>
