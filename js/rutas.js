@@ -12,10 +12,27 @@ var idRutaEditar = 0
 var rutaEmpleado = ""
 var cantidadEmpleadosCrear = 0
 
+var table;
+
 $(document).ready(function(){
 
     getRutas();
     getEmpleados();
+
+    table = $('#table_rutas').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    })
 
     $('#select_empleados_registrar_0').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_ruta')});
     $('#select_empleados_editar_0').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_editar_ruta')});
@@ -292,8 +309,19 @@ function getRutas(){
                     </tr>
                     `)
                 }*/
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    table.row.add([
+                        response.data[i].nombre_ruta, 
+                        response.data[i].empleados,
+                        `
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].empleados}\', \'${response.data[i].empleados_id}\', \'${response.data[i].nombre_ruta}'\)" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        `
+                    ]);
+                }
+                table.draw();
 
-                $('#table_body').empty()
+                /*$('#table_body').empty()
                 for(var i = 0; i < response.data.length; i++ ){
                     $('#table_body').append(`
                     <tr>
@@ -307,7 +335,7 @@ function getRutas(){
                         </td>
                     </tr>
                     `)
-                }
+                }*/
 
             }
 
@@ -328,11 +356,11 @@ function getRutas(){
 
 }
 
-function modalEditarRuta(e, id, empleados, empleados_id){
+function modalEditarRuta(e, id, empleados, empleados_id, nombre_ruta){
 
-    var nombre_ruta = $(e).closest("tr") 
+    /*var nombre_ruta = $(e).closest("tr") 
     .find(".nombre_ruta") 
-    .text();    
+    .text();    */
 
 
     inp_editar_nombre_ruta.val($.trim(nombre_ruta))

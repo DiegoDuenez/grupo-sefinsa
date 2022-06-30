@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -22,31 +23,49 @@
     <?php include 'templates/navbar.php' ?>
     <?php include 'templates/sidebar.php' ?>
 
-    <div class="content-wrapper">
+    <!--<div class="content-wrapper">
         <div class="content">
           <div class="container-fluid">
-            <div class="row p-lg-5">
-                
-            <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control" style="width: 30%" id="search_filter" placeholder="Buscar ruta..."/>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_ruta">Registrar ruta</button>
-            </div>
-            <table class="table mt-2" id="tabla_rutas" >
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Empleado(s)</th>
-                    <!--<th scope="col">Estatus</th>-->
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="table_body">
-               
-            </tbody>
-            </table>
-            </div>
+            
           </div>
         </div>
+    </div>-->
+
+    <div class="content-wrapper">
+    <section class="content">
+    <div class="container-fluid">
+        <div class="row p-lg-5">
+            <div class="d-flex w-100 flex-row justify-content-end">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_ruta">Registrar ruta</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">Rutas registradas</h3>
+                    </div>
+                        <div class="card-body">
+                            <table id="table_rutas" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Empleado(s)</th>
+                                    
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body">
+                                
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
     </div>
 
 
@@ -114,16 +133,13 @@
     <?php include 'templates/footer.php' ?>
   </div>
 
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="dist/js/adminlte.min.js"></script>
-  <script src="plugins/select2/js/select2.full.min.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/rutas.js"></script>
-  <script src="plugins/toastr/toastr.min.js"></script>
-  <script src="plugins/blockui/jquery.blockui.min.js"></script>
-  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <?php include 'templates/scripts.php' ?>
+    <script src="js/auth.js"></script>
+    <script src="js/rutas.js"></script>
+
+  <script>
+   
+  </script>
 
 </body>
 
