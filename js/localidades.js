@@ -113,8 +113,8 @@ function getLocalidades(){
                     `
 
                     table.row.add([
-                        response.data[i].nombre_poblacion,
                         response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
                         horario,
                         "$ "+response.data[i].monto_multa,
                         `

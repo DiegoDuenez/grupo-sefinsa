@@ -31,7 +31,7 @@
                 <div class="container-fluid">
                     <div class="row p-lg-5">
                         <div class="d-flex w-100 flex-row justify-content-end">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar localidad</button>
                         </div>
 
                     </div>
@@ -46,8 +46,8 @@
                                     <table class="table" id="tabla_localidades">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Nombre</th>
                                             <th scope="col">Ruta</th>
+                                            <th scope="col">Nombre</th>
                                             <th scope="col">Hora limite de cobro </th>
                                             <th scope="col">Monto de multa</th>
                                             <th scope="col">Acciones</th>
@@ -115,8 +115,16 @@
 
                     <div class="form-group mt-2">
                         <label for="inp_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                    
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                        </div>
                     </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_localidad">Guardar</button>
@@ -173,7 +181,13 @@
                     </div>
                     <div class="form-group mt-2">
                         <label for="inp_editar_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_editar_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                   
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input  class="form-control" id="inp_editar_monto_multa"  type="number" placeholder="0.00" required name="price" min="0.00" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -301,7 +301,8 @@
 
                     </div>
 
-                    <hr>
+                    <!--<hr>
+                    en otro form
                     <h5>Información del aval</h5>
 
                     <div class="form-row">
@@ -329,7 +330,7 @@
                             <textarea class="form-control" id="inp_editar_garantias_aval" rows="3" required></textarea>
                         </div>
                         
-                    </div>
+                    </div>-->
 
                 </div>
                 <div class="modal-footer">
