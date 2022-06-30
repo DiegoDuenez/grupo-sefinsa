@@ -53,8 +53,24 @@ var inp_pagare_cliente = $('#inp_pagare_cliente')
 var inp_domicilio_aval = $('#inp_domicilio_aval')
 var inp_ine_aval = $('#inp_ine_aval')
 */
+var table;
 
 $(document).ready(function(){
+
+    table = $('#tabla_clientes').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    })
 
     getClientes()
     getRutas()
@@ -98,10 +114,61 @@ function getClientes(){
 
             if(response.status == 'success'){
 
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
 
-                
+                    var colocadoraTag = ""
+                    var colocadoraStatus = "";
+                    var colocadoraClass = ""
 
-                $('#table_body').empty()
+                    if(response.data[i].status_colocadora == 0){
+                        colocadoraStatus = '(Colocadora deshabilitada)'
+                        colocadoraClass = 'text-danger'
+                    }
+
+                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
+                    }
+                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
+                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    
+                    }
+                    else{
+                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
+                    }
+
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion,
+                        response.data[i].telefono,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
+                        colocadoraTag,
+                        response.data[i].nombre_aval,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
+                            ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
+                            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\',
+                            \'${response.data[i].nombre_ruta}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_colocadora}\',
+                            \'${response.data[i].nombre_aval}\', \'${response.data[i].otras_referencias}\', \'${response.data[i].garantias}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <input type="hidden" value="${response.data[i].id}" name="id"/>
+                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        </form>
+                        `
+                    ]);
+
+
+                }
+                table.draw();
+
+
+
+                /*$('#table_body').empty()
                 for(var i = 0; i < response.data.length; i++ ){
 
                     var colocadoraTag = ""
@@ -159,7 +226,7 @@ function getClientes(){
                     </tr>
                     `)
     
-                }
+                }*/
 
             }
 
@@ -804,40 +871,12 @@ function getColocadoras(){
 }
 
 
-function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
-
-    var nombre_completo = $(e).closest("tr") 
-    .find(".nombre_completo") 
-    .text();
-    
-    var direccion = $(e).closest("tr") 
-    .find(".direccion") 
-    .text();  
-
-    var telefono = $(e).closest("tr") 
-    .find(".telefono") 
-    .text();  
-
-    var ruta = $(e).closest("tr") 
-    .find(".ruta") 
-    .text();  
-
-    var poblacion = $(e).closest("tr") 
-    .find(".poblacion") 
-    .text();  
-   
-    var colocadora = $(e).closest("tr") 
-    .find(".colocadora") 
-    .text();  
-
-    var nombre_aval = $(e).closest("tr") 
-    .find(".nombre_aval") 
-    .text();  
+function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id, nombre_completo, direccion, telefono, ruta, poblacion, colocadora, nombre_aval, otras_referencias, garantias){
 
 
     /** CAMPOS OCULTOS */
 
-    var otras_referencias = $(e).closest("tr") 
+    /*var otras_referencias = $(e).closest("tr") 
     .find(".or") 
     .text();  
 
@@ -859,7 +898,7 @@ function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
 
     var garantias_aval = $(e).closest("tr") 
     .find(".garantias_aval") 
-    .text();  
+    .text();  */
 
 
     inp_editar_nombre_cliente.val($.trim(nombre_completo))
@@ -867,10 +906,10 @@ function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
     inp_editar_telefono_cliente.val($.trim(telefono))
     inp_editar_otras_referencias_cliente.val($.trim(otras_referencias))
     inp_editar_garantias_cliente.val($.trim(garantias))
-    inp_editar_direccion_aval.val($.trim(direccion_aval))
+   /* inp_editar_direccion_aval.val($.trim(direccion_aval))
     inp_editar_telefono_aval.val($.trim(telefono_aval))
     inp_editar_otras_referencias_aval.val($.trim(or_aval))
-    inp_editar_garantias_aval.val($.trim(garantias_aval))
+    inp_editar_garantias_aval.val($.trim(garantias_aval))*/
 
 
     idClienteEditar = cliente_id
@@ -879,8 +918,6 @@ function modalEditarCliente(e, cliente_id, aval_id, ruta_id, poblacion_id){
     poblacionCliente = $.trim(poblacion)
     colocadoraCliente = $.trim(colocadora)
     inp_editar_nombre_aval.val($.trim(nombre_aval))
-
-
     
     getRutas()
     getPoblacionesRuta(ruta_id)
@@ -911,11 +948,11 @@ function getClientesRuta(ruta_id){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
 
+                table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-                    var colocadoraTag = ``
+                    var colocadoraTag = ""
                     var colocadoraStatus = "";
                     var colocadoraClass = ""
 
@@ -939,35 +976,30 @@ function getClientesRuta(ruta_id){
                         colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
                     }
 
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="direccion"> ${response.data[i].direccion} </td>
-                    <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
-                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    ${colocadoraTag}
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion,
+                        response.data[i].telefono,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
+                        colocadoraTag,
+                        response.data[i].nombre_aval,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
+                            ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
+                            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\',
+                            \'${response.data[i].nombre_ruta}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_colocadora}\',
+                            \'${response.data[i].nombre_aval}\', \'${response.data[i].otras_referencias}\', \'${response.data[i].garantias}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <input type="hidden" value="${response.data[i].id}" name="id"/>
+                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
+                        </form>
+                        `
+                    ]);
 
-                    
-                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
-                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
 
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval}  </td>
-                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
-                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
-                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
-                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
-
-                    <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <button class="btn btn-danger btn_pdf_usuario" onclick="pdfCliente(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\')" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
-                    </td>
-    
-                    </tr>
-                    `)
-    
                 }
-
+                table.draw();
             }
 
         },
@@ -1009,11 +1041,10 @@ function getClientesPoblacion(poblacion_id){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
-
+                table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-                    var colocadoraTag = ``
+                    var colocadoraTag = ""
                     var colocadoraStatus = "";
                     var colocadoraClass = ""
 
@@ -1037,36 +1068,30 @@ function getClientesPoblacion(poblacion_id){
                         colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
                     }
 
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="direccion"> ${response.data[i].direccion} </td>
-                    <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
-                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                     ${colocadoraTag}
-                    
-                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
-                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
-
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} </td>
-                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
-                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
-                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
-                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
-
-                    <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion,
+                        response.data[i].telefono,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
+                        colocadoraTag,
+                        response.data[i].nombre_aval,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
+                            ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
+                            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\',
+                            \'${response.data[i].nombre_ruta}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_colocadora}\',
+                            \'${response.data[i].nombre_aval}\', \'${response.data[i].otras_referencias}\', \'${response.data[i].garantias}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
                         <form action="php/PDF/pdf.php" method="POST" class="d-inline">
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                    </td>
-    
-                    </tr>
-                    `)
-    
+                        `
+                    ]);
+
+
                 }
+                table.draw();
 
             }
 
@@ -1108,11 +1133,10 @@ function getClientesColocadora(colocadora_id){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
-
+                table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-                    var colocadoraTag = ``
+                    var colocadoraTag = ""
                     var colocadoraStatus = "";
                     var colocadoraClass = ""
 
@@ -1136,36 +1160,30 @@ function getClientesColocadora(colocadora_id){
                         colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
                     }
 
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="direccion"> ${response.data[i].direccion} </td>
-                    <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
-                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    ${colocadoraTag}
-                    
-                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
-                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
-
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval}   </td>
-                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
-                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
-                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
-                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
-
-                    <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion,
+                        response.data[i].telefono,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
+                        colocadoraTag,
+                        response.data[i].nombre_aval,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
+                            ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
+                            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\',
+                            \'${response.data[i].nombre_ruta}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_colocadora}\',
+                            \'${response.data[i].nombre_aval}\', \'${response.data[i].otras_referencias}\', \'${response.data[i].garantias}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
                         <form action="php/PDF/pdf.php" method="POST" class="d-inline">
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                    </td>
-    
-                    </tr>
-                    `)
-    
+                        `
+                    ]);
+
+
                 }
+                table.draw();
 
             }
 

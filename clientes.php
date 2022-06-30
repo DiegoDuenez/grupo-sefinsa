@@ -24,13 +24,13 @@
     <?php include 'templates/navbar.php' ?>
     <?php include 'templates/sidebar.php' ?>
 
-    <div class="content-wrapper">
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row p-lg-5">
-                
-            <div class="d-flex mt-2 w-100 justify-content-between">
 
+    <div class="content-wrapper">
+    <section class="content">
+    <div class="container-fluid">
+
+        <div class="row p-2">
+            <div class="d-flex mt-2 w-100 justify-content-between">
                 <div class="form-group" style="width: 30%">
                     <label for="select_rutas_filtro">Filtrar por ruta</label>
                     <select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
@@ -50,56 +50,47 @@
                     <select class="form-control select_colocadoras_filtro"  id="select_colocadoras_filtro" style="width:auto;">
                     <option value="0">General</option>
                 </select>
-
                 </div>
-            
-
             </div>
-            <div class="d-flex mt-2 w-100 flex-row justify-content-between">
-                <input class="form-control" id="search_filter" placeholder="Buscar Cliente..." style="width: 30%"/>
-                <!--<select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
-                    <option value="0">Filtrar por ruta</option>
-                </select>
-
-                <select class="form-control select_poblaciones_filtro"  id="select_poblaciones_filtro" style="width:auto;">
-                    <option value="0">Filtrar por población</option>
-                </select>
-
-                <select class="form-control select_colocadoras_filtro"  id="select_colocadoras_filtro" style="width:auto;">
-                    <option value="0">Filtrar por colocadora</option>
-                </select>-->
-
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_cliente">Registrar Cliente</button>
-            </div>
-            <table class="table mt-2" id="tabla_clientes" >
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Ruta</th>
-                    <th scope="col">Población</th>
-                    <th scope="col">Colocadora</th>
-                    <!--<th scope="col">Garantías</th>
-                    <th scope="col">Comprobantes</th>
-                    <th scope="col">Otras referencias</th>-->
-                    <th scope="col">Aval</th>
-                    <!--<th scope="col">Nombre (Aval)</th>
-                    <th scope="col">Dirección (Aval)</th>
-                    <th scope="col">Teléfono (Aval)</th>
-                    <th scope="col">Garantías (Aval)</th>
-                    <th scope="col">Comprobantes (AvaL)</th>
-                    <th scope="col">Otras referencias (Aval)</th>-->
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="table_body">
-               
-            </tbody>
-            </table>
-            </div>
-          </div>
         </div>
+
+        <div class="row p-2 pb-3">
+            <div class="d-flex w-100 flex-row justify-content-end">
+                <button type="button" class="btn btn-success btn_modal_registrar_cliente" data-toggle="modal" data-target="#modal_registrar_cliente">Registrar cliente</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">Clientez registrados</h3>
+                    </div>
+                        <div class="card-body">
+                            <table class="table mt-2" id="tabla_clientes" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">Ruta</th>
+                                        <th scope="col">Población</th>
+                                        <th scope="col">Colocadora</th>
+                                        <th scope="col">Aval</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_body">
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     </div>
 
 
