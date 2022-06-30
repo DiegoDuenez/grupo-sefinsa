@@ -16,8 +16,24 @@ btn_modal_registrar_colocadora = $(".btn_modal_registrar_colocadora")
 idColocadoraEditar = 0
 colocadoraRuta = ""
 colocadoraPoblacion = ""
+var table
 
 $(document).ready(function(){
+
+    table = $('#tabla_colocadoras').DataTable( {
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        }
+    })
 
     getColocadorasRutaPoblacion();
     getRutas()
@@ -66,30 +82,27 @@ function getColocadorasRutaPoblacion(){
 
             if(response.status == 'success'){
 
-                $('#table_body').empty()
-                for(var i = 0; i < response.data.length; i++ ){
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="direccion"> ${response.data[i].direccion} </td>
-                    <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                    <td class="nombre_poblacion"> ${response.data[i].nombre_poblacion} </td>
 
-                    <td class="status"> ${ response.data[i].status == 1 ? 'Activo': 'Inactivo'  } </td>
-                    <td> 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarColocadora(this, ${response.data[i].id},  ${response.data[i].ruta_id} , \'${response.data[i].nombre_ruta}\',  \'${response.data[i].nombre_poblacion}\')" title="Editar colocadora" data-toggle="modal" data-target="#modal_editar_colocadora"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    var status = ""
+                    if(response.data[i].status == 1 ? status = 'Activo': status ='Inactivo' )
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion,
+                        response.data[i].telefono,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion,
+                        status,
+                        `
+                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarColocadora(this, ${response.data[i].id},  ${response.data[i].ruta_id} , \'${response.data[i].nombre_ruta}\',  \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\')" title="Editar colocadora" data-toggle="modal" data-target="#modal_editar_colocadora"><i class="fa-solid fa-pen-to-square" ></i></button>
                         ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar colocadora"><i class="fa-solid fa-ban" ></i></button>`
                         : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar colocadora"><i class="fa-regular fa-circle-check"></i></button>`  }
-                            
-    
-                    </td>
-    
-                    </tr>
-                    `)
-    
+
+                        `
+                    ]);
                 }
+                table.draw();
 
             }
 
@@ -378,17 +391,8 @@ $('.select_rutas').on('change', function() {
     getPoblacionesRuta(this.value);
 });
 
-function modalEditarColocadora(e, id, ruta_id, ruta, poblacion){
+function modalEditarColocadora(e, id, ruta_id, ruta, poblacion, nombre_completo, direccion, telefono){
 
-    var nombre_completo = $(e).closest("tr") 
-    .find(".nombre_completo") 
-    .text();    
-    var direccion = $(e).closest("tr") 
-    .find(".direccion") 
-    .text();  
-    var telefono = $(e).closest("tr") 
-    .find(".telefono") 
-    .text();  
     inp_editar_nombre_completo.val($.trim(nombre_completo))
     inp_editar_direccion.val($.trim(direccion))
     inp_editar_telefono.val($.trim(telefono))
