@@ -234,7 +234,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_cliente">Generar prestamo</button>
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_cliente">Guardar</button>
                 </div>
             </div>
         </div>
@@ -252,7 +252,7 @@
             </div>
                 <div class="modal-body">
 
-                <div class="form-row">
+                    <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_editar_nombre_cliente">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <input class="form-control" id="inp_editar_nombre_cliente" placeholder="Nombre cliente" autofocus required/>
