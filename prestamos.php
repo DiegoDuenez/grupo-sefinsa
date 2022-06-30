@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Usuarios</title>
+    <title>Prestamos</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.0/css/all.css">
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -27,7 +27,7 @@
                     <div class="row p-3">
                         
                         <div class="d-flex w-100 flex-row justify-content-end">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar usuario</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_prestamo">Generar prestamo</button>
                         </div>
 
                     </div>
@@ -36,10 +36,10 @@
                         <div class="col-12">
                             <div class="card">
                             <div class="card-header">
-                            <h3 class="card-title">Usuarios registrados</h3>
+                            <h3 class="card-title">Prestamos registrados</h3>
                             </div>
                                 <div class="card-body">
-                                    <table class="table" id="tabla_usuarios">
+                                    <table class="table" id="tabla_prestamos">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
@@ -63,7 +63,7 @@
     </div>
 
 
-    <!-- Modal Registrar -->
+    <!-- Modal Registrar 
     <div class="modal fade" id="modal_registrar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -97,9 +97,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <!-- Modal Editar -->
+    <!-- Modal Editar 
     <div class="modal fade" id="modal_editar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -141,27 +141,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
 
     <?php include 'templates/footer.php' ?>
   </div>
 
-  <!--<script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="dist/js/adminlte.min.js"></script>
-  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/usuarios.js"></script>
-  <script src="plugins/toastr/toastr.min.js"></script>
-  <script src="plugins/blockui/jquery.blockui.min.js"></script>
-  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
-
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
-  <script src="js/usuarios.js"></script>
+  <script src="js/prestamos.js"></script>
 
 
 </body>

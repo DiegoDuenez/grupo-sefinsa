@@ -155,7 +155,7 @@ switch($func){
     break;
 
 
-    case 'create':
+    /*case 'create':
 
         
         $nombre_cliente = $_POST['nombre_cliente'];
@@ -214,10 +214,30 @@ switch($func){
         $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval);
 
         
+    break;*/
+
+
+    case 'create':
+
+        $nombre_cliente = sanitize($_DATA['nombre_cliente']);
+        $direccion_cliente = sanitize($_DATA['direccion_cliente']);
+        $telefono_cliente = sanitize($_DATA['telefono_cliente']);
+        $or_cliente = sanitize($_DATA['or_cliente']);
+        $colocadora_id = $_DATA['colocadora_id'];
+        $ruta_id = $_DATA['ruta_id'];
+        $poblacion_id = $_DATA['poblacion_id'];
+        $garantias_cliente = sanitize($_DATA['garantias_cliente']);
+        $nueva_carpeta_cliente  =  $Cliente->lastIdBeforeInsert('clientes') . '_'.$nombre_cliente;
+        //$nueva_carpeta_aval  =  $Cliente->lastIdBeforeInsert('avales') . '_'.$nombre_aval;
+
+        echo $Cliente->registrar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente,
+        $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_cliente);
+
+
     break;
 
 
-    case 'edit':
+    /*case 'edit':
 
         $nombre_cliente = $_POST['nombre_cliente'];
         $direccion_cliente = $_POST['direccion_cliente'];
@@ -247,6 +267,29 @@ switch($func){
         FileManager::renameFolder('../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes'], '../../resources/comprobantes/avales/'.$aval_id.'_'.$nombre_aval);
         FileManager::renameFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'], '../../resources/comprobantes/clientes/'.$cliente_id.'_'.$nombre_cliente);
         FileManager::renameFolder('../../resources/garantias/avales/'.$aval['carpeta_garantias'], '../../resources/garantias/avales/'.$aval_id.'_'.$nombre_aval);
+        FileManager::renameFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias'], '../../resources/garantias/clientes/'.$cliente_id.'_'.$nombre_cliente);
+
+
+    break;*/
+
+    case 'edit':
+
+        $nombre_cliente = sanitize($_DATA['nombre_cliente']);
+        $direccion_cliente = sanitize($_DATA['direccion_cliente']);
+        $telefono_cliente = sanitize($_DATA['telefono_cliente']);
+        $or_cliente = sanitize($_DATA['or_cliente']);
+        $colocadora_id = $_DATA['colocadora_id'];
+        $ruta_id = $_DATA['ruta_id'];
+        $poblacion_id = $_DATA['poblacion_id'];
+        $garantias_cliente = sanitize($_DATA['garantias_cliente']);
+        $cliente_id = $_DATA['cliente_id'];
+
+        $cliente = $Cliente->getCliente($cliente_id);
+
+        echo $Cliente->editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente, $ruta_id,
+        $poblacion_id, $cliente_id);
+
+        FileManager::renameFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'], '../../resources/comprobantes/clientes/'.$cliente_id.'_'.$nombre_cliente);
         FileManager::renameFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias'], '../../resources/garantias/clientes/'.$cliente_id.'_'.$nombre_cliente);
 
 

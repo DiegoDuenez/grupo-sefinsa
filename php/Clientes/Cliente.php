@@ -29,7 +29,7 @@ class Cliente extends Database{
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
-        INNER JOIN avales ON $this->table.aval_id = avales.id
+        LEFT JOIN avales ON $this->table.aval_id = avales.id
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
@@ -162,10 +162,10 @@ class Cliente extends Database{
 
     public function lastIdBeforeInsert($table){
 
+        $env = require '../env.php';
         $query = "SELECT AUTO_INCREMENT
         FROM  INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_SCHEMA = 'bd_finanzas'
-        AND   TABLE_NAME   = '$table'";
+        WHERE TABLE_SCHEMA = '" .$env['database'] ."' AND  TABLE_NAME   = '$table'";
 
         $result = $this->SelectOne($query);
 
@@ -273,6 +273,67 @@ class Cliente extends Database{
     }
 
 
+    public function registrar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $carpeta_comp_cliente, $carpeta_gar_cliente)
+    {
+
+        try{
+
+
+                $insertCliente = "INSERT INTO $this->table (nombre_completo, direccion, telefono, otras_referencias, aval_id,  colocadora_id, garantias, ruta_id, poblacion_id, carpeta_comprobantes, carpeta_garantias) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, null,$colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $carpeta_comp_cliente, $carpeta_gar_cliente]);
+
+                if($cliente){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha creado al cliente'
+                    ], 200);
+                }
+                else {
+
+                    return json([
+                        'status' => 'error', 
+                        'data'=>null, 
+                        'message'=>'Error al crear al cliente'
+                    ], 400);
+
+                }
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+
+    public function editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $cliente_id)
+    {
+        $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ?, ruta_id = ?, poblacion_id = ?,
+                carpeta_comprobantes = ?, carpeta_garantias = ?
+                WHERE id = '$cliente_id'";
+                $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id, $ruta_id, $poblacion_id, $cliente_id.'_'.$nombre_cliente, $cliente_id.'_'.$nombre_cliente]);
+
+
+                if($cliente){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha actualizado al cliente'
+                    ], 200);
+                }
+                else{
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'No se actualizo nada nuevo'
+                    ], 200);
+                }
+    }
+
+
     /*public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval){
 
@@ -337,7 +398,7 @@ class Cliente extends Database{
     }
 
 
-    public function edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nombre_aval, 
+   /* public function edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id, $ruta_id, $poblacion_id){
 
         try{
@@ -388,6 +449,6 @@ class Cliente extends Database{
         }
 
 
-    }
+    }*/
 
 }

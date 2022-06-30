@@ -27,7 +27,7 @@
     <div class="content-wrapper">
     <section class="content">
     <div class="container-fluid">
-        <div class="row p-lg-5">
+        <div class="row p-3">
             <div class="d-flex w-100 flex-row justify-content-end">
                 <button type="button" class="btn btn-success btn_modal_registrar_colocadora" data-toggle="modal" data-target="#modal_registrar_colocadora">Registrar colocadora</button>
             </div>
@@ -67,7 +67,7 @@
     <!--<div class="content-wrapper">
         <div class="content">
           <div class="container-fluid">
-            <div class="row p-lg-5">
+            <div class="row p-3">
                 
             
             <div class="d-flex mt-2 w-100 flex-row justify-content-between">

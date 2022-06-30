@@ -268,7 +268,7 @@ btn_guardar_cliente.click(function(){
         })
 
     }
-    else if(inp_archivos_cliente.get(0).files.length < 5){
+    /*else if(inp_archivos_cliente.get(0).files.length < 5){
         Swal.fire({
             icon: 'warning',
             title: 'Archivos faltantes',
@@ -287,22 +287,121 @@ btn_guardar_cliente.click(function(){
             showCancelButton: false,
             showConfirmButton: false
         })
-    }
+    }*/
     else
     {
         var colocadora_id = $('.select_colocadoras option:selected').val()
-        var ruta_id = $('.select_rutas option:selected').val() 
+        var ruta_id = $('#select_rutas_registrar option:selected').val() 
         var poblacion_id = $('.select_poblaciones option:selected').val() 
 
-        registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
-                        inp_nombre_aval.val(), inp_direccion_aval.val(), inp_telefono_aval.val(), inp_otras_referencias_aval.val(), colocadora_id,
-                        inp_garantias_cliente.val(), inp_garantias_aval.val(), ruta_id, poblacion_id)
+
+      registrarCliente(inp_nombre_cliente.val(), inp_direccion_cliente.val(), inp_telefono_cliente.val(), inp_otras_referencias_cliente.val(),
+        inp_garantias_cliente.val(), colocadora_id, ruta_id, poblacion_id)
+
     }
 
 
 })
 
-function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, ruta_id, poblacion_id){
+function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, garantias_cliente, colocadora_id, ruta_id, poblacion_id){
+
+    var datasend ={
+        func: 'create',
+        nombre_cliente,
+        direccion_cliente,
+        telefono_cliente,
+        or_cliente,
+        garantias_cliente,
+        ruta_id, 
+        poblacion_id,
+        colocadora_id
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        data : JSON.stringify(datasend),
+        dataType: 'json',
+        success : function(response) {
+
+            if(response.status == "success"){
+                $('#modal_registrar_cliente').modal('toggle');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Nuevo empleado',
+                    text: 'Se ha registrado al empleado',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                })
+                getClientes()
+            }
+            
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    })
+
+}
+
+
+function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, garantias_cliente, colocadora_id, ruta_id, poblacion_id, cliente_id){
+
+    var datasend ={
+        func: 'edit',
+        nombre_cliente,
+        direccion_cliente,
+        telefono_cliente,
+        or_cliente,
+        garantias_cliente,
+        ruta_id, 
+        poblacion_id,
+        colocadora_id,
+        cliente_id
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        data : JSON.stringify(datasend),
+        dataType: 'json',
+        success : function(response) {
+
+            if(response.status == "success"){
+                $('#modal_editar_cliente').modal('toggle');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Empleado actualizado',
+                    text: 'Se ha actualizado al empleado',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                })
+                getClientes()
+            }
+            
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    })
+
+}
+
+/*function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, ruta_id, poblacion_id){
 
     var data = new FormData();
     data.append('func', 'create');
@@ -348,9 +447,6 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
         processData: false,
         type: 'POST',
         success: function(response){
-            /*var jsonResponse = JSON.parse(response);
-            
-            if(jsonResponse.status == "success"){*/
 
                 $('#modal_registrar_cliente').modal('toggle');
 
@@ -378,7 +474,7 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
         }
     });
     
-}
+}*/
 
 
 btn_guardar_editar_cliente.click(function(){
@@ -386,8 +482,6 @@ btn_guardar_editar_cliente.click(function(){
 
     if(inp_editar_nombre_cliente.val() == '' || inp_editar_direccion_cliente.val() == '' || inp_editar_telefono_cliente.val() == '' 
         || inp_editar_otras_referencias_cliente.val() == '' || inp_editar_garantias_cliente.val() == ''
-        || inp_editar_nombre_aval.val() == '' || inp_editar_direccion_aval.val() == '' || inp_editar_telefono_aval.val() == '' 
-        || inp_editar_otras_referencias_aval.val() == '' || inp_editar_garantias_aval.val() == '' 
         || $('#select_rutas_editar option:selected').val() == 0  || $('#select_poblaciones_editar option:selected').val() == 0 
         || $('#select_colocadoras_editar option:selected').val() == 0 
         ){
@@ -408,15 +502,17 @@ btn_guardar_editar_cliente.click(function(){
         var ruta_id = $('#select_rutas_editar option:selected').val() 
         var poblacion_id = $('#select_poblaciones_editar option:selected').val() 
 
-        editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
+       /* editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
                         inp_editar_nombre_aval.val(), inp_editar_direccion_aval.val(), inp_editar_telefono_aval.val(), inp_editar_otras_referencias_aval.val(), colocadora_id,
-                        inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar, ruta_id, poblacion_id)
+                        inp_editar_garantias_cliente.val(), inp_editar_garantias_aval.val(), idClienteEditar, idAvalEditar, ruta_id, poblacion_id)*/
 
+        editarCliente(inp_editar_nombre_cliente.val(), inp_editar_direccion_cliente.val(), inp_editar_telefono_cliente.val(), inp_editar_otras_referencias_cliente.val(),
+        inp_editar_garantias_cliente.val(), colocadora_id, ruta_id, poblacion_id,idClienteEditar)
     }
 
 })
 
-function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, cliente_id, aval_id, ruta_id, poblacion_id){
+/*function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, nombre_aval, direccion_aval, telefono_aval, or_aval, colocadora_id, garantias_cliente, garantias_aval, cliente_id, aval_id, ruta_id, poblacion_id){
 
     var data = new FormData();
     data.append('func', 'edit');
@@ -447,9 +543,7 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
         type: 'POST',
         success: function(response){
 
-            /*var jsonResponse = JSON.parse(response);
             
-            if(jsonResponse.status == "success"){*/
 
                 $('#modal_editar_cliente').modal('toggle');
 
@@ -477,7 +571,7 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
         }
     });
 
-}
+}*/
 
 
 
