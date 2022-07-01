@@ -150,7 +150,7 @@ function getClientes(){
                         response.data[i].nombre_ruta,
                         response.data[i].nombre_poblacion,
                         colocadoraTag,
-                        response.data[i].nombre_aval,
+                        response.data[i].nombre_aval == null ? '(Por definir)' : response.data[i].nombre_aval ,
                         `
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
                             ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
