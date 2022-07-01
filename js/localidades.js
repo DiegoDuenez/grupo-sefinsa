@@ -5,6 +5,8 @@ inp_nombre_localidad = $("#inp_nombre_localidad")
 inp_primer_hora = $("#inp_primer_hora")
 inp_segunda_hora = $("#inp_segunda_hora")
 inp_monto_multa = $("#inp_monto_multa")
+inp_grupo = $('#inp_grupo')
+inp_editar_grupo = $('#inp_editar_grupo')
 inp_editar_primer_hora = $("#inp_editar_primer_hora")
 inp_editar_segunda_hora = $("#inp_editar_segunda_hora")
 inp_editar_monto_multa = $("#inp_editar_monto_multa")
@@ -89,24 +91,6 @@ function getLocalidades(){
 
             if(response.status == 'success'){
 
-                /*$('#table_body').empty()
-                for(var i = 0; i < response.data.length; i++ ){
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="nombre_localidad"> ${response.data[i].nombre_poblacion} </td>
-                    <td class="nombre_ruta"> ${response.data[i].nombre_ruta} </td>
-                    <td class="hora_limite_cobro"> ${response.data[i].primer_dia_cobro} de ${response.data[i].primer_hora_limite} ${ response.data[i].primer_hora_limite >= "00:00:00" && response.data[i].primer_hora_limite <= "11:59:59" ? 'AM' : 'PM'} a ${response.data[i].segunda_hora_limite} ${ response.data[i].segunda_hora_limite >= "00:00:00" && response.data[i].segunda_hora_limite <= "11:59:59" ? 'AM' : 'PM'}  </td>
-                    <td class="monto_multa">$ ${response.data[i].monto_multa} </td>
-
-                    <td> 
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\, \'${response.data[i].primer_dia_cobro}'\, \'${response.data[i].segundo_dia_cobro}'\)" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
-                       
-                    </td>
-    
-                    </tr>
-                    `)
-                }*/
-
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
                     var horario = 
@@ -117,10 +101,11 @@ function getLocalidades(){
                     table.row.add([
                         response.data[i].nombre_ruta,
                         response.data[i].nombre_poblacion,
+                        response.data[i].grupo,
                         horario,
                         "$ "+response.data[i].monto_multa,
                         `
-                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\, \'${response.data[i].primer_dia_cobro}\', \'${response.data[i].nombre_poblacion}\')" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
+                        <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarLocalidad(this, ${response.data[i].id}, \'${response.data[i].nombre_ruta}'\, \'${response.data[i].primer_hora_limite}'\, \'${response.data[i].segunda_hora_limite}'\, \'${response.data[i].monto_multa}'\, \'${response.data[i].primer_dia_cobro}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].grupo}\')" title="Editar localidad" data-toggle="modal" data-target="#modal_editar_localidad"><i class="fa-solid fa-pen-to-square" ></i></button>
                         `
                     ]);
                 }
@@ -197,7 +182,7 @@ function getRutas(){
 
 }
 
-function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, nombre_poblacion){
+function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, nombre_poblacion, grupo){
 
    
     inp_editar_nombre_localidad.val($.trim(nombre_poblacion))
@@ -205,6 +190,7 @@ function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limi
     inp_editar_primer_hora.val($.trim(primer_hora_limite))
     inp_editar_segunda_hora.val($.trim(segunda_hora_limite))
     inp_editar_monto_multa.val($.trim(monto_multa))
+    inp_editar_grupo.val($.trim(grupo))
     idLocalidadEditar = id
     rutaLocalidad = ruta
 
@@ -217,6 +203,7 @@ function modalEditarLocalidad(e, id, ruta, primer_hora_limite, segunda_hora_limi
 btn_guardar_localidad.click(function(){
 
     if(inp_nombre_localidad.val() == "" || $(`.select_rutas option:selected`).val() == 0 
+    || inp_grupo.val() == "" || inp_grupo.val() == 0
     || inp_primer_hora.val() == "" || inp_segunda_hora.val() == "" || inp_monto_multa.val() < 0){
 
         Swal.fire({
@@ -236,13 +223,13 @@ btn_guardar_localidad.click(function(){
         dia_cobro = $('#select_primer_dia option:selected').val()
         //segundo_dia_cobro = $('#select_segundo_dia option:selected').val()
 
-        registrarLocalidad(inp_nombre_localidad.val(), ruta_id, inp_primer_hora.val(), inp_segunda_hora.val(), inp_monto_multa.val(), dia_cobro)
+        registrarLocalidad(inp_nombre_localidad.val(), ruta_id, inp_primer_hora.val(), inp_segunda_hora.val(), inp_monto_multa.val(), dia_cobro, inp_grupo.val())
 
     }
 
 })
 
-function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa, dia_cobro){
+function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa, dia_cobro, grupo){
 
     var datasend ={
         func: 'create',
@@ -252,6 +239,7 @@ function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segun
         segunda_hora_limite,
         monto_multa,
         dia_cobro,
+        grupo
     }
 
     $.ajax({
@@ -296,6 +284,7 @@ function registrarLocalidad(nombre_localidad, ruta_id, primer_hora_limite, segun
 btn_guardar_editar_localidad.click(function(){
 
     if(inp_editar_nombre_localidad.val() == "" || $(`.select_rutas.editar option:selected`).val() == 0 
+    || inp_editar_grupo.val() == "" || inp_editar_grupo.val() == 0
     || inp_editar_primer_hora.val() == "" || inp_editar_segunda_hora.val() == "" || inp_editar_monto_multa.val() < 0){
 
         Swal.fire({
@@ -314,14 +303,14 @@ btn_guardar_editar_localidad.click(function(){
         var ruta_id = $(`.select_rutas.editar option:selected`).val()
         var dia_cobro = $('#select_editar_primer_dia option:selected').val()
 
-        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar, inp_editar_primer_hora.val(), inp_editar_segunda_hora.val(), inp_editar_monto_multa.val(), dia_cobro)
+        editarLocalidad(inp_editar_nombre_localidad.val(), ruta_id, idLocalidadEditar, inp_editar_primer_hora.val(), inp_editar_segunda_hora.val(), inp_editar_monto_multa.val(), dia_cobro, inp_editar_grupo.val())
 
     }
 
 })
 
 
-function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segunda_hora_limite, monto_multa, dia_cobro){
+function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segunda_hora_limite, monto_multa, dia_cobro, grupo){
 
     localidad = {
         func: 'edit',
@@ -332,6 +321,7 @@ function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segu
         segunda_hora_limite,
         monto_multa,
         dia_cobro,
+        grupo
     }
 
     $.ajax({

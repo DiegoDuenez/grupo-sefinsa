@@ -1,3 +1,14 @@
+var env = {
+
+    production : {
+        url : 'https://awsoftware.mx/grupo_sefinsa/'
+    },
+
+    local : {
+        url : 'http://localhost/proyecto_cobranza/'
+    }
+
+}
 
 var dateToday = new Date();
 var dateLastWeek = new Date();

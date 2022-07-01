@@ -48,6 +48,7 @@
                                         <tr>
                                             <th scope="col">Ruta</th>
                                             <th scope="col">Nombre</th>
+                                            <th scope="col">Grupo</th>
                                             <th scope="col">Hora limite de cobro </th>
                                             <th scope="col">Monto de multa</th>
                                             <th scope="col">Acciones</th>
@@ -82,11 +83,17 @@
                         <label for="inp_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
+
                     <div class="form-group mt-2">
                         <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_rutas" id="select_rutas_registrar" >
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
                     </div>
 
                     <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -149,11 +156,17 @@
                         <label for="inp_editar_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
                     </div>
+
                     <div class="form-group mt-2">
                         <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control select_rutas editar" id="select_rutas_editar">
                             <option selected value="0" >Seleccionar ruta</option>
                         </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
                     </div>
 
                     <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -189,6 +202,8 @@
                             <input  class="form-control" id="inp_editar_monto_multa"  type="number" placeholder="0.00" required name="price" min="0.00" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                         </div>
                     </div>
+
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_localidad">Guardar</button>

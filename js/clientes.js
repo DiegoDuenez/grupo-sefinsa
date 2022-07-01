@@ -335,6 +335,8 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
                     timer: 1000,
                     showCancelButton: false,
                     showConfirmButton: false
+                }).then((result) => {
+                    window.location.href = `${env.local.url}prestamos.php?c=1`;
                 })
                 getClientes()
             }
