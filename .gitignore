@@ -2,4 +2,3 @@ resources/comprobantes/avales/*
 resources/comprobantes/clientes/*
 resources/garantias/avales/*
 resources/garantias/clientes/*
-php/env.php

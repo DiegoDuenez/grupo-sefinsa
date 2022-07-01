@@ -30,7 +30,7 @@ $(document).ready(function(){
             "zeroRecords": "No se encontro ningún registro",
             "info": "Mostrando pagina _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado desde _MAX_ total de registros)",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
             "sSearch": "Buscar",
             "paginate": {
                 "previous": "Anterior",
