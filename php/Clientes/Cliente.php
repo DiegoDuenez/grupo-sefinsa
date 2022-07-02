@@ -334,7 +334,7 @@ class Cliente extends Database{
     }
 
 
-    /*public function create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
+    public function createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval){
 
         try{
@@ -375,7 +375,7 @@ class Cliente extends Database{
         }
 
 
-    }*/
+    }
 
     public function getCliente($id){
 

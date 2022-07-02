@@ -155,7 +155,7 @@ switch($func){
     break;
 
 
-    /*case 'create':
+    case 'createConAval':
 
         
         $nombre_cliente = $_POST['nombre_cliente'];
@@ -209,12 +209,12 @@ switch($func){
         FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
 
 
-        echo $Cliente->create($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
+        echo $Cliente->createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
         $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $nueva_carpeta_aval, $colocadora_id, $garantias_cliente, 
         $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval);
 
         
-    break;*/
+    break;
 
 
     case 'create':
