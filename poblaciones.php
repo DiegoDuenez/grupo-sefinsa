@@ -49,9 +49,12 @@
                                             <th scope="col">Ruta</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Grupo</th>
+                                            <th scope="col">Semanas de pago</th>
                                             <th scope="col">Hora limite de cobro </th>
                                             <th scope="col">Monto de multa</th>
                                             <th scope="col">Acciones</th>
+                                            <th scope="col">Fecha de registro</th>
+
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
@@ -94,6 +97,11 @@
                     <div class="form-group mt-2">
                         <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input  class="form-control" id="inp_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
                     </div>
 
                     <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -167,6 +175,11 @@
                     <div class="form-group mt-2">
                         <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input  class="form-control" id="inp_editar_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
                     </div>
 
                     <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>

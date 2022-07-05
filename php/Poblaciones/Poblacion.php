@@ -44,14 +44,14 @@ class Poblacion extends Database{
 
     }
 
-    public function create($nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo){
+    public function create($nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo, $semanas){
 
         try{
 
             if(!$this->existsData($this->table, 'nombre_poblacion', trim($nombre))){
 
-                $insert = "INSERT INTO $this->table (nombre_poblacion, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, grupo) VALUES (?, ?, ?, ?, ?,?,?)";
-                $localidad = $this->ExecuteQuery($insert, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo]);
+                $insert = "INSERT INTO $this->table (nombre_poblacion, ruta_id, primer_hora_limite, segunda_hora_limite, monto_multa, primer_dia_cobro, grupo, semanas_pago) VALUES (?, ?, ?, ?, ?,?, ?, ?)";
+                $localidad = $this->ExecuteQuery($insert, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo, $semanas]);
 
                 /*$insert2 = "INSERT INTO ruta_localidades (ruta_id, localidad_id) VALUES (?,?)";
                 $localidad_ruta = $this->ExecuteQuery($insert2, [$ruta_id, $this->lastInsertId()]);*/
@@ -96,15 +96,15 @@ class Poblacion extends Database{
 
     }
 
-    public function edit($nombre, $ruta_id, $id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo){
+    public function edit($nombre, $ruta_id, $id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo, $semanas_pago){
 
         try{
 
             if(!$this->existsData($this->table, 'nombre_poblacion', trim($nombre), $id)){
 
                 $update = "UPDATE $this->table SET nombre_poblacion = ?, ruta_id = ?, primer_hora_limite = ?, segunda_hora_limite = ?, monto_multa = ?,
-                primer_dia_cobro = ?, grupo = ? WHERE id = '$id'";
-                $localidad = $this->ExecuteQuery($update, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo]);
+                primer_dia_cobro = ?, grupo = ?, semanas_pago = ? WHERE id = '$id'";
+                $localidad = $this->ExecuteQuery($update, [$nombre, $ruta_id, $primer_hora_limite, $segunda_hora_limite, $monto_multa, $dia_cobro, $grupo, $semanas_pago]);
 
 
                if($localidad) {

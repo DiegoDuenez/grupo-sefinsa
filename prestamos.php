@@ -83,6 +83,8 @@
             </div>
                 <div class="modal-body">
 
+                <div id="cliente" class="">
+
                 <ul class="nav nav-tabs" id="prestamosTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="nuevo-cliente-tab" data-toggle="tab" href="#nuevo-cliente" role="tab" aria-controls="home" aria-selected="true">Nuevo cliente</a>
@@ -285,10 +287,48 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div id="pago" class="d-none">
+
+                    <div class="form-row">
+                       
+                        <div class="form-group mt-2">
+                            <label for="inp_monto_multa">Monto a prestar <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input  class="form-control" id="inp_monto_prestar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group mt-2">
+                            <label for="inp_monto_multa">Pago por semana <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input  class="form-control" id="inp_pago_semana" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
                    
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_usuario">Guardar</button>
+                    <button type="submit" class="btn btn-secondary" id="btn_anterior_usuario" disabled>Anterior</button>
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_usuario">Siguiente</button>
                 </div>
             </div>
         </div>

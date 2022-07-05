@@ -10,6 +10,7 @@ var env = {
 
 }
 
+
 var dateToday = new Date();
 var dateLastWeek = new Date();
 
@@ -82,6 +83,8 @@ function logout(){
 
         localStorage.removeItem('usuario')
         window.location = "index.php";
+
+       
         
     }
 }
