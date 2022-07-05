@@ -52,9 +52,18 @@ class FileManager{
         else{
             return false;
         }
-        
-        
        
+    }
+
+    public static function dropFiles($path)
+    {
+        if(is_dir($path)){
+            $files = glob("$path/*");
+            foreach($files as $file){
+                unlink($file); 
+            }
+        }
+            
     }
 
 }

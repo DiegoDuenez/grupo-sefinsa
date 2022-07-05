@@ -82,27 +82,36 @@
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group mt-2">
-                        <label for="inp_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col mt-2">
+                            <label for="inp_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                        </div>
+
+                        <div class="form-group col mt-2">
+                            <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_rutas" id="select_rutas_registrar" >
+                                <option selected value="0" >Seleccionar ruta</option>
+                            </select>
+                        </div>
+
                     </div>
 
-                    <div class="form-group mt-2">
-                        <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_rutas" id="select_rutas_registrar" >
-                            <option selected value="0" >Seleccionar ruta</option>
-                        </select>
-                    </div>
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
+                        <div class="form-group col mt-2">
+                            <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
+                        </div>
                     </div>
-
-                    <div class="form-group mt-2">
-                        <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
-                    </div>
+                   
 
                     <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
@@ -160,26 +169,34 @@
             </div>
                 <div class="modal-body">
 
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                    <div class="form-row">
+
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                        </div>
+
+                        <div class="form-group col mt-2">
+                            <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_rutas editar" id="select_rutas_editar">
+                                <option selected value="0" >Seleccionar ruta</option>
+                            </select>
+                        </div>
+
                     </div>
 
-                    <div class="form-group mt-2">
-                        <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_rutas editar" id="select_rutas_editar">
-                            <option selected value="0" >Seleccionar ruta</option>
-                        </select>
-                    </div>
+                    <div class="form-row">
 
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
-                    </div>
+                        <div class="form-group col mt-2">
+                            <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
+                        </div>
 
-                    <div class="form-group mt-2">
-                        <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input  class="form-control" id="inp_editar_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
+                        <div class="form-group col mt-2">
+                            <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_editar_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
+                        </div>
+
                     </div>
 
                     <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>

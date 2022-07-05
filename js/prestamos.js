@@ -10,7 +10,9 @@ var modal_prestamos_label = $('#modal_prestamos_label')
 var formClienteSoloArchivos = $('#formClienteSoloArchivos')
 var prestamosTab = $('#prestamosTab')
 var btn_guardar_usuario = $('#btn_guardar_usuario')
+var btn_siguiente_usuario = $('#btn_siguiente_usuario')
 var btn_anterior_usuario = $('#btn_anterior_usuario')
+var inp_fecha_prestamo = $('#inp_fecha_prestamo')
 
 $(document).ready(function(){
 
@@ -24,6 +26,11 @@ $(document).ready(function(){
     $('#select_poblaciones_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
     $('#select_clientes_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
 
+    /*inp_fecha_prestamo.datetimepicker({
+		format:'YYYY:MM:DD',
+		date : globalFechaInicial,
+		locale: 'es-MX'
+	});*/
 
 
     const queryString = window.location.search;
@@ -57,11 +64,13 @@ $('#select_poblaciones_registrar').on('change', function() {
 });
 
 
-btn_guardar_usuario.click(function(){
+btn_siguiente_usuario.click(function(){
     $('#pago').removeClass('d-none')
     $('#cliente').addClass('d-none')
     btn_anterior_usuario.prop('disabled', false)
     modal_prestamos_label.text('Prestamo')
+    btn_siguiente_usuario.addClass('d-none')
+    btn_guardar_usuario.removeClass('d-none')
 
 })
 
@@ -69,7 +78,8 @@ btn_anterior_usuario.click(function(){
     $('#pago').addClass('d-none')
     $('#cliente').removeClass('d-none')
     btn_anterior_usuario.prop('disabled', true)
-    
+    btn_siguiente_usuario.removeClass('d-none')
+    btn_guardar_usuario.addClass('d-none')
     modal_prestamos_label.text('Registrar cliente y aval')
 
 })

@@ -261,7 +261,7 @@
                     <div class="form-row">
                         <div class="form-group col mt-2">
                             <label for="inp_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-         s                   <textarea class="form-control" id="inp_otras_referencias_aval" rows="3" required></textarea>
+                            <textarea class="form-control" id="inp_otras_referencias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col mt-2">
                             <label for="inp_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -295,7 +295,14 @@
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label for="inp_monto_multa">Monto a prestar <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_fecha_prestamo">Fecha de prestamo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_fecha_prestamo" type="date" value="<?php echo date('Y-m-d'); ?>" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_monto_prestar">Monto a prestar <span class="text-danger" title="Campo obligatorio">*</span></label>
                             
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -308,7 +315,7 @@
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label for="inp_monto_multa">Pago por semana <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_pago_semana">Pago por semana <span class="text-danger" title="Campo obligatorio">*</span></label>
                             
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -319,6 +326,7 @@
                         </div>
                     </div>
 
+                    
 
                 </div>
 
@@ -326,7 +334,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-secondary" id="btn_anterior_usuario" disabled>Anterior</button>
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_usuario">Siguiente</button>
+                    <button type="submit" class="btn btn-primary" id="btn_siguiente_usuario">Siguiente</button>
+                    <button type="submit" class="btn btn-primary d-none" id="btn_guardar_usuario">Guardar</button>
+
                 </div>
             </div>
         </div>
