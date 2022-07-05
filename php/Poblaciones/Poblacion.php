@@ -9,7 +9,7 @@ class Poblacion extends Database{
 
     public function index(){
 
-        $query = "SELECT  $this->table.*, rutas.nombre_ruta FROM $this->table
+        $query = "SELECT $this->table.*, rutas.nombre_ruta FROM $this->table
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id ORDER BY $this->table.id DESC";
 
         $rutas =  $this->Select($query);

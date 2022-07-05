@@ -34,7 +34,11 @@ $(document).ready(function(){
                 "previous": "Anterior",
                 "next": "Siguiente"
             }
-        }
+        },
+        "columnDefs": [
+            { "visible": false, "targets": -1 }
+          ],
+          order: [[7, 'desc']],
     })
 
     getColocadorasRutaPoblacion();
@@ -100,8 +104,9 @@ function getColocadorasRutaPoblacion(){
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarColocadora(this, ${response.data[i].id},  ${response.data[i].ruta_id} , \'${response.data[i].nombre_ruta}\',  \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\')" title="Editar colocadora" data-toggle="modal" data-target="#modal_editar_colocadora"><i class="fa-solid fa-pen-to-square" ></i></button>
                         ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar colocadora"><i class="fa-solid fa-ban" ></i></button>`
                         : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar colocadora"><i class="fa-regular fa-circle-check"></i></button>`  }
+                        `,
+                        response.data[i].created_at
 
-                        `
                     ]);
                 }
                 table.draw();

@@ -46,6 +46,8 @@
                                             <th scope="col">Perfil</th>
                                             <th scope="col">Estatus</th>
                                             <th scope="col">Acciones</th>
+                                            <th scope="col">Fecha de registro</th>
+
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">

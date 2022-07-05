@@ -35,7 +35,11 @@ $(document).ready(function(){
                 "previous": "Anterior",
                 "next": "Siguiente"
             }
-        }
+        },
+        "columnDefs": [
+            { "visible": false, "targets": -1 }
+          ],
+          order: [[5, 'desc']],
     })
 
     getUsuarios();
@@ -80,7 +84,9 @@ function getUsuarios(){
                             ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar usuario"><i class="fa-solid fa-ban" ></i></button>`
                             : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar usuario"><i class="fa-regular fa-circle-check"></i></button>`  }
 
-                            `
+                            `,
+                        response.data[i].created_at
+
                         ]);
                     }
                     table.draw();

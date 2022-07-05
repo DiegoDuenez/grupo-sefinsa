@@ -33,7 +33,11 @@ $(document).ready(function(){
                 "previous": "Anterior",
                 "next": "Siguiente"
             }
-        }
+        },
+        "columnDefs": [
+            { "visible": false, "targets": -1 }
+          ],
+          order: [[3, 'desc']],
     })
 
     $('#select_empleados_registrar_0').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_ruta')});
@@ -306,7 +310,9 @@ function getRutas(){
                         response.data[i].empleados,
                         `
                         <button class="btn btn-warning btn_editar_ruta" onclick="modalEditarRuta(this, ${response.data[i].id}, \'${response.data[i].empleados}\', \'${response.data[i].empleados_id}\', \'${response.data[i].nombre_ruta}'\)" title="Editar ruta" data-toggle="modal" data-target="#modal_editar_ruta"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        `
+                        `,
+                        response.data[i].created_at
+
                     ]);
                 }
                 table.draw();

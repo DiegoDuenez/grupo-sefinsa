@@ -43,8 +43,9 @@
                                 <tr>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Empleado(s)</th>
-                                    
                                     <th scope="col">Acciones</th>
+                                    <th scope="col">Fecha de registro</th>
+
                                 </tr>
                             </thead>
                             <tbody id="table_body">

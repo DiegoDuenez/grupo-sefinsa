@@ -71,7 +71,11 @@ $(document).ready(function(){
                 "previous": "Anterior",
                 "next": "Siguiente"
             }
-        }
+        },
+        "columnDefs": [
+            { "visible": false, "targets": -1 }
+          ],
+          order: [[8, 'desc']],
     })
 
     getClientes()
@@ -161,7 +165,9 @@ function getClientes(){
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                        `
+                        `,
+                        response.data[i].created_at
+
                     ]);
 
 
