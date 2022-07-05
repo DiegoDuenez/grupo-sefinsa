@@ -129,7 +129,7 @@ function getEmpleados(){
                 for(var i = 0; i < response.data.length; i++ ){
                     
                     $('.select_empleados').append(`
-                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo} (${response.data[i].nombre_perfil})</option>
                     `)
 
                     if(rutaEmpleado != ""){
@@ -229,7 +229,7 @@ function llenarSelectEditar(select_id, optionSelect){
                 for(var i = 0; i < response.data.length; i++ ){
                     
                     $(`#${select_id}`).append(`
-                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo} (${response.data[i].nombre_perfil})</option>
                     `)
 
 
