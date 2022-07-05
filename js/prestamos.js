@@ -84,6 +84,12 @@ btn_anterior_usuario.click(function(){
 
 })
 
+btn_guardar_usuario.click(function(){
+    var id = $('.tab-content .active').attr('id');
+    alert(id)
+})
+
+
 
 function getRutas(){
 
