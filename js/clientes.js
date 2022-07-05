@@ -1065,7 +1065,8 @@ function getClientesRuta(ruta_id){
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                        `
+                        `,
+                        response.data[i].created_at
                     ]);
 
 
@@ -1157,7 +1158,8 @@ function getClientesPoblacion(poblacion_id){
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                        `
+                        `,
+                        response.data[i].created_at
                     ]);
 
 
@@ -1249,7 +1251,8 @@ function getClientesColocadora(colocadora_id){
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>
-                        `
+                        `,
+                        response.data[i].created_at
                     ]);
 
 
