@@ -123,6 +123,9 @@ $('#select_poblaciones_registrar').on('change', function() {
 
 function getPrestamos(){
 
+
+    clearInputs()
+
     $.blockUI({ message: '<h4> TRAYENDO PRESTAMOS...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
 
     var datasend = {
@@ -185,6 +188,7 @@ btn_siguiente_usuario.click(function(){
     modal_prestamos_label.text('Prestamo')
     btn_siguiente_usuario.addClass('d-none')
     btn_guardar_prestamo.removeClass('d-none')
+    $('#modal_dialog').removeClass('modal-xl')
 
 })
 
@@ -195,6 +199,8 @@ btn_anterior_usuario.click(function(){
     btn_siguiente_usuario.removeClass('d-none')
     btn_guardar_prestamo.addClass('d-none')
     modal_prestamos_label.text('Registrar cliente y aval')
+    $('#modal_dialog').addClass('modal-xl')
+
 
 })
 
