@@ -46,6 +46,21 @@ class Cliente extends Database{
 
     }
 
+    public function traerCliente($id)
+    {
+
+        $query = "SELECT * FROM $this->table WHERE $this->table.id = '$id'";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->SelectOne($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
     public function clientesRuta($id){
 
         $query  = "SELECT 
@@ -394,6 +409,44 @@ class Cliente extends Database{
         $aval = $this->SelectOne($query);
 
         return $aval;
+
+    }
+
+    public function createPrestamoClienteExistente($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval,  $carpeta_comp_aval, $carpeta_gar_aval,
+    $monto_prestado, $pago_semanal, $fecha_prestamo){
+
+        require '../Prestamos/Prestamo.php';
+
+        try{
+
+            $insertAval = "INSERT INTO avales (nombre_completo, direccion, telefono, otras_referencias, garantias, carpeta_comprobantes, carpeta_garantias) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $aval = $this->ExecuteQuery($insertAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, $carpeta_comp_aval, $carpeta_gar_aval]);
+
+            if($aval) {
+
+                $updateCliente = "UPDATE $this->table SET garantias = ?, aval_id = ? WHERE $this->table.id = '$cliente_id' ";
+                $cliente = $this->ExecuteQuery($updateCliente, [$garantias_cliente, $this->lastId()]);
+
+                $Prestamo = new Prestamo();
+                $Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
+            
+
+            } else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error al crear al cliente'
+                ], 400);
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
 
     }
 

@@ -53,7 +53,7 @@
                                             <th scope="col">Teléfono del aval</th>
                                             <th scope="col">Monto prestado</th>
                                             <th scope="col">Pago por semana</th>
-                                            <th scope="col">Semanas</th>
+                                            <th scope="col">Semanas de pago</th>
                                             <th scope="col">Fecha de registro</th>
 
 
@@ -326,7 +326,6 @@
                         </div>
                     </div>
 
-                    
 
                 </div>
 
@@ -335,7 +334,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-secondary" id="btn_anterior_usuario" disabled>Anterior</button>
                     <button type="submit" class="btn btn-primary" id="btn_siguiente_usuario">Siguiente</button>
-                    <button type="submit" class="btn btn-primary d-none" id="btn_guardar_usuario">Guardar</button>
+                    <button type="submit" class="btn btn-primary d-none" id="btn_guardar_prestamo">Guardar</button>
 
                 </div>
             </div>
