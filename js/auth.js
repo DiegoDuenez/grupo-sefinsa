@@ -103,6 +103,12 @@ function authGuard(){
     }
 }
 
+function RemoveParameterFromUrl(url, parameter) {
+    return url
+      .replace(new RegExp('[?&]' + parameter + '=[^&#]*(#.*)?$'), '$1')
+      .replace(new RegExp('([?&])' + parameter + '=[^&]*&'), '$1');
+  }
+
 function clearInputs(){
 
     

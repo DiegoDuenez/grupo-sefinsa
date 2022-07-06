@@ -186,6 +186,9 @@ switch($func){
         FileManager::createFolder('../../resources/comprobantes/avales/'.$nueva_carpeta_aval);
         FileManager::createFolder('../../resources/garantias/avales/'.$nueva_carpeta_aval);
 
+        FileManager::createFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
+        FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
+
         for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
             $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
             FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
@@ -351,6 +354,7 @@ switch($func){
 
 
     break;
+
 
 
     default:

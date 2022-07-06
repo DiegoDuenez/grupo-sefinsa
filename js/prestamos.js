@@ -97,6 +97,7 @@ $(document).ready(function(){
         group_or_client.hide()
         prestamosTab.hide()
         traerCliente(cliente)
+
         //formClienteSoloArchivos.show()
 
     }
@@ -292,7 +293,9 @@ btn_guardar_prestamo.click(function(){
                         showConfirmButton: false
                     })
     
-                    //getPrestamos()
+                    window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+
+                    getPrestamos()
         
                 },
                 error : function(e){
@@ -629,6 +632,8 @@ function traerCliente(id){
                         text: 'El usuario no existe',
                     }).then((result) => {
                         $('#modal_registrar_prestamo').modal('toggle');
+                        window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+
                     })
     
                 }

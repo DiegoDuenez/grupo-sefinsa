@@ -39,6 +39,12 @@ $ruta = basename($_SERVER['PHP_SELF']);
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="empleados.php" class="nav-link <?php if($ruta == 'empleados.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Empleados</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="rutas.php" class="nav-link <?php if($ruta == 'rutas.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-route"></i>
                                 <p>Rutas</p>
@@ -48,12 +54,6 @@ $ruta = basename($_SERVER['PHP_SELF']);
                             <a href="poblaciones.php" class="nav-link <?php if($ruta == 'poblaciones.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 <p>Poblaciones</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="empleados.php" class="nav-link <?php if($ruta == 'empleados.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-users"></i>
-                                <p>Empleados</p>
                             </a>
                         </li>
                         <li class="nav-item">

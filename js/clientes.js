@@ -342,7 +342,7 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
                     showCancelButton: false,
                     showConfirmButton: false
                 }).then((result) => {
-                    window.location.href = `${env.local.url}prestamos.php?c=1`;
+                    window.location.href = `${env.local.url}prestamos.php?c=${response.data.id}`;
                 })
                 getClientes()
             }

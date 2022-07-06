@@ -301,7 +301,7 @@ class Cliente extends Database{
                 if($cliente){
                     return json([
                         'status' => 'success', 
-                        'data'=> null, 
+                        'data'=> ['id' => $this->lastId()], 
                         'message'=> 'Se ha creado al cliente'
                     ], 200);
                 }
@@ -450,7 +450,7 @@ class Cliente extends Database{
 
     }
 
-
+    
    /* public function edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id, $ruta_id, $poblacion_id){
 
