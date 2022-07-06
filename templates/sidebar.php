@@ -33,6 +33,12 @@ $ruta = basename($_SERVER['PHP_SELF']);
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <li class="nav-item">
+                            <a href="perfiles.php"  class="nav-link <?php if($ruta == 'perfiles.php') echo ' active'; ?>">
+                                <i class="fa-solid fa-users"></i>
+                                <p>Perfiles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="usuarios.php " class="nav-link <?php if($ruta == 'usuarios.php') echo ' active'; ?>">
                                 <i class="fa-solid fa-users"></i>
                                 <p>Usuarios</p>
