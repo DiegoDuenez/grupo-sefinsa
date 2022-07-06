@@ -281,7 +281,6 @@ btn_guardar_prestamo.click(function(){
                 type: 'POST',
                 success: function(response){
         
-                    console.log(response)
                     $('#modal_registrar_prestamo').modal('toggle');
     
                     Swal.fire({
@@ -315,7 +314,102 @@ btn_guardar_prestamo.click(function(){
 
     }
     else if(id == "nuevo-cliente"){
-        //alert(id)
+
+        if(inp_nombre_cliente.val() == "" || inp_direccion_cliente.val() == "" || inp_telefono_cliente.val() == ""
+        || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
+        || $('.select_colocadoras option:selected').val() == 0 
+        || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
+        || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
+        || inp_archivos_cliente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
+        || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente.get(0).files.length == 0
+        || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
+        {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos vacios',
+                text: 'Necesitas llenar todos los campos',
+                timer: 1000,
+                showCancelButton: false,
+                showConfirmButton: false
+            })
+            
+        }
+        else {
+
+            data.append('func', 'createPrestamoNuevoCliente');
+            data.append('nombre_cliente', inp_nombre_cliente.val())
+            data.append('direccion_cliente', inp_direccion_cliente.val())
+            data.append('telefono_cliente', inp_telefono_cliente.val())
+            data.append('or_cliente', inp_otras_referencias_cliente.val())
+            data.append('ruta_id', $('#select_rutas_registrar option:selected').val() )
+            data.append('poblacion_id', $('.select_poblaciones option:selected').val() )
+            data.append('colocadora_id', $('.select_colocadoras option:selected').val())
+
+            data.append('nombre_aval', inp_nombre_aval.val())
+            data.append('direccion_aval', inp_direccion_aval.val())
+            data.append('telefono_aval', inp_telefono_aval.val())
+            data.append('or_aval', inp_otras_referencias_aval.val())
+            data.append('garantias_cliente', inp_garantias_cliente.val())
+            data.append('garantias_aval', inp_garantias_aval.val())
+            data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
+            data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
+            data.append('fecha_prestamo', inp_fecha_prestamo.val())
+            data.append('monto_prestado', inp_monto_prestar.val())
+            data.append('pago_semanal', inp_pago_semana.val())
+
+
+            $.each(inp_archivos_cliente[0].files, function(i, file) {
+                data.append('archivo_cliente_'+i, file);
+            });
+        
+            $.each(inp_archivos_aval[0].files, function(i, file) {
+                data.append('archivo_aval_'+i, file);
+            });
+        
+            $.each(inp_archivos_garantias_aval[0].files, function(i, file) {
+                data.append('garantia_aval_'+i, file);
+            });
+        
+            $.each(inp_archivos_garantias_cliente[0].files, function(i, file) {
+                data.append('garantia_cliente_'+i, file);
+            });
+
+            $.ajax({
+                url: 'php/Clientes/App.php',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(response){
+        
+                    $('#modal_registrar_prestamo').modal('toggle');
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Nuevo prestamo',
+                        text: 'Se ha registrado un nuevo prestamo',
+                        timer: 1000,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    })
+    
+                    getPrestamos()
+        
+                },
+                error : function(e){
+        
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            });
+
+        }
+    
 
     }
     else if(id == "cliente-existente"){

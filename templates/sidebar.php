@@ -34,7 +34,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
                     <li class="nav-item">
                         <li class="nav-item">
                             <a href="perfiles.php"  class="nav-link <?php if($ruta == 'perfiles.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fa-solid fa-user"></i>
                                 <p>Perfiles</p>
                             </a>
                         </li>

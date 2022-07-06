@@ -350,7 +350,10 @@ class Cliente extends Database{
 
 
     public function createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
-    $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval){
+    $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval,
+    $monto_prestado, $pago_semanal, $fecha_prestamo){
+
+        require '../Prestamos/Prestamo.php';
 
         try{
 
@@ -364,6 +367,10 @@ class Cliente extends Database{
                 $cliente = $this->ExecuteQuery($insertCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $this->lastId(),$colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $carpeta_comp_cliente, $carpeta_gar_cliente]);
 
                 if($cliente){
+                    
+                    $Prestamo = new Prestamo();
+                    $Prestamo->create($this->lastId(), $monto_prestado, $pago_semanal, $fecha_prestamo);
+
                     return json([
                         'status' => 'success', 
                         'data'=> null, 

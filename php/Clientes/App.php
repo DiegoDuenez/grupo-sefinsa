@@ -235,8 +235,10 @@ switch($func){
         $garantias_aval = $_POST['garantias_aval'];
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
 
+        $monto_prestado = $_POST['monto_prestado'];
+        $pago_semanal = $_POST['pago_semanal'];
+        $fecha_prestamo = $_POST['fecha_prestamo'];
 
-        
         $nueva_carpeta_cliente  =  $Cliente->lastIdBeforeInsert('clientes') . '_'.$nombre_cliente;
         $nueva_carpeta_aval  =  $Cliente->lastIdBeforeInsert('avales') . '_'.$nombre_aval;
 
@@ -271,7 +273,7 @@ switch($func){
 
         echo $Cliente->createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
         $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $nueva_carpeta_aval, $colocadora_id, $garantias_cliente, 
-        $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval);
+        $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo);
 
         
     break;
