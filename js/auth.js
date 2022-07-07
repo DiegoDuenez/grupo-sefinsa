@@ -112,6 +112,12 @@ function RemoveParameterFromUrl(url, parameter) {
 function clearInputs(){
 
     
+    /*$('input[type=text]').val('')
+    $('input[type=number]').val('')
+
+    $('textarea').val('')
+    $('select').val(0).trigger('change.select2');*/
+
 
     $('#inp_nombre_completo').val("")
     $('#inp_usuario').val("")
@@ -182,6 +188,37 @@ function clearInputs(){
     $('#select_poblaciones_registrar').prop( "disabled", true );
     $('#select_colocadoras_registrar').prop( "disabled", true );
 
+
+    // CLIENTE INPUTS
+    var inp_nombre_cliente = $('#inp_nombre_cliente').val('')
+    var inp_direccion_cliente = $('#inp_direccion_cliente').val('')
+    var inp_telefono_cliente = $('#inp_telefono_cliente').val('')
+    var select_rutas_registrar = $('#select_rutas_registrar').val('')
+    var select_poblaciones_registrar = $('#select_poblaciones_registrar').val('')
+    var select_colocadoras_registrar = $('#select_colocadoras_registrar').val('')
+    var inp_otras_referencias_cliente = $('#inp_otras_referencias_cliente').val('')
+    var inp_garantias_cliente = $('#inp_garantias_cliente').val('')
+    var inp_archivos_garantias_cliente = $('#inp_archivos_garantias_cliente').val('')
+    var inp_archivos_cliente = $('#inp_archivos_cliente').val('')
+    var select_clientes_registrar = $('#select_clientes_registrar').val(0).trigger('change.select2');
+
+    var inp_garantias_cliente_existente = $('#inp_garantias_cliente_existente').val('')
+    var inp_archivos_garantias_cliente_existente = $('#inp_archivos_garantias_cliente_existente').val('')
+    var inp_archivos_cliente_existente = $('#inp_archivos_cliente_existente').val('')
+
+    // AVAL INPUTS
+    var inp_nombre_aval = $('#inp_nombre_aval').val('')
+    var inp_direccion_aval = $('#inp_direccion_aval').val('')
+    var inp_telefono_aval = $('#inp_telefono_aval').val('')
+    var inp_otras_referencias_aval = $('#inp_otras_referencias_aval').val('')
+    var inp_garantias_aval = $('#inp_garantias_aval').val('')
+    var inp_archivos_garantias_aval = $('#inp_archivos_garantias_aval').val('')
+    var inp_archivos_aval = $('#inp_archivos_aval').val('')
+
+    // PRESTAMO INPUTS
+    var inp_fecha_prestamo = $('#inp_fecha_prestamo').val('')
+    var inp_monto_prestar = $('#inp_monto_prestar').val('')
+    var inp_pago_semana = $('#inp_pago_semana').val('')
 
 
 

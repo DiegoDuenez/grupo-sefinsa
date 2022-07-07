@@ -26,6 +26,11 @@ var inp_otras_referencias_cliente = $('#inp_otras_referencias_cliente')
 var inp_garantias_cliente = $('#inp_garantias_cliente')
 var inp_archivos_garantias_cliente = $('#inp_archivos_garantias_cliente')
 var inp_archivos_cliente = $('#inp_archivos_cliente')
+var select_clientes_registrar = $('#select_clientes_registrar')
+
+var inp_garantias_cliente_existente = $('#inp_garantias_cliente_existente')
+var inp_archivos_garantias_cliente_existente = $('#inp_archivos_garantias_cliente_existente')
+var inp_archivos_cliente_existente = $('#inp_archivos_cliente_existente')
 
 // AVAL INPUTS
 var inp_nombre_aval = $('#inp_nombre_aval')
@@ -119,7 +124,9 @@ $('#select_poblaciones_registrar').on('change', function() {
     getColocadorasRutaPoblacion($('#select_rutas_registrar option:selected').val(), this.value);
 });
 
-
+select_clientes_registrar.on('change', function() {
+    cliente = this.value
+})
 
 function getPrestamos(){
 
@@ -204,6 +211,16 @@ btn_anterior_usuario.click(function(){
 
 })
 
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href") // activated tab
+    if(target == "cliente-existente"){
+        $("#inputs_registrar_cliente_3").addClass('d-none')      
+    }
+    else{
+        $("#inputs_registrar_cliente_3").removeClass('d-none')      
+    }
+  });
+
 btn_guardar_prestamo.click(function(){
     var id = $('.tab-content .active').attr('id');
     
@@ -211,9 +228,7 @@ btn_guardar_prestamo.click(function(){
 
    
 
-    if(id == "nuevo-cliente" && cliente){
-
-        //alert(id + " con paremetros")
+    if(id == "nuevo-cliente" && cliente ){
 
         if(inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
@@ -229,7 +244,7 @@ btn_guardar_prestamo.click(function(){
                 showCancelButton: false,
                 showConfirmButton: false
             })
-            /*console.log('func', 'createPrestamoClienteExistente');
+            console.log('func', 'createPrestamoClienteExistente');
             console.log('cliente_id', cliente)
             console.log('nombre_aval', inp_nombre_aval.val())
             console.log('direccion_aval', inp_direccion_aval.val())
@@ -243,7 +258,7 @@ btn_guardar_prestamo.click(function(){
             console.log('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
             console.log('fecha_prestamo', inp_fecha_prestamo.val())
             console.log('monto_prestado', inp_monto_prestar.val())
-            console.log('pago_semanal', inp_pago_semana.val())*/
+            console.log('pago_semanal', inp_pago_semana.val())
         }
         else {
 
@@ -320,6 +335,7 @@ btn_guardar_prestamo.click(function(){
 
     }
     else if(id == "nuevo-cliente"){
+
 
         if(inp_nombre_cliente.val() == "" || inp_direccion_cliente.val() == "" || inp_telefono_cliente.val() == ""
         || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
@@ -420,6 +436,106 @@ btn_guardar_prestamo.click(function(){
     }
     else if(id == "cliente-existente"){
         //alert(id)
+
+        if(inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
+        || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
+        || inp_garantias_cliente_existente.val() == "" || inp_garantias_aval.val() == ""
+        || inp_archivos_cliente_existente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
+        || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente_existente.get(0).files.length == 0
+        || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
+        {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos vacios',
+                text: 'Necesitas llenar todos los campos',
+                timer: 1000,
+                showCancelButton: false,
+                showConfirmButton: false
+            })
+
+            console.log('func', 'createPrestamoClienteExistente');
+            console.log('cliente_id', cliente)
+            console.log('garantias_cliente', inp_garantias_cliente_existente.val())
+            console.log('garantias_aval', inp_garantias_aval.val())
+            console.log("archivos cliente", inp_archivos_cliente_existente.get(0).files.length)
+            console.log("archivos aval", inp_archivos_aval.get(0).files.length)
+            console.log('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
+            console.log('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
+            console.log('fecha_prestamo', inp_fecha_prestamo.val())
+            console.log('monto_prestado', inp_monto_prestar.val())
+            console.log('pago_semanal', inp_pago_semana.val())
+        
+        }
+        else {
+
+            data.append('func', 'createPrestamoClienteExistente');
+            data.append('cliente_id', cliente)
+            data.append('nombre_aval', inp_nombre_aval.val())
+            data.append('direccion_aval', inp_direccion_aval.val())
+            data.append('telefono_aval', inp_telefono_aval.val())
+            data.append('or_aval', inp_otras_referencias_aval.val())
+            data.append('garantias_cliente', inp_garantias_cliente_existente.val())
+            data.append('garantias_aval', inp_garantias_aval.val())
+            data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
+            data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
+            data.append('fecha_prestamo', inp_fecha_prestamo.val())
+            data.append('monto_prestado', inp_monto_prestar.val())
+            data.append('pago_semanal', inp_pago_semana.val())
+
+            $.each(inp_archivos_cliente_existente[0].files, function(i, file) {
+                data.append('archivo_cliente_'+i, file);
+            });
+        
+            $.each(inp_archivos_aval[0].files, function(i, file) {
+                data.append('archivo_aval_'+i, file);
+            });
+        
+            $.each(inp_archivos_garantias_aval[0].files, function(i, file) {
+                data.append('garantia_aval_'+i, file);
+            });
+        
+            $.each(inp_archivos_garantias_cliente_existente[0].files, function(i, file) {
+                data.append('garantia_cliente_'+i, file);
+            });
+
+            $.ajax({
+                url: 'php/Clientes/App.php',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(response){
+        
+                    $('#modal_registrar_prestamo').modal('toggle');
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Nuevo prestamo',
+                        text: 'Se ha registrado un nuevo prestamo',
+                        timer: 1000,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    })
+    
+
+                    getPrestamos()
+        
+                },
+                error : function(e){
+        
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            });
+        
+
+        }
+
     }
 })
 

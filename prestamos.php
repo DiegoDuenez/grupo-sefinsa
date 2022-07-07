@@ -96,6 +96,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="prestamosTabContent">
+
                     <div class="tab-pane fade show active" id="nuevo-cliente" role="tabpanel" aria-labelledby="nuevo-cliente-tab">
 
                         <h5 id="titulo_cliente">Archivos del cliente</h5>
@@ -136,7 +137,7 @@
                         
                         </div>
 
-                        <div class="form-row" id="inputs_registrar_cliente_3">
+                        <div class="form-row" id="inputs_registrar_cliente_3" class="">
                             
                             <div class="form-group col mt-2" id="group_or_client">
                                 <label for="inp_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
@@ -177,13 +178,13 @@
                             </div>
                             <div class="form-group col mt-2">
                                 <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                                <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
+                                <textarea class="form-control" id="inp_garantias_cliente_existente" rows="3" required></textarea>
                             </div>
                             <div class="form-group col ml-3 mt-2">
                                 <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
+                                        <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente_existente" required multiple >
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +195,7 @@
                                 <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <input type="file" class="form-control-file" id="inp_archivos_cliente" required multiple >
+                                        <input type="file" class="form-control-file" id="inp_archivos_cliente_existente" required multiple >
                                     </div>
                                 </div>
                             </div>
@@ -204,41 +205,6 @@
                 </div>
 
 
-                    <!--<div id="formClienteSoloArchivos">
-                        <div class="form-row">
-                            
-                            <div class="form-group col mt-2" id="group_or_client">
-                                <label for="inp_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                                <textarea class="form-control" id="inp_otras_referencias_cliente" rows="3" required></textarea>
-                            </div>
-                            <div class="form-group col mt-2">
-                                <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                                <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
-                            </div>
-                            <div class="form-group col ml-3 mt-2">
-                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col mt-2">
-                                <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <input type="file" class="form-control-file" id="inp_archivos_cliente" required multiple >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>-->
-
-                    
 
                     <hr>
                     <h5>Información del aval</h5>
