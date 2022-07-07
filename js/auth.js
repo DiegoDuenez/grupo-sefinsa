@@ -140,7 +140,7 @@ function clearInputs(){
     $('#select_primer_dia option[value=Lunes]').prop('selected',true);
     $('#select_segundo_dia option[value=Sabado]').prop('selected',true);
     $("#inp_primer_hora").val('00:00:00')
-    $('#inp_monto_multa').val('0.00')
+    $('#inp_monto_multa').val('50.00')
 
     // EMPLEADOS INPUTS
     $(`.select_perfiles option[value="0"]`).prop('selected',true);
@@ -190,35 +190,45 @@ function clearInputs(){
 
 
     // CLIENTE INPUTS
-    var inp_nombre_cliente = $('#inp_nombre_cliente').val('')
-    var inp_direccion_cliente = $('#inp_direccion_cliente').val('')
-    var inp_telefono_cliente = $('#inp_telefono_cliente').val('')
-    var select_rutas_registrar = $('#select_rutas_registrar').val('')
-    var select_poblaciones_registrar = $('#select_poblaciones_registrar').val('')
-    var select_colocadoras_registrar = $('#select_colocadoras_registrar').val('')
-    var inp_otras_referencias_cliente = $('#inp_otras_referencias_cliente').val('')
-    var inp_garantias_cliente = $('#inp_garantias_cliente').val('')
-    var inp_archivos_garantias_cliente = $('#inp_archivos_garantias_cliente').val('')
-    var inp_archivos_cliente = $('#inp_archivos_cliente').val('')
-    var select_clientes_registrar = $('#select_clientes_registrar').val(0).trigger('change.select2');
+    $('#inp_nombre_cliente').val('')
+    $('#inp_direccion_cliente').val('')
+    $('#inp_telefono_cliente').val('')
+    $('#select_rutas_registrar').val('')
+    $('#select_poblaciones_registrar').val('')
+    $('#select_colocadoras_registrar').val('')
+    $('#inp_otras_referencias_cliente').val('')
+    $('#inp_garantias_cliente').val('')
+    $('#inp_archivos_garantias_cliente').val('')
+    $('#inp_archivos_cliente').val('')
+    $('#select_clientes_registrar').val(0).trigger('change.select2');
 
-    var inp_garantias_cliente_existente = $('#inp_garantias_cliente_existente').val('')
-    var inp_archivos_garantias_cliente_existente = $('#inp_archivos_garantias_cliente_existente').val('')
-    var inp_archivos_cliente_existente = $('#inp_archivos_cliente_existente').val('')
+    $('#inp_garantias_cliente_existente').val('')
+    $('#inp_archivos_garantias_cliente_existente').val('')
+    $('#inp_archivos_cliente_existente').val('')
+    $('#inp_archivos_cliente_existente').val('')
+    $('#inp_direccion_cliente_existente').val('')
+    $('#inp_telefono_cliente_existente').val('')
+
+    $('#select_rutas_registrar_existente').prop( "disabled", true );
+    $('#select_poblaciones_registrar_existente').prop( "disabled", true );
+    $('#select_clientes_registrar_existente').prop( "disabled", true );
+    
+    $('#select_rutas_registrar_existente').val(0).trigger('change.select2');
+    $('#select_poblaciones_registrar_existente').val(0).trigger('change.select2');
+    $('#select_clientes_registrar_existente').val(0).trigger('change.select2');
 
     // AVAL INPUTS
-    var inp_nombre_aval = $('#inp_nombre_aval').val('')
-    var inp_direccion_aval = $('#inp_direccion_aval').val('')
-    var inp_telefono_aval = $('#inp_telefono_aval').val('')
-    var inp_otras_referencias_aval = $('#inp_otras_referencias_aval').val('')
-    var inp_garantias_aval = $('#inp_garantias_aval').val('')
-    var inp_archivos_garantias_aval = $('#inp_archivos_garantias_aval').val('')
-    var inp_archivos_aval = $('#inp_archivos_aval').val('')
+    $('#inp_nombre_aval').val('')
+    $('#inp_direccion_aval').val('')
+    $('#inp_telefono_aval').val('')
+    $('#inp_otras_referencias_aval').val('')
+    $('#inp_garantias_aval').val('')
+    $('#inp_archivos_garantias_aval').val('')
+    $('#inp_archivos_aval').val('')
 
     // PRESTAMO INPUTS
-    var inp_fecha_prestamo = $('#inp_fecha_prestamo').val('')
-    var inp_monto_prestar = $('#inp_monto_prestar').val('')
-    var inp_pago_semana = $('#inp_pago_semana').val('')
+    $('#inp_monto_prestar').val('')
+    $('#inp_pago_semana').val('')
 
 
 

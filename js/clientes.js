@@ -75,7 +75,7 @@ $(document).ready(function(){
         "columnDefs": [
             { "visible": false, "targets": -1 }
           ],
-          order: [[8, 'desc']],
+          order: [[7, 'desc']],
     })
 
     getClientes()
@@ -154,7 +154,6 @@ function getClientes(){
                         response.data[i].nombre_ruta,
                         response.data[i].nombre_poblacion,
                         colocadoraTag,
-                        response.data[i].nombre_aval == null ? '(Por definir)' : response.data[i].nombre_aval ,
                         `
                         <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, 
                             ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id},
@@ -313,6 +312,7 @@ btn_guardar_cliente.click(function(){
 
 function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, garantias_cliente, colocadora_id, ruta_id, poblacion_id){
 
+
     var datasend ={
         func: 'create',
         nombre_cliente,
@@ -336,13 +336,19 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
                 $('#modal_registrar_cliente').modal('toggle');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Nuevo empleado',
-                    text: 'Se ha registrado al empleado',
-                    timer: 1000,
-                    showCancelButton: false,
-                    showConfirmButton: false
+                    title: 'Nuevo cliente',
+                    text: 'Se ha registrado al cliente \n\n ¿Quieres generar un prestamo para este cliente?',
+                    //timer: 1000,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Si',
+                    cancelButtonText: 'No',
+
                 }).then((result) => {
-                    window.location.href = `${env.local.url}prestamos.php?c=${response.data.id}`;
+                    
+                    if (result.isConfirmed) {
+                        window.location.href = `${env.local.url}prestamos.php?c=${response.data.id}`;
+                    }
                 })
                 getClientes()
             }
@@ -358,6 +364,13 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
 
         }
     })
+
+
+
+
+
+
+    
 
 }
 
@@ -388,8 +401,8 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
                 $('#modal_editar_cliente').modal('toggle');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Empleado actualizado',
-                    text: 'Se ha actualizado al empleado',
+                    title: 'cliente actualizado',
+                    text: 'Se ha actualizado al cliente',
                     timer: 1000,
                     showCancelButton: false,
                     showConfirmButton: false

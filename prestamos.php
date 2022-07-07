@@ -159,6 +159,7 @@
                         </div>
 
                         <div class="form-row" id="inputs_registrar_cliente_4">
+
                             <div class="form-group col mt-2">
                                 <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <div class="form-row">
@@ -167,19 +168,58 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="cliente-existente" role="tabpanel" aria-labelledby="cliente-existente-tab">
+
                         <div class="form-row">
+
                             <div class="form-group col mt-2">
                                 <label for="select_clientes_registrar">Cliente <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <select class="form-control select_clientes"  id="select_clientes_registrar">
                                 </select>
                             </div>
+
+                            <div class="form-group col mt-2">
+                                <label for="inp_direccion_cliente_existente">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <input class="form-control" id="inp_direccion_cliente_existente" placeholder="Dirección cliente" required/>
+                            </div>
+
+                            <div class="form-group col mt-2">
+                                <label for="inp_telefono_cliente_existente">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <input class="form-control" type="number" min="0" id="inp_telefono_cliente_existente" placeholder="Teléfono cliente" required/>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col mt-2">
+                                <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <select class="form-control select_rutas"  id="select_rutas_registrar_existente" disabled>
+                                </select>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <label for="select_poblaciones_registrar">Población <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <select class="form-control select_poblaciones"  id="select_poblaciones_registrar_existente" disabled>
+                                </select>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <label for="select_colocadoras_registrar">Colocadora <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <select class="form-control select_colocadoras"  id="select_colocadoras_registrar_existente" disabled>
+                                </select>
+                            </div>
+                        
+                        </div>
+
+                        <div class="form-row">
+
                             <div class="form-group col mt-2">
                                 <label for="inp_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <textarea class="form-control" id="inp_garantias_cliente_existente" rows="3" required></textarea>
                             </div>
+
                             <div class="form-group col ml-3 mt-2">
                                 <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <div class="form-row">
@@ -188,9 +228,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-row">
                             <div class="form-group col mt-2">
                                 <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <div class="form-row">
@@ -199,6 +237,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                  
                     </div>

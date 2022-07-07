@@ -13,12 +13,11 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval',
-        poblaciones.semanas_pago
+        avales.telefono as 'telefono_aval'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
-        INNER JOIN avales ON clientes.aval_id = avales.id
-        INNER JOIN poblaciones ON clientes.poblacion_id = poblaciones.id
+        INNER JOIN avales ON prestamos.aval_id = avales.id
+        INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         ";
 
         return json([
@@ -28,13 +27,13 @@ class Prestamo extends Database{
         ], 200);
     }
 
-    public function create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo){
+    public function create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo){
 
         try{
 
         
-            $insert= "INSERT INTO $this->table (cliente_id, monto_prestado, pago_semanal, fecha_prestamo) VALUES (?, ?, ?, ?)";
-            $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo]);
+            $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, pago_semanal, fecha_prestamo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo]);
 
             if($prestamo){
 

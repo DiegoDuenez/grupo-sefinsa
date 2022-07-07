@@ -76,7 +76,6 @@
                                         <th scope="col">Ruta</th>
                                         <th scope="col">Población</th>
                                         <th scope="col">Colocadora</th>
-                                        <th scope="col">Aval</th>
                                         <th scope="col">Acciones</th>
                                         <th scope="col">Fecha de registro</th>
 

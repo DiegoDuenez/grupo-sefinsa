@@ -31,6 +31,8 @@ var select_clientes_registrar = $('#select_clientes_registrar')
 var inp_garantias_cliente_existente = $('#inp_garantias_cliente_existente')
 var inp_archivos_garantias_cliente_existente = $('#inp_archivos_garantias_cliente_existente')
 var inp_archivos_cliente_existente = $('#inp_archivos_cliente_existente')
+var inp_direccion_cliente_existente = $('#inp_direccion_cliente_existente')
+var inp_telefono_cliente_existente = $('#inp_telefono_cliente_existente')
 
 // AVAL INPUTS
 var inp_nombre_aval = $('#inp_nombre_aval')
@@ -85,6 +87,10 @@ $(document).ready(function(){
     $('#select_poblaciones_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
     $('#select_clientes_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
 
+    $('#select_rutas_registrar_existente').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
+    $('#select_poblaciones_registrar_existente').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
+    $('#select_colocadoras_registrar_existente').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
+
     /*inp_fecha_prestamo.datetimepicker({
 		format:'YYYY:MM:DD',
 		date : globalFechaInicial,
@@ -124,8 +130,21 @@ $('#select_poblaciones_registrar').on('change', function() {
     getColocadorasRutaPoblacion($('#select_rutas_registrar option:selected').val(), this.value);
 });
 
+$('#select_rutas_registrar_existente').on('change', function() {
+    $('#select_poblaciones_registrar_existente').prop( "disabled", false );
+    getPoblacionesRuta(this.value);
+});
+
+$('#select_poblaciones_registrar_existente').on('change', function() {
+    $('#select_colocadoras_registrar_existente').prop( "disabled", false);
+    getColocadorasRutaPoblacion($('#select_rutas_registrar_existente option:selected').val(), this.value);
+});
+
 select_clientes_registrar.on('change', function() {
     cliente = this.value
+
+    traerCliente(cliente)
+
 })
 
 function getPrestamos(){
@@ -222,11 +241,13 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   });
 
 btn_guardar_prestamo.click(function(){
+
+    
+
+    
     var id = $('.tab-content .active').attr('id');
     
     var data = new FormData();
-
-   
 
     if(id == "nuevo-cliente" && cliente ){
 
@@ -303,7 +324,14 @@ btn_guardar_prestamo.click(function(){
                 success: function(response){
         
                     $('#modal_registrar_prestamo').modal('toggle');
-    
+                    $('#pago').addClass('d-none')
+                    $('#cliente').removeClass('d-none')
+                    btn_anterior_usuario.prop('disabled', true)
+                    btn_siguiente_usuario.removeClass('d-none')
+                    btn_guardar_prestamo.addClass('d-none')
+                    modal_prestamos_label.text('Registrar cliente y aval')
+                    $('#modal_dialog').addClass('modal-xl')
+                    
                     Swal.fire({
                         icon: 'success',
                         title: 'Nuevo prestamo',
@@ -406,7 +434,14 @@ btn_guardar_prestamo.click(function(){
                 success: function(response){
         
                     $('#modal_registrar_prestamo').modal('toggle');
-    
+                    $('#pago').addClass('d-none')
+                    $('#cliente').removeClass('d-none')
+                    btn_anterior_usuario.prop('disabled', true)
+                    btn_siguiente_usuario.removeClass('d-none')
+                    btn_guardar_prestamo.addClass('d-none')
+                    modal_prestamos_label.text('Registrar cliente y aval')
+                    $('#modal_dialog').addClass('modal-xl')
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Nuevo prestamo',
@@ -436,13 +471,16 @@ btn_guardar_prestamo.click(function(){
     }
     else if(id == "cliente-existente"){
         //alert(id)
-
-        if(inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
+        if( inp_direccion_cliente_existente.val() == "" || inp_telefono_cliente_existente.val() == "" || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
         || inp_garantias_cliente_existente.val() == "" || inp_garantias_aval.val() == ""
         || inp_archivos_cliente_existente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
         || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente_existente.get(0).files.length == 0
-        || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
+        || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0
+        || $('#select_rutas_registrar_existente option:selected').val() == 0
+        || $('#select_colocadoras_registrar_existente option:selected').val() == 0
+        ||  $('#select_poblaciones_registrar_existente option:selected').val() == 0
+        )
         {
             Swal.fire({
                 icon: 'warning',
@@ -453,7 +491,7 @@ btn_guardar_prestamo.click(function(){
                 showConfirmButton: false
             })
 
-            console.log('func', 'createPrestamoClienteExistente');
+            /*console.log('func', 'createPrestamoClienteExistente');
             console.log('cliente_id', cliente)
             console.log('garantias_cliente', inp_garantias_cliente_existente.val())
             console.log('garantias_aval', inp_garantias_aval.val())
@@ -463,13 +501,18 @@ btn_guardar_prestamo.click(function(){
             console.log('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
             console.log('fecha_prestamo', inp_fecha_prestamo.val())
             console.log('monto_prestado', inp_monto_prestar.val())
-            console.log('pago_semanal', inp_pago_semana.val())
+            console.log('pago_semanal', inp_pago_semana.val())*/
         
         }
         else {
 
             data.append('func', 'createPrestamoClienteExistente');
             data.append('cliente_id', cliente)
+            data.append('direccion_cliente', inp_direccion_cliente_existente.val())
+            data.append('telefono_cliente', inp_telefono_cliente_existente.val())
+            data.append('ruta_id', $('#select_rutas_registrar_existente option:selected').val() )
+            data.append('poblacion_id', $('#select_poblaciones_registrar_existente option:selected').val() )
+            data.append('colocadora_id', $('#select_colocadoras_registrar_existente option:selected').val())
             data.append('nombre_aval', inp_nombre_aval.val())
             data.append('direccion_aval', inp_direccion_aval.val())
             data.append('telefono_aval', inp_telefono_aval.val())
@@ -508,7 +551,14 @@ btn_guardar_prestamo.click(function(){
                 success: function(response){
         
                     $('#modal_registrar_prestamo').modal('toggle');
-    
+                    $('#pago').addClass('d-none')
+                    $('#cliente').removeClass('d-none')
+                    btn_anterior_usuario.prop('disabled', true)
+                    btn_siguiente_usuario.removeClass('d-none')
+                    btn_guardar_prestamo.addClass('d-none')
+                    modal_prestamos_label.text('Registrar cliente y aval')
+                    $('#modal_dialog').addClass('modal-xl')
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Nuevo prestamo',
@@ -536,12 +586,14 @@ btn_guardar_prestamo.click(function(){
 
         }
 
+       
+
     }
 })
 
 
 
-function getRutas(){
+function getRutas(nombre_ruta = ""){
 
     var datasend = {
         func: "rutasActivas"
@@ -562,19 +614,26 @@ function getRutas(){
                 $('.select_rutas').append(`
                     <option value="0" >Seleccionar ruta</option>
                 `)
+
+                var tabSeleccionado = $('.tab-content .active').attr('id');
+
+                if(tabSeleccionado == 'cliente-existente'){
+
+                    $('#select_rutas_registrar_existente').prop( "disabled", false );
+                    console.log(nombre_ruta)
+                }
+
                 for(var i = 0; i < response.data.length; i++ ){
                     
                     $('.select_rutas').append(`
                         <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
                     `)
 
-                    /*if(rutaCliente != ""){
-                        $(`.select_rutas.editar option[name='${rutaCliente}']`).attr('selected','selected');
-                    }*/
-
+                    if(tabSeleccionado == 'cliente-existente'){
+                        $(`#select_rutas_registrar_existente option[name='${nombre_ruta}']`).attr('selected','selected');
+                    }
 
                 }
-
 
                 $('#select_rutas_filtro').empty()
                 $('#select_rutas_filtro').append(`
@@ -585,6 +644,8 @@ function getRutas(){
                     $('.select_rutas_filtro').append(`
                         <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
                     `)
+
+                    
 
                 }
 
@@ -606,7 +667,7 @@ function getRutas(){
 }
 
 
-function getPoblacionesRuta(ruta_id){
+function getPoblacionesRuta(ruta_id, nombre_poblacion = ""){
 
 
     var datasend = {
@@ -633,16 +694,22 @@ function getPoblacionesRuta(ruta_id){
 
                     $('.select_poblaciones.editar').prop( "disabled", false );
 
+                    var tabSeleccionado = $('.tab-content .active').attr('id');
+
+                    if(tabSeleccionado == 'cliente-existente'){
+                        $('#select_poblaciones_registrar_existente').prop( "disabled", false );
+                        console.log(nombre_poblacion)
+                    }
+
                     for(var i = 0; i < response.data.length; i++ ){
                     
                         $('.select_poblaciones').append(`
                             <option name="${response.data[i].nombre_poblacion}" value="${response.data[i].id}">${response.data[i].nombre_poblacion}</option>
                         `)
-    
-                       /* if(poblacionCliente != ""){
-                            $(`.select_poblaciones.editar option[name='${poblacionCliente}']`).attr('selected','selected');
-                        }*/
-    
+
+                        if(tabSeleccionado == 'cliente-existente'){
+                            $(`#select_poblaciones_registrar_existente option[name='${nombre_poblacion}']`).attr('selected','selected');
+                        }
     
                     }
                 }
@@ -677,7 +744,7 @@ function getPoblacionesRuta(ruta_id){
 }
 
 
-function getColocadorasRutaPoblacion(ruta_id, poblacion_id){
+function getColocadorasRutaPoblacion(ruta_id, poblacion_id, nombre_colocadora = ""){
 
     var datasend = {
         func: "colocadorasRutaPoblacion",
@@ -701,6 +768,16 @@ function getColocadorasRutaPoblacion(ruta_id, poblacion_id){
                     $('.select_colocadoras').append(`
                         <option value="0" >Seleccionar colocadora</option>
                     `)
+
+                    var tabSeleccionado = $('.tab-content .active').attr('id');
+
+                    if(tabSeleccionado == 'cliente-existente'){
+
+                        $('#select_colocadoras_registrar_existente').prop( "disabled", false );
+
+                        console.log(nombre_colocadora)
+                    }
+
                     for(var i = 0; i < response.data.length; i++ ){
 
                         $('.select_colocadoras.editar').prop( "disabled", false );
@@ -710,9 +787,9 @@ function getColocadorasRutaPoblacion(ruta_id, poblacion_id){
                             <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
                         `)
 
-                        /*if(colocadoraCliente != ""){
-                            $(`.select_colocadoras.editar option[name='${colocadoraCliente}']`).attr('selected','selected');
-                        }*/
+                        if(tabSeleccionado == 'cliente-existente'){
+                            $(`#select_colocadoras_registrar_existente option[name='${nombre_colocadora}']`).attr('selected','selected');
+                        }
 
 
                     }
@@ -724,7 +801,7 @@ function getColocadorasRutaPoblacion(ruta_id, poblacion_id){
                     Swal.fire({
                         icon: 'warning',
                         title: 'Aviso',
-                        text: 'Esta poblacion no tiene colcoadoras asignadas aún',
+                        text: 'Esta poblacion no tiene colcadoras asignadas aún',
                         timer: 1000,
                         showCancelButton: false,
                         showConfirmButton: false
@@ -839,6 +916,18 @@ function traerCliente(id){
                 if(objectLength > 0){
 
                     console.log(response.data)
+
+                    var tabSelecionado = $('.tab-content .active').attr('id');
+
+                    if(tabSelecionado == "cliente-existente"){
+                        getRutas(response.data.nombre_ruta)
+                        getPoblacionesRuta(response.data.ruta_id, response.data.nombre_poblacion)
+                        getColocadorasRutaPoblacion(response.data.ruta_id, response.data.poblacion_id, response.data.nombre_colocadora)
+                        inp_direccion_cliente_existente.val(response.data.direccion)
+                        inp_telefono_cliente_existente.val(response.data.telefono)
+                        inp_garantias_cliente_existente.val(response.data.garantias)
+                    }
+                   
                 
                 }
                 else{

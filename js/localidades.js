@@ -22,6 +22,7 @@ var table;
 
 $(document).ready(function(){
 
+
     table = $('#tabla_localidades').DataTable( {
         pageLength : 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
@@ -40,7 +41,7 @@ $(document).ready(function(){
         "columnDefs": [
             { "visible": false, "targets": -1 }
           ],
-          order: [[7, 'desc']],
+          order: [[6, 'desc']],
     })
 
     getLocalidades();
@@ -108,7 +109,6 @@ function getLocalidades(){
                         response.data[i].nombre_ruta,
                         response.data[i].nombre_poblacion,
                         response.data[i].grupo,
-                        response.data[i].semanas_pago,
                         horario,
                         "$ "+response.data[i].monto_multa,
                         `

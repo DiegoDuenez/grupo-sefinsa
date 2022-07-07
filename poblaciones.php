@@ -31,7 +31,7 @@
                 <div class="container-fluid">
                     <div class="row p-3">
                         <div class="d-flex w-100 flex-row justify-content-end">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar localidad</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_localidad">Registrar población</button>
                         </div>
 
                     </div>
@@ -49,7 +49,6 @@
                                             <th scope="col">Ruta</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Grupo</th>
-                                            <th scope="col">Semanas de pago</th>
                                             <th scope="col">Hora limite de cobro </th>
                                             <th scope="col">Monto de multa</th>
                                             <th scope="col">Acciones</th>
@@ -105,11 +104,6 @@
                             <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
                         </div>
-
-                        <div class="form-group col mt-2">
-                            <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
-                        </div>
                     </div>
                    
 
@@ -144,7 +138,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                             </div>
-                            <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                         </div>
                     </div>
 
@@ -191,12 +185,6 @@
                             <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
                         </div>
-
-                        <div class="form-group col mt-2">
-                            <label for="inp_grupo">Semanas de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_editar_semanas" onKeyDown="return false" type="number" placeholder="Grupo" min="15" value="15" step="5" max="20" required min="1" />
-                        </div>
-
                     </div>
 
                     <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
