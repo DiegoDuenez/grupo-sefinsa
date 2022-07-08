@@ -172,6 +172,7 @@ function getPrestamos(){
 
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
+                    
                     table.row.add([
                         response.data[i].nombre_completo, 
                         response.data[i].direccion_cliente,
@@ -181,6 +182,7 @@ function getPrestamos(){
                         response.data[i].telefono_aval,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
+                        response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
                         `
                         <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago" data-toggle="modal" data-target="#modal_ver_semanas"><i class="fa-solid fa-eye"></i></button>
                         `,

@@ -53,6 +53,7 @@
                                             <th scope="col">Teléfono del aval</th>
                                             <th scope="col">Monto prestado</th>
                                             <th scope="col">Pago por semana</th>
+                                            <th scope="col">Estatus</th>
                                             <th scope="col">Semanas de pago</th>
                                             <th scope="col">Fecha de registro</th>
 
