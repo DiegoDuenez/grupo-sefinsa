@@ -2,7 +2,7 @@
 
 require '../Clientes/Cliente.php';
 require '../FileManager.php';
-require './otropdf.php';
+require './PDFClass.php';
 
 $id = $_POST['id'];
 
