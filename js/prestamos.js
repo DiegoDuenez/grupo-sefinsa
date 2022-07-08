@@ -182,7 +182,7 @@ function getPrestamos(){
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
                         `
-                        <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago" data-toggle="modal" data-target="#"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago" data-toggle="modal" data-target="#modal_ver_semanas"><i class="fa-solid fa-eye"></i></button>
                         `,
                         response.data[i].created_at,
 

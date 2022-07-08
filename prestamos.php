@@ -355,49 +355,36 @@
         </div>
     </div>
 
-    <!-- Modal Editar 
-    <div class="modal fade" id="modal_editar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Modal Semanas-->
+    <div class="modal fade" id="modal_ver_semanas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Semanas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control " id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control " id="inp_editar_usuario" placeholder="Usuario" required/>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="select_perfiles_editar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_perfiles editar"  id="select_perfiles_editar">
-                        </select>
-                    </div>
-                    <div class="form-group mt-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="false" id="cb_password">
-                            <label class="form-check-label" for="cb_password">
-                                Cambiar contraseña
-                            </label>
+
+                    <div class="d-flex w-100">
+                        <div class="card">
+                            <h5 class="card-header">Featured</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            </div>
                         </div>
+                        
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_password" class="d-none" id="lb_password">Nueva contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control d-none" id="inp_editar_password" type="password" placeholder="Contraseña"/>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_editar_usuario">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="">Guardar</button>
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 
 
     <?php include 'templates/footer.php' ?>
