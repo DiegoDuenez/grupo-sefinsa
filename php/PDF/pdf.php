@@ -21,7 +21,7 @@ $pathGarantiasAval = "../../resources/garantias/avales/".$aval['carpeta_garantia
     
 $nombre_archivo = "Informacion_".$cliente['nombre_completo'].".pdf";
 
-if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarantias)){
+if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarantias) && FileManager::getFiles($pathComprobantesAval) && FileManager::getFiles($pathGarantiasAval) ){
 
     // DATOS DEL CLIENTE
     $pdf->AddPage('L', 'A4', 0);
@@ -29,14 +29,11 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
     $pdf->Cell(280, 10, 'Datos del cliente', 1,0, 'C');
     $pdf->Ln();
     $w = 35;
-    $h = 10;
+    $h = 20;
     $x = $pdf->GetX();
     $header = ['Nombre', 'Direcci'.iconv( 'UTF-8', 'windows-1252', 'ó' ).'n', 'Tel'.iconv( 'UTF-8', 'windows-1252', 'é' ).'fono', 'Garantias', 'Otras refs.' ,'Ruta', 'Poblaci'.iconv( 'UTF-8', 'windows-1252', 'ó' ).'n', 'Colocadora'];
     for($i = 0; $i < count($header); $i++){
         $pdf->Cell(35, 10, $header[$i], 1,0, 'c');
-        //$pdf->myCell($w, $h, $x, $header[$i]);
-
-
     }
 
     $pdf->Ln();
@@ -63,6 +60,38 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
 
     $pdf->Ln();
 
+
+    // DATOS AVAL
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(175, 10, 'Datos del aval', 1,0, 'C');
+    $pdf->Ln();
+    $x = $pdf->GetX();
+    $header = ['Nombre', 'Direcci'.iconv( 'UTF-8', 'windows-1252', 'ó' ).'n', 'Tel'.iconv( 'UTF-8', 'windows-1252', 'é' ).'fono', 'Garantias', 'Otras refs.'];
+    for($i = 0; $i < count($header); $i++){
+        $pdf->Cell(35, 10, $header[$i], 1,0, 'c');
+    }
+
+    $pdf->Ln();
+
+
+    $pdf->SetFont('Arial', '', 12);
+    $x = $pdf->GetX();
+    $pdf->myCell($w, $h, $x, $aval['nombre_completo']);
+    $x = $pdf->GetX();
+    $pdf->myCell($w, $h, $x, $aval['direccion']);
+    $x = $pdf->GetX();
+    $pdf->myCell($w, $h, $x, $aval['telefono']);
+    $x = $pdf->GetX();
+    $pdf->myCell($w, $h, $x, $aval['garantias']);
+    $x = $pdf->GetX();
+    $pdf->myCell($w, $h, $x, $aval['otras_referencias']);
+    $x = $pdf->GetX();
+
+    $pdf->Ln();
+
+
+
+
     for($i = 2; $i < count(FileManager::getFiles($pathComprobantes)); $i++){
 
         $pdf->AddPage();
@@ -84,7 +113,7 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
 
     }
 
-    /*for($i = 2; $i < count(FileManager::getFiles($pathComprobantesAval)); $i++){
+    for($i = 2; $i < count(FileManager::getFiles($pathComprobantesAval)); $i++){
 
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 18);
@@ -103,7 +132,7 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
         }
         $pdf-> Image($pathGarantiasAval.'/'.FileManager::getFiles($pathGarantiasAval)[$i],35,35,150,150);
 
-    }*/
+    }
 
     $pdf->Output('D', $nombre_archivo);
 

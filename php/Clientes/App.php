@@ -404,13 +404,12 @@ switch($func){
         $colocadora_id = $_DATA['colocadora_id'];
         $ruta_id = $_DATA['ruta_id'];
         $poblacion_id = $_DATA['poblacion_id'];
-        $garantias_cliente = sanitize($_DATA['garantias_cliente']);
+        //$garantias_cliente = sanitize($_DATA['garantias_cliente']);
         $cliente_id = $_DATA['cliente_id'];
 
         $cliente = $Cliente->getCliente($cliente_id);
 
-        echo $Cliente->editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente, $ruta_id,
-        $poblacion_id, $cliente_id);
+        echo $Cliente->editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $ruta_id,$poblacion_id, $cliente_id);
 
         FileManager::renameFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'], '../../resources/comprobantes/clientes/'.$cliente_id.'_'.$nombre_cliente);
         FileManager::renameFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias'], '../../resources/garantias/clientes/'.$cliente_id.'_'.$nombre_cliente);
