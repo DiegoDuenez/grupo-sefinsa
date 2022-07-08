@@ -331,6 +331,15 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="select_modalidad">Colocadora <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control" id="select_modalidad">
+                                <option value="15">15 semanas</option>
+                                <option value="20">20 semanas</option>
+                            </select>
+                        </div>
+                    </div>
 
                 </div>
 

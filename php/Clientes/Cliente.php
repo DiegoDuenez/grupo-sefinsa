@@ -77,12 +77,6 @@ class Cliente extends Database{
         $this->table.ruta_id as 'ruta_cliente', 
         $this->table.poblacion_id as 'poblacion_cliente',
         $this->table.ruta_id  as 'ruta_cliente',
-        avales.id as 'aval_id', 
-        avales.nombre_completo as 'nombre_aval',
-        avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval', 
-        avales.otras_referencias as 'or_aval',
-        avales.garantias as 'garantias_aval',
         colocadoras.id as 'colocadora_id', 
         colocadoras.nombre_completo as 'nombre_colocadora', 
         colocadoras.status as 'status_colocadora', 
@@ -91,7 +85,6 @@ class Cliente extends Database{
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
-        LEFT JOIN avales ON $this->table.aval_id = avales.id
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
@@ -115,12 +108,6 @@ class Cliente extends Database{
         $this->table.ruta_id as 'ruta_cliente', 
         $this->table.poblacion_id as 'poblacion_cliente',
         $this->table.ruta_id  as 'ruta_cliente',
-        avales.id as 'aval_id', 
-        avales.nombre_completo as 'nombre_aval',
-        avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval', 
-        avales.otras_referencias as 'or_aval',
-        avales.garantias as 'garantias_aval',
         colocadoras.id as 'colocadora_id', 
         colocadoras.nombre_completo as 'nombre_colocadora', 
         colocadoras.status as 'status_colocadora', 
@@ -129,7 +116,6 @@ class Cliente extends Database{
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
-        LEFT JOIN avales ON $this->table.aval_id = avales.id
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
@@ -153,12 +139,6 @@ class Cliente extends Database{
         $this->table.ruta_id as 'ruta_cliente', 
         $this->table.poblacion_id as 'poblacion_cliente',
         $this->table.ruta_id  as 'ruta_cliente',
-        avales.id as 'aval_id', 
-        avales.nombre_completo as 'nombre_aval',
-        avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval', 
-        avales.otras_referencias as 'or_aval',
-        avales.garantias as 'garantias_aval',
         colocadoras.id as 'colocadora_id', 
         colocadoras.nombre_completo as 'nombre_colocadora', 
         colocadoras.status as 'status_colocadora', 
@@ -167,7 +147,6 @@ class Cliente extends Database{
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
-        LEFT JOIN avales ON $this->table.aval_id = avales.id
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
@@ -360,7 +339,7 @@ class Cliente extends Database{
 
     public function createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
 
         require '../Prestamos/Prestamo.php';
 
@@ -381,9 +360,8 @@ class Cliente extends Database{
 
                     $cliente_id = $this->lastId();
                     $Prestamo = new Prestamo();
-                    $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
+                    $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
                    
-                    //$this->editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $garantias_cliente, $ruta_id, $poblacion_id, $cliente_id);
 
                     return json([
                         'status' => 'success', 
@@ -434,7 +412,7 @@ class Cliente extends Database{
     }
 
     public function createPrestamoClienteExistente($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval,  $carpeta_comp_aval, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
 
         require '../Prestamos/Prestamo.php';
 
@@ -453,7 +431,7 @@ class Cliente extends Database{
 
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
+                $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
                 
                 //$Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
             
@@ -478,7 +456,7 @@ class Cliente extends Database{
     }
 
     public function createPrestamoClienteExistenteURI($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval,  $carpeta_comp_aval, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
 
         require '../Prestamos/Prestamo.php';
 
@@ -497,9 +475,8 @@ class Cliente extends Database{
                 $clienteArray = $this->getCliente($cliente_id);
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
+                $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
                 
-                //$Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
             
 
             } else {

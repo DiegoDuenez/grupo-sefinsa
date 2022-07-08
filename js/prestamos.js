@@ -325,6 +325,7 @@ btn_guardar_prestamo.click(function(){
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('pago_semanal', inp_pago_semana.val())
+            data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
 
             $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -434,6 +435,7 @@ btn_guardar_prestamo.click(function(){
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('pago_semanal', inp_pago_semana.val())
+            data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
 
             $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -541,6 +543,7 @@ btn_guardar_prestamo.click(function(){
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('pago_semanal', inp_pago_semana.val())
+            data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
             $.each(inp_archivos_cliente_existente[0].files, function(i, file) {
                 data.append('archivo_cliente_'+i, file);

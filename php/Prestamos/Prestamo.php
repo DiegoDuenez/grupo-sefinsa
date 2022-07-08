@@ -27,13 +27,14 @@ class Prestamo extends Database{
         ], 200);
     }
 
-    public function create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo){
+    public function create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
 
         try{
 
         
-            $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, pago_semanal, fecha_prestamo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo]);
+            $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, pago_semanal, fecha_prestamo, modalidad_semanas)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad]);
 
             if($prestamo){
 
