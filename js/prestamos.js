@@ -50,6 +50,8 @@ var inp_pago_semana = $('#inp_pago_semana')
 
 // URI
 var cliente = ""
+var clienteID = ""
+
 var table
 
 
@@ -141,9 +143,9 @@ $('#select_poblaciones_registrar_existente').on('change', function() {
 });
 
 select_clientes_registrar.on('change', function() {
-    cliente = this.value
+    clienteID = this.value
 
-    traerCliente(cliente)
+    traerCliente(clienteID)
 
 })
 
@@ -172,8 +174,8 @@ function getPrestamos(){
                 for(var i = 0; i < response.data.length; i++ ){
                     table.row.add([
                         response.data[i].nombre_completo, 
-                        response.data[i].direccion,
-                        response.data[i].telefono,
+                        response.data[i].direccion_cliente,
+                        response.data[i].telefono_cliente,
                         response.data[i].nombre_aval,
                         response.data[i].direccion_aval,
                         response.data[i].telefono_aval,
@@ -232,18 +234,59 @@ btn_anterior_usuario.click(function(){
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href") // activated tab
-    if(target == "cliente-existente"){
+    if(target == "#cliente-existente"){
+        inp_nombre_cliente.val('')
+        inp_direccion_cliente.val('')
+        inp_telefono_cliente.val('')
+        inp_otras_referencias_cliente.val('')
+        inp_garantias_cliente.val('')
+        inp_nombre_aval.val('')
+        inp_direccion_aval.val('')
+        inp_telefono_aval.val('')
+        inp_otras_referencias_aval.val('')
+        inp_garantias_cliente.val('')
+
+        $('#select_rutas_registrar').val(0).trigger('change.select2');
+        $('#select_poblaciones_registrar').val(0).trigger('change.select2');
+        $('#select_colocadoras_registrar').val(0).trigger('change.select2');
+        $('#select_poblaciones_registrar').prop('disabled', true)
+        $('#select_colocadoras_registrar').prop('disabled', true)
+        $('#select_poblaciones_registrar').empty()
+        $('#select_colocadoras_registrar').empty()
+        $('#select_clientes_registrar').val(0).trigger('change.select2');
+
+
+        
         $("#inputs_registrar_cliente_3").addClass('d-none')      
     }
     else{
+
+        inp_direccion_cliente_existente.val('')
+        inp_telefono_cliente_existente.val('')
+        inp_garantias_cliente_existente.val('')
+        inp_nombre_aval.val('')
+        inp_direccion_aval.val('')
+        inp_telefono_aval.val('')
+        inp_otras_referencias_aval.val('')
+        inp_garantias_cliente.val('')
+
+        $('#select_rutas_registrar_existente').val(0).trigger('change.select2');
+        $('#select_poblaciones_registrar_existente').val(0).trigger('change.select2');
+        $('#select_colocadoras_registrar_existente').val(0).trigger('change.select2');
+        $('#select_poblaciones_registrar_existente').prop('disabled', true)
+        $('#select_colocadoras_registrar_existente').prop('disabled', true)
+        $('#select_rutas_registrar_existente').prop('disabled', true)
+        $('#select_poblaciones_registrar_existente').empty()
+        $('#select_colocadoras_registrar_existente').empty()
+        $('#select_poblaciones_registrar').empty()
+        $('#select_colocadoras_registrar').empty()
+
+
         $("#inputs_registrar_cliente_3").removeClass('d-none')      
     }
   });
 
 btn_guardar_prestamo.click(function(){
-
-    
-
     
     var id = $('.tab-content .active').attr('id');
     
@@ -265,25 +308,11 @@ btn_guardar_prestamo.click(function(){
                 showCancelButton: false,
                 showConfirmButton: false
             })
-            console.log('func', 'createPrestamoClienteExistente');
-            console.log('cliente_id', cliente)
-            console.log('nombre_aval', inp_nombre_aval.val())
-            console.log('direccion_aval', inp_direccion_aval.val())
-            console.log('telefono_aval', inp_telefono_aval.val())
-            console.log('or_aval', inp_otras_referencias_aval.val())
-            console.log('garantias_cliente', inp_garantias_cliente.val())
-            console.log('garantias_aval', inp_garantias_aval.val())
-            console.log("archivos cliente", inp_archivos_cliente.get(0).files.length)
-            console.log("archivos aval", inp_archivos_aval.get(0).files.length)
-            console.log('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
-            console.log('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
-            console.log('fecha_prestamo', inp_fecha_prestamo.val())
-            console.log('monto_prestado', inp_monto_prestar.val())
-            console.log('pago_semanal', inp_pago_semana.val())
+           
         }
         else {
 
-            data.append('func', 'createPrestamoClienteExistente');
+            data.append('func', 'createPrestamoClienteExistenteURI');
             data.append('cliente_id', cliente)
             data.append('nombre_aval', inp_nombre_aval.val())
             data.append('direccion_aval', inp_direccion_aval.val())
@@ -341,7 +370,7 @@ btn_guardar_prestamo.click(function(){
                         showConfirmButton: false
                     })
     
-                    window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+                    //window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
 
                     getPrestamos()
         
@@ -394,7 +423,6 @@ btn_guardar_prestamo.click(function(){
             data.append('ruta_id', $('#select_rutas_registrar option:selected').val() )
             data.append('poblacion_id', $('.select_poblaciones option:selected').val() )
             data.append('colocadora_id', $('.select_colocadoras option:selected').val())
-
             data.append('nombre_aval', inp_nombre_aval.val())
             data.append('direccion_aval', inp_direccion_aval.val())
             data.append('telefono_aval', inp_telefono_aval.val())
@@ -451,6 +479,7 @@ btn_guardar_prestamo.click(function(){
                         showConfirmButton: false
                     })
     
+                    getClientes()
                     getPrestamos()
         
                 },
@@ -469,7 +498,7 @@ btn_guardar_prestamo.click(function(){
     
 
     }
-    else if(id == "cliente-existente"){
+    else if(id == "cliente-existente" && clienteID){
         //alert(id)
         if( inp_direccion_cliente_existente.val() == "" || inp_telefono_cliente_existente.val() == "" || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
@@ -491,23 +520,11 @@ btn_guardar_prestamo.click(function(){
                 showConfirmButton: false
             })
 
-            /*console.log('func', 'createPrestamoClienteExistente');
-            console.log('cliente_id', cliente)
-            console.log('garantias_cliente', inp_garantias_cliente_existente.val())
-            console.log('garantias_aval', inp_garantias_aval.val())
-            console.log("archivos cliente", inp_archivos_cliente_existente.get(0).files.length)
-            console.log("archivos aval", inp_archivos_aval.get(0).files.length)
-            console.log('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
-            console.log('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
-            console.log('fecha_prestamo', inp_fecha_prestamo.val())
-            console.log('monto_prestado', inp_monto_prestar.val())
-            console.log('pago_semanal', inp_pago_semana.val())*/
-        
         }
         else {
 
             data.append('func', 'createPrestamoClienteExistente');
-            data.append('cliente_id', cliente)
+            data.append('cliente_id', clienteID)
             data.append('direccion_cliente', inp_direccion_cliente_existente.val())
             data.append('telefono_cliente', inp_telefono_cliente_existente.val())
             data.append('ruta_id', $('#select_rutas_registrar_existente option:selected').val() )
@@ -896,6 +913,7 @@ function getClientes(){
 
 function traerCliente(id){
 
+
     var datasend = {
         func: "traerCliente",
         id
@@ -931,15 +949,40 @@ function traerCliente(id){
                 
                 }
                 else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'El usuario no existe',
-                    }).then((result) => {
-                        $('#modal_registrar_prestamo').modal('toggle');
-                        window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+                    if(id != 0){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'El usuario no existe',
+                        }).then((result) => {
+                            $('#modal_registrar_prestamo').modal('toggle');
+                            window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+    
+                        })
+                    }
+                    else{
 
-                    })
+                        inp_direccion_cliente_existente.val('')
+                        inp_telefono_cliente_existente.val('')
+                        inp_garantias_cliente_existente.val('')
+                        inp_nombre_aval.val('')
+                        inp_direccion_aval.val('')
+                        inp_telefono_aval.val('')
+                        inp_otras_referencias_aval.val('')
+                        inp_garantias_cliente.val('')
+                
+                        $('#select_rutas_registrar_existente').val(0).trigger('change.select2');
+                        $('#select_poblaciones_registrar_existente').val(0).trigger('change.select2');
+                        $('#select_colocadoras_registrar_existente').val(0).trigger('change.select2');
+                        $('#select_poblaciones_registrar_existente').prop('disabled', true)
+                        $('#select_colocadoras_registrar_existente').prop('disabled', true)
+                        $('#select_poblaciones_registrar_existente').empty()
+                        $('#select_colocadoras_registrar_existente').empty()
+                        $('#select_poblaciones_registrar').empty()
+                        $('#select_colocadoras_registrar').empty()
+                        
+                    }
+                    
     
                 }
 

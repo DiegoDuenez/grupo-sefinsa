@@ -220,6 +220,57 @@ switch($func){
 
     break;
 
+    case 'createPrestamoClienteExistenteURI':
+
+        $cliente_id = $_POST['cliente_id'];
+        $cantidad_archivos_garantias_cliente = $_POST['cantidad_archivos_garantias_cliente'];
+        $cliente = $Cliente->getCliente($cliente_id);
+
+        $nombre_aval = sanitize($_POST['nombre_aval']);
+        $direccion_aval = sanitize($_POST['direccion_aval']);
+        $telefono_aval = $_POST['telefono_aval'];
+        $or_aval = $_POST['or_aval'];
+        $garantias_cliente = $_POST['garantias_cliente'];
+        $garantias_aval = $_POST['garantias_aval'];
+        $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
+
+        $monto_prestado = $_POST['monto_prestado'];
+        $pago_semanal = $_POST['pago_semanal'];
+        $fecha_prestamo = $_POST['fecha_prestamo'];
+
+        $nueva_carpeta_aval  =  $Cliente->lastIdBeforeInsert('avales') . '_'.$nombre_aval;
+
+        FileManager::createFolder('../../resources/comprobantes/avales/'.$nueva_carpeta_aval);
+        FileManager::createFolder('../../resources/garantias/avales/'.$nueva_carpeta_aval);
+
+        FileManager::createFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
+        FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
+
+        for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+            $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
+            FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+        }
+        for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+            $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+            FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+        }
+
+        $ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+        FileManager::moveTo(FileManager::get('archivo_cliente_0','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_0','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_1','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_1','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_2','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_2','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_3','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_3','name'));
+        FileManager::moveTo(FileManager::get('archivo_cliente_4','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_4','name'));
+
+        $ruta_archivos_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+        FileManager::moveTo(FileManager::get('archivo_aval_0','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_0','name'));
+        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
+
+        echo $Cliente->createPrestamoClienteExistenteURI($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, 
+        $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo);
+
+    break;
+
     case 'createPrestamoNuevoCliente':
 
         

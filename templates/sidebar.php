@@ -6,7 +6,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="usuarios.php" class="brand-link">
-        <img src="resources/assets/logo.png" alt="Grupo SEFINSA" class="brand-image " title="GRUPO SEFINSA" style="opacity: .8; width: 10rem;">
+        <img src="resources/assets/logo.png" alt="Grupo SEFINSA" class="brand-image " title="GRUPO SEFINSA" style="width: 10rem;">
         <br>
         <span span class="brand-text font-weight-light  d-none">GRUPO SEFINSA</span>
     </a>
