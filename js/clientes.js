@@ -58,6 +58,7 @@ var table;
 $(document).ready(function(){
 
     table = $('#tabla_clientes').DataTable( {
+      
         pageLength : 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
         "language": {
@@ -76,6 +77,8 @@ $(document).ready(function(){
             { "visible": false, "targets": -1 }
           ],
           order: [[7, 'desc']],
+
+          
     })
 
     getClientes()

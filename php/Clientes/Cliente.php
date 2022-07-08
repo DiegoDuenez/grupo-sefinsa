@@ -15,12 +15,6 @@ class Cliente extends Database{
         $this->table.ruta_id as 'ruta_cliente', 
         $this->table.poblacion_id as 'poblacion_cliente',
         $this->table.ruta_id  as 'ruta_cliente',
-        /*avales.id as 'aval_id', 
-        avales.nombre_completo as 'nombre_aval',
-        avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval', 
-        avales.otras_referencias as 'or_aval',
-        avales.garantias as 'garantias_aval',*/
         colocadoras.id as 'colocadora_id', 
         colocadoras.nombre_completo as 'nombre_colocadora', 
         colocadoras.status as 'status_colocadora', 
@@ -393,12 +387,47 @@ class Cliente extends Database{
 
     public function getCliente($id){
 
-        $query  = "SELECT $this->table.* FROM $this->table WHERE $this->table.id = '$id'";
+        
+        $query  = "SELECT 
+        $this->table.*,  
+        $this->table.otras_referencias,  
+        $this->table.ruta_id as 'ruta_cliente', 
+        $this->table.poblacion_id as 'poblacion_cliente',
+        $this->table.ruta_id  as 'ruta_cliente',
+        colocadoras.id as 'colocadora_id', 
+        colocadoras.nombre_completo as 'nombre_colocadora', 
+        colocadoras.status as 'status_colocadora', 
+        colocadoras.ruta_id as 'ruta_colocadora',
+        colocadoras.poblacion_id as 'poblacion_colocadora',
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
+        FROM $this->table 
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = $this->table.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
+        WHERE $this->table.id = '$id'";
 
         $cliente = $this->SelectOne($query);
 
         return $cliente;
 
+    }
+
+    public function getAvalCliente($id)
+    {
+        $query  = "SELECT 
+        avales.*
+        FROM avales
+        INNER JOIN prestamos ON avales.id = prestamos.aval_id
+        INNER JOIN $this->table ON $this->table.id = prestamos.cliente_id
+        WHERE prestamos.cliente_id = '$id'
+        ORDER BY prestamos.id DESC
+        LIMIT 1
+        ";
+
+        $aval = $this->SelectOne($query);
+
+        return $aval;   
     }
 
     public function getAval($id){
