@@ -138,3 +138,13 @@ if(FileManager::getFiles($pathComprobantes) && FileManager::getFiles($pathGarant
 
 
 }
+else{
+    echo "No se encontro el directorio solicitado.";
+    echo '
+    <script>
+    setTimeout(function(){
+       window.location.href = "http://localhost/proyecto_cobranza/clientes.php";
+    }, 1000);
+    </script>';
+    die();
+}
