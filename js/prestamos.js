@@ -256,7 +256,7 @@ function getPrestamos(){
                         "$ " + response.data[i].pago_semanal,
                         response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
                         `
-                        <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago" data-toggle="modal" data-target="#modal_ver_semanas"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago"  onclick="generarSemanas(${response.data[i].modalidad_semanas}, \'${response.data[i].fecha_prestamo}\')" data-toggle="modal" data-target="#modal_ver_semanas"><i class="fa-solid fa-eye"></i></button>
                         `,
                         response.data[i].created_at,
 
@@ -1081,4 +1081,17 @@ function traerCliente(id){
         }
     });
 
+}
+
+function generarSemanas(semanas, fecha_prestamo){
+
+    fecha = moment(fecha_prestamo, 'YYYY-MM-DD')
+   /* for(var i = 0; i < 20; i++){
+        console.log(fecha.add(i, 'weeks').format('YYYY-MM-DD'))
+    }*/
+    console.log(fecha.add(15, 'weeks').format('YYYY-MM-DD'))
+    /*var fecha = new Date(fecha_prestamo);
+    var dias = 2; // Número de días a agregar
+    fecha.setDate(fecha.getDate() + dias);
+    console.info(fecha)*/
 }

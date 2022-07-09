@@ -63,7 +63,7 @@
                                     <tbody id="table_body">
                                     
                                     </tbody>
-                                </table>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -371,7 +371,7 @@
             </div>
                 <div class="modal-body">
 
-                    <div class="d-flex w-100">
+                    <!--<div class="d-flex w-100">
                         <div class="card">
                             <h5 class="card-header">Featured</h5>
                             <div class="card-body">
@@ -380,7 +380,18 @@
                             </div>
                         </div>
                         
-                    </div>
+                    </div>-->
+                        <table class="table" id="tabla_pagos">
+                        <thead>
+                            <tr>
+                                <th scope="col">Semana</th>
+                                <th scope="col">Cantidad a pagar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_body">
+                        
+                        </tbody>
+                        </table>
                     
                 </div>
                 <div class="modal-footer">
