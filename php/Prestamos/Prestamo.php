@@ -18,6 +18,7 @@ class Prestamo extends Database{
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
+        ORDER BY $this->table.id desc
         ";
 
         return json([

@@ -149,6 +149,78 @@ select_clientes_registrar.on('change', function() {
 
 })
 
+inp_monto_prestar.on('input', function(){
+
+    var interes = 0
+    var abono = 0
+    if($('#select_modalidad option:selected').val() == 15){
+        interes = 40
+        abono = 10
+    }
+    else if($('#select_modalidad option:selected').val() == 20){
+        interes = 55
+        abono = 80
+    }
+
+    monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
+
+    console.log('abono', abono)
+    console.log('interes', interes)
+    console.log('monto_interes', monto_con_interes)
+    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
+
+    if($('#select_modalidad option:selected').val() == 15){
+        pago_semanal = (monto_con_interes * abono) / 100
+    }
+    else if($('#select_modalidad option:selected').val() == 20){
+        pago_semanal = abono * inp_monto_prestar.val()[0]
+    }
+
+    console.log('pago_semanal',pago_semanal)
+
+
+    inp_pago_semana.val(pago_semanal)
+
+})
+
+
+$('#select_modalidad').on('change', function() {
+
+    var interes = 0
+    var abono = 0
+    if(this.value == 15){
+        interes = 40
+        abono = 10
+    }
+    else if(this.value == 20){
+        interes = 55
+        abono = 80
+    }
+
+    monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
+
+    console.log('abono', abono)
+    console.log('interes', interes)
+    console.log('monto_interes', monto_con_interes)
+    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
+
+    if(this.value == 15){
+        pago_semanal = (monto_con_interes * abono) / 100
+    }
+    else if(this.value == 20){
+        pago_semanal = abono * inp_monto_prestar.val()[0]
+    }
+
+    console.log('pago_semanal',pago_semanal)
+
+
+    inp_pago_semana.val(pago_semanal)
+
+
+
+})
+
+
 function getPrestamos(){
 
 
@@ -293,6 +365,8 @@ btn_guardar_prestamo.click(function(){
     var id = $('.tab-content .active').attr('id');
     
     var data = new FormData();
+
+    alert(id)
 
     if(id == "nuevo-cliente" && cliente ){
 
@@ -502,7 +576,7 @@ btn_guardar_prestamo.click(function(){
     
 
     }
-    else if(id == "cliente-existente" && clienteID){
+    else if(id == "cliente-existente"){
         //alert(id)
         if( inp_direccion_cliente_existente.val() == "" || inp_telefono_cliente_existente.val() == "" || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
@@ -513,6 +587,7 @@ btn_guardar_prestamo.click(function(){
         || $('#select_rutas_registrar_existente option:selected').val() == 0
         || $('#select_colocadoras_registrar_existente option:selected').val() == 0
         ||  $('#select_poblaciones_registrar_existente option:selected').val() == 0
+        || clienteID == ""
         )
         {
             Swal.fire({

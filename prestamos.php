@@ -317,6 +317,17 @@
                                 <input  class="form-control" id="inp_monto_prestar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="select_modalidad">Modalidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control" id="select_modalidad">
+                                <option value="15">15 semanas</option>
+                                <option value="20">20 semanas</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-row">
@@ -332,15 +343,7 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="select_modalidad">Modalidad <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <select class="form-control" id="select_modalidad">
-                                <option value="15">15 semanas</option>
-                                <option value="20">20 semanas</option>
-                            </select>
-                        </div>
-                    </div>
+                    
 
                 </div>
 
