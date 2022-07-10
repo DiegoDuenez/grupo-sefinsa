@@ -462,6 +462,8 @@ class Cliente extends Database{
                 $Prestamo = new Prestamo();
                 $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
                 
+               // $prestamo_id = $this->lastId();
+                //$Prestamo->generarPagos($prestamo_id, $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
                 //$Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
             
 

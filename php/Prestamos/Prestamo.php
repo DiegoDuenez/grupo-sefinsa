@@ -37,7 +37,85 @@ class Prestamo extends Database{
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad]);
 
+            $prestamo_id = $this->lastId();
+
+
             if($prestamo){
+
+                $insertado = false;
+
+                
+                for($i = 1; $i <= $modalidad; $i++)
+                {
+                    $fecha = date("Y-m-d",strtotime($fecha_prestamo."+ $i week"));           
+                    //array_push($arreglo_fechas, $fecha);
+                    $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago)
+                    VALUES (?, ?, ?, ?, ?, ?)";
+                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha]);
+                    if($i ==  15){
+                        $insertado = true;
+                    }
+                }
+
+                if($insertado){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha registrado el prestamo'
+                    ], 200);
+                }
+                else{
+                    echo $pago;
+                }
+                //$this->generarPagos($this->lastId(), $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
+
+            }
+            else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error al registrar el prestamo'
+                ], 400);
+
+            }
+
+          
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+
+    public function generarPagos($prestamo_id, $fecha_actual, $cantidad_semanas, $cantidad_esperada, $cantidad_pagada, $cantidad_multa, $cantidad_total){
+
+        try{
+
+            $arreglo_fechas = [];
+            $insertado = true;
+
+            for($i = 1; $i <= $cantidad_semanas; $i++)
+            {
+                $fecha = date("Y-m-d",strtotime($fecha_actual."+ $i week"));           
+                //array_push($arreglo_fechas, $fecha);
+                $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $prestamo = $this->ExecuteQuery($insert, [$prestamo_id, $cantidad_esperada, $cantidad_pagada, $cantidad_multa, $cantidad_total, $fecha]);
+                //$i == 15 ? $insertado = true : $insertado = false;
+            }
+
+//            echo implode(", ", $arreglo_fechas);       
+        
+            /*$insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $prestamo = $this->ExecuteQuery($insert, [$prestamo_id, $cantidad_esperada, $cantidad_pagada, $cantidad_multa, $cantidad_total, $fecha]);
+*/
+
+            if($insertado){
 
                 return json([
                     'status' => 'success', 
@@ -64,7 +142,6 @@ class Prestamo extends Database{
             die();
 
         }
-
     }
 
 
