@@ -81,7 +81,7 @@ class Pago extends Database{
                 $pago = $this->SelectOne($queryPago);
 
                 if($pago_recibido < $pago['cantidad_esperada_pago']){
-                    
+
                     $diferencia = $pago['cantidad_esperada_pago'] - $pago_recibido;
 
                     $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
@@ -119,6 +119,73 @@ class Pago extends Database{
             die();
 
         }
+    }
+
+
+    public function noPagar($pago_id, $pago_multa){
+
+        try{
+
+            $query = "SELECT * FROM $this->table WHERE id = '$pago_id'";
+            $queryPago = $this->SelectOne($query);
+
+            $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
+            $siguientePago = $this->SelectOne($queryNextRow);
+            $siguientePagoId = $siguientePago['id'];
+
+            $pago_siguiente = $siguientePago['cantidad_esperada_pago'] + $queryPago['cantidad_esperada_pago'] + $pago_multa;
+
+
+            $update = "UPDATE $this->table SET status = ? WHERE $this->table.id = '$pago_id'";
+            $pago1 = $this->ExecuteQuery($update, [-1]);
+
+            $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '$siguientePagoId'";
+            $pago2 = $this->ExecuteQuery($update, [$pago_siguiente]);
+
+
+            if($pago1 && $pago2) {
+
+              
+                /*$query = "SELECT sum(cantidad_normal_pagada) as 'sumatoria' FROM $this->table WHERE prestamo_id = '$prestamo_id'";
+                $sumatoria = $this->SelectOne($query);
+
+                $queryPrestamo = "SELECT monto_prestado FROM prestamos WHERE id = '$prestamo_id'";
+                $prestamo = $this->SelectOne($queryPrestamo);
+
+                $queryPago = "SELECT cantidad_esperada_pago FROM $this->table WHERE id = '$pago_id'";
+                $pago = $this->SelectOne($queryPago);
+
+                if($pago_recibido < $pago['cantidad_esperada_pago']){
+
+                    $diferencia = $pago['cantidad_esperada_pago'] - $pago_recibido;
+
+                    $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
+                    $siguientePago = $this->SelectOne($queryNextRow);
+
+                    $update = "UPDATE $this->table SET cantidad_pendiente = ? WHERE $this->table.id = '$pago_id'";
+                    $pago = $this->ExecuteQuery($update, [$diferencia]);
+
+                    $update = "UPDATE $this->table SET cantidad_esperada_pago = cantidad_esperada_pago + '$diferencia' WHERE $this->table.id = '".$siguientePago['id']."'";
+                    $updateSiguientePago = $this->ExecuteQuery($update, []);
+                }*/
+
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha hecho el no pago correctamente'
+                ], 200);
+
+            } 
+
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
     }
 
 

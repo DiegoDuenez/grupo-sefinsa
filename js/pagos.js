@@ -89,16 +89,17 @@ function getPagos(){
 
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
-                    /*var status
+
+                    var status
                     if(response.data[i].status == 1){
-                        status = 'Pagado <i class="fa-solid fa-check text-success" title="Pagado a tiempo"></i>'
+                        status = 'Pagado'
                     }
                     else if(response.data[i].status == 0){
                         status = 'Pendiente'
                     }
                     else if(response.data[i].status == -1){
-                        status = 'No pagó <i class="fa-solid fa-circle text-danger" title="No pagó"></i>'
-                    }*/
+                        status = 'No pagó'
+                    }
 
                     table.row.add([
                         response.data[i].nombre_completo, 
@@ -110,10 +111,10 @@ function getPagos(){
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].concepto,
                         response.data[i].fecha_pago,
-                        response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
+                        status,
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-money-bill"></i></button>
-                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : '',
 
 
@@ -316,6 +317,18 @@ function getPagosCliente(cliente_id){
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
+                    var status;
+                    if(response.data[i].status == 0){
+                        status = 'Pendiente'
+                    }
+                    else if(response.data[i].status == '-1'){
+                        status = 'No pagado'
+                    }
+                    else{
+                        status = 'Pagado'
+                    }
+
+
                     table.row.add([
                         response.data[i].nombre_completo, 
                         "$ " + response.data[i].monto_prestado,
@@ -326,10 +339,10 @@ function getPagosCliente(cliente_id){
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].concepto,
                         response.data[i].fecha_pago,
-                        response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
+                        status,
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-money-bill"></i></button>
-                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : '',
                     ]);
 
@@ -353,3 +366,70 @@ function getPagosCliente(cliente_id){
     });
 
 }
+
+
+function noPagar(pago_id, pago_multa){
+
+    Swal.fire({
+        icon: 'warning',
+        title: 'No realizar pago',
+        text: 'Se aplicara la multa para el siguiente pago mas la cantidad que no se pagó, ¿Esta seguro de esto?',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+
+    }).then((result) => {
+        
+        if (result.isConfirmed) {
+
+            var datasend ={
+                func: 'noPagar',
+                pago_id,
+                pago_multa
+            }
+        
+            $.ajax({
+        
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify(datasend),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+        
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Pago no recibido',
+                            text: 'No se recibio el pago',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        })
+                        getPagos()
+        
+                    }
+                    
+                },
+                error : function(e){
+                    
+        
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+            
+            
+            
+        }
+
+        
+    })
+
+}
+

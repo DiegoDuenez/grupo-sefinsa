@@ -31,4 +31,14 @@ switch($func){
 
     break;
 
+    case 'noPagar':
+
+        $pago_id = $_DATA['pago_id'];
+        $pago_multa = $_DATA['pago_multa'];
+       //$concepto = $_DATA['concepto'];
+
+        echo $Pago->noPagar($pago_id, $pago_multa);
+
+    break;
+
 }
