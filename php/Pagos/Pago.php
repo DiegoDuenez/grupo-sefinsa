@@ -133,7 +133,7 @@ class Pago extends Database{
             $siguientePago = $this->SelectOne($queryNextRow);
             $siguientePagoId = $siguientePago['id'];
 
-            $pago_siguiente = $siguientePago['cantidad_esperada_pago'] + $queryPago['cantidad_esperada_pago'] + $pago_multa;
+            $pago_siguiente = $siguientePago['cantidad_esperada_pago'] + $queryPago['cantidad_esperada_pago'];
 
 
             $update = "UPDATE $this->table SET status = ? WHERE $this->table.id = '$pago_id'";

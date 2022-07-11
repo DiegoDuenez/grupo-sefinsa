@@ -373,7 +373,7 @@ function noPagar(pago_id, pago_multa){
     Swal.fire({
         icon: 'warning',
         title: 'No realizar pago',
-        text: 'Se aplicara la multa para el siguiente pago mas la cantidad que no se pagó, ¿Esta seguro de esto?',
+        text: 'Se marcara el pago como No pagado, ¿Esta seguro de esto?',
         showCancelButton: true,
         showConfirmButton: true,
         confirmButtonText: 'Si',

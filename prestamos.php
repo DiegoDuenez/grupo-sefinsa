@@ -317,6 +317,19 @@
                                 <input  class="form-control" id="inp_monto_prestar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-row d-none">
+                        <div class="form-group col mt-2">
+                            <label for="inp_monto_prestar_intereses">Monto a prestar con intereses <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input  class="form-control" id="inp_monto_prestar_intereses" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" disabled/>
+                            </div>
+                        </div>
 
                     </div>
 

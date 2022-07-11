@@ -333,7 +333,7 @@ class Cliente extends Database{
 
     public function createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad,$monto_prestado_intereses){
 
         require '../Prestamos/Prestamo.php';
 
@@ -354,7 +354,7 @@ class Cliente extends Database{
 
                     $cliente_id = $this->lastId();
                     $Prestamo = new Prestamo();
-                    $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
+                    $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses);
                    
 
                     return json([
@@ -441,7 +441,7 @@ class Cliente extends Database{
     }
 
     public function createPrestamoClienteExistente($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval,  $carpeta_comp_aval, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses){
 
         require '../Prestamos/Prestamo.php';
 
@@ -460,7 +460,7 @@ class Cliente extends Database{
 
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
+                $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses);
                 
                // $prestamo_id = $this->lastId();
                 //$Prestamo->generarPagos($prestamo_id, $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
@@ -487,7 +487,7 @@ class Cliente extends Database{
     }
 
     public function createPrestamoClienteExistenteURI($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval,  $carpeta_comp_aval, $carpeta_gar_aval,
-    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad){
+    $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses){
 
         require '../Prestamos/Prestamo.php';
 
@@ -506,7 +506,7 @@ class Cliente extends Database{
                 $clienteArray = $this->getCliente($cliente_id);
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad);
+                $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses);
                 
             
 

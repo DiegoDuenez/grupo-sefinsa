@@ -184,6 +184,7 @@ switch($func){
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
 
         $monto_prestado = $_POST['monto_prestado'];
+        $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
         $pago_semanal = $_POST['pago_semanal'];
         $fecha_prestamo = $_POST['fecha_prestamo'];
         $modalidad_semanas = $_POST['modalidad_semanas'];
@@ -217,7 +218,7 @@ switch($func){
         FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
 
         echo $Cliente->createPrestamoClienteExistente($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, 
-        $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas);
+        $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas, $monto_prestado_intereses);
 
     break;
 
@@ -236,6 +237,7 @@ switch($func){
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
 
         $monto_prestado = $_POST['monto_prestado'];
+        $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
         $pago_semanal = $_POST['pago_semanal'];
         $fecha_prestamo = $_POST['fecha_prestamo'];
         $modalidad_semanas = $_POST['modalidad_semanas'];
@@ -270,7 +272,7 @@ switch($func){
         FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
 
         echo $Cliente->createPrestamoClienteExistenteURI($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, 
-        $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas);
+        $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas, $monto_prestado_intereses);
 
     break;
 
@@ -296,6 +298,7 @@ switch($func){
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
 
         $monto_prestado = $_POST['monto_prestado'];
+        $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
         $pago_semanal = $_POST['pago_semanal'];
         $fecha_prestamo = $_POST['fecha_prestamo'];
         $modalidad_semanas = $_POST['modalidad_semanas'];
@@ -334,7 +337,7 @@ switch($func){
 
         echo $Cliente->createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
         $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $nueva_carpeta_aval, $colocadora_id, $garantias_cliente, 
-        $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas);
+        $garantias_aval, $ruta_id, $poblacion_id, $nueva_carpeta_cliente, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas, $monto_prestado_intereses);
 
         
     break;

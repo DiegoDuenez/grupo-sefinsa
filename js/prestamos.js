@@ -47,11 +47,10 @@ var inp_archivos_aval = $('#inp_archivos_aval')
 var inp_fecha_prestamo = $('#inp_fecha_prestamo')
 var inp_monto_prestar = $('#inp_monto_prestar')
 var inp_pago_semana = $('#inp_pago_semana')
-
+var inp_monto_prestar_intereses = $('#inp_monto_prestar_intereses')
 // URI
 var cliente = ""
 var clienteID = ""
-
 var table
 
 
@@ -164,6 +163,8 @@ inp_monto_prestar.on('input', function(){
 
     monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
 
+    inp_monto_prestar_intereses.val(monto_con_interes )
+
     console.log('abono', abono)
     console.log('interes', interes)
     console.log('monto_interes', monto_con_interes)
@@ -189,15 +190,16 @@ $('#select_modalidad').on('change', function() {
     var interes = 0
     var abono = 0
     if(this.value == 15){
-        interes = 40
+        interes = 50
         abono = 10
     }
     else if(this.value == 20){
-        interes = 55
+        interes = 60
         abono = 80
     }
 
     monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
+    inp_monto_prestar_intereses.val(monto_con_interes )
 
     console.log('abono', abono)
     console.log('interes', interes)
@@ -403,6 +405,7 @@ btn_guardar_prestamo.click(function(){
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
+            data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
@@ -513,6 +516,7 @@ btn_guardar_prestamo.click(function(){
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
+            data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
@@ -622,6 +626,7 @@ btn_guardar_prestamo.click(function(){
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
+            data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
 
