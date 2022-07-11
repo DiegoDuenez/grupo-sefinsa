@@ -230,7 +230,8 @@ function clearInputs(){
     $('#inp_monto_prestar').val('')
     $('#inp_pago_semana').val('')
 
-
+    $('#inp_cantidad_pagada').val('')
+    $('#inp_concepto').val('')
 
 
     

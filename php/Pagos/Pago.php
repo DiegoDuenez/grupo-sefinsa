@@ -81,10 +81,14 @@ class Pago extends Database{
                 $pago = $this->SelectOne($queryPago);
 
                 if($pago_recibido < $pago['cantidad_esperada_pago']){
+                    
                     $diferencia = $pago['cantidad_esperada_pago'] - $pago_recibido;
 
                     $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
                     $siguientePago = $this->SelectOne($queryNextRow);
+
+                    $update = "UPDATE $this->table SET cantidad_pendiente = ? WHERE $this->table.id = '$pago_id'";
+                    $pago = $this->ExecuteQuery($update, [$diferencia]);
 
                     $update = "UPDATE $this->table SET cantidad_esperada_pago = cantidad_esperada_pago + '$diferencia' WHERE $this->table.id = '".$siguientePago['id']."'";
                     $updateSiguientePago = $this->ExecuteQuery($update, []);

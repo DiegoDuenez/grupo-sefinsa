@@ -54,6 +54,7 @@
                                             <th scope="col">Pago esperado</th>
                                             <th scope="col">Pago recibido</th>
                                             <th scope="col">Pago de multa</th>
+                                            <th scope="col">Pago pendiente</th>
                                             <th scope="col">Pago total</th>
                                             <th scope="col">Concepto</th>
                                             <th scope="col">Fecha de pago</th>
@@ -94,7 +95,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input  class="form-control" id="inp_cantidad_pagada" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                <input  class="form-control" id="inp_cantidad_pagada" type="number" placeholder="0.00" required name="price" min="0.00" value="" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                             </div>
                         </div>
                     </div>

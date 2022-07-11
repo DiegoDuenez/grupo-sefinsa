@@ -34,7 +34,7 @@ $(document).ready(function(){
         /*"columnDefs": [
             { "visible": false, "targets": -1 }
           ],*/
-          order: [[7, 'asc']],
+          order: [[8, 'asc']],
 
           
     })
@@ -69,7 +69,7 @@ select_clientes_filtro.on('change', function() {
 
 function getPagos(){
 
-    //clearInputs()
+    clearInputs()
 
     $.blockUI({ message: '<h4> TRAYENDO PAGOS..</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
 
@@ -106,13 +106,14 @@ function getPagos(){
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
+                        "$ " + response.data[i].cantidad_pendiente,
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].concepto,
                         response.data[i].fecha_pago,
                         response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-money-bill"></i></button>
-                        <button class="btn btn-danger btn_no_pagar" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
                         ` : '',
 
 
@@ -321,15 +322,17 @@ function getPagosCliente(cliente_id){
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
+                        "$ " + response.data[i].cantidad_pendiente,
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].concepto,
                         response.data[i].fecha_pago,
                         response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-money-bill"></i></button>
-                        <button class="btn btn-danger btn_no_pagar" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="" title="No pagó" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-ban"></i></button>
                         ` : '',
                     ]);
+
 
                 }
                 table.draw();
