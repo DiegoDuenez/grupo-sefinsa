@@ -170,7 +170,7 @@ inp_monto_prestar.on('input', function(){
     console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
 
     if($('#select_modalidad option:selected').val() == 15){
-        pago_semanal = (monto_con_interes * abono) / 100
+        pago_semanal = (inp_monto_prestar.val() * abono) / 100
     }
     else if($('#select_modalidad option:selected').val() == 20){
         pago_semanal = abono * inp_monto_prestar.val()[0]
@@ -205,7 +205,7 @@ $('#select_modalidad').on('change', function() {
     console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
 
     if(this.value == 15){
-        pago_semanal = (monto_con_interes * abono) / 100
+        pago_semanal = (inp_monto_prestar.val() * abono) / 100
     }
     else if(this.value == 20){
         pago_semanal = abono * inp_monto_prestar.val()[0]
@@ -261,8 +261,11 @@ function getPrestamos(){
                         response.data[i].created_at,
 
                     ]);
+
                 }
+
                 table.draw();
+
 
             }
 
