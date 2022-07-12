@@ -12,6 +12,7 @@ var pagoId;
 var prestamoId;
 var montoMulta;
 var table;
+var clienteIdFiltro;
 
 $(document).ready(function(){
 
@@ -69,6 +70,7 @@ $(document).ready(function(){
 });
 
 select_clientes_filtro.on('change', function() {
+    clienteIdFiltro = this.value
     this.value == 0 ? getPagos() : getPagosCliente(this.value);
     
 });
