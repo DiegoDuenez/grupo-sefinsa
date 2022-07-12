@@ -29,7 +29,7 @@
                 <div class="container-fluid">
                     <div class="row p-3">
                         
-                        <div class="d-flex w-100 flex-row justify-content-end">
+                        <div class="d-flex w-100 flex-row justify-content-end" style="gap: 1rem;">
                             <button type="button" id="btn_generar_prestamo" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_prestamo">Generar prestamo</button>
                         </div>
 
@@ -53,6 +53,26 @@
                                             <th scope="col">Teléfono del aval</th>
                                             <th scope="col">Monto prestado</th>
                                             <th scope="col">Pago por semana</th>
+                                           <!-- <th scope="col">Semana 1</th>
+                                            <th scope="col">Semana 2</th>
+                                            <th scope="col">Semana 3</th>
+                                            <th scope="col">Semana 4</th>
+                                            <th scope="col">Semana 5</th>
+                                            <th scope="col">Semana 6</th>
+                                            <th scope="col">Semana 7</th>
+                                            <th scope="col">Semana 8</th>
+                                            <th scope="col">Semana 9</th>
+                                            <th scope="col">Semana 10</th>
+                                            <th scope="col">Semana 11</th>
+                                            <th scope="col">Semana 12</th>
+                                            <th scope="col">Semana 13</th>
+                                            <th scope="col">Semana 14</th>
+                                            <th scope="col">Semana 15</th>
+                                            <th scope="col">Semana 16</th>
+                                            <th scope="col">Semana 17</th>
+                                            <th scope="col">Semana 18</th>
+                                            <th scope="col">Semana 19</th>
+                                            <th scope="col">Semana 20</th>-->
                                             <th scope="col">Estatus</th>
                                             <th scope="col">Pagos</th>
                                             <th scope="col">Fecha de registro</th>
@@ -61,9 +81,11 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table_body">
-                                    
+                                        
                                     </tbody>
                                     </table>
+
+                                    
                                 </div>
                             </div>
                         </div>
@@ -421,6 +443,7 @@
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
   <script src="js/prestamos.js"></script>
+  
 
 
 </body>

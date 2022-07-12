@@ -36,6 +36,12 @@ switch($func){
 
     break;
 
+    case 'fechasPago':
+
+        $prestamo_id = $_DATA['prestamo_id'];
+        echo $Pago->fechasPagos($prestamo_id);
+    break;
+
     case 'noPagar':
 
         $pago_id = $_DATA['pago_id'];

@@ -28,6 +28,8 @@
             <div class="content">
                 <div class="container-fluid">
 
+                
+
                 <div class="row p-2">
                     <div class="d-flex mt-2 w-100 justify-content-between">
                         <div class="form-group" style="width: 30%">
@@ -36,6 +38,12 @@
                                 <option value="0">General</option>
                             </select>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row p-3">
+                    <div class="d-flex w-100 flex-row justify-content-end" style="gap: 1rem;">
+                        <button type="button" id="btn_excel" class="btn btn-success" title="Exportar prestamos a excel"  onclick="tableToExcel('tabla_pagos', 'Hoja1')"><i class="fa-solid fa-file-excel"></i></button>
                     </div>
                 </div>
 
@@ -136,7 +144,24 @@
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
   <script src="js/pagos.js"></script>
+  <script>
+    var tableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta charset="utf-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+        , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+    return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+        //window.location.href = uri + base64(format(template, ctx))
+        var a = document.createElement('a');
+        a.href = uri + base64(format(template, ctx))
+        a.download = "Prestamos" + '.xls';
+        a.click();
+    }
+    })()
 
+  </script>
 
 </body>
 
