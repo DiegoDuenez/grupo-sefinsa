@@ -26,6 +26,27 @@ class Pago extends Database{
 
     }
 
+    public function pagosPrestamo($prestamo_id)
+    {
+
+        $query = "SELECT $this->table.*,prestamos.monto_prestado, 
+        clientes.nombre_completo, poblaciones.monto_multa
+        FROM $this->table 
+        INNER JOIN prestamos ON $this->table.prestamo_id = prestamos.id
+        INNER JOIN clientes ON prestamos.cliente_id = clientes.id
+        INNER JOIN poblaciones ON clientes.poblacion_id = poblaciones.id
+        WHERE prestamos.id = '$prestamo_id'
+        ORDER BY clientes.nombre_completo ASC
+        ";
+
+        return json([
+            'status' => 'success', 
+            'data'=> $this->Select($query), 
+            'message'=> ''
+        ], 200);
+
+    }
+
     public function pagosCliente($cliente_id)
     {
 

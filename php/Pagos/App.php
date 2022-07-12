@@ -19,6 +19,11 @@ switch($func){
         echo $Pago->pagosCliente($cliente_id);
     break;
 
+    case 'pagosPrestamo':
+        $prestamo_id = $_DATA['prestamo_id'];
+        echo $Pago->pagosPrestamo($prestamo_id);
+    break;
+
     case 'pagar':
 
         $pago_id = $_DATA['pago_id'];

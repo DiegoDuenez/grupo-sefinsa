@@ -76,7 +76,7 @@ $(document).ready(function(){
         "columnDefs": [
             { "visible": false, "targets": -1 }
           ],
-          order: [[9, 'desc']],
+          order: [[10, 'desc']],
     })
     
     getPrestamos()
@@ -246,6 +246,17 @@ function getPrestamos(){
 
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Pagado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pagandose</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
                     
                     table.row.add([
                         response.data[i].nombre_completo, 
@@ -256,9 +267,9 @@ function getPrestamos(){
                         response.data[i].telefono_aval,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
-                        response.data[i].status == 0 ? 'Pendiente' : 'Pagado',
+                        status,
                         `
-                        <button class="btn btn-info btn_ver_semanas" title="Ver semanas de pago"  onclick="generarSemanas(${response.data[i].modalidad_semanas}, \'${response.data[i].fecha_prestamo}\')" data-toggle="modal" data-target="#modal_ver_semanas"><i class="fa-solid fa-eye"></i></button>
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
                         response.data[i].created_at,
 

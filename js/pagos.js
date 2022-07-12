@@ -44,6 +44,14 @@ $(document).ready(function(){
 
     
     select_clientes_filtro.select2({theme: 'bootstrap4', width: '100%'});
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    prestamo = urlParams.get('p')
+    if(prestamo){
+        //formClienteSoloArchivos.show()
+        getPagosPrestamo(prestamo)
+    }
     /*$('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
     $('#select_poblaciones_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
 
@@ -65,6 +73,83 @@ select_clientes_filtro.on('change', function() {
     
 });
 
+
+function getPagosPrestamo(prestamo_id)
+{
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO PAGOS..</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "pagosPrestamo",
+        prestamo_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Pagado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pendiente</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        "$ " + response.data[i].monto_prestado,
+                        "$ " + response.data[i].cantidad_esperada_pago,
+                        "$ " + response.data[i].cantidad_normal_pagada,
+                        "$ " + response.data[i].cantidad_multa,
+                        "$ " + response.data[i].cantidad_pendiente,
+                        "$ " + response.data[i].cantidad_total_pagada,
+                        response.data[i].concepto,
+                        response.data[i].fecha_pago,
+                        status,
+                        response.data[i].status == 0 ? `
+                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
+                        ` : '',
+
+
+                    ]);
+
+
+                }
+                table.draw();
+
+            }
+
+        },
+        error : function(e){
+
+            console.log(e)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+}
 
 
 function getPagos(){
@@ -92,13 +177,13 @@ function getPagos(){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = 'Pagado'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
-                        status = 'Pendiente'
+                        status = '<span class="badge badge-warning">Pendiente</span>'
                     }
                     else if(response.data[i].status == -1){
-                        status = 'No pagó'
+                        status = '<span class="badge badge-danger">No pagó</span>'
                     }
 
                     table.row.add([

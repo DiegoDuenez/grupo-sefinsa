@@ -91,8 +91,14 @@ function getColocadorasRutaPoblacion(){
 
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
-                    var status = ""
-                    if(response.data[i].status == 1 ? status = 'Activo': status ='Inactivo' )
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Activo</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-danger">Inactivo</span>'
+                    }
+
                     table.row.add([
                         response.data[i].nombre_completo, 
                         response.data[i].direccion,
