@@ -85,13 +85,17 @@ class Pago extends Database{
             $update = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_multa = ?, cantidad_total_pagada = ?, concepto = ?, status = ? WHERE $this->table.id = '$pago_id'";
             $pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $concepto , $status]);
 
+            //PENDIENTE 
+            $queryCantidadPagos = "SELECT count(id) FROM $this->table WHERE prestamo_id = '$prestamo_id' and cantidad_multa != 0;";
+            $cantidad = $this->SelectOne($queryCantidadPagos);
+
             //$update = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_multa = ?, cantidad_total_pagada = ?, concepto = '$concepto', status = ? WHERE $this->table.id = '$pago_id'";
             //$pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $status]);
             //echo $update;
 
             if($pago) {
 
-              
+                
                 $query = "SELECT sum(cantidad_normal_pagada) as 'sumatoria' FROM $this->table WHERE prestamo_id = '$prestamo_id'";
                 $sumatoria = $this->SelectOne($query);
 

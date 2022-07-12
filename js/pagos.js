@@ -402,15 +402,15 @@ function getPagosCliente(cliente_id){
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-                    var status;
-                    if(response.data[i].status == 0){
-                        status = 'Pendiente'
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
-                    else if(response.data[i].status == '-1'){
-                        status = 'No pagado'
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pendiente</span>'
                     }
-                    else{
-                        status = 'Pagado'
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
                     }
 
 
