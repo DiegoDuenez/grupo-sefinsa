@@ -43,7 +43,7 @@
 
                 <div class="row p-3">
                     <div class="d-flex w-100 flex-row justify-content-end" style="gap: 1rem;">
-                        <button type="button" id="btn_excel" class="btn btn-success" title="Exportar prestamos a excel"  onclick="tableToExcel('tabla_pagos', 'Hoja1')"><i class="fa-solid fa-file-excel"></i></button>
+                        <button type="button" id="btn_excel" class="btn btn-success" title="Exportar pagos a excel"  onclick="tableToExcel('tabla_pagos', 'Hoja1')"><i class="fa-solid fa-file-excel"></i></button>
                     </div>
                 </div>
 
