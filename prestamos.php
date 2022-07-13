@@ -77,8 +77,9 @@
                                             <th scope="col">Nombre del aval</th>
                                             <th scope="col">Dirección del aval</th>
                                             <th scope="col">Teléfono del aval</th>
-                                            <th scope="col">Monto prestado</th>
-                                            <th scope="col">Pago por semana</th>
+                                            <th scope="col">Fecha de prestamo</th>
+                                            <th scope="col" class="sum_monto_prestado">Monto prestado</th>
+                                            <th scope="col" class="sum_pago_semanal">Pago por semana</th>
                                            <!-- <th scope="col">Semana 1</th>
                                             <th scope="col">Semana 2</th>
                                             <th scope="col">Semana 3</th>
@@ -101,7 +102,6 @@
                                             <th scope="col">Semana 20</th>-->
                                             <th scope="col">Estatus</th>
                                             <th scope="col">Pagos</th>
-                                            <th scope="col">Fecha de registro</th>
 
 
                                         </tr>

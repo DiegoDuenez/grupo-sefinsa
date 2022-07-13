@@ -75,9 +75,51 @@ $(document).ready(function(){
             }
         },
         "columnDefs": [
-            { "visible": false, "targets": [-1/*, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/] }
+            { "visible": false, "targets": [/*-1, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/] }
           ],
-          order: [[10, 'desc']],
+          order: [[6, 'desc']],
+
+          "footerCallback": function(row, data, start, end, display) {
+            var api = this.api();
+           
+            api.columns('.sum_monto_prestado', {
+              page: 'current'
+            }).every(function() {
+              var sum = this
+                .data()
+                .reduce(function(a, b) {
+                   a = a.toString().replace(/[$]/g,'');
+                   b = b.toString().replace(/[$]/g,'');
+                   a = a.toString().replace(/[,]/g,'');
+                    b = b.toString().replace(/[,]/g,'');
+                  var x = parseFloat(a) || 0;
+                  var y = parseFloat(b) || 0;
+      
+                 
+                  return x + y;
+                }, 0);
+              $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+            });
+
+            api.columns('.sum_pago_semanal', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+        
+                   
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+        }
     })
 
     tableExcel = $('#tabla_prestamos_excel').DataTable({bFilter: false, bPaginate: false})
@@ -408,13 +450,13 @@ function getPrestamos(){
                         response.data[i].nombre_aval,
                         response.data[i].direccion_aval,
                         response.data[i].telefono_aval,
+                        response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
-                        response.data[i].created_at,
 
                     ]);
 
@@ -483,13 +525,13 @@ function getPrestamosRuta(ruta_id){
                         response.data[i].nombre_aval,
                         response.data[i].direccion_aval,
                         response.data[i].telefono_aval,
+                        response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
-                        response.data[i].created_at,
 
                     ]);
                 }
@@ -550,13 +592,13 @@ function getPrestamosPoblacion(poblacion_id){
                         response.data[i].nombre_aval,
                         response.data[i].direccion_aval,
                         response.data[i].telefono_aval,
+                        response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
-                        response.data[i].created_at,
 
                     ]);
                 }
@@ -617,13 +659,13 @@ function getPrestamosColocadora(colocadora_id){
                         response.data[i].nombre_aval,
                         response.data[i].direccion_aval,
                         response.data[i].telefono_aval,
+                        response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
-                        response.data[i].created_at,
 
                     ]);
                 }
@@ -1563,7 +1605,7 @@ function getPrestamosExcel(prestamo_id){
                             `
                             <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                             `,
-                            response.data[i].created_at,
+                           response.data[i].fecha_prestamo,
 
                         ]);
 
@@ -1603,7 +1645,7 @@ function getPrestamosExcel(prestamo_id){
                             `
                             <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                             `,
-                            response.data[i].created_at,
+                           response.data[i].fecha_prestamo,
 
                         ]);
 

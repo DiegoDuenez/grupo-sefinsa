@@ -238,4 +238,10 @@ function clearInputs(){
 
 }
 
+function formatearCantidadMX(cantidad) {
+    total = new Intl.NumberFormat("es-MX").format(cantidad);
+ 
+    return total;
+ }
+
 authGuard()

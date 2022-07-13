@@ -175,11 +175,7 @@ $(document).ready(function(){
 
 });
 
-function formatearCantidadMX(cantidad) {
-   total = new Intl.NumberFormat("es-MX").format(cantidad);
 
-   return total;
-}
 
 select_clientes_filtro.on('change', function() {
     clienteIdFiltro = this.value
