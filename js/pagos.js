@@ -315,8 +315,17 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
                     timer: 1000,
                     showCancelButton: false,
                     showConfirmButton: false
+                }).then((result)=>{
+
+                    if(clienteIdFiltro){
+                        getPagosCliente(clienteIdFiltro)
+                    }
+                    else{
+                        getPagos()
+                    }
+
                 })
-                getPagos()
+               
 
             }
             
@@ -355,7 +364,7 @@ function getClientes(){
 
                 select_clientes_filtro.empty()
                 select_clientes_filtro.append(`
-                    <option value="0" >Seleccionar cliente</option>
+                    <option value="0" >General</option>
                 `)
                 for(var i = 0; i < response.data.length; i++ ){
                     
@@ -384,6 +393,8 @@ function getClientes(){
 
 
 function getPagosCliente(cliente_id){
+
+    clearInputs()
 
     var datasend = {
         func: "pagosCliente",
@@ -493,8 +504,16 @@ function noPagar(pago_id, pago_multa){
                             timer: 1000,
                             showCancelButton: false,
                             showConfirmButton: false
+                        }).then((result)=>{
+
+                            if(clienteIdFiltro){
+                                getPagosCliente(clienteIdFiltro)
+                            }
+                            else{
+                                getPagos()
+                            }
+        
                         })
-                        getPagos()
         
                     }
                     
