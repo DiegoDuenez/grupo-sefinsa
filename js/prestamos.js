@@ -85,6 +85,8 @@ $(document).ready(function(){
     getPrestamos()
     getRutas()
     getClientes()
+    getPoblaciones()
+    getColocadoras()
     
     $('#select_colocadoras_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
     $('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
@@ -95,6 +97,9 @@ $(document).ready(function(){
     $('#select_poblaciones_registrar_existente').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
     $('#select_colocadoras_registrar_existente').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_prestamo')});
 
+    $('#select_rutas_filtro').select2({theme: 'bootstrap4', width: '100%'});
+    $('#select_poblaciones_filtro').select2({theme: 'bootstrap4', width: '100%'});
+    $('#select_colocadoras_filtro').select2({theme: 'bootstrap4', width: '100%'});
     /*inp_fecha_prestamo.datetimepicker({
 		format:'YYYY:MM:DD',
 		date : globalFechaInicial,
@@ -144,6 +149,42 @@ $('#select_poblaciones_registrar_existente').on('change', function() {
     getColocadorasRutaPoblacion($('#select_rutas_registrar_existente option:selected').val(), this.value);
 });
 
+
+/* FILTROS */
+
+$('#select_rutas_filtro').on('change', function(){
+    $('#select_poblaciones_filtro').val(0).trigger('change.select2');
+    $('#select_colocadoras_filtro').val(0).trigger('change.select2');
+    if(this.value == 0){
+        getPrestamos();
+    }
+    else{
+        getPrestamosRuta(this.value)
+    }
+})
+
+$('#select_poblaciones_filtro').on('change', function(){
+    $('#select_colocadoras_filtro').val(0).trigger('change.select2');
+    $('#select_rutas_filtro').val(0).trigger('change.select2');
+    if(this.value == 0){
+        getPrestamos();
+    }
+    else{
+        getPrestamosPoblacion(this.value)
+    }
+})
+
+$('#select_colocadoras_filtro').on('change', function(){
+    $('#select_poblaciones_filtro').val(0).trigger('change.select2');
+    $('#select_rutas_filtro').val(0).trigger('change.select2');
+    if(this.value == 0){
+        getPrestamos();
+    }
+    else{
+        getPrestamosColocadora(this.value)
+    }
+})
+
 select_clientes_registrar.on('change', function() {
     clienteID = this.value
 
@@ -177,7 +218,7 @@ inp_monto_prestar.on('input', function(){
         pago_semanal = (inp_monto_prestar.val() * abono) / 100
     }
     else if($('#select_modalidad option:selected').val() == 20){
-        pago_semanal = abono * inp_monto_prestar.val()[0]
+        pago_semanal = abono * (inp_monto_prestar.val() / 1000)
     }
 
     console.log('pago_semanal',pago_semanal)
@@ -213,7 +254,7 @@ $('#select_modalidad').on('change', function() {
         pago_semanal = (inp_monto_prestar.val() * abono) / 100
     }
     else if(this.value == 20){
-        pago_semanal = abono * inp_monto_prestar.val()[0]
+        pago_semanal = abono * (inp_monto_prestar.val() / 1000)
     }
 
     console.log('pago_semanal',pago_semanal)
@@ -224,6 +265,99 @@ $('#select_modalidad').on('change', function() {
 
 
 })
+
+
+function getPoblaciones(){
+
+
+    var datasend = {
+        func: "index",
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Poblaciones/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#select_poblaciones_filtro').empty()
+                $('#select_poblaciones_filtro').append(`
+                    <option value="0" >General</option>
+                `)
+
+                for(var i = 0; i < response.data.length; i++ ){
+                
+                    $('#select_poblaciones_filtro').append(`
+                        <option name="${response.data[i].nombre_poblacion}" value="${response.data[i].id}">${response.data[i].nombre_poblacion}</option>
+                    `)
+
+                }
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+function getColocadoras(){
+
+
+    var datasend = {
+        func: "colocadorasActivas",
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Colocadoras/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#select_colocadoras_filtro').empty()
+                $('#select_colocadoras_filtro').append(`
+                    <option value="0" >General</option>
+                `)
+                for(var i = 0; i < response.data.length; i++ ){
+
+                    $('#select_colocadoras_filtro').append(`
+                        <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
+                    `)
+
+                }
+                
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
 
 
 function getPrestamos(){
@@ -258,7 +392,7 @@ function getPrestamos(){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Pagado</span>'
+                        status = '<span class="badge badge-success">Finalizado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -307,6 +441,210 @@ function getPrestamos(){
     });
 
 }
+
+
+function getPrestamosRuta(ruta_id){
+
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO PRESTAMOS...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "prestamosRuta",
+        ruta_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Finalizado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pagandose</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion_cliente,
+                        response.data[i].telefono_cliente,
+                        response.data[i].nombre_aval,
+                        response.data[i].direccion_aval,
+                        response.data[i].telefono_aval,
+                        "$ " + response.data[i].monto_prestado,
+                        "$ " + response.data[i].pago_semanal,
+                        status,
+                        `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
+                        `,
+                        response.data[i].created_at,
+
+                    ]);
+                }
+                table.draw();
+            }
+        },
+        error : function(e){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+function getPrestamosPoblacion(poblacion_id){
+
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO PRESTAMOS...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "prestamosPoblacion",
+        poblacion_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Finalizado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pagandose</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion_cliente,
+                        response.data[i].telefono_cliente,
+                        response.data[i].nombre_aval,
+                        response.data[i].direccion_aval,
+                        response.data[i].telefono_aval,
+                        "$ " + response.data[i].monto_prestado,
+                        "$ " + response.data[i].pago_semanal,
+                        status,
+                        `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
+                        `,
+                        response.data[i].created_at,
+
+                    ]);
+                }
+                table.draw();
+            }
+        },
+        error : function(e){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+function getPrestamosColocadora(colocadora_id){
+
+
+    clearInputs()
+
+    $.blockUI({ message: '<h4> TRAYENDO PRESTAMOS...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+
+    var datasend = {
+        func: "prestamosColocadora",
+        colocadora_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+                table.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Finalizado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pagandose</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+                    table.row.add([
+                        response.data[i].nombre_completo, 
+                        response.data[i].direccion_cliente,
+                        response.data[i].telefono_cliente,
+                        response.data[i].nombre_aval,
+                        response.data[i].direccion_aval,
+                        response.data[i].telefono_aval,
+                        "$ " + response.data[i].monto_prestado,
+                        "$ " + response.data[i].pago_semanal,
+                        status,
+                        `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
+                        `,
+                        response.data[i].created_at,
+
+                    ]);
+                }
+                table.draw();
+            }
+        },
+        error : function(e){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}
+
+
 
 btn_siguiente_usuario.click(function(){
     $('#pago').removeClass('d-none')
@@ -391,7 +729,6 @@ btn_guardar_prestamo.click(function(){
     
     var data = new FormData();
 
-    alert(id)
 
     if(id == "nuevo-cliente" && cliente ){
 
@@ -446,6 +783,15 @@ btn_guardar_prestamo.click(function(){
                 data.append('garantia_cliente_'+i, file);
             });
 
+            var alerta = Swal.fire({
+                title: "Guardando prestamo",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                   Swal.showLoading()
+                }
+             })
+
             $.ajax({
                 url: 'php/Clientes/App.php',
                 data: data,
@@ -455,6 +801,8 @@ btn_guardar_prestamo.click(function(){
                 type: 'POST',
                 success: function(response){
         
+                    alerta.close()
+
                     $('#modal_registrar_prestamo').modal('toggle');
                     $('#pago').addClass('d-none')
                     $('#cliente').removeClass('d-none')
@@ -463,6 +811,7 @@ btn_guardar_prestamo.click(function(){
                     btn_guardar_prestamo.addClass('d-none')
                     modal_prestamos_label.text('Registrar cliente y aval')
                     $('#modal_dialog').addClass('modal-xl')
+
                     
                     Swal.fire({
                         icon: 'success',
@@ -557,6 +906,16 @@ btn_guardar_prestamo.click(function(){
                 data.append('garantia_cliente_'+i, file);
             });
 
+            var alerta = Swal.fire({
+                title: "Guardando prestamo",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                   Swal.showLoading()
+                }
+             })
+
+
             $.ajax({
                 url: 'php/Clientes/App.php',
                 data: data,
@@ -566,6 +925,7 @@ btn_guardar_prestamo.click(function(){
                 type: 'POST',
                 success: function(response){
         
+                    alerta.close()
                     $('#modal_registrar_prestamo').modal('toggle');
                     $('#pago').addClass('d-none')
                     $('#cliente').removeClass('d-none')
@@ -604,7 +964,6 @@ btn_guardar_prestamo.click(function(){
 
     }
     else if(id == "cliente-existente"){
-        //alert(id)
         if( inp_direccion_cliente_existente.val() == "" || inp_telefono_cliente_existente.val() == "" || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
         || inp_garantias_cliente_existente.val() == "" || inp_garantias_aval.val() == ""
@@ -666,6 +1025,16 @@ btn_guardar_prestamo.click(function(){
                 data.append('garantia_cliente_'+i, file);
             });
 
+            var alerta = Swal.fire({
+                title: "Guardando prestamo",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                   Swal.showLoading()
+                }
+            })
+
+
             $.ajax({
                 url: 'php/Clientes/App.php',
                 data: data,
@@ -675,6 +1044,7 @@ btn_guardar_prestamo.click(function(){
                 type: 'POST',
                 success: function(response){
         
+                    alerta.close()
                     $('#modal_registrar_prestamo').modal('toggle');
                     $('#pago').addClass('d-none')
                     $('#cliente').removeClass('d-none')
@@ -1149,7 +1519,7 @@ function getPrestamosExcel(prestamo_id){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Pagado</span>'
+                        status = '<span class="badge badge-success">Finalizado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -1248,7 +1618,7 @@ function getPrestamosExcel(prestamo_id){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Pagado</span>'
+                        status = '<span class="badge badge-success">Finalizado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'

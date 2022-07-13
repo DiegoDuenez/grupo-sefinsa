@@ -36,6 +36,20 @@ switch($func){
 
     break;
 
+    case 'puedeOmitirUltimaSemana':
+        
+        $prestamo_id = $_DATA['prestamo_id'];
+        echo $Pago->puedeOmitirUltimaSemana($prestamo_id);
+
+    break;
+
+    case 'omitirSemanaPago':
+
+        $pago_id = $_DATA['pago_id'];
+        echo $Pago->omitirSemanaPago($pago_id);
+
+    break;
+
     case 'fechasPago':
 
         $prestamo_id = $_DATA['prestamo_id'];

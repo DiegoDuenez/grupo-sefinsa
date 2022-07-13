@@ -7,12 +7,16 @@ var label_multa = $('#label_multa')
 var cb_multa = $('#cb_multa')
 var inp_concepto = $('#inp_concepto')
 var select_clientes_filtro = $('#select_clientes_filtro')
+var select_clientes_prestamos_filtro = $('#select_clientes_prestamos_filtro')
+var btn_omitir_pago = $('#btn_omitir_pago')
 
 var pagoId;
 var prestamoId;
 var montoMulta;
 var table;
 var clienteIdFiltro;
+var prestamoIdFiltro;
+
 
 $(document).ready(function(){
 
@@ -35,7 +39,107 @@ $(document).ready(function(){
         /*"columnDefs": [
             { "visible": false, "targets": -1 }
           ],*/
-          order: [[8, 'asc']],
+          //order: [[8, 'asc']],
+          "aaSorting": [],
+
+          "footerCallback": function(row, data, start, end, display) {
+            var api = this.api();
+           
+            api.columns('.sum_pago_total', {
+              page: 'current'
+            }).every(function() {
+              var sum = this
+                .data()
+                .reduce(function(a, b) {
+                   a = a.toString().replace(/[$]/g,'');
+                   b = b.toString().replace(/[$]/g,'');
+                   a = a.toString().replace(/[,]/g,'');
+                    b = b.toString().replace(/[,]/g,'');
+                  var x = parseFloat(a) || 0;
+                  var y = parseFloat(b) || 0;
+      
+                 
+                  return x + y;
+                }, 0);
+              $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+            });
+
+            api.columns('.sum_pago_multa', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+        
+                   
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+
+              api.columns('.sum_pago_recibido', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+        
+                   
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+              
+              api.columns('.sum_pago_esperado', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+        
+                   
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+
+              api.columns('.sum_pago_pendiente', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+        
+                   
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+        }
 
           
     })
@@ -45,6 +149,8 @@ $(document).ready(function(){
 
     
     select_clientes_filtro.select2({theme: 'bootstrap4', width: '100%'});
+    select_clientes_prestamos_filtro.select2({theme: 'bootstrap4', width: '100%'});
+
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -69,11 +175,82 @@ $(document).ready(function(){
 
 });
 
+function formatearCantidadMX(cantidad) {
+   total = new Intl.NumberFormat("es-MX").format(cantidad);
+
+   return total;
+}
+
 select_clientes_filtro.on('change', function() {
     clienteIdFiltro = this.value
+    getPrestamosCliente(this.value)
     this.value == 0 ? getPagos() : getPagosCliente(this.value);
     
 });
+
+select_clientes_prestamos_filtro.on('change', function(){
+
+    prestamoIdFiltro = this.value
+    this.value == 0 ?  getPagosCliente(clienteIdFiltro) : getPagosPrestamo(this.value)
+})
+
+function getPrestamosCliente(cliente_id){
+
+    var datasend = {
+        func: "prestamosCliente",
+        cliente_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Prestamos/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+
+                if(response.data.length > 0){
+
+                    select_clientes_prestamos_filtro.prop('disabled', false)
+
+                    select_clientes_prestamos_filtro.empty()
+                    select_clientes_prestamos_filtro.append(`
+                        <option value="0" >General</option>
+                    `)
+                    for(var i = 0; i < response.data.length; i++ ){
+                        
+                        select_clientes_prestamos_filtro.append(`
+                            <option name="${response.data[i].id}" value="${response.data[i].id}">${response.data[i].monto_prestado}</option>
+                        `)
+
+                    }
+
+                }
+                else{
+                    select_clientes_prestamos_filtro.prop('disabled', true)
+                }
+
+    
+
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
 
 
 function getPagosPrestamo(prestamo_id)
@@ -110,6 +287,10 @@ function getPagosPrestamo(prestamo_id)
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+                    else if(response.data[i].status == 2){
+                        status = '<span class="badge badge-info">Omitido</span>'
+                    }
+
 
                     table.row.add([
                         response.data[i].nombre_completo, 
@@ -174,8 +355,13 @@ function getPagos(){
 
             if(response.status == 'success'){
 
+
+                console.log(response)
+
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
+
+                    puedeOmitirUltimaSemana(response.data[i].prestamo_id)
 
                     var status
                     if(response.data[i].status == 1){
@@ -187,6 +373,10 @@ function getPagos(){
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+                    else if(response.data[i].status == 2){
+                        status = '<span class="badge badge-info">Omitido</span>'
+                    }
+
 
                     table.row.add([
                         response.data[i].nombre_completo, 
@@ -239,8 +429,7 @@ function modalPagar(pago_id, prestamo_id, monto_multa){
     pagoId = pago_id
     prestamoId = prestamo_id
     montoMulta = monto_multa
-    console.log(pagoId)
-    console.log(prestamoId)
+    puedeOmitirUltimaSemana(prestamoId)
 
 }
 /*
@@ -284,6 +473,117 @@ btn_guardar_pago.click(function(){
 
 })
 
+btn_omitir_pago.click(function(){
+
+    omitirSemanaPago(pagoId)
+})
+
+
+
+function omitirSemanaPago(pago_id){
+
+    var datasend ={
+        func: 'omitirSemanaPago',
+        pago_id
+    }
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        data : JSON.stringify(datasend),
+        dataType: 'json',
+        success : function(response) {
+
+            console.log(response.data)
+
+            if(response.status == "success"){
+
+                $('#modal_pagar').modal('toggle');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pago omitido',
+                    text: 'Se ha omitido el pago correctamente',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                }).then((result)=>{
+
+                    if(clienteIdFiltro){
+                        if(prestamoId){
+                            getPagosPrestamo(prestamoIdFiltro)
+                        }
+                        else{
+                            getPagosCliente(clienteIdFiltro)
+                        }
+                        
+                    }
+                    else{
+                        getPagos()
+                    }
+
+                })
+
+            }
+            
+        },
+        error : function(e){
+            
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    })
+
+}
+
+function puedeOmitirUltimaSemana(prestamo_id){
+
+    var datasend ={
+        func: 'puedeOmitirUltimaSemana',
+        prestamo_id
+    }
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        data : JSON.stringify(datasend),
+        dataType: 'json',
+        success : function(response) {
+
+            console.log(response.data)
+
+            if(response.data){
+                $('#btn_omitir_pago').removeClass('d-none')
+            }
+            else{
+                $('#btn_omitir_pago').addClass('d-none')
+            }
+
+            if(response.status == "success"){
+
+            }
+            
+        },
+        error : function(e){
+            
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    })
+
+}
+
 
 
 function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
@@ -305,6 +605,9 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
         dataType: 'json',
         success : function(response) {
 
+            console.log(response.data)
+            console.log(response.data2)
+
             if(response.status == "success"){
 
                 $('#modal_pagar').modal('toggle');
@@ -318,7 +621,12 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
                 }).then((result)=>{
 
                     if(clienteIdFiltro){
-                        getPagosCliente(clienteIdFiltro)
+                        if(prestamoId){
+                            getPagosPrestamo(prestamoIdFiltro)
+                        }
+                        else{
+                            getPagosCliente(clienteIdFiltro)
+                        }
                     }
                     else{
                         getPagos()
@@ -415,6 +723,10 @@ function getPagosCliente(cliente_id){
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
+
+                    puedeOmitirUltimaSemana(response.data[i].prestamo_id)
+
+
                     var status
                     if(response.data[i].status == 1){
                         status = '<span class="badge badge-success">Pagado</span>'
@@ -425,6 +737,10 @@ function getPagosCliente(cliente_id){
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+                    else if(response.data[i].status == 2){
+                        status = '<span class="badge badge-info">Omitido</span>'
+                    }
+
 
 
                     table.row.add([
@@ -507,7 +823,12 @@ function noPagar(pago_id, pago_multa){
                         }).then((result)=>{
 
                             if(clienteIdFiltro){
-                                getPagosCliente(clienteIdFiltro)
+                                if(prestamoId){
+                                    getPagosPrestamo(prestamoIdFiltro)
+                                }
+                                else{
+                                    getPagosCliente(clienteIdFiltro)
+                                }
                             }
                             else{
                                 getPagos()

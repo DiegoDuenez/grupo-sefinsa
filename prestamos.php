@@ -27,6 +27,32 @@
         <div class="content-wrapper">
             <div class="content">
                 <div class="container-fluid">
+
+                <div class="row p-2">
+                    <div class="d-flex mt-2 w-100 justify-content-between">
+                        <div class="form-group" style="width: 30%">
+                            <label for="select_rutas_filtro">Filtrar por ruta</label>
+                            <select class="form-control select_rutas_filtro"  id="select_rutas_filtro"  style="width:auto;">
+                                <option value="0">General</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="width: 30%">
+                            <label for="select_poblaciones_filtro">Filtrar por población</label>
+                            <select class="form-control select_poblaciones_filtro"  id="select_poblaciones_filtro" style="width:auto;">
+                            <option value="0">General</option>
+                        </select>
+                        </div>
+
+                        <div class="form-group" style="width: 30%">
+                            <label for="select_colocadoras_filtro">Filtrar por colocadora</label>
+                            <select class="form-control select_colocadoras_filtro"  id="select_colocadoras_filtro" style="width:auto;">
+                            <option value="0">General</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+
                     <div class="row p-3">
                         
                         <div class="d-flex w-100 flex-row justify-content-end" style="gap: 1rem;">
@@ -83,6 +109,21 @@
                                     <tbody id="table_body">
                                         
                                     </tbody>
+                                    <tfoot>
+                                        <tr class="thead-dark">
+                                            <th>Totales</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
                                     </table>
 
                                     

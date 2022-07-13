@@ -31,10 +31,17 @@
                 
 
                 <div class="row p-2">
-                    <div class="d-flex mt-2 w-100 justify-content-between">
+                    <div class="d-flex mt-2 w-100" style="gap: 1rem;">
                         <div class="form-group" style="width: 30%">
                             <label for="select_clientes_filtro">Filtrar por cliente</label>
                             <select class="form-control select_clientes_filtro"  id="select_clientes_filtro"  style="width:50%;">
+                                <option value="0">General</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="width: 30%">
+                            <label for="select_clientes_prestamos_filtro">Filtrar por prestamo</label>
+                            <select class="form-control select_clientes_prestamos_filtro"  id="select_clientes_prestamos_filtro"  style="width:50%;" disabled>
                                 <option value="0">General</option>
                             </select>
                         </div>
@@ -59,11 +66,11 @@
                                         <tr>
                                             <th scope="col">Nombre del cliente</th>
                                             <th scope="col">Monto prestado</th>
-                                            <th scope="col">Pago esperado</th>
-                                            <th scope="col">Pago recibido</th>
-                                            <th scope="col">Pago de multa</th>
-                                            <th scope="col">Pago pendiente</th>
-                                            <th scope="col">Pago total</th>
+                                            <th scope="col" class="sum_pago_esperado" >Pago esperado</th>
+                                            <th scope="col" class="sum_pago_recibido" >Pago recibido</th>
+                                            <th scope="col" class="sum_pago_multa">Pago de multa</th>
+                                            <th scope="col" class="sum_pago_pendiente">Pago pendiente</th>
+                                            <th scope="col" class="sum_pago_total">Pago total</th>
                                             <th scope="col">Concepto</th>
                                             <th scope="col">Fecha de pago</th>
                                             <th scope="col">Estatus</th>
@@ -73,6 +80,21 @@
                                     <tbody id="table_body">
                                     
                                     </tbody>
+                                    <tfoot>
+                                        <tr class="thead-dark">
+                                            <th>Totales</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -128,6 +150,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary d-none" id="btn_omitir_pago">Omitir pago</button>
                     <button type="submit" class="btn btn-primary" id="btn_guardar_pago">Guardar</button>
                 </div>
             </div>

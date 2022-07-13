@@ -44,4 +44,32 @@ switch($func){
 
     break;
 
+    case 'prestamosRuta':
+
+        $id = $_DATA['ruta_id'];
+        echo $Prestamo->prestamosRuta($id);
+        
+    break;
+
+    case 'prestamosPoblacion':
+
+        $id = $_DATA['poblacion_id'];
+        echo $Prestamo->prestamosPoblacion($id);
+        
+    break;
+
+    case 'prestamosCliente':
+
+        $id = $_DATA['cliente_id'];
+        echo $Prestamo->prestamosCliente($id);
+
+    break;
+
+    case 'prestamosColocadora':
+
+        $id = $_DATA['colocadora_id'];
+        echo $Prestamo->prestamosColocadora($id);
+
+    break;
+
 }

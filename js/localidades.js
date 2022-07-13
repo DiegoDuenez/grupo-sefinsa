@@ -348,7 +348,7 @@ function editarLocalidad(nombre_localidad, ruta_id, id, primer_hora_limite, segu
                 $('#modal_editar_localidad').modal('toggle');
                 Swal.fire({
                     icon: 'success',
-                    title: 'Localidad actualizada',
+                    title: 'Población actualizada',
                     text: 'Se ha editado la localidad',
                     timer: 1000,
                     showCancelButton: false,
@@ -396,7 +396,7 @@ function desactivar(id){
                     if(response.status == "success"){
                         Swal.fire({
                             icon: 'success',
-                            title: 'Localidad desactivada',
+                            title: 'Población desactivada',
                             text: 'Se ha desactivado la localidad',
                             timer: 1000,
                             showCancelButton: false,
@@ -447,7 +447,7 @@ function activar(id){
                     if(response.status == "success"){
                         Swal.fire({
                             icon: 'success',
-                            title: 'Localidad activada',
+                            title: 'Población activada',
                             text: 'Se ha activado la localidad',
                             timer: 1000,
                             showCancelButton: false,
