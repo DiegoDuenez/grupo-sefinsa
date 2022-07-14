@@ -66,4 +66,13 @@ class FileManager{
             
     }
 
+    public static function folderExist($path){
+        if (is_dir($path)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }

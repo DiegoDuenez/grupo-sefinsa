@@ -780,8 +780,6 @@ btn_guardar_prestamo.click(function(){
 
         if(inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
-        || inp_archivos_cliente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
-        || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente.get(0).files.length == 0
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
         {
             Swal.fire({
@@ -806,6 +804,8 @@ btn_guardar_prestamo.click(function(){
             data.append('garantias_aval', inp_garantias_aval.val())
             data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
+            data.append('cantidad_archivos_aval', inp_archivos_aval.get(0).files.length)
+            data.append('cantidad_archivos_cliente', inp_archivos_cliente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('monto_prestado_intereses', 0.00)
@@ -869,6 +869,7 @@ btn_guardar_prestamo.click(function(){
                     })
     
                     //window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
+                    window.location.href = RemoveParameterFromUrl(window.location.href, 'c')
 
                     getPrestamos()
         
@@ -897,8 +898,6 @@ btn_guardar_prestamo.click(function(){
         || $('.select_colocadoras option:selected').val() == 0 
         || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
-        || inp_archivos_cliente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
-        || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente.get(0).files.length == 0
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
         {
             Swal.fire({
@@ -929,6 +928,8 @@ btn_guardar_prestamo.click(function(){
             data.append('garantias_aval', inp_garantias_aval.val())
             data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
+            data.append('cantidad_archivos_aval', inp_archivos_aval.get(0).files.length)
+            data.append('cantidad_archivos_cliente', inp_archivos_cliente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('monto_prestado_intereses', 0.00)
@@ -1013,8 +1014,6 @@ btn_guardar_prestamo.click(function(){
         if( inp_direccion_cliente_existente.val() == "" || inp_telefono_cliente_existente.val() == "" || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
         || inp_garantias_cliente_existente.val() == "" || inp_garantias_aval.val() == ""
-        || inp_archivos_cliente_existente.get(0).files.length == 0 || inp_archivos_aval.get(0).files.length == 0
-        || inp_archivos_garantias_aval.get(0).files.length == 0 || inp_archivos_garantias_cliente_existente.get(0).files.length == 0
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0
         || $('#select_rutas_registrar_existente option:selected').val() == 0
         || $('#select_colocadoras_registrar_existente option:selected').val() == 0
@@ -1049,6 +1048,8 @@ btn_guardar_prestamo.click(function(){
             data.append('garantias_aval', inp_garantias_aval.val())
             data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
             data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente_existente.get(0).files.length)
+            data.append('cantidad_archivos_aval', inp_archivos_aval.get(0).files.length)
+            data.append('cantidad_archivos_cliente', inp_archivos_cliente_existente.get(0).files.length)
             data.append('fecha_prestamo', inp_fecha_prestamo.val())
             data.append('monto_prestado', inp_monto_prestar.val())
             data.append('monto_prestado_intereses', 0.00)

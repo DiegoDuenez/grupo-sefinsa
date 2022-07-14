@@ -173,6 +173,7 @@ switch($func){
         $poblacion_id = $_POST['poblacion_id'];
         $garantias_cliente = $_POST['garantias_cliente'];
         $cantidad_archivos_garantias_cliente = $_POST['cantidad_archivos_garantias_cliente'];
+        $cantidad_archivos_cliente = $_POST['cantidad_archivos_cliente'];
         $cliente = $Cliente->getCliente($cliente_id);
 
         $nombre_aval = sanitize($_POST['nombre_aval']);
@@ -182,6 +183,8 @@ switch($func){
         $garantias_cliente = $_POST['garantias_cliente'];
         $garantias_aval = $_POST['garantias_aval'];
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
+        $cantidad_archivos_aval = $_POST['cantidad_archivos_aval'];
+
 
         $monto_prestado = $_POST['monto_prestado'];
         $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
@@ -197,16 +200,41 @@ switch($func){
         FileManager::createFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
         FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
 
-        for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
-            $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
-            FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
-        }
-        for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
-            $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
-            FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+        if($cantidad_archivos_garantias_aval > 0){
+            for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+                $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+            }
         }
 
-        $ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+        if($cantidad_archivos_garantias_cliente > 0){
+            for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+                $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+                FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+            }
+        }
+
+
+        if($cantidad_archivos_cliente > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_cliente; $i++){
+                $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+                FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
+            }
+                
+        }
+        
+        if($cantidad_archivos_aval > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_aval; $i++){
+                $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
+            }
+
+        }
+        
+
+        /*$ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
         FileManager::moveTo(FileManager::get('archivo_cliente_0','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_0','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_1','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_1','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_2','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_2','name'));
@@ -215,7 +243,7 @@ switch($func){
 
         $ruta_archivos_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
         FileManager::moveTo(FileManager::get('archivo_aval_0','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_0','name'));
-        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
+        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));*/
 
         echo $Cliente->createPrestamoClienteExistente($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, 
         $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas, $monto_prestado_intereses);
@@ -226,6 +254,7 @@ switch($func){
 
         $cliente_id = $_POST['cliente_id'];
         $cantidad_archivos_garantias_cliente = $_POST['cantidad_archivos_garantias_cliente'];
+        $cantidad_archivos_cliente = $_POST['cantidad_archivos_cliente'];
         $cliente = $Cliente->getCliente($cliente_id);
 
         $nombre_aval = sanitize($_POST['nombre_aval']);
@@ -235,6 +264,7 @@ switch($func){
         $garantias_cliente = $_POST['garantias_cliente'];
         $garantias_aval = $_POST['garantias_aval'];
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
+        $cantidad_archivos_aval = $_POST['cantidad_archivos_aval'];
 
         $monto_prestado = $_POST['monto_prestado'];
         $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
@@ -251,16 +281,43 @@ switch($func){
         FileManager::createFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
         FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
 
-        for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
-            $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
-            FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
-        }
-        for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
-            $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
-            FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+        if($cantidad_archivos_garantias_aval > 0){
+
+            for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+                $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+            }
+
         }
 
-        $ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+        if($cantidad_archivos_garantias_cliente > 0){
+
+            for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+                $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+                FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+            }
+
+        }
+
+        if($cantidad_archivos_cliente > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_cliente; $i++){
+                $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+                FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
+            }
+                
+        }
+        
+        if($cantidad_archivos_aval > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_aval; $i++){
+                $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
+            }
+
+        }
+
+        /*$ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
         FileManager::moveTo(FileManager::get('archivo_cliente_0','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_0','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_1','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_1','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_2','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_2','name'));
@@ -269,7 +326,7 @@ switch($func){
 
         $ruta_archivos_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
         FileManager::moveTo(FileManager::get('archivo_aval_0','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_0','name'));
-        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
+        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));*/
 
         echo $Cliente->createPrestamoClienteExistenteURI($cliente_id, $garantias_cliente, $nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, 
         $nueva_carpeta_aval, $nueva_carpeta_aval, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad_semanas, $monto_prestado_intereses);
@@ -288,6 +345,8 @@ switch($func){
         $poblacion_id = $_POST['poblacion_id'];
         $garantias_cliente = $_POST['garantias_cliente'];
         $cantidad_archivos_garantias_cliente = $_POST['cantidad_archivos_garantias_cliente'];
+        $cantidad_archivos_cliente = $_POST['cantidad_archivos_cliente'];
+
         
         $nombre_aval = $_POST['nombre_aval'];
         $direccion_aval = $_POST['direccion_aval'];
@@ -296,6 +355,7 @@ switch($func){
         $colocadora_id = $_POST['colocadora_id'];
         $garantias_aval = $_POST['garantias_aval'];
         $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
+        $cantidad_archivos_aval = $_POST['cantidad_archivos_aval'];
 
         $monto_prestado = $_POST['monto_prestado'];
         $monto_prestado_intereses = $_POST['monto_prestado_intereses'];
@@ -313,17 +373,42 @@ switch($func){
         FileManager::createFolder('../../resources/garantias/avales/'.$nueva_carpeta_aval);
 
        
-        for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
-            $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
-            FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+        if($cantidad_archivos_garantias_aval > 0){
+
+            for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+                $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+            }
         }
 
-        for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
-            $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$nueva_carpeta_cliente.'/';
-            FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+        if($cantidad_archivos_garantias_cliente > 0){
+
+            for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+                $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$nueva_carpeta_cliente.'/';
+                FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+            }
         }
 
-        $ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$nueva_carpeta_cliente.'/';
+
+        if($cantidad_archivos_cliente > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_cliente; $i++){
+                $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$nueva_carpeta_cliente.'/';
+                FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
+            }
+                
+        }
+        
+        if($cantidad_archivos_aval > 0){
+        
+            for($i = 0; $i < $cantidad_archivos_aval; $i++){
+                $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+                FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
+            }
+
+        }
+
+        /*$ruta_archivos_cliente =  '../../resources/comprobantes/clientes/'.$nueva_carpeta_cliente.'/';
         FileManager::moveTo(FileManager::get('archivo_cliente_0','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_0','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_1','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_1','name'));
         FileManager::moveTo(FileManager::get('archivo_cliente_2','tmp_name'), $ruta_archivos_cliente.FileManager::get('archivo_cliente_2','name'));
@@ -332,7 +417,7 @@ switch($func){
 
         $ruta_archivos_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
         FileManager::moveTo(FileManager::get('archivo_aval_0','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_0','name'));
-        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));
+        FileManager::moveTo(FileManager::get('archivo_aval_1','tmp_name'), $ruta_archivos_aval.FileManager::get('archivo_aval_1','name'));*/
 
 
         echo $Cliente->createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nueva_carpeta_cliente,
@@ -400,23 +485,99 @@ switch($func){
 
     case 'edit':
 
-        $nombre_cliente = sanitize($_DATA['nombre_cliente']);
-        $direccion_cliente = sanitize($_DATA['direccion_cliente']);
-        $telefono_cliente = sanitize($_DATA['telefono_cliente']);
-        $or_cliente = sanitize($_DATA['or_cliente']);
-        $colocadora_id = $_DATA['colocadora_id'];
-        $ruta_id = $_DATA['ruta_id'];
-        $poblacion_id = $_DATA['poblacion_id'];
-        //$garantias_cliente = sanitize($_DATA['garantias_cliente']);
-        $cliente_id = $_DATA['cliente_id'];
-
+        $nombre_cliente = sanitize($_POST['nombre_cliente']);
+        $direccion_cliente = sanitize($_POST['direccion_cliente']);
+        $telefono_cliente = sanitize($_POST['telefono_cliente']);
+        $or_cliente = sanitize($_POST['or_cliente']);
+        $colocadora_id = $_POST['colocadora_id'];
+        $ruta_id = $_POST['ruta_id'];
+        $poblacion_id = $_POST['poblacion_id'];
+        $cliente_id = $_POST['cliente_id'];
+        $cantidad_archivos_garantias_cliente = $_POST['cantidad_archivos_garantias_cliente'];
+        $cantidad_archivos_cliente = $_POST['cantidad_archivos_cliente'];
         $cliente = $Cliente->getCliente($cliente_id);
+        $cantidad_archivos_garantias_aval = $_POST['cantidad_archivos_garantias_aval'];
+        $cantidad_archivos_aval = $_POST['cantidad_archivos_aval'];
+        $aval = $Cliente->getAvalCliente($cliente_id);
+
+
+        $ruta = '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'];
+        if($cantidad_archivos_garantias_cliente > 0){
+
+            if(FileManager::folderExist('../../resources/garantias/clientes/'.$cliente['carpeta_garantias'])){
+
+                FileManager::dropFiles('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
+
+                for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+                    $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+                    FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+                }
+    
+            }
+
+        }
+
+        if($cantidad_archivos_cliente > 0){
+
+            if(FileManager::folderExist('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'])){
+
+
+                FileManager::dropFiles('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
+
+                for($i = 0; $i < $cantidad_archivos_cliente; $i++){
+                    $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_garantias'].'/';
+                    FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
+                }
+    
+            }
+
+        }
+
+        if($aval){
+
+            if($cantidad_archivos_garantias_aval > 0){
+            
+                if(FileManager::folderExist('../../resources/garantias/avales/'.$aval['carpeta_garantias'])){
+        
+                    FileManager::dropFiles('../../resources/comprobantes/avales/'.$aval['carpeta_garantias']);
+
+                    for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+                        $ruta_garantias_aval =  '../../resources/garantias/avales/'.$aval['carpeta_garantias'].'/';
+                        FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+                    }
+                    
+                }
+
+            }
+
+            
+            if($cantidad_archivos_aval > 0){
+            
+        
+                if(FileManager::folderExist('../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes'])){
+
+                    FileManager::dropFiles('../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes']);
+
+                    for($i = 0; $i < $cantidad_archivos_aval; $i++){
+                        $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes'].'/';
+                        FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
+                    }
+                    
+                }
+
+            }
+
+        }
+
+        
 
         echo $Cliente->editar($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $colocadora_id, $ruta_id,$poblacion_id, $cliente_id);
 
         FileManager::renameFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'], '../../resources/comprobantes/clientes/'.$cliente_id.'_'.$nombre_cliente);
         FileManager::renameFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias'], '../../resources/garantias/clientes/'.$cliente_id.'_'.$nombre_cliente);
 
+       
+        
 
     break;
 

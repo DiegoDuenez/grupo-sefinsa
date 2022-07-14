@@ -380,7 +380,79 @@ function registrarCliente(nombre_cliente, direccion_cliente, telefono_cliente, o
 
 function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_cliente, garantias_cliente, colocadora_id, ruta_id, poblacion_id, cliente_id){
 
-    var datasend ={
+    var data = new FormData();
+
+    data.append('func', 'edit');
+    data.append('nombre_cliente', nombre_cliente)
+    data.append('direccion_cliente', direccion_cliente)
+    data.append('telefono_cliente', telefono_cliente)
+    data.append('or_cliente', or_cliente)
+    data.append('garantias_cliente', garantias_cliente)
+    data.append('ruta_id', ruta_id)
+    data.append('poblacion_id', poblacion_id)
+    data.append('colocadora_id', colocadora_id)
+    data.append('cliente_id', cliente_id)
+    data.append('cantidad_archivos_garantias_aval', inp_archivos_garantias_aval.get(0).files.length)
+    data.append('cantidad_archivos_garantias_cliente', inp_archivos_garantias_cliente.get(0).files.length)
+    data.append('cantidad_archivos_cliente', inp_archivos_cliente.get(0).files.length)
+    data.append('cantidad_archivos_aval', inp_archivos_aval.get(0).files.length)
+
+
+    $.each(inp_archivos_cliente[0].files, function(i, file) {
+        data.append('archivo_cliente_'+i, file);
+    });
+
+    $.each(inp_archivos_aval[0].files, function(i, file) {
+        data.append('archivo_aval_'+i, file);
+    });
+
+    $.each(inp_archivos_garantias_aval[0].files, function(i, file) {
+        data.append('garantia_aval_'+i, file);
+    });
+
+    $.each(inp_archivos_garantias_cliente[0].files, function(i, file) {
+        data.append('garantia_cliente_'+i, file);
+    });
+
+
+    $.ajax({
+        url: 'php/Clientes/App.php',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function(response){
+
+
+            $('#modal_editar_cliente').modal('toggle');
+            Swal.fire({
+                icon: 'success',
+                title: 'cliente actualizado',
+                text: 'Se ha actualizado al cliente',
+                timer: 1000,
+                showCancelButton: false,
+                showConfirmButton: false
+            })
+            getClientes()
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+
+
+    // PETICION CON JSON
+
+   /*var datasend ={
         func: 'edit',
         nombre_cliente,
         direccion_cliente,
@@ -391,9 +463,9 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
         poblacion_id,
         colocadora_id,
         cliente_id
-    }
+    }*/
 
-    $.ajax({
+    /*$.ajax({
         type: 'POST',
         url: URL,
         data : JSON.stringify(datasend),
@@ -423,7 +495,7 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
             })
 
         }
-    })
+    })*/
 
 }
 
@@ -1076,7 +1148,7 @@ function getClientesRuta(ruta_id){
                             \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion}\', \'${response.data[i].telefono}\',
                             \'${response.data[i].nombre_ruta}\', \'${response.data[i].nombre_poblacion}\', \'${response.data[i].nombre_colocadora}\',
                             \'${response.data[i].nombre_aval}\', \'${response.data[i].otras_referencias}\', \'${response.data[i].garantias}\')" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
+                            <form action="php/PDF/pdf.php" method="POST" class="d-inline">
                             <input type="hidden" value="${response.data[i].id}" name="id"/>
                             <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
                         </form>

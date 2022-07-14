@@ -214,7 +214,7 @@
                                 <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
                             </div>
                             <div class="form-group col ml-3 mt-2">
-                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás</label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
@@ -227,7 +227,7 @@
                         <div class="form-row" id="inputs_registrar_cliente_4">
 
                             <div class="form-group col mt-2">
-                                <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré</label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_cliente" required multiple >
@@ -287,7 +287,7 @@
                             </div>
 
                             <div class="form-group col ml-3 mt-2">
-                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás </label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente_existente" required multiple >
@@ -296,7 +296,7 @@
                             </div>
 
                             <div class="form-group col mt-2">
-                                <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré </label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_cliente_existente" required multiple >
@@ -339,7 +339,7 @@
                             <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col ml-3 mt-2">
-                            <label for="inp_archivos_garantias_aval">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple >
@@ -351,7 +351,7 @@
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label for="inp_archivos_aval">Comprobante de domicilio e INE <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_archivos_aval">Comprobante de domicilio e INE </label>
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" id="inp_archivos_aval" required multiple >

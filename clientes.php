@@ -295,43 +295,58 @@
                             <label for="inp_editar_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="3" required></textarea>
                         </div>
-                        <!--<div class="form-group col mt-2">
-                            <label for="inp_editar_garantias_cliente">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_garantias_cliente" rows="3" required></textarea>
-                        </div>-->
-
-                    </div>
-
-                    <!--<hr>
-                    en otro form
-                    <h5>Información del aval</h5>
-
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_nombre_aval">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_editar_nombre_aval" placeholder="Nombre aval" autofocus required/>
-                        </div>
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_direccion_aval">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_editar_direccion_aval" placeholder="Dirección aval" required/>
-                        </div>
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_telefono_aval">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control"  type="number" min="0" id="inp_editar_telefono_aval" placeholder="Teléfono aval" required/>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_otras_referencias_aval" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <textarea class="form-control" id="inp_editar_garantias_aval" rows="3" required></textarea>
-                        </div>
                         
-                    </div>-->
+                       
+
+                    </div>
+
+                    <hr>
+                    
+                    <h5>Subir o cambiar archivos del cliente</h5>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_archivos_garantias_cliente">Archivos de garantiás</label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col mt-2">
+                            <label for="inp_archivos_cliente">Comprobante de domicilio, INE, tarjetón, contrato y pagaré </label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_cliente" required multiple >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    
+                    <h5>Subir o cambiar archivos del aval</h5>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col mt-2">
+                            <label for="inp_archivos_aval">Comprobante de domicilio, INE, tarjetón, contrato y pagaré </label>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="inp_archivos_aval" required multiple >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
