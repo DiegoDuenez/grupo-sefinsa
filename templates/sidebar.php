@@ -90,12 +90,12 @@ $ruta = basename($_SERVER['PHP_SELF']);
                     
                 </ul>
             </li>
-            <!--<li class="nav-item">
+            <li class="nav-item">
                 <a href="configuraciones.php"  class="nav-link <?php if($ruta == 'configuraciones.php') echo ' active'; ?>">
                     <i class="fa-solid fa-gears"></i>
                     <p>Configuraciones</p>
                 </a>
-            </li>-->
+            </li>
 
 
             <!--

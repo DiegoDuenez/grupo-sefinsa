@@ -434,7 +434,7 @@ function getPrestamos(){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -511,7 +511,7 @@ function getPrestamosRuta(ruta_id){
                 for(var i = 0; i < response.data.length; i++ ){
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -579,7 +579,7 @@ function getPrestamosPoblacion(poblacion_id){
                 for(var i = 0; i < response.data.length; i++ ){
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -647,7 +647,7 @@ function getPrestamosColocadora(colocadora_id){
                 for(var i = 0; i < response.data.length; i++ ){
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -1565,7 +1565,7 @@ function getPrestamosExcel(prestamo_id){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'
@@ -1664,7 +1664,7 @@ function getPrestamosExcel(prestamo_id){
 
                     var status
                     if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Finalizado</span>'
+                        status = '<span class="badge badge-success">Pagado</span>'
                     }
                     else if(response.data[i].status == 0){
                         status = '<span class="badge badge-warning">Pagandose</span>'

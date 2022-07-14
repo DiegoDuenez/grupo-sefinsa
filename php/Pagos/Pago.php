@@ -152,7 +152,7 @@ class Pago extends Database{
             $cantidadMultas = $this->SelectOne($queryCantidadMultas);
 
             //PENDIENTE CHECAR EN QUE SEMANA VA
-            $queryCantidadSemanas = "SELECT count(id) as cantidad_semanas FROM pagos WHERE prestamo_id = '$prestamo_id' and pagos.status = 1 || pagos.status = -1";
+            $queryCantidadSemanas = "SELECT count(id) as cantidad_semanas FROM $this->table WHERE prestamo_id = '$prestamo_id' and pagos.status = 1 or prestamo_id = '$prestamo_id' and pagos.status = -1";
             $cantidadSemanas = $this->SelectOne($queryCantidadSemanas);
 
             if($cantidadMultas['cantidad_multas'] == 0 && $cantidadSemanas['cantidad_semanas']  == 14){
@@ -247,7 +247,7 @@ class Pago extends Database{
                 $cantidadMultas = $this->SelectOne($queryCantidadMultas);
 
                 //PENDIENTE CHECAR EN QUE SEMANA VA
-                $queryCantidadSemanas = "SELECT count(id) as cantidad_semanas FROM pagos WHERE prestamo_id = '$prestamo_id' and pagos.status = 1 || pagos.status = -1";
+                $queryCantidadSemanas = "SELECT count(id) as cantidad_semanas FROM $this->table WHERE prestamo_id = '$prestamo_id' and pagos.status = 1 or prestamo_id = '$prestamo_id' and pagos.status = -1";
                 $cantidadSemanas = $this->SelectOne($queryCantidadSemanas);
 
                 if($cantidadSemanas['cantidad_semanas']  == 15){
