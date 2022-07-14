@@ -40,7 +40,7 @@
                         <div class="col-12">
                             <div class="card">
                             <div class="card-header">
-                            <h3 class="card-title">Poblaciones registradas</h3>
+                            <h3 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Poblaciones registradas</h3>
                             </div>
                                 <div class="card-body">
                                     <table class="table" id="tabla_localidades">
