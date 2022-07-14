@@ -453,6 +453,7 @@ function getPrestamos(){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
+                        response.data[i].modalidad_semanas + " semanas",
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
@@ -528,6 +529,7 @@ function getPrestamosRuta(ruta_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
+                        response.data[i].modalidad_semanas + " semanas",
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
@@ -595,6 +597,7 @@ function getPrestamosPoblacion(poblacion_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
+                        response.data[i].modalidad_semanas + " semanas",
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
@@ -662,6 +665,7 @@ function getPrestamosColocadora(colocadora_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
+                        response.data[i].modalidad_semanas + " semanas",
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>

@@ -100,6 +100,7 @@
                                             <th scope="col">Semana 18</th>
                                             <th scope="col">Semana 19</th>
                                             <th scope="col">Semana 20</th>-->
+                                            <th scope="col">Modalidad</th>
                                             <th scope="col">Estatus</th>
                                             <th scope="col">Pagos</th>
 
@@ -112,6 +113,7 @@
                                     <tfoot>
                                         <tr class="thead-dark">
                                             <th>Totales</th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
