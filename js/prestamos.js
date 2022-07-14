@@ -48,6 +48,7 @@ var inp_fecha_prestamo = $('#inp_fecha_prestamo')
 var inp_monto_prestar = $('#inp_monto_prestar')
 var inp_pago_semana = $('#inp_pago_semana')
 var inp_monto_prestar_intereses = $('#inp_monto_prestar_intereses')
+var inp_tarjeton = $('#inp_tarjeton')
 // URI
 var cliente = ""
 var clienteID = ""
@@ -780,6 +781,7 @@ btn_guardar_prestamo.click(function(){
 
         if(inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
+        || inp_tarjeton.val() == ""
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
         {
             Swal.fire({
@@ -811,6 +813,8 @@ btn_guardar_prestamo.click(function(){
             data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
+            data.append('tarjeton', inp_tarjeton.val())
+
 
 
             $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -896,6 +900,7 @@ btn_guardar_prestamo.click(function(){
         if(inp_nombre_cliente.val() == "" || inp_direccion_cliente.val() == "" || inp_telefono_cliente.val() == ""
         || $('.select_rutas option:selected').val() == 0  || $('.select_poblaciones option:selected').val() == 0 
         || $('.select_colocadoras option:selected').val() == 0 
+        || inp_tarjeton.val() == ""
         || inp_nombre_aval.val() == "" || inp_direccion_aval.val() == "" || inp_telefono_aval.val() == ""
         || inp_otras_referencias_aval.val() == "" || inp_garantias_cliente.val() == "" || inp_garantias_aval.val() == ""
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0)
@@ -935,6 +940,8 @@ btn_guardar_prestamo.click(function(){
             data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
+            data.append('tarjeton', inp_tarjeton.val())
+
 
 
             $.each(inp_archivos_cliente[0].files, function(i, file) {
@@ -1015,6 +1022,7 @@ btn_guardar_prestamo.click(function(){
         || inp_otras_referencias_aval.val() == "" || select_clientes_registrar.val() == "0" 
         || inp_garantias_cliente_existente.val() == "" || inp_garantias_aval.val() == ""
         || inp_monto_prestar.val() == 0 || inp_pago_semana.val() == 0
+        || inp_tarjeton.val() == ""
         || $('#select_rutas_registrar_existente option:selected').val() == 0
         || $('#select_colocadoras_registrar_existente option:selected').val() == 0
         ||  $('#select_poblaciones_registrar_existente option:selected').val() == 0
@@ -1055,6 +1063,8 @@ btn_guardar_prestamo.click(function(){
             data.append('monto_prestado_intereses', 0.00)
             data.append('pago_semanal', inp_pago_semana.val())
             data.append('modalidad_semanas', $('#select_modalidad option:selected').val())
+            data.append('tarjeton', inp_tarjeton.val())
+
 
             $.each(inp_archivos_cliente_existente[0].files, function(i, file) {
                 data.append('archivo_cliente_'+i, file);
