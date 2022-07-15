@@ -8,7 +8,15 @@ var cb_multa = $('#cb_multa')
 var inp_concepto = $('#inp_concepto')
 var select_clientes_filtro = $('#select_clientes_filtro')
 var select_clientes_prestamos_filtro = $('#select_clientes_prestamos_filtro')
+var inp_fecha_pago = $('#inp_fecha_pago')
 var btn_omitir_pago = $('#btn_omitir_pago')
+var inp_folio = $('#inp_folio')
+var span_pago = $('#span_pago')
+var ec_monto = $('#ec_monto')
+var ec_ruta = $('#ec_ruta')
+var ec_poblacion = $('#ec_poblacion')
+var ec_cliente = $('#ec_cliente')
+var span_fecha_prestamo = $('#span_fecha_prestamo')
 
 var pagoId;
 var prestamoId;
@@ -16,9 +24,55 @@ var montoMulta;
 var table;
 var clienteIdFiltro;
 var prestamoIdFiltro;
-
+var tabla_ec_pagos;
 
 $(document).ready(function(){
+
+    tabla_ec_pagos = $('#tabla_ec_pagos').DataTable({
+        bFilter: false,
+        bInfo: false,
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+        "aaSorting": [],
+        "footerCallback": function(row, data, start, end, display) {
+            var api = this.api();
+           
+            api.columns('.sum_ec_abono', {
+              page: 'current'
+            }).every(function() {
+              var sum = this
+                .data()
+                .reduce(function(a, b) {
+                   a = a.toString().replace(/[$]/g,'');
+                   b = b.toString().replace(/[$]/g,'');
+                   a = a.toString().replace(/[,]/g,'');
+                    b = b.toString().replace(/[,]/g,'');
+                  var x = parseFloat(a) || 0;
+                  var y = parseFloat(b) || 0;
+                  return x + y;
+                }, 0);
+              $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+            });
+        
+            api.columns('.sum_ec_multa', {
+                page: 'current'
+              }).every(function() {
+                var sum = this
+                  .data()
+                  .reduce(function(a, b) {
+                     a = a.toString().replace(/[$]/g,'');
+                     b = b.toString().replace(/[$]/g,'');
+                     a = a.toString().replace(/[,]/g,'');
+                      b = b.toString().replace(/[,]/g,'');
+                    var x = parseFloat(a) || 0;
+                    var y = parseFloat(b) || 0;
+                    return x + y;
+                  }, 0);
+                $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
+              });
+        }
+
+    })
 
     table = $('#tabla_pagos').DataTable( {
       
@@ -36,9 +90,9 @@ $(document).ready(function(){
                 "next": "Siguiente"
             }
         },
-        /*"columnDefs": [
-            { "visible": false, "targets": -1 }
-          ],*/
+        "columnDefs": [
+            { "visible": false, "targets": 10 }
+          ],
           //order: [[8, 'asc']],
           "aaSorting": [],
 
@@ -300,7 +354,8 @@ function getPagosPrestamo(prestamo_id)
                         response.data[i].fecha_pago,
                         status,
                         response.data[i].status == 0 ? `
-                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
+                        , \'${response.data[i].monto_prestado}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : '',
 
@@ -375,20 +430,23 @@ function getPagos(){
 
 
                     table.row.add([
+                        response.data[i].semana, 
+                        response.data[i].folio, 
                         response.data[i].nombre_completo, 
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
-                        "$ " + response.data[i].cantidad_pendiente,
+                        `<span class="text-danger text-bold">$ ${response.data[i].cantidad_pendiente}</span>`,
                         "$ " + response.data[i].cantidad_total_pagada,
-                        response.data[i].concepto,
                         response.data[i].fecha_pago,
+                        "$ " + response.data[i].balance,
                         status,
                         response.data[i].status == 0 ? `
-                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
+                        , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
-                        ` : '',
+                        ` : ''
 
 
                     ]);
@@ -418,13 +476,21 @@ function getPagos(){
 }
 
 
-function modalPagar(pago_id, prestamo_id, monto_multa){
+function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, poblacion, monto, fecha_prestamo){
     //alert(monto_multa)
     cb_multa.prop('checked', false);
     label_multa.text(`Aplicar multa de $${monto_multa}`)
+    span_pago.text(`$ ${pago}`)
+    ec_cliente.text(cliente)
+    ec_ruta.text(ruta)
+    ec_poblacion.text(poblacion)
+    ec_monto.text(`$ ${monto}`)
+    span_fecha_prestamo.text(fecha_prestamo)
+
     pagoId = pago_id
     prestamoId = prestamo_id
     montoMulta = monto_multa
+    getPagosPrestamoPagados(prestamo_id)
     puedeOmitirUltimaSemana(prestamoId)
 
 }
@@ -451,7 +517,7 @@ btn_guardar_pago.click(function(){
             showConfirmButton: false
         })
     }
-    else if(inp_concepto.val() == ""){
+    else if(inp_concepto.val() == ""  || inp_fecha_pago.val() == "" || inp_folio.val() == ""){
         Swal.fire({
             icon: 'warning',
             title: 'Campos vacios',
@@ -463,7 +529,7 @@ btn_guardar_pago.click(function(){
     }
     else{
 
-        cb_multa.prop('checked') ? hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), montoMulta, inp_concepto.val()) : hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), 0.00, inp_concepto.val()) 
+        cb_multa.prop('checked') ? hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), montoMulta, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) : hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), 0.00, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) 
            
     }
 
@@ -582,7 +648,7 @@ function puedeOmitirUltimaSemana(prestamo_id){
 
 
 
-function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
+function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto, fecha_pago, folio){
 
     var datasend ={
         func: 'pagar',
@@ -590,7 +656,9 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
         prestamo_id,
         pago_recibido,
         pago_multa,
-        concepto
+        concepto,
+        fecha_pago,
+        folio
     }
 
     $.ajax({
@@ -600,9 +668,6 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto){
         data : JSON.stringify(datasend),
         dataType: 'json',
         success : function(response) {
-
-            console.log(response.data)
-            console.log(response.data2)
 
             if(response.status == "success"){
 
@@ -782,7 +847,7 @@ function noPagar(pago_id, pago_multa){
 
     Swal.fire({
         icon: 'warning',
-        title: 'No realizar pago',
+        title: 'No realizó pago',
         text: 'Se marcara el pago como No pagado, ¿Esta seguro de esto?',
         showCancelButton: true,
         showConfirmButton: true,
@@ -856,3 +921,72 @@ function noPagar(pago_id, pago_multa){
 
 }
 
+
+function getPagosPrestamoPagados(prestamo_id){
+
+
+    var datasend = {
+        func: "pagosPrestamoPagados",
+        prestamo_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            console.log(response)
+            if(response.status == 'success'){
+
+                tabla_ec_pagos.clear()
+                for(var i = 0; i < response.data.length; i++ ){
+
+                    var status
+                    if(response.data[i].status == 1){
+                        status = '<span class="badge badge-success">Pagado</span>'
+                    }
+                    else if(response.data[i].status == 0){
+                        status = '<span class="badge badge-warning">Pendiente</span>'
+                    }
+                    else if(response.data[i].status == -1){
+                        status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+                    else if(response.data[i].status == 2){
+                        status = '<span class="badge badge-info">Omitido</span>'
+                    }
+
+
+                    tabla_ec_pagos.row.add([
+                        response.data[i].semana, 
+                        response.data[i].fecha_pago_realizada,
+                        "$ " + response.data[i].cantidad_normal_pagada,
+                        "$ " + response.data[i].cantidad_multa,
+                        status
+                    ]);
+
+
+                }
+                tabla_ec_pagos.draw();
+
+            }
+
+        },
+        error : function(e){
+
+            console.log(e)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        },
+        complete : function(){
+            $.unblockUI();
+        }
+    });
+
+}

@@ -10,48 +10,15 @@ class Pago extends Database{
     public function index()
     {
 
-        $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa
+        $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa,
+        poblaciones.nombre_poblacion, rutas.nombre_ruta, prestamos.fecha_prestamo
         FROM $this->table 
         INNER JOIN prestamos ON $this->table.prestamo_id = prestamos.id
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
         INNER JOIN poblaciones ON clientes.poblacion_id = poblaciones.id
+        INNER JOIN rutas ON clientes.ruta_id = rutas.id
         ORDER BY $this->table.prestamo_id DESC, $this->table.fecha_pago ASC
         ";
-
-        $queryPrestamos = "SELECT prestamo_id FROM pagos GROUP BY prestamo_id";
-        $prestamos_id = $this->Select($queryPrestamos);
-
-        /*$puedeOmitirUltimaSemana = false;
-
-        $keys = array_keys($prestamos_id);
-        $arraySize = count($prestamos_id); 
-
-        for($i=0; $i < $arraySize; $i++) {
-            $id = $prestamos_id[$i]['prestamo_id'];
-
-            //PENDIENTE CHECAR SI TIENE MULTAS
-            $queryCantidadMultas = "SELECT count(id) as cantidad_multas FROM $this->table WHERE prestamo_id = '$id' and cantidad_multa != 0;";
-            $cantidadMultas = $this->SelectOne($queryCantidadMultas);
-
-            //PENDIENTE CHECAR EN QUE SEMANA VA
-            $queryCantidadSemanas = "SELECT count(id) as cantidad_semanas FROM pagos WHERE prestamo_id = '$id' and pagos.status = 1 || pagos.status = -1";
-            $cantidadSemanas = $this->SelectOne($queryCantidadSemanas);
-
-            if($cantidadMultas['cantidad_multas'] == 0 && $cantidadSemanas['cantidad_semanas']  == 14){
-
-                $puedeOmitirUltimaSemana = true;
-                
-            } 
-            else if($cantidadMultas['cantidad_multas'] == 0 && $cantidadSemanas['cantidad_semanas']  == 19){
-
-                $puedeOmitirUltimaSemana = true;
-
-            }
-            else{
-                $puedeOmitirUltimaSemana = false;
-
-            }
-        }*/
 
         return json([
             'status' => 'success', 
@@ -60,6 +27,24 @@ class Pago extends Database{
         ], 200);
 
     }
+
+    public function pagosPrestamoPagados($prestamo_id){
+
+        $query = "SELECT $this->table.* from $this->table
+        INNER JOIN prestamos ON prestamos.id = pagos.prestamo_id
+        INNER JOIN clientes ON prestamos.cliente_id = clientes.id
+        where prestamos.id = '$prestamo_id' and $this->table.status != 0
+        ORDER BY $this->table.semana DESC";
+
+        return json([
+            'status' => 'success', 
+            'data'=> $this->Select($query), 
+            'message'=> ''
+        ], 200);
+
+    }
+
+    
 
     public function omitirSemanaPago($pago_id){
 
@@ -192,7 +177,7 @@ class Pago extends Database{
     }
 
 
-    public function pagar($pago_id, $prestamo_id, $pago_recibido, $pago_multa, $concepto)
+    public function pagar($pago_id, $prestamo_id, $pago_recibido, $pago_multa, $concepto, $fecha_pago, $folio)
     {
         try{
 
@@ -203,9 +188,17 @@ class Pago extends Database{
             $queryPago = $this->SelectOne($query);
 
         
+            $queryPrestamo = "SELECT monto_prestado FROM prestamos WHERE id = '$prestamo_id'";
+            $prestamo = $this->SelectOne($queryPrestamo);
 
-            $update = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_multa = ?, cantidad_total_pagada = ?, concepto = ?, status = ? WHERE $this->table.id = '$pago_id'";
-            $pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $concepto , $status]);
+            $balance = $queryPago['balance'] + $pago_multa - $pago_recibido;
+
+            $update = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_multa = ?, cantidad_total_pagada = ?, 
+            concepto = ?, status = ?, fecha_pago_realizada = ?, folio = ? WHERE $this->table.id = '$pago_id'";
+            $pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $concepto , $status, $fecha_pago, $folio]);
+
+            $update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
+            $pago2 = $this->ExecuteQuery($update, [$balance]);
 
             if($pago) {
 
@@ -307,6 +300,10 @@ class Pago extends Database{
 
             $pago_siguiente = $siguientePago['cantidad_esperada_pago'] + $queryPago['cantidad_esperada_pago'];
 
+            $prestamo_id = $queryPago['prestamo_id'];
+            $queryPrestamo = "SELECT monto_prestado FROM prestamos WHERE id = '$prestamo_id'";
+            $prestamo = $this->SelectOne($queryPrestamo);
+
 
             $update = "UPDATE $this->table SET status = ? WHERE $this->table.id = '$pago_id'";
             $pago1 = $this->ExecuteQuery($update, [-1]);
@@ -314,6 +311,10 @@ class Pago extends Database{
             $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '$siguientePagoId'";
             $pago2 = $this->ExecuteQuery($update, [$pago_siguiente]);
 
+            $balance = $queryPago['balance'] + $queryPago['cantidad_esperada_pago'];
+
+            $update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
+            $pago3 = $this->ExecuteQuery($update, [$balance]);
 
             if($pago1 && $pago2) {
 

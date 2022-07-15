@@ -24,6 +24,11 @@ switch($func){
         echo $Pago->pagosPrestamo($prestamo_id);
     break;
 
+    case 'pagosPrestamoPagados':
+        $prestamo_id = $_DATA['prestamo_id'];
+        echo $Pago->pagosPrestamoPagados($prestamo_id);
+    break;
+
     case 'pagar':
 
         $pago_id = $_DATA['pago_id'];
@@ -31,8 +36,10 @@ switch($func){
         $pago_recibido = $_DATA['pago_recibido'];
         $pago_multa = $_DATA['pago_multa'];
         $concepto = $_DATA['concepto'];
+        $fecha_pago = $_DATA['fecha_pago'];
+        $folio = $_DATA['folio'];
 
-        echo $Pago->pagar($pago_id, $prestamo_id, $pago_recibido, $pago_multa, $concepto);
+        echo $Pago->pagar($pago_id, $prestamo_id, $pago_recibido, $pago_multa, $concepto, $fecha_pago, $folio);
 
     break;
 

@@ -153,9 +153,9 @@ class Prestamo extends Database{
                 {
                     $fecha = date("Y-m-d",strtotime($fecha_prestamo."+ $i week"));           
                     //array_push($arreglo_fechas, $fecha);
-                    $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago)
-                    VALUES (?, ?, ?, ?, ?, ?)";
-                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha]);
+                    $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago, semana, balance)
+                    VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha, $i, $monto_prestado]);
                     if($i ==  15){
                         $insertado = true;
                     }
