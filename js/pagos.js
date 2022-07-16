@@ -26,6 +26,8 @@ var clienteIdFiltro;
 var prestamoIdFiltro;
 var tabla_ec_pagos;
 
+var semanaRenovar;
+
 $(document).ready(function(){
 
     tabla_ec_pagos = $('#tabla_ec_pagos').DataTable({
@@ -444,7 +446,7 @@ function getPagos(){
                         status,
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
-                        , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                        , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : ''
 
@@ -476,7 +478,7 @@ function getPagos(){
 }
 
 
-function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, poblacion, monto, fecha_prestamo){
+function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, poblacion, monto, fecha_prestamo, semana){
     //alert(monto_multa)
     cb_multa.prop('checked', false);
     label_multa.text(`Aplicar multa de $${monto_multa}`)
@@ -486,6 +488,7 @@ function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, pobl
     ec_poblacion.text(poblacion)
     ec_monto.text(`$ ${monto}`)
     span_fecha_prestamo.text(fecha_prestamo)
+    semanaRenovar = semana
 
     pagoId = pago_id
     prestamoId = prestamo_id
@@ -529,7 +532,27 @@ btn_guardar_pago.click(function(){
     }
     else{
 
-        cb_multa.prop('checked') ? hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), montoMulta, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) : hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), 0.00, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) 
+        if(semanaRenovar == "10"){
+
+            Swal.fire({
+                icon: 'question',
+                title: '¿Cliente renueva?',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No',
+
+            }).then((result) => {
+                
+                /*if (result.isConfirmed) {
+                    window.location.href = `${env.local.url}prestamos.php?c=${response.data.id}`;
+                }*/
+            })
+
+        }
+        else{
+            cb_multa.prop('checked') ? hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), montoMulta, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) : hacerPago(pagoId, prestamoId, inp_cantidad_pagada.val(), 0.00, inp_concepto.val(), inp_fecha_pago.val(), inp_folio.val()) 
+        }
            
     }
 

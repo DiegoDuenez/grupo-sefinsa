@@ -54,7 +54,7 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active p-3" id="abonosconfig" role="tabpanel" aria-labelledby="abonos-tab">
                                         <div class="d-flex w-100 flex-row justify-content-end">
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar abonos</button>
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_abono">Registrar abono</button>
                                         </div>
                                         <table class="table mt-3" id="tabla_abonos">
                                             <thead>
@@ -82,6 +82,7 @@
                                                     <th scope="col">Cantidad</th>
                                                     <th scope="col">Interes</th>
                                                     <th scope="col">Tipo de abono</th>
+                                                    <th scope="col">Semana de renovación</th>
                                                     <th scope="col">Estatus</th>
                                                     <th scope="col">Acciones</th>
 
@@ -121,34 +122,55 @@
     </div>
 
 
-    <!-- Modal Registrar -->
-    <div class="modal fade" id="modal_registrar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Registrar Abonos -->
+    <div class="modal fade" id="modal_registrar_abono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Registrar abono</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                        <label for="inp_abono_cantidad">Cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_abono_cantidad" placeholder="Cantidad" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_usuario" placeholder="Usuario" required/>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="select_perfiles_registrar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_perfiles registrar"  id="select_perfiles_registrar">
+                        <label for="select_abono_tipo_cantidad">Tipo de cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_abono_tipo_cantidad"  id="select_abono_tipo_cantidad"  style="width:100%;">
+                            <option value="%">Porcentaje (%)</option>
+                            <option value="$">Peso ($)</option>
                         </select>
+
+                        <div class="form-row d-flex mt-2">
+                            <div class="form-group col mt-2">
+                                <input class="form-control bg-white" id="inp_abono_cantidad_con_tipo" autofocus disabled/>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <select class="form-control col select_tipo"  id="select_tipo"  style="width:100%;">
+                                    <option value="0">Por cada</option>
+                                    <option value="1">De</option>
+                                </select>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input  class="form-control" id="inp_cantidad_pagada" type="number" placeholder="0.00" required name="price" min="0.00" value="" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_password">Contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control" id="inp_password" type="password" placeholder="Contraseña" required/>
-                    </div>
+                    <!--<div class="form-group mt-2">
+                        <label for="inp_descripcion">Descripción <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <textarea class="form-control" id="inp_descripcion" rows="3" required></textarea>
+                    </div>-->
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_usuario">Guardar</button>
@@ -207,7 +229,7 @@
 
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
-  <script src="js/configuracion_semanas.js"></script>
+  <script src="js/configuraciones.js"></script>
 
 
 </body>
