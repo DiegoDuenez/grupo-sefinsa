@@ -27,6 +27,7 @@ var prestamoIdFiltro;
 var tabla_ec_pagos;
 
 var semanaRenovar;
+var modalidadPagoSeleccionado
 
 $(document).ready(function(){
 
@@ -331,8 +332,6 @@ function getPagosPrestamo(prestamo_id)
 
             if(response.status == 'success'){
 
-                console.log(response)
-
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
@@ -371,7 +370,6 @@ function getPagosPrestamo(prestamo_id)
                         , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : ''
-
 
                     ]);
 
@@ -419,13 +417,11 @@ function getPagos(){
 
             if(response.status == 'success'){
 
-
-                console.log(response)
-
                 table.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
                     puedeOmitirUltimaSemana(response.data[i].prestamo_id)
+
 
                     var status
                     if(response.data[i].status == 1){
@@ -457,10 +453,9 @@ function getPagos(){
                         status,
                         response.data[i].status == 0 ? `
                         <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
-                        , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
+                        , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\', ${response.data[i].modalidad_semanas})" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : ''
-
 
                     ]);
 
@@ -489,7 +484,7 @@ function getPagos(){
 }
 
 
-function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, poblacion, monto, fecha_prestamo, semana){
+function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, poblacion, monto, fecha_prestamo, semana, modalidad){
     //alert(monto_multa)
     cb_multa.prop('checked', false);
     label_multa.text(`Aplicar multa de $${monto_multa}`)
@@ -500,6 +495,7 @@ function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, pobl
     ec_monto.text(`$ ${monto}`)
     span_fecha_prestamo.text(fecha_prestamo)
     semanaRenovar = semana
+    modalidadPagoSeleccionado = modalidad
    
     pagoId = pago_id
     prestamoId = prestamo_id
@@ -694,7 +690,34 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto, fe
 
             if(response.status == "success"){
 
-                if(semanaRenovar != 10){
+
+                if(semanaRenovar == 10 && modalidadPagoSeleccionado == 15 || semanaRenovar == 15 && modalidadPagoSeleccionado == 20){
+
+                    Swal.fire({
+                        icon: 'question',
+                        title: '¿Cliente renueva?',
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                        confirmButtonText: 'Si',
+                        cancelButtonText: 'No',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+        
+                    }).then((result) => {
+                        
+                        if (result.isConfirmed) {
+                            window.location.href = `${env.local.url}prestamos.php?p=${prestamo_id}`;
+                        }
+                        else{
+                            $('#modal_pagar').modal('toggle');
+                            getPagos()
+                        }
+
+                    })                  
+
+                }
+                else{
+
                     $('#modal_pagar').modal('toggle');
                     Swal.fire({
                         icon: 'success',
@@ -714,31 +737,6 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto, fe
                             }
                         }
                         else{
-                            getPagos()
-                        }
-
-                    })
-
-                }
-                else{
-
-                    Swal.fire({
-                        icon: 'question',
-                        title: '¿Cliente renueva?',
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        confirmButtonText: 'Si',
-                        cancelButtonText: 'No',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-        
-                    }).then((result) => {
-                        
-                        if (result.isConfirmed) {
-                            window.location.href = `${env.local.url}prestamos.php?p=${prestamo_id}`;
-                        }
-                        else{
-                            $('#modal_pagar').modal('toggle');
                             getPagos()
                         }
 
@@ -869,7 +867,6 @@ function getPagosCliente(cliente_id){
                         , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\')" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
                         <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\')" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         ` : ''
-
 
                     ]);
 

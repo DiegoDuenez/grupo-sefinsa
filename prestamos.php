@@ -501,6 +501,13 @@
                 </button>
             </div>
                 <div class="modal-body">
+                    
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_fecha_renovacion" class="d-none">Fecha de renovación <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_fecha_renovacion" type="hidden" value="<?php echo date('Y-m-d'); ?>" required />
+                        </div>
+                    </div>
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
@@ -530,7 +537,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input  class="form-control" id="inp_debe_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                <input  class="form-control" id="inp_debe_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" disabled pattern="^\d+(?:\.\d{1,2})?$"/>
                             </div>
                         </div>
                     </div>
@@ -538,7 +545,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_perfil">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btn_renovar">Renovar</button>
                 </div>
             </div>
         </div>

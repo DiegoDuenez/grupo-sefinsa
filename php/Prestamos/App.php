@@ -39,6 +39,19 @@ switch($func){
 
     break;
 
+    case 'renovarPrestamo':
+
+        $prestamo_id = $_DATA['prestamo_id'];
+        $tarjeton = $_DATA['tarjeton'];
+        $monto_renovar = $_DATA['monto_renovar'];
+        $pago_semanal = $_DATA['pago_semanal'];
+        $fecha_prestamo = $_DATA['fecha_prestamo'];
+        $monto_debe = $_DATA['monto_debe'];
+
+        echo $Prestamo->renovarPrestamo($prestamo_id, $tarjeton, $monto_renovar, $pago_semanal, $fecha_prestamo, $monto_debe);
+
+    break;
+
     case 'create':
 
         /*$cliente_id = $_DATA['cliente_id'];

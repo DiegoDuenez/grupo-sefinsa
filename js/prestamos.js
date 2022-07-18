@@ -14,6 +14,8 @@ var prestamosTab = $('#prestamosTab')
 var btn_guardar_prestamo = $('#btn_guardar_prestamo')
 var btn_siguiente_usuario = $('#btn_siguiente_usuario')
 var btn_anterior_usuario = $('#btn_anterior_usuario')
+var btn_renovar = $('#btn_renovar')
+var inp_fecha_renovacion = $('#inp_fecha_renovacion')
 
 // MODAL RENOVAR
 var inp_tarjeton_renovar = $('#inp_tarjeton_renovar')
@@ -59,7 +61,8 @@ var cliente = ""
 var clienteID = ""
 var table
 var tableExcel
-
+var prestamo = ""
+var modalidadSemanasRenovar = ""
 
 $(document).ready(function(){
 
@@ -296,10 +299,10 @@ $('#select_modalidad').on('change', function() {
     monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
     inp_monto_prestar_intereses.val(monto_con_interes )
 
-    console.log('abono', abono)
+   /* console.log('abono', abono)
     console.log('interes', interes)
     console.log('monto_interes', monto_con_interes)
-    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
+    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)*/
 
     if(this.value == 15){
         pago_semanal = (inp_monto_prestar.val() * abono) / 100
@@ -308,7 +311,7 @@ $('#select_modalidad').on('change', function() {
         pago_semanal = abono * (inp_monto_prestar.val() / 1000)
     }
 
-    console.log('pago_semanal',pago_semanal)
+   // console.log('pago_semanal',pago_semanal)
 
 
     inp_pago_semana.val(pago_semanal)
@@ -450,6 +453,9 @@ function getPrestamos(){
                     }
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
+                    }
+                    else if(response.data[i].status == 2){
+                        status = '<span class="badge badge-primary">Renovado</span>'
                     }
                     
                     table.row.add([
@@ -1807,7 +1813,8 @@ function getPrestamo(prestamo_id){
 
             if(response.status == 'success'){
 
-                console.log(response)
+                console.log(response.data)
+                modalidadSemanasRenovar = response.data.modalidad_semanas
                 inp_debe_renovar.val(response.data.debe)
             }
             
@@ -1824,4 +1831,87 @@ function getPrestamo(prestamo_id){
         }
     });
 
+}
+
+btn_renovar.click(function(){
+
+    var interes = 0
+    var abono = 0
+    if(modalidadSemanasRenovar == 15){
+        interes = 50
+        abono = 10
+    }
+    else if(modalidadSemanasRenovar == 20){
+        interes = 60
+        abono = 80
+    }
+
+    console.log('abono', abono)
+    console.log('interes', interes)
+
+    if(modalidadSemanasRenovar  == 15){
+        pago_semanal = (inp_monto_renovar.val() * abono) / 100
+    }
+    else if(modalidadSemanasRenovar  == 20){
+        pago_semanal = abono * (inp_monto_renovar.val() / 1000)
+    }
+
+    //console.log('pago_semanal',pago_semanal)
+
+    renovarPrestamo(prestamo, inp_tarjeton_renovar.val(), inp_monto_renovar.val(), pago_semanal, inp_fecha_renovacion.val(),inp_debe_renovar.val() )
+
+})
+
+
+function renovarPrestamo(prestamo_id, tarjeton, monto_renovar, pago_semanal, fecha_prestamo, monto_debe)
+{
+
+    var datasend = {
+        func: "renovarPrestamo",
+        prestamo_id,
+        tarjeton,
+        monto_renovar,
+        pago_semanal,
+        fecha_prestamo,
+        monto_debe
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campos vacios',
+                    text: 'Necesitas llenar todos los campos',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                }).then((result)=>{
+
+                    $('#modal_renovar').modal('toggle');
+                    window.location.href = RemoveParameterFromUrl(window.location.href, 'p')
+
+                })
+
+            }
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+    
 }

@@ -11,7 +11,7 @@ class Pago extends Database{
     {
 
         $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa,
-        poblaciones.nombre_poblacion, rutas.nombre_ruta, prestamos.fecha_prestamo
+        poblaciones.nombre_poblacion, rutas.nombre_ruta, prestamos.fecha_prestamo, prestamos.modalidad_semanas
         FROM $this->table 
         INNER JOIN prestamos ON $this->table.prestamo_id = prestamos.id
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
@@ -90,15 +90,15 @@ class Pago extends Database{
     public function pagosPrestamo($prestamo_id)
     {
 
-        $query = "SELECT $this->table.*,prestamos.monto_prestado, 
-        clientes.nombre_completo, poblaciones.monto_multa
+        $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa,
+        poblaciones.nombre_poblacion, rutas.nombre_ruta, prestamos.fecha_prestamo, prestamos.modalidad_semanas
         FROM $this->table 
         INNER JOIN prestamos ON $this->table.prestamo_id = prestamos.id
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
         INNER JOIN poblaciones ON clientes.poblacion_id = poblaciones.id
+        INNER JOIN rutas ON clientes.ruta_id = rutas.id
         WHERE prestamos.id = '$prestamo_id'
-        ORDER BY clientes.nombre_completo ASC
-        ";
+        ORDER BY $this->table.prestamo_id DESC, $this->table.fecha_pago ASC";
 
         return json([
             'status' => 'success', 
@@ -111,14 +111,15 @@ class Pago extends Database{
     public function pagosCliente($cliente_id)
     {
 
-        $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa
+        $query = "SELECT $this->table.*,prestamos.monto_prestado, clientes.nombre_completo, poblaciones.monto_multa,
+        poblaciones.nombre_poblacion, rutas.nombre_ruta, prestamos.fecha_prestamo, prestamos.modalidad_semanas
         FROM $this->table 
         INNER JOIN prestamos ON $this->table.prestamo_id = prestamos.id
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
         INNER JOIN poblaciones ON clientes.poblacion_id = poblaciones.id
+        INNER JOIN rutas ON clientes.ruta_id = rutas.id
         WHERE clientes.id = '$cliente_id'
-        ORDER BY $this->table.prestamo_id DESC, $this->table.fecha_pago ASC
-        ";
+        ORDER BY $this->table.prestamo_id DESC, $this->table.fecha_pago ASC";
 
         return json([
             'status' => 'success', 
