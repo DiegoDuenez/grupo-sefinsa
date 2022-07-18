@@ -92,8 +92,11 @@ $(document).ready(function(){
                 "next": "Siguiente"
             }
         },
+        createdRow: function (row, data, index) {
+            $('td', row).eq(7).addClass('text-danger').addClass('text-bold');
+        },
         "columnDefs": [
-            { "visible": false, "targets": 10 }
+            { "visible": false, "targets": [] }
           ],
           //order: [[8, 'asc']],
           "aaSorting": [],
@@ -189,8 +192,10 @@ $(document).ready(function(){
                       b = b.toString().replace(/[,]/g,'');
                     var x = parseFloat(a) || 0;
                     var y = parseFloat(b) || 0;
-        
                    
+                    console.log(x)
+                  console.log(y)  
+
                     return x + y;
                   }, 0);
                 $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
@@ -356,7 +361,7 @@ function getPagosPrestamo(prestamo_id)
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
-                        `<span class="text-danger text-bold">$ ${response.data[i].cantidad_pendiente}</span>`,
+                        `$ ${response.data[i].cantidad_pendiente}`,
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].fecha_pago,
                         "$ " + response.data[i].balance,
@@ -445,7 +450,7 @@ function getPagos(){
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
-                        `<span class="text-danger text-bold">$ ${response.data[i].cantidad_pendiente}</span>`,
+                        `$ ${response.data[i].cantidad_pendiente}`,
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].fecha_pago,
                         "$ " + response.data[i].balance,
@@ -689,7 +694,6 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto, fe
 
             if(response.status == "success"){
 
-                alert(semanaRenovar)
                 if(semanaRenovar != 10){
                     $('#modal_pagar').modal('toggle');
                     Swal.fire({
@@ -855,7 +859,7 @@ function getPagosCliente(cliente_id){
                         "$ " + response.data[i].cantidad_esperada_pago,
                         "$ " + response.data[i].cantidad_normal_pagada,
                         "$ " + response.data[i].cantidad_multa,
-                        `<span class="text-danger text-bold">$ ${response.data[i].cantidad_pendiente}</span>`,
+                        `$ ${response.data[i].cantidad_pendiente}`,
                         "$ " + response.data[i].cantidad_total_pagada,
                         response.data[i].fecha_pago,
                         "$ " + response.data[i].balance,

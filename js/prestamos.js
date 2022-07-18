@@ -153,6 +153,8 @@ $(document).ready(function(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     cliente = urlParams.get('c')
+    prestamo = urlParams.get('p')
+
     if(cliente){
         $('#modal_registrar_prestamo').modal('toggle');
         inputs_registrar_cliente_1.hide()
@@ -160,14 +162,15 @@ $(document).ready(function(){
         group_or_client.hide()
         prestamosTab.hide()
         traerCliente(cliente)
-        //formClienteSoloArchivos.show()
 
     }
     else{
-       // $('#modal_registrar_prestamo').modal({backdrop: 'static'})
        titulo_cliente.hide()
        modal_prestamos_label.text('Registrar cliente y aval')
+    }
 
+    if(prestamo){
+        $('#modal_renovar').modal('toggle')
     }
 })
 

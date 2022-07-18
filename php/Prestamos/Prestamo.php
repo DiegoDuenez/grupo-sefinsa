@@ -151,14 +151,18 @@ class Prestamo extends Database{
 
                 $insertado = false;
 
+                /*$queryBalance = "SELECT sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id'";
+                $balance = $this->SelectOne($queryBalance);*/
+
                 
+                $balance = $pago_semanal * $modalidad;
                 for($i = 1; $i <= $modalidad; $i++)
                 {
                     $fecha = date("Y-m-d",strtotime($fecha_prestamo."+ $i week"));           
                     //array_push($arreglo_fechas, $fecha);
                     $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago, semana, balance)
                     VALUES (?, ?, ?, ?, ?, ?, ?,?)";
-                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha, $i, $monto_prestado]);
+                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha, $i, $balance]);
                     if($i ==  15){
                         $insertado = true;
                     }

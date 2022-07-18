@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
+    <style>
+        /*.sum_pago_pendiente {
+            color: red;
+        }*/
+    </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

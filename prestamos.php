@@ -490,6 +490,61 @@
     </div>
 
 
+    <!-- Modal Renovar -->
+    <div class="modal fade" id="modal_renovar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Renovar prestamo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_tarjeton_renovar">Número de tarjetón <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input  class="form-control" id="inp_tarjeton_renovar" type="number" placeholder="Número de tarjetón" required " min="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_monto_renovar">Monto <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input  class="form-control" id="inp_monto_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="inp_debe_renovar">Debe <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input  class="form-control" id="inp_debe_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_perfil">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <?php include 'templates/footer.php' ?>
   </div>
 
