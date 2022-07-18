@@ -149,10 +149,11 @@
                                 <input class="form-control bg-white" id="inp_abono_cantidad_con_tipo" autofocus disabled/>
                             </div>
                             <div class="form-group col mt-2">
-                                <select class="form-control col select_tipo"  id="select_tipo"  style="width:100%;">
-                                    <option value="0">Por cada</option>
-                                    <option value="1">De</option>
-                                </select>
+                                <!--<select class="form-control bg-white col select_tipo"  id="select_tipo"  style="width:100%;" disabled>
+                                    <option name="de" value="1">De</option>
+                                    <option name="porcada" value="0">Por cada</option>
+                                </select>-->
+                                <input class="form-control bg-white" id="inp_tipo" autofocus disabled/>
                             </div>
                             <div class="form-group col mt-2">
                                 <div class="input-group">
