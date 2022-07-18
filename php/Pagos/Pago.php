@@ -330,7 +330,7 @@ class Pago extends Database{
             $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '$siguientePagoId'";
             $pago2 = $this->ExecuteQuery($update, [$pago_siguiente]);
 
-            $queryBalance = "select sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = 1 and status = 0; ";
+            $queryBalance = "select sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id' and status = 0; ";
             $balance = $this->SelectOne($queryBalance);
             /*$update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
             $pago3 = $this->ExecuteQuery($update, [$balance['debe']]);*/

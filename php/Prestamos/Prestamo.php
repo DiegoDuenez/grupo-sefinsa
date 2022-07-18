@@ -32,7 +32,7 @@ class Prestamo extends Database{
     }
 
     public function getPrestamo($prestamo_id){
-
+      
         $query = "SELECT prestamos.*, clientes.nombre_completo, 
         clientes.direccion,
         clientes.telefono, clientes.garantias , 
@@ -41,7 +41,7 @@ class Prestamo extends Database{
         avales.telefono as 'telefono_aval',
         rutas.nombre_ruta,
         poblaciones.nombre_poblacion,
-        ( sum(cantidad_esperada_pago) - sum(cantidad_total_pagada)) as debe
+        sum(cantidad_esperada_pago) as debe
         FROM prestamos
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
