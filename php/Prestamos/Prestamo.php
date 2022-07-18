@@ -13,10 +13,13 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval'
+        avales.telefono as 'telefono_aval',
+        rutas.nombre_ruta,
+        poblaciones.nombre_poblacion
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
+        INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         ORDER BY $this->table.id desc
         ";

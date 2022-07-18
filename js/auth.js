@@ -233,7 +233,7 @@ function clearInputs(){
     $('#inp_cantidad_pagada').val('')
     $('#inp_concepto').val('')
 
-
+    $('#inp_folio').val('')
     
 
 }
