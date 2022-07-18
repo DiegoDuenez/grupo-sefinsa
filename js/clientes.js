@@ -428,7 +428,7 @@ function editarCliente(nombre_cliente, direccion_cliente, telefono_cliente, or_c
             $('#modal_editar_cliente').modal('toggle');
             Swal.fire({
                 icon: 'success',
-                title: 'cliente actualizado',
+                title: 'Cliente actualizado',
                 text: 'Se ha actualizado al cliente',
                 timer: 1000,
                 showCancelButton: false,

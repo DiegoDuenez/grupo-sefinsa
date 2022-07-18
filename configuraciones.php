@@ -160,21 +160,18 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input  class="form-control" id="inp_cantidad_pagada" type="number" placeholder="0.00" required name="price" min="0.00" value="" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                    <input  class="form-control" id="inp_cantidad_pagada" disabled type="text" placeholder="0.00" required name="price" min="0.00" value="Monto prestado" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                                 </div>
                             </div>
                         </div>
 
 
                     </div>
-                    <!--<div class="form-group mt-2">
-                        <label for="inp_descripcion">Descripción <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <textarea class="form-control" id="inp_descripcion" rows="3" required></textarea>
-                    </div>-->
+                   
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_usuario">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_abono">Guardar</button>
                 </div>
             </div>
         </div>
