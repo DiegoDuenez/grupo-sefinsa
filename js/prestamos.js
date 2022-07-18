@@ -15,6 +15,11 @@ var btn_guardar_prestamo = $('#btn_guardar_prestamo')
 var btn_siguiente_usuario = $('#btn_siguiente_usuario')
 var btn_anterior_usuario = $('#btn_anterior_usuario')
 
+// MODAL RENOVAR
+var inp_tarjeton_renovar = $('#inp_tarjeton_renovar')
+var inp_monto_renovar = $('#inp_monto_renovar')
+var inp_debe_renovar = $('#inp_debe_renovar')
+
 // CLIENTE INPUTS
 var inp_nombre_cliente =$('#inp_nombre_cliente')
 var inp_direccion_cliente = $('#inp_direccion_cliente')
@@ -171,6 +176,7 @@ $(document).ready(function(){
 
     if(prestamo){
         $('#modal_renovar').modal('toggle')
+        getPrestamo(prestamo)
     }
 })
 
@@ -1779,6 +1785,42 @@ function getPrestamosExcel(prestamo_id){
         },
         complete : function(){
             $.unblockUI();
+        }
+    });
+
+}
+
+function getPrestamo(prestamo_id){
+
+    var datasend = {
+        func: "getPrestamo",
+        prestamo_id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Prestamos/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                console.log(response)
+                inp_debe_renovar.val(response.data.debe)
+            }
+            
+
+        },
+        error : function(e){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
         }
     });
 

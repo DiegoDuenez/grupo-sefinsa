@@ -19,6 +19,12 @@ switch($func){
         echo $Prestamo->index();
     break;
 
+    case 'getPrestamo':
+
+        $prestamo_id = $_DATA['prestamo_id'];
+        echo $Prestamo->getPrestamo($prestamo_id);
+    break;
+
     case 'generarPagos':
 
         $prestamo_id = $_DATA['prestamo_id'];

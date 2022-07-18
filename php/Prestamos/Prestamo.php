@@ -31,6 +31,38 @@ class Prestamo extends Database{
         ], 200);
     }
 
+    public function getPrestamo($prestamo_id){
+
+        $query = "SELECT prestamos.*, clientes.nombre_completo, 
+        clientes.direccion,
+        clientes.telefono, clientes.garantias , 
+        avales.nombre_completo as 'nombre_aval', 
+        avales.direccion as 'direccion_aval',
+        avales.telefono as 'telefono_aval',
+        rutas.nombre_ruta,
+        poblaciones.nombre_poblacion,
+        ( sum(cantidad_esperada_pago) - sum(cantidad_total_pagada)) as debe
+        FROM prestamos
+        INNER JOIN clientes ON prestamos.cliente_id = clientes.id
+        INNER JOIN avales ON prestamos.aval_id = avales.id
+        INNER JOIN rutas ON prestamos.ruta_id = rutas.id
+        INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
+        INNER JOIN pagos ON prestamos.id = pagos.prestamo_id
+		WHERE prestamo_id = '$prestamo_id' and pagos.status = 0
+        ORDER BY prestamos.id desc";
+
+        return json([
+            'status' => 'success', 
+            'data'=> $this->SelectOne($query), 
+            'message'=> ''
+        ], 200);
+
+    }
+
+    public function renovarPrestamo($prestamo_id){
+
+    }
+
     public function prestamosRuta($ruta_id)
     {
 

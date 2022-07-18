@@ -198,16 +198,12 @@ class Pago extends Database{
                 concepto = ?, status = ?, fecha_pago_realizada = ?, folio = ? WHERE $this->table.id = '$pago_id'";
                 $pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $concepto , $status, $fecha_pago, $folio]);
 
-                $queryBalance = "SELECT ( sum(cantidad_esperada_pago)  - sum(cantidad_total_pagada)) 
-                as debe from pagos WHERE prestamo_id = '$prestamo_id' and status = 0";
-                $balance = $this->SelectOne($queryBalance);
+               
 
-                $update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
-                $pago2 = $this->ExecuteQuery($update, [$balance['debe']]);
-
-               // echo $balance['debe'];
 
                 if($pago) {
+
+                    
 
                     
                     $query = "SELECT sum(cantidad_normal_pagada) as 'sumatoria' FROM $this->table WHERE prestamo_id = '$prestamo_id'";
@@ -274,6 +270,12 @@ class Pago extends Database{
                         ], 200);
 
                     }
+
+                    $queryBalance = "select sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id' and status = 0; ";
+                    $balance = $this->SelectOne($queryBalance);
+    
+                    $update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
+                    $pago2 = $this->ExecuteQuery($update, [$balance['debe']]);
                     
 
                     return json([
@@ -328,10 +330,8 @@ class Pago extends Database{
             $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '$siguientePagoId'";
             $pago2 = $this->ExecuteQuery($update, [$pago_siguiente]);
 
-            $queryBalance = "SELECT (sum(cantidad_esperada_pago) - sum(cantidad_total_pagada)) as debe from pagos 
-            WHERE prestamo_id = '$prestamo_id' and status = 0;";
+            $queryBalance = "select sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = 1 and status = 0; ";
             $balance = $this->SelectOne($queryBalance);
-
             /*$update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
             $pago3 = $this->ExecuteQuery($update, [$balance['debe']]);*/
 
