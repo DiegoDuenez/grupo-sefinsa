@@ -452,11 +452,12 @@ function getPrestamos(){
                         status = '<span class="badge badge-warning">Pagandose</span>'
                     }
                     else if(response.data[i].status == -1){
-                        status = '<span class="badge badge-danger">No pagó</span>'
+                        status = '<span class="badge badge-danger">Vencido</span>'
                     }
                     else if(response.data[i].status == 2){
                         status = '<span class="badge badge-primary">Renovado</span>'
                     }
+                   
                     
                     table.row.add([
                         response.data[i].nombre_completo, 

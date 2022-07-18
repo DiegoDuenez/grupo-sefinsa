@@ -67,9 +67,11 @@ switch($func){
 
         $pago_id = $_DATA['pago_id'];
         $pago_multa = $_DATA['pago_multa'];
+        $semana= $_DATA['semana'];
+
        //$concepto = $_DATA['concepto'];
 
-        echo $Pago->noPagar($pago_id, $pago_multa);
+        echo $Pago->noPagar($pago_id, $pago_multa, $semana);
 
     break;
 
