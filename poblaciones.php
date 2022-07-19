@@ -249,6 +249,7 @@
     <?php include 'templates/scripts.php' ?>
     <script src="js/auth.js"></script>
     <script src="js/localidades.js"></script>
+    <script src="js/config.js"></script>
 
 </body>
 

@@ -31,6 +31,19 @@ class Configuracion extends Database{
 
     }
 
+    public function getMultaPorDefecto(){
+
+        $query = "SELECT * FROM configuracion_multa ORDER BY id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->SelectOne($query),
+                'message' => ''
+            ]
+        , 200);
+    }
+
     public function abonosActivos(){
 
         $query = "SELECT * FROM configuracion_abonos WHERE status = 1 ORDER BY id DESC";

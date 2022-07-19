@@ -124,4 +124,10 @@ switch($func){
 
     break;
 
+    case 'getMultaPorDefecto':
+        
+        echo $Configuracion->getMultaPorDefecto();
+
+    break;
+
 }
