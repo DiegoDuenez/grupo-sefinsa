@@ -100,4 +100,28 @@ switch($func){
 
     break;
 
+    case 'editMulta':
+        
+        $cantidad = $_DATA['cantidad'];
+        $id = $_DATA['id'];
+
+        echo $Configuracion->editMulta($id, $cantidad);
+
+    break;
+
+    case 'desactivarMulta':
+       
+        $id = $_DATA['id'];
+        echo $Configuracion->desactivarMulta($id);
+
+    break;
+
+
+    case 'activarMulta':
+        
+        $id = $_DATA['id'];
+        echo $Configuracion->activarMulta($id);
+
+    break;
+
 }

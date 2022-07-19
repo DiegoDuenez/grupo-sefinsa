@@ -93,7 +93,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade" id="multaconfig" role="tabpanel" aria-labelledby="multa-tab">
+                                    <div class="tab-pane fade pt-5" id="multaconfig" role="tabpanel" aria-labelledby="multa-tab">
 
                                         <table class="table mt-3" id="tabla_multa">
                                             <thead>
@@ -309,6 +309,37 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_semana">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Modal Editar Multa -->
+     <div class="modal fade" id="modal_editar_multa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar multa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="form-group col mt-2">
+                        <label for="inp_multa_cantidad_editar">Cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input  class="form-control" id="inp_multa_cantidad_editar" type="number" placeholder="0.00" required name="price" min="0.00" value="" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_editar_multa">Guardar</button>
                 </div>
             </div>
         </div>

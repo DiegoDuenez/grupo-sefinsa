@@ -355,4 +355,117 @@ class Configuracion extends Database{
 
     }
 
+
+    /* MULTA */
+
+    public function editMulta($id, $cantidad){
+
+        try{
+
+
+            $update = "UPDATE configuracion_multa SET cantidad = ? WHERE id = '$id'";
+            $abono = $this->ExecuteQuery($update, [$cantidad]);
+
+            if($abono) {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha editado la multa por defecto'
+                ], 200);
+
+            } else {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=>null, 
+                    'message'=>'No se cambio nada nuevo'
+                ], 200);
+
+            }
+
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+
+    public function desactivarMulta($id){
+
+
+        try{
+
+            $update = "UPDATE configuracion_multa SET status = 0 WHERE id = ? and status = 1";
+            $abono = $this->ExecuteQuery($update, [$id]);
+
+            if($abono) {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha desactivado el registro'
+                ], 200);
+
+            } else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error inesperado'
+                ], 400);
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+    }
+       
+
+
+    public function activarMulta($id){
+
+      
+
+        try{
+
+            $update = "UPDATE configuracion_multa SET status = 1 WHERE id = ? and status = 0";
+            $abono = $this->ExecuteQuery($update, [$id]);
+
+            if($abono) {
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha activado el registro'
+                ], 200);
+
+            } else {
+
+                return json([
+                    'status' => 'error', 
+                    'data'=>null, 
+                    'message'=>'Error inesperado'
+                ], 400);
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+            die();
+
+        }
+
+
+    }
+
 }
