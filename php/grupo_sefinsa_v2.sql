@@ -82,7 +82,7 @@ CREATE TABLE `avales` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `avales` (
 
 LOCK TABLES `avales` WRITE;
 /*!40000 ALTER TABLE `avales` DISABLE KEYS */;
-INSERT INTO `avales` VALUES (1,'Alondra Juarez','calle #1292','8711223529','celular','1_Alondra Juarez','1_Alondra Juarez','soltero','2022-07-15 14:29:54','2022-07-15 14:29:54');
+INSERT INTO `avales` VALUES (1,'Alondra Juarez','calle #1292','8711223529','celular','1_Alondra Juarez','1_Alondra Juarez','soltero','2022-07-15 14:29:54','2022-07-15 14:29:54'),(2,'Alberto Escobedo','calle #1292','8711223529','celular','2_Alberto Escobedo','2_Alberto Escobedo','casado','2022-07-18 15:31:13','2022-07-18 15:31:13'),(3,'Maria Gomez','calle #0010','8711223529','refri','3_Maria Gomez','3_Maria Gomez','Soltero','2022-07-18 15:35:59','2022-07-18 15:35:59'),(4,'Alondra Juarez','calle #1292','8711223529','celular','4_Alondra Juarez','4_Alondra Juarez','casada','2022-07-18 15:38:19','2022-07-18 15:38:19'),(5,'Alondra Juarez','calle #1292','8711223529','celular','5_Alondra Juarez','5_Alondra Juarez','casada','2022-07-18 15:40:46','2022-07-18 15:40:46'),(6,'Vianey Lopez','calle #0010','8711223529','2efdx','6_Vianey Lopez','6_Vianey Lopez','csdsz','2022-07-18 15:46:18','2022-07-18 15:46:18'),(7,'Alberto Escobedo','calle #1292','8711223529','celular','7_Alberto Escobedo','7_Alberto Escobedo','casado','2022-07-18 17:41:01','2022-07-18 17:41:01'),(8,'Vianey Lopez','calle #2222','8711223529','television','8_Vianey Lopez','8_Vianey Lopez','nks','2022-07-18 21:11:46','2022-07-18 21:11:46'),(9,'Ernesto Perez','calle #2334','8711223529','celular','9_Ernesto Perez','9_Ernesto Perez','casado','2022-07-18 21:17:18','2022-07-18 21:17:18'),(10,'Kevin Dominguez','calle #2334','8711223529','tele','10_Kevin Dominguez','10_Kevin Dominguez','casado','2022-07-18 21:37:19','2022-07-18 21:37:19'),(11,'Fernando Perez','calle #1292','8711223529','celular','11_Fernando Perez','11_Fernando Perez','casado','2022-07-19 20:26:25','2022-07-19 20:26:25');
 /*!40000 ALTER TABLE `avales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,10 +176,12 @@ CREATE TABLE `configuracion_abonos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
   `tipo_cantidad` varchar(50) NOT NULL,
+  `de` varchar(500) DEFAULT NULL,
+  `por_cada` varchar(500) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+  `status` int(1) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,6 +190,7 @@ CREATE TABLE `configuracion_abonos` (
 
 LOCK TABLES `configuracion_abonos` WRITE;
 /*!40000 ALTER TABLE `configuracion_abonos` DISABLE KEYS */;
+INSERT INTO `configuracion_abonos` VALUES (6,10,'%','Monto prestado',NULL,'10% De Monto prestado',1),(7,80,'$',NULL,'1000','$80 Por cada $1000',1);
 /*!40000 ALTER TABLE `configuracion_abonos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,10 +203,10 @@ DROP TABLE IF EXISTS `configuracion_multa`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuracion_multa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` double(10,2) NOT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +215,7 @@ CREATE TABLE `configuracion_multa` (
 
 LOCK TABLES `configuracion_multa` WRITE;
 /*!40000 ALTER TABLE `configuracion_multa` DISABLE KEYS */;
+INSERT INTO `configuracion_multa` VALUES (1,50.00,1);
 /*!40000 ALTER TABLE `configuracion_multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,9 +231,10 @@ CREATE TABLE `configuracion_semanas` (
   `cantidad` int(11) NOT NULL,
   `interes` int(11) NOT NULL,
   `tipo_abono` int(11) NOT NULL,
-  `status` int(1) DEFAULT NULL,
+  `semana_renovacion` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +243,7 @@ CREATE TABLE `configuracion_semanas` (
 
 LOCK TABLES `configuracion_semanas` WRITE;
 /*!40000 ALTER TABLE `configuracion_semanas` DISABLE KEYS */;
+INSERT INTO `configuracion_semanas` VALUES (1,15,40,6,10,1),(2,20,55,7,15,1),(3,40,60,9,35,1);
 /*!40000 ALTER TABLE `configuracion_semanas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +336,7 @@ CREATE TABLE `pagos` (
   `status` int(1) DEFAULT 0,
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +345,6 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (1,1,800.00,800.00,0.00,0.00,800.00,'abono 800','2022-07-22','2022-07-15',12345,1,4000,1,'2022-07-15 13:58:44'),(2,1,800.00,800.00,0.00,0.00,800.00,'Abono los 800','2022-07-29','2022-07-15',5678,2,4000,1,'2022-07-15 13:58:44'),(3,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-05',NULL,NULL,3,4000,0,'2022-07-15 13:58:44'),(4,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-12',NULL,NULL,4,4000,0,'2022-07-15 13:58:44'),(5,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-19',NULL,NULL,5,4000,0,'2022-07-15 13:58:44'),(6,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-26',NULL,NULL,6,4000,0,'2022-07-15 13:58:44'),(7,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-02',NULL,NULL,7,4000,0,'2022-07-15 13:58:44'),(8,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-09',NULL,NULL,8,4000,0,'2022-07-15 13:58:44'),(9,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-16',NULL,NULL,9,4000,0,'2022-07-15 13:58:44'),(10,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-23',NULL,NULL,10,4000,0,'2022-07-15 13:58:44'),(11,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-30',NULL,NULL,11,4000,0,'2022-07-15 13:58:44'),(12,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-07',NULL,NULL,12,4000,0,'2022-07-15 13:58:44'),(13,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-14',NULL,NULL,13,4000,0,'2022-07-15 13:58:44'),(14,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-21',NULL,NULL,14,4000,0,'2022-07-15 13:58:44'),(15,1,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-28',NULL,NULL,15,4000,0,'2022-07-15 13:58:44');
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +433,7 @@ CREATE TABLE `prestamos` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +442,6 @@ CREATE TABLE `prestamos` (
 
 LOCK TABLES `prestamos` WRITE;
 /*!40000 ALTER TABLE `prestamos` DISABLE KEYS */;
-INSERT INTO `prestamos` VALUES (1,1,'calle #8888','8711223529',2,3,18,1,8000.00,0.00,800.00,'2022-07-15',15,12345,0,'2022-07-15 14:29:54','2022-07-15 09:29:54');
 /*!40000 ALTER TABLE `prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-15 14:03:24
+-- Dump completed on 2022-07-19 18:02:39
