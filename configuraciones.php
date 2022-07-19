@@ -227,7 +227,7 @@
 
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
-  <script src="js/configuraciones.js"></script>
+  <script src="js/configuracion_abonos.js"></script>
 
 
 </body>

@@ -169,7 +169,6 @@ function getConfiguracionAbonos(){
         data: JSON.stringify(datasend),
         success : function(response){
 
-            console.log(response)
             if(response.status == 'success'){
 
 
@@ -177,7 +176,6 @@ function getConfiguracionAbonos(){
                 table_abonos.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-                    console.log(response.data[i])
                     var status
                     if(response.data[i].status == 1){
                         status = '<span class="badge badge-success">Activo</span>'
@@ -319,23 +317,27 @@ function modalEditarAbono(e, id, cantidad, tipo_cantidad, descripcion, de = null
 
     abonoEditarId = id
     inp_abono_cantidad_editar.val(cantidad)
-    $(`#select_abono_tipo_cantidad_editar option[value='${tipo_cantidad}']`).attr('selected','selected');
+
+    $("#select_abono_tipo_cantidad_editar > option").each(function() {
+        if(this.value == tipo_cantidad){
+            $(this).attr('selected','selected');
+        }
+        else{
+            $(this).attr('selected',false);
+        }
+    });
 
     if(de != "null"){
-        console.log(de)
         inp_tipo_editar.val('De')
         inp_cantidad_pagada_editar.val('Monto prestado')
         inp_abono_cantidad_con_tipo_editar.val(cantidad + tipo_cantidad)
         inp_cantidad_pagada_editar.prop('disabled', 'disabled')
-
     }
     else if(por_cada != null){
-        console.log(por_cada)
         inp_tipo_editar.val('Por cada')
         inp_abono_cantidad_con_tipo_editar.val(tipo_cantidad + cantidad)
         inp_cantidad_pagada_editar.val(por_cada)
         inp_cantidad_pagada_editar.prop('disabled', false)
-
     }
 
 }
