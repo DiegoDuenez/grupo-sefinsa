@@ -60,7 +60,9 @@ class Configuracion extends Database{
 
     public function semanasActivas(){
 
-        $query = "SELECT configuracion_semanas.*, configuracion_abonos.descripcion as abono_descripcion FROM configuracion_semanas
+        $query = "SELECT configuracion_semanas.*, configuracion_abonos.cantidad as 'cantidad_abono' ,  configuracion_abonos.tipo_cantidad, 
+        configuracion_abonos.de, configuracion_abonos.por_cada, 
+        configuracion_abonos.descripcion as abono_descripcion FROM configuracion_semanas
         INNER JOIN configuracion_abonos ON configuracion_semanas.tipo_abono = configuracion_abonos.id
         WHERE configuracion_semanas.status = 1
         ORDER BY id DESC";

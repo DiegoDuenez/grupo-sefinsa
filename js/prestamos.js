@@ -248,31 +248,38 @@ select_clientes_registrar.on('change', function() {
 
 inp_monto_prestar.on('input', function(){
 
-    var interes = 0
-    var abono = 0
-    if($('#select_modalidad option:selected').val() == 15){
+
+    var interes = $('#select_modalidad option:selected').attr('data-tipo-abono')
+    var abono = $('#select_modalidad option:selected').attr('data-cantidad-abono')
+
+    console.log($('#select_modalidad option:selected').attr('data-tipo-abono'))
+
+   /* if($('#select_modalidad option:selected').val() == 15){
         interes = 40
         abono = 10
     }
     else if($('#select_modalidad option:selected').val() == 20){
         interes = 55
         abono = 80
-    }
+    }*/
 
-    monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
+    /*monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
 
-    inp_monto_prestar_intereses.val(monto_con_interes )
+    inp_monto_prestar_intereses.val(monto_con_interes )*/
 
     console.log('abono', abono)
     console.log('interes', interes)
-    console.log('monto_interes', monto_con_interes)
-    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
+    //console.log('monto_interes', monto_con_interes)
+    //console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
 
-    if($('#select_modalidad option:selected').val() == 15){
+    if($('#select_modalidad option:selected').attr('data-tipo-abono') == "%"){
         pago_semanal = (inp_monto_prestar.val() * abono) / 100
+        console.log(`formula % (inp_monto_prestar.val() * ${abono}) / 100`)
     }
-    else if($('#select_modalidad option:selected').val() == 20){
-        pago_semanal = abono * (inp_monto_prestar.val() / 1000)
+    else if($('#select_modalidad option:selected').attr('data-tipo-abono') == "$"){
+        pago_semanal = abono * (inp_monto_prestar.val() / parseInt($('#select_modalidad option:selected').attr('data-por-cada')))
+        console.log(`formula $ ${abono} * (${inp_monto_prestar.val()} / ${parseInt($('#select_modalidad option:selected').attr('data-por-cada'))})`)
+
     }
 
     console.log('pago_semanal',pago_semanal)
@@ -285,7 +292,46 @@ inp_monto_prestar.on('input', function(){
 
 $('#select_modalidad').on('change', function() {
 
-    var interes = 0
+    var interes = $('#select_modalidad option:selected').attr('data-interes')
+    var abono = $('#select_modalidad option:selected').attr('data-cantidad-abono')
+
+    console.log($('#select_modalidad option:selected').attr('data-tipo-abono'))
+
+   /* if($('#select_modalidad option:selected').val() == 15){
+        interes = 40
+        abono = 10
+    }
+    else if($('#select_modalidad option:selected').val() == 20){
+        interes = 55
+        abono = 80
+    }*/
+
+    /*monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
+
+    inp_monto_prestar_intereses.val(monto_con_interes )*/
+
+    console.log('abono', abono)
+    console.log('interes', interes)
+   // console.log('monto_interes', monto_con_interes)
+   // console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)
+
+    if($('#select_modalidad option:selected').attr('data-tipo-abono') == "%"){
+        pago_semanal = (inp_monto_prestar.val() * abono) / 100
+        console.log(`formula % (inp_monto_prestar.val() * ${abono}) / 100`)
+
+    }
+    else if($('#select_modalidad option:selected').attr('data-tipo-abono') == "$"){
+        pago_semanal = abono * (inp_monto_prestar.val() / parseInt($('#select_modalidad option:selected').attr('data-por-cada')))
+        console.log(`formula $ ${abono} * (${inp_monto_prestar.val()} / ${parseInt($('#select_modalidad option:selected').attr('data-por-cada'))})`)
+
+    }
+
+    console.log('pago_semanal',pago_semanal)
+
+
+    inp_pago_semana.val(pago_semanal)
+
+    /*var interes = 0
     var abono = 0
     if(this.value == 15){
         interes = 50
@@ -299,11 +345,6 @@ $('#select_modalidad').on('change', function() {
     monto_con_interes = (inp_monto_prestar.val() * interes) / 100 + parseInt(inp_monto_prestar.val())
     inp_monto_prestar_intereses.val(monto_con_interes )
 
-   /* console.log('abono', abono)
-    console.log('interes', interes)
-    console.log('monto_interes', monto_con_interes)
-    console.log(`formular ${inp_monto_prestar.val()} * ${interes} / 100`)*/
-
     if(this.value == 15){
         pago_semanal = (inp_monto_prestar.val() * abono) / 100
     }
@@ -311,10 +352,7 @@ $('#select_modalidad').on('change', function() {
         pago_semanal = abono * (inp_monto_prestar.val() / 1000)
     }
 
-   // console.log('pago_semanal',pago_semanal)
-
-
-    inp_pago_semana.val(pago_semanal)
+    inp_pago_semana.val(pago_semanal)*/
 
 
 
@@ -455,7 +493,7 @@ function getPrestamos(){
                         status = '<span class="badge badge-danger">Vencido</span>'
                     }
                     else if(response.data[i].status == 2){
-                        status = '<span class="badge badge-primary">Renovado</span>'
+                        status = '<span class="badge badge-warning">Renovado</span>'
                     }
                    
                     
