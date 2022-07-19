@@ -519,6 +519,14 @@ switch($func){
                 }
     
             }
+            else{
+                FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
+                
+                for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
+                    $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+                    FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
+                }
+            }
 
         }
 
@@ -534,6 +542,14 @@ switch($func){
                     FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
                 }
     
+            }
+            else{
+                FileManager::createFolder('../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes']);
+                
+                for($i = 0; $i < $cantidad_archivos_cliente; $i++){
+                    $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_garantias'].'/';
+                    FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
+                }
             }
 
         }
@@ -552,6 +568,14 @@ switch($func){
                     }
                     
                 }
+                else{
+                    FileManager::createFolder('../../resources/garantias/avales/'.$aval['carpeta_garantias']);
+                    
+                    for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
+                        $ruta_garantias_aval =  '../../resources/garantias/avales/'.$aval['carpeta_garantias'].'/';
+                        FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
+                    }
+                }
 
             }
 
@@ -568,6 +592,15 @@ switch($func){
                         FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
                     }
                     
+                }
+                else{
+
+                    FileManager::createFolder('../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes']);
+                    
+                    for($i = 0; $i < $cantidad_archivos_aval; $i++){
+                        $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$aval['carpeta_comprobantes'].'/';
+                        FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
+                    }
                 }
 
             }
