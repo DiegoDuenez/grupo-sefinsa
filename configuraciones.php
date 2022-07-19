@@ -53,10 +53,10 @@
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active p-3" id="abonosconfig" role="tabpanel" aria-labelledby="abonos-tab">
-                                        <div class="d-flex w-100 flex-row justify-content-end">
+                                        <div class="d-flex w-100 flex-row justify-content-end mb-5">
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_abono">Registrar abono</button>
                                         </div>
-                                        <table class="table mt-3" id="tabla_abonos">
+                                        <table class="table" id="tabla_abonos">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Cantidad</th>
@@ -149,10 +149,7 @@
                                 <input class="form-control bg-white" id="inp_abono_cantidad_con_tipo" autofocus disabled/>
                             </div>
                             <div class="form-group col mt-2">
-                                <!--<select class="form-control bg-white col select_tipo"  id="select_tipo"  style="width:100%;" disabled>
-                                    <option name="de" value="1">De</option>
-                                    <option name="porcada" value="0">Por cada</option>
-                                </select>-->
+                            
                                 <input class="form-control bg-white" id="inp_tipo" autofocus disabled/>
                             </div>
                             <div class="form-group col mt-2">
@@ -168,7 +165,6 @@
 
                     </div>
                    
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_abono">Guardar</button>
@@ -177,45 +173,49 @@
         </div>
     </div>
 
-    <!-- Modal Editar -->
-    <div class="modal fade" id="modal_editar_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Editar Abono -->
+    <div class="modal fade" id="modal_editar_abono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar abono</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
                     <div class="form-group mt-2">
-                        <label for="inp_editar_nombre_completo">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control " id="inp_editar_nombre_completo" placeholder="Nombre completo" autofocus required/>
+                        <label for="inp_abono_cantidad_editar">Cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_abono_cantidad_editar" placeholder="Cantidad" autofocus required/>
                     </div>
                     <div class="form-group mt-2">
-                        <label for="inp_editar_usuario">Usuario <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control " id="inp_editar_usuario" placeholder="Usuario" required/>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="select_perfiles_editar">Perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control select_perfiles editar"  id="select_perfiles_editar">
+                        <label for="select_abono_tipo_cantidad_editar">Tipo de cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_abono_tipo_cantidad_editar"  id="select_abono_tipo_cantidad_editar"  style="width:100%;">
+                            <option value="%">Porcentaje (%)</option>
+                            <option value="$">Peso ($)</option>
                         </select>
-                    </div>
-                    <div class="form-group mt-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="false" id="cb_password">
-                            <label class="form-check-label" for="cb_password">
-                                Cambiar contraseña
-                            </label>
+
+                        <div class="form-row d-flex mt-2">
+                            <div class="form-group col mt-2">
+                                <input class="form-control bg-white" id="inp_abono_cantidad_con_tipo_editar" autofocus disabled/>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <input class="form-control bg-white" id="inp_tipo_editar" autofocus disabled/>
+                            </div>
+                            <div class="form-group col mt-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input  class="form-control" id="inp_cantidad_pagada_editar" disabled type="text" placeholder="0.00" required name="price" min="0.00" value="Monto prestado" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group mt-2">
-                        <label for="inp_editar_password" class="d-none" id="lb_password">Nueva contraseña <span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input class="form-control d-none" id="inp_editar_password" type="password" placeholder="Contraseña"/>
-                    </div>
+                   
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar_editar_usuario">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_editar_abono">Guardar</button>
                 </div>
             </div>
         </div>

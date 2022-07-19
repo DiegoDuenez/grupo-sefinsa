@@ -6,9 +6,20 @@ var inp_abono_cantidad_con_tipo = $('#inp_abono_cantidad_con_tipo')
 var select_tipo = $('#select_tipo')
 var inp_tipo = $('#inp_tipo')
 var inp_cantidad_pagada = $('#inp_cantidad_pagada')
+var inp_abono_cantidad_editar = $('#inp_abono_cantidad_editar')
+var select_abono_tipo_cantidad_editar = $('#select_abono_tipo_cantidad_editar')
+var inp_abono_cantidad_con_tipo_editar = $('#inp_abono_cantidad_con_tipo_editar')
+var select_tipo_editar = $('#select_tipo_editar')
+var inp_tipo_editar = $('#inp_tipo_editar')
+var inp_cantidad_pagada_editar = $('#inp_cantidad_pagada_editar')
+
 var btn_guardar_abono = $('#btn_guardar_abono')
+var btn_guardar_editar_abono = $('#btn_guardar_editar_abono')
+
 
 var table_abonos
+var abonoEditarId = ""
+
 
 $(document).ready(function(){
 
@@ -41,6 +52,7 @@ $(document).ready(function(){
 })
 
 
+// INPUTS EN MODAL REGISTRAR
 
 inp_abono_cantidad.on('input', function(){
 
@@ -62,12 +74,9 @@ inp_abono_cantidad.on('input', function(){
         inp_tipo.val('')
     }
 
-    
-
 })
 
 select_abono_tipo_cantidad.on('change', function() {
-
 
     if($(this).val() == "$" && inp_abono_cantidad_con_tipo.val().includes('%')){
         inp_abono_cantidad_con_tipo.val(inp_abono_cantidad_con_tipo.val().slice(0, -1) + '')
@@ -87,6 +96,57 @@ select_abono_tipo_cantidad.on('change', function() {
     }
 
 })
+
+
+// INPUTS EN MODAL EDITAR
+
+inp_abono_cantidad_editar.on('input', function(){
+
+    if($('#select_abono_tipo_cantidad_editar option:selected').val() == '$' && $(this).val() != ""){
+        inp_abono_cantidad_con_tipo_editar.val(select_abono_tipo_cantidad_editar.val() + $(this).val())
+        inp_tipo_editar.val('Por cada')
+        inp_cantidad_pagada_editar.val('0.00')
+        inp_cantidad_pagada_editar.prop('disabled', false)
+
+    }
+    else if($('#select_abono_tipo_cantidad_editar option:selected').val()== '%' && $(this).val() != ""){
+        inp_abono_cantidad_con_tipo_editar.val($(this).val() + select_abono_tipo_cantidad_editar.val())
+        inp_tipo_editar.val('De')
+        inp_cantidad_pagada_editar.val('Monto prestado')
+        inp_cantidad_pagada_editar.prop('disabled', 'disabled')
+    }
+    else{
+        inp_abono_cantidad_con_tipo_editar.val('')
+        inp_tipo_editar.val('')
+    }
+
+})
+
+select_abono_tipo_cantidad_editar.on('change', function() {
+
+    if($(this).val() == "$" && inp_abono_cantidad_con_tipo_editar.val().includes('%')){
+        inp_abono_cantidad_con_tipo_editar.val(inp_abono_cantidad_con_tipo_editar.val().slice(0, -1) + '')
+        inp_abono_cantidad_con_tipo_editar.val($(this).val() + inp_abono_cantidad_editar.val())
+        inp_tipo_editar.val('Por cada')
+        inp_cantidad_pagada_editar.val('0.00')
+        inp_cantidad_pagada_editar.prop('disabled', false)
+
+    }
+    else if($(this).val() == "%" && inp_abono_cantidad_con_tipo_editar.val().includes('$')){
+        inp_abono_cantidad_con_tipo_editar.val().substring(1)
+        inp_abono_cantidad_con_tipo_editar.val(inp_abono_cantidad_editar.val() + $(this).val())
+        inp_tipo_editar.val('De')
+        inp_cantidad_pagada_editar.val('Monto presto')
+        inp_cantidad_pagada_editar.prop('disabled', 'disabled')
+
+    }
+
+})
+
+
+
+
+
 
 
 function getConfiguracionAbonos(){
@@ -117,7 +177,7 @@ function getConfiguracionAbonos(){
                 table_abonos.clear()
                 for(var i = 0; i < response.data.length; i++ ){
 
-
+                    console.log(response.data[i])
                     var status
                     if(response.data[i].status == 1){
                         status = '<span class="badge badge-success">Activo</span>'
@@ -141,9 +201,9 @@ function getConfiguracionAbonos(){
                         response.data[i].descripcion,
                         status,
                         `
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarUsuario(this, ${response.data[i].id},  \'${response.data[i].nombre_perfil}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].usuario}\' )" title="Editar usuario" data-toggle="modal" data-target="#modal_editar_usuario"><i class="fa-solid fa-pen-to-square" ></i></button>
-                         ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_eliminar_usuario" onclick="desactivar( ${response.data[i].id})" title="Desactivar usuario"><i class="fa-solid fa-ban" ></i></button>`
-                        : `<button class="btn btn-success btn_activar_usuario" onclick="activar(${response.data[i].id})" title="Activar usuario"><i class="fa-regular fa-circle-check"></i></button>`  }
+                        <button class="btn btn-warning btn_editar_abono" onclick="modalEditarAbono(this, ${response.data[i].id}, ${response.data[i].cantidad},  \'${response.data[i].tipo_cantidad}\', \'${response.data[i].descripcion}\', \'${response.data[i].de}\', ${ response.data[i].por_cada} )" title="Editar abono" data-toggle="modal" data-target="#modal_editar_abono"><i class="fa-solid fa-pen-to-square" ></i></button>
+                         ${ response.data[i].status == 1 ? `<button class="btn btn-danger btn_desactivar_abono" onclick="desactivarAbono( ${response.data[i].id})" title="Desactivar abono"><i class="fa-solid fa-ban" ></i></button>`
+                        : `<button class="btn btn-success btn_activar_abono" onclick="activarAbono(${response.data[i].id})" title="Activar abono"><i class="fa-regular fa-circle-check"></i></button>`  }
                         `,
                         response.data[i].created_at
 
@@ -207,7 +267,7 @@ btn_guardar_abono.click(function(){
 function registrarAbono(cantidad, tipo_cantidad, descripcion, de = null, por_cada = null){
 
     var datasend = {
-        func: "createAbonos",
+        func: "createAbono",
         cantidad,
         tipo_cantidad,
         descripcion,
@@ -251,7 +311,211 @@ function registrarAbono(cantidad, tipo_cantidad, descripcion, de = null, por_cad
         }
     });
 
+}
 
 
+
+function modalEditarAbono(e, id, cantidad, tipo_cantidad, descripcion, de = null, por_cada = null){
+
+    abonoEditarId = id
+    inp_abono_cantidad_editar.val(cantidad)
+    $(`#select_abono_tipo_cantidad_editar option[value='${tipo_cantidad}']`).attr('selected','selected');
+
+    if(de != "null"){
+        console.log(de)
+        inp_tipo_editar.val('De')
+        inp_cantidad_pagada_editar.val('Monto prestado')
+        inp_abono_cantidad_con_tipo_editar.val(cantidad + tipo_cantidad)
+        inp_cantidad_pagada_editar.prop('disabled', 'disabled')
+
+    }
+    else if(por_cada != null){
+        console.log(por_cada)
+        inp_tipo_editar.val('Por cada')
+        inp_abono_cantidad_con_tipo_editar.val(tipo_cantidad + cantidad)
+        inp_cantidad_pagada_editar.val(por_cada)
+        inp_cantidad_pagada_editar.prop('disabled', false)
+
+    }
+
+}
+
+btn_guardar_editar_abono.click(function(){
+
+    if(inp_abono_cantidad_editar.val() == "" || inp_cantidad_pagada_editar.val()=="" || inp_cantidad_pagada_editar.val() == "0.00"){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacios',
+            text: 'Necesitas llenar sstodos los campos',
+            timer: 1000,
+            showCancelButton: false,
+            showConfirmButton: false
+        })
+
+    }
+    else{
+
+        tipo = $('#select_abono_tipo_cantidad_editar option:selected').val()
+
+        if(inp_cantidad_pagada_editar.val() != "Monto prestado"){
+            descripcion = inp_abono_cantidad_con_tipo_editar.val() + " " + inp_tipo_editar.val() + " $" + inp_cantidad_pagada_editar.val()
+            editarAbono(abonoEditarId, inp_abono_cantidad_editar.val(), tipo, descripcion, null, inp_cantidad_pagada_editar.val())
+
+        }
+        else{
+            descripcion = inp_abono_cantidad_con_tipo_editar.val() + " " + inp_tipo_editar.val() + " " + inp_cantidad_pagada_editar.val()
+            editarAbono(abonoEditarId, inp_abono_cantidad_editar.val(), tipo, descripcion, inp_cantidad_pagada_editar.val(), null)
+        }
+    }
+
+})
+
+function editarAbono(id, cantidad, tipo_cantidad, descripcion, de = null, por_cada = null){
+
+    var datasend = {
+        func: "editAbono",
+        id,
+        cantidad,
+        tipo_cantidad,
+        descripcion,
+        de,
+        por_cada
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            if(response.status == 'success'){
+
+                $('#modal_editar_abono').modal('toggle');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Abono editado',
+                    text: 'El abono se ha editado correctamente',
+                    timer: 1000,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                })
+
+                getConfiguracionAbonos();
+
+            }
+
+        },
+        error : function(e){
+
+            console.log(e)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: e.responseJSON.message,
+            })
+
+        }
+    });
+
+}
+
+
+function desactivarAbono(id){
+
+    Swal.fire({
+        title: '¿Quieres desactivar el abono?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'desactivarAbono',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Abono desactivado',
+                            text: 'Se ha desactivado el abono',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        })
+                        getConfiguracionAbonos();
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+
+    })
+
+}
+
+function activarAbono(id){
+
+    Swal.fire({
+        title: '¿Quieres activar el abono?',
+        showCancelButton: true,
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                data : JSON.stringify({
+                    func: 'activarAbono',
+                    id
+                }),
+                dataType: 'json',
+                success : function(response) {
+        
+                    if(response.status == "success"){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Abono activado',
+                            text: 'Se ha activado el abono',
+                            timer: 1000,
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        })
+                        getConfiguracionAbonos();
+                    }
+                    
+                },
+                error : function(e){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: e.responseJSON.message,
+                    })
+        
+                }
+            })
+
+        } 
+
+    })
 
 }
