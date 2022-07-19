@@ -358,8 +358,8 @@ class Pago extends Database{
                 $queryPago = "SELECT cantidad_esperada_pago FROM $this->table WHERE id = '$pago_id'";
                 $pago = $this->SelectOne($queryPago);
 
-                $update = "UPDATE $this->table SET cantidad_pendiente = ?, status = ? WHERE $this->table.id = '$pago_id'";
-                $pago = $this->ExecuteQuery($update, [$pago['cantidad_esperada_pago'], -1]);
+                $update = "UPDATE $this->table SET cantidad_pendiente = ?, fecha_pago_realizada = ?, status = ? WHERE $this->table.id = '$pago_id'";
+                $pago = $this->ExecuteQuery($update, [$pago['cantidad_esperada_pago'], $fecha_no_pago, -1]);
 
                 $update = "UPDATE prestamos SET prestamos.status = ? WHERE prestamos.id = '$prestamo_id'";
                 $this->ExecuteQuery($update, [-1]);
