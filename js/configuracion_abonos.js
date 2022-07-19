@@ -145,16 +145,12 @@ select_abono_tipo_cantidad_editar.on('change', function() {
 
 
 
-
-
-
-
 function getConfiguracionAbonos(){
 
 
     clearInputs()
 
-    $.blockUI({ message: '<h4> TRAYENDO CLIENTES...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
+    $.blockUI({ message: '<h4> TRAYENDO ABONOS...</h4>', css: { backgroundColor: null, color: '#fff', border: null } });
 
     var datasend = {
         func: "index",

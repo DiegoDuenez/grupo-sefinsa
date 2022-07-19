@@ -73,10 +73,10 @@
                                         </table>
                                     </div>
                                     <div class="tab-pane fade p-3" id="semanasconfig" role="tabpanel" aria-labelledby="semanas-tab">
-                                        <div class="d-flex w-100 flex-row justify-content-end">
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_usuario">Registrar semana</button>
+                                        <div class="d-flex w-100 flex-row justify-content-end mb-5">
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_registrar_semana">Registrar semana</button>
                                         </div>
-                                        <table class="table mt-3" id="tabla_semanas">
+                                        <table class="table " id="tabla_semanas">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Cantidad</th>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="multaconfig" role="tabpanel" aria-labelledby="multa-tab">
 
-                                        <table class="table mt-3" id="tabla_semanas">
+                                        <table class="table mt-3" id="tabla_multa">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Cantidad</th>
@@ -162,7 +162,6 @@
                             </div>
                         </div>
 
-
                     </div>
                    
                 </div>
@@ -222,12 +221,108 @@
     </div>
 
 
+    <!-- Modal Registrar Semanas -->
+    <div class="modal fade" id="modal_registrar_semana" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar semana</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_cantidad">Cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_semana_cantidad" placeholder="Cantidad" autofocus required/>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_interes">Interes <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <input class="form-control" type="number" min="0" id="inp_semana_interes" placeholder="Interes" autofocus required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="select_semana_tipo_abono">Tipo de abono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_semana_tipo_abono"  id="select_semana_tipo_abono"  style="width:100%;">
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_semana_ren">Semana de renovación<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_semana_semana_ren" placeholder="Semana de renovación" autofocus required/>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_semana">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Editar Semanas -->
+    <div class="modal fade" id="modal_editar_semana" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar semana</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_cantidad_editar">Cantidad <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_semana_cantidad_editar" placeholder="Cantidad" autofocus required/>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_interes_editar">Interes <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <input class="form-control" type="number" min="0" id="inp_semana_interes_editar" placeholder="Interes" autofocus required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="select_semana_tipo_abono_editar">Tipo de abono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control select_semana_tipo_abono"  id="select_semana_tipo_abono_editar"  style="width:100%;">
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="inp_semana_semana_ren_editar">Semana de renovación<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" type="number" min="0" id="inp_semana_semana_ren_editar" placeholder="Semana de renovación" autofocus required/>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btn_guardar_editar_semana">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <?php include 'templates/footer.php' ?>
   </div>
 
   <?php include 'templates/scripts.php' ?>
   <script src="js/auth.js"></script>
   <script src="js/configuracion_abonos.js"></script>
+  <script src="js/configuracion_semanas.js"></script>
+  <script src="js/configuracion_multa.js"></script>
 
 
 </body>
