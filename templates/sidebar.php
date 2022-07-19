@@ -16,7 +16,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
             <div class="image">
             </div>
                 <div class="info">
-                <a href="#" class="d-block" id="usuario">...</a>
+                <a href="#" class="d-block" id="usuario">... </a>
             </div>
         </div>
 
