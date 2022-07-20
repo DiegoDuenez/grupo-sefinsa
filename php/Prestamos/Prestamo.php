@@ -227,6 +227,7 @@ class Prestamo extends Database{
                     /*$queryBalance = "SELECT sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id'";
                     $balance = $this->SelectOne($queryBalance);*/
                     
+                    // ARREGLAR ESTO
                     $balance = $pago_semanal * $modalidad['cantidad'];
                     for($i = 1; $i <= $modalidad['cantidad']; $i++)
                     {
