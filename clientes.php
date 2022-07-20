@@ -339,7 +339,7 @@
                         </div>
 
                         <div class="form-group col mt-2">
-                            <label for="inp_archivos_aval">Comprobante de domicilio, INE, tarjetón, contrato y pagaré </label>
+                            <label for="inp_archivos_aval">Comprobante de domicilio e INE</label>
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" id="inp_archivos_aval" required multiple >

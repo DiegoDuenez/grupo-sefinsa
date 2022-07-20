@@ -15,12 +15,14 @@ class Prestamo extends Database{
         avales.direccion as 'direccion_aval',
         avales.telefono as 'telefono_aval',
         rutas.nombre_ruta,
-        poblaciones.nombre_poblacion
+        poblaciones.nombre_poblacion,
+        configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
+        INNER JOIN configuracion_semanas ON prestamos.modalidad_semanas = configuracion_semanas.id
         ORDER BY $this->table.id desc
         ";
 
@@ -93,13 +95,17 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval'
+        avales.telefono as 'telefono_aval',
+        rutas.nombre_ruta,
+        poblaciones.nombre_poblacion,
+        configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN colocadoras ON prestamos.colocadora_id = colocadoras.id
+        INNER JOIN configuracion_semanas ON prestamos.modalidad_semanas = configuracion_semanas.id
         WHERE prestamos.ruta_id = '$ruta_id'
         ORDER BY $this->table.id desc
         ";
@@ -119,13 +125,17 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval'
+        avales.telefono as 'telefono_aval',
+        rutas.nombre_ruta,
+        poblaciones.nombre_poblacion,
+        configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN colocadoras ON prestamos.colocadora_id = colocadoras.id
+        INNER JOIN configuracion_semanas ON prestamos.modalidad_semanas = configuracion_semanas.id
         WHERE prestamos.poblacion_id = '$poblacion_id'
         ORDER BY $this->table.id desc
         ";
@@ -145,13 +155,17 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval'
+        avales.telefono as 'telefono_aval',
+        rutas.nombre_ruta,
+        poblaciones.nombre_poblacion,
+        configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN colocadoras ON prestamos.colocadora_id = colocadoras.id
+        INNER JOIN configuracion_semanas ON prestamos.modalidad_semanas = configuracion_semanas.id
         WHERE prestamos.colocadora_id = '$colocadora_id'
         ORDER BY $this->table.id desc
         ";
@@ -172,12 +186,14 @@ class Prestamo extends Database{
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
         avales.telefono as 'telefono_aval'
+        configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN colocadoras ON prestamos.colocadora_id = colocadoras.id
+        INNER JOIN configuracion_semanas ON prestamos.modalidad_semanas = configuracion_semanas.id
         WHERE prestamos.cliente_id = '$cliente_id'
         ORDER BY $this->table.id desc
         ";
@@ -193,58 +209,54 @@ class Prestamo extends Database{
 
         try{
 
-        
-            $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, monto_prestado_intereses, pago_semanal, fecha_prestamo, modalidad_semanas, numero_tarjeton)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $monto_prestado_intereses, $pago_semanal, $fecha_prestamo, $modalidad, $tarjeton]);
+            if(!$this->existsData('prestamos', 'numero_tarjeton', trim($tarjeton))){
 
-            $prestamo_id = $this->lastId();
+            
+
+                $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, monto_prestado_intereses, pago_semanal, fecha_prestamo, modalidad_semanas, numero_tarjeton)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $monto_prestado_intereses, $pago_semanal, $fecha_prestamo, $modalidad, $tarjeton]);
+
+                $prestamo_id = $this->lastId();
 
 
-            if($prestamo){
-
-                $insertado = false;
-
-                /*$queryBalance = "SELECT sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id'";
-                $balance = $this->SelectOne($queryBalance);*/
-
-                
-                $balance = $pago_semanal * $modalidad;
-                for($i = 1; $i <= $modalidad; $i++)
-                {
-                    $fecha = date("Y-m-d",strtotime($fecha_prestamo."+ $i week"));           
-                    //array_push($arreglo_fechas, $fecha);
-                    $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago, semana, balance)
-                    VALUES (?, ?, ?, ?, ?, ?, ?,?)";
-                    $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha, $i, $balance]);
-                    if($i ==  15){
-                        $insertado = true;
+                if($prestamo){
+                    /*$queryBalance = "SELECT sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id'";
+                    $balance = $this->SelectOne($queryBalance);*/
+                    
+                    $balance = $pago_semanal * $modalidad;
+                    for($i = 1; $i <= $modalidad; $i++)
+                    {
+                        $fecha = date("Y-m-d",strtotime($fecha_prestamo."+ $i week"));           
+                        //array_push($arreglo_fechas, $fecha);
+                        $insert= "INSERT INTO pagos (prestamo_id, cantidad_esperada_pago, cantidad_normal_pagada, cantidad_multa, cantidad_total_pagada, fecha_pago, semana, balance)
+                        VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                        $pago = $this->ExecuteQuery($insert, [$prestamo_id, $pago_semanal, 0, 0, 0, $fecha, $i, $balance]);
+                        if($i ==  $modalidad){
+                           return true;
+                        }
                     }
-                }
 
-                if($insertado){
-                    return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha registrado el prestamo'
-                    ], 200);
+                    //$this->generarPagos($this->lastId(), $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
+
                 }
-                else{
-                    echo $pago;
+                else {
+
+                   /* return json([
+                        'status' => 'error', 
+                        'data'=>null, 
+                        'message'=>'Error al registrar el prestamo'
+                    ], 400);*/
+
+                    return false;
+
                 }
-                //$this->generarPagos($this->lastId(), $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
 
             }
-            else {
-
-                return json([
-                    'status' => 'error', 
-                    'data'=>null, 
-                    'message'=>'Error al registrar el prestamo'
-                ], 400);
-
+            else{
+                return  false;
             }
-
+           
           
 
         } catch(Exception $e) {

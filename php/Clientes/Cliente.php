@@ -354,14 +354,28 @@ class Cliente extends Database{
 
                     $cliente_id = $this->lastId();
                     $Prestamo = new Prestamo();
-                    $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                    $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
                    
+                    if($p){
+                        return json([
+                            'status' => 'success', 
+                            'data'=> null, 
+                            'message'=> 'Se ha registrado el prestamo'
+                        ], 200);
+                    }
+                    else{
+                        return json([
+                            'status' => 'success', 
+                            'data'=> null, 
+                            'message'=> 'El número de tarjeton ya existe'
+                        ], 400);
+                    }
 
-                    return json([
+                   /* return json([
                         'status' => 'success', 
                         'data'=> null, 
                         'message'=> 'Se ha creado al cliente'
-                    ], 200);
+                    ], 200);*/
                 }
             
 
@@ -460,11 +474,22 @@ class Cliente extends Database{
 
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                if($p){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha registrado el prestamo'
+                    ], 200);
+                }
+                else{
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'El número de tarjeton ya existe'
+                    ], 400);
+                }
                 
-               // $prestamo_id = $this->lastId();
-                //$Prestamo->generarPagos($prestamo_id, $fecha_prestamo, $modalidad, $monto_prestado, 0, 0, $monto_prestado);
-                //$Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);
             
 
             } else {
@@ -506,8 +531,21 @@ class Cliente extends Database{
                 $clienteArray = $this->getCliente($cliente_id);
 
                 $Prestamo = new Prestamo();
-                $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
-                
+                $p = $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                if($p){
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'Se ha registrado el prestamo'
+                    ], 200);
+                }
+                else{
+                    return json([
+                        'status' => 'success', 
+                        'data'=> null, 
+                        'message'=> 'El número de tarjeton ya existe'
+                    ], 400);
+                }
             
 
             } else {

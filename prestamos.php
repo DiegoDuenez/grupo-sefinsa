@@ -71,6 +71,7 @@
                                     <table class="table" id="tabla_prestamos">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Tarjetón</th>
                                             <th scope="col">Nombre del cliente</th>
                                             <th scope="col">Dirección del cliente</th>
                                             <th scope="col">Teléfono del cliente</th>
@@ -129,7 +130,7 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                     </table>

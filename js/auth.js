@@ -235,6 +235,8 @@ function clearInputs(){
     $('#inp_concepto').val('')
 
     $('#inp_folio').val('')
+
+    $('#inp_tarjeton').val('')
     
 
 }

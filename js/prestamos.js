@@ -84,9 +84,9 @@ $(document).ready(function(){
             }
         },
         "columnDefs": [
-            { "visible": false, "targets": [1,4/*-1, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/] }
+            { "visible": false, "targets": [2,5/*-1, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/] }
           ],
-          order: [[6, 'desc']],
+          order: [[7, 'desc']],
 
           "footerCallback": function(row, data, start, end, display) {
             var api = this.api();
@@ -498,6 +498,7 @@ function getPrestamos(){
                    
                     
                     table.row.add([
+                        response.data[i].numero_tarjeton, 
                         response.data[i].nombre_completo, 
                         response.data[i].direccion_cliente,
                         response.data[i].telefono_cliente,
@@ -507,7 +508,7 @@ function getPrestamos(){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
-                        response.data[i].modalidad_semanas + " semanas",
+                        response.data[i].semanas,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
@@ -575,7 +576,9 @@ function getPrestamosRuta(ruta_id){
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+
                     table.row.add([
+                        response.data[i].numero_tarjeton, 
                         response.data[i].nombre_completo, 
                         response.data[i].direccion_cliente,
                         response.data[i].telefono_cliente,
@@ -585,11 +588,13 @@ function getPrestamosRuta(ruta_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
-                        response.data[i].modalidad_semanas + " semanas",
+                        response.data[i].semanas,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion
 
                     ]);
                 }
@@ -643,7 +648,9 @@ function getPrestamosPoblacion(poblacion_id){
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+
                     table.row.add([
+                        response.data[i].numero_tarjeton, 
                         response.data[i].nombre_completo, 
                         response.data[i].direccion_cliente,
                         response.data[i].telefono_cliente,
@@ -653,11 +660,13 @@ function getPrestamosPoblacion(poblacion_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
-                        response.data[i].modalidad_semanas + " semanas",
+                        response.data[i].semanas,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion
 
                     ]);
                 }
@@ -711,7 +720,9 @@ function getPrestamosColocadora(colocadora_id){
                     else if(response.data[i].status == -1){
                         status = '<span class="badge badge-danger">No pagó</span>'
                     }
+
                     table.row.add([
+                        response.data[i].numero_tarjeton, 
                         response.data[i].nombre_completo, 
                         response.data[i].direccion_cliente,
                         response.data[i].telefono_cliente,
@@ -721,11 +732,13 @@ function getPrestamosColocadora(colocadora_id){
                         response.data[i].fecha_prestamo,
                         "$ " + response.data[i].monto_prestado,
                         "$ " + response.data[i].pago_semanal,
-                        response.data[i].modalidad_semanas + " semanas",
+                        response.data[i].semanas,
                         status,
                         `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
                         `,
+                        response.data[i].nombre_ruta,
+                        response.data[i].nombre_poblacion
 
                     ]);
                 }
@@ -1180,11 +1193,14 @@ btn_guardar_prestamo.click(function(){
         
                 },
                 error : function(e){
-        
+
+                    var eString = JSON.parse(e.responseText);
+                    console.log(eString)
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: e.responseJSON.message,
+                        text: eString.message,
                     })
         
                 }
