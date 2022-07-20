@@ -42,7 +42,6 @@ $(document).ready(function(){
 
         var usuario =  JSON.parse(localStorage.getItem('usuario'))
         $('#usuario').text(usuario.usuario)
-        $('#usuario').append(` <i class="fa-solid fa-circle text-success" style='font-size: 0.7rem' title='Conectado'></i>`)
         
     }
     
