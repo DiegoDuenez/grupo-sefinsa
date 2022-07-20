@@ -75,7 +75,7 @@ function getSemanasActivasConfiguracion(){
                     data-tipo-abono="${response.data[i].tipo_cantidad}" 
                     data-de="${response.data[i].de}"
                     data-por-cada="${response.data[i].por_cada}"
-                    value="${response.data[i].id}">${response.data[i].cantidad} semanas</option>
+                    value="${response.data[i].id}">${response.data[i].cantidad} semanas (${response.data[i].abono_descripcion})</option>
                 `)
 
             }
