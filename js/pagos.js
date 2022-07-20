@@ -26,8 +26,13 @@ var clienteIdFiltro;
 var prestamoIdFiltro;
 var tabla_ec_pagos;
 
-var semanaRenovar;
-var modalidadPagoSeleccionado
+var semana_renovar_pago_seleccionado
+var modalidad_id_pago_seleccionado
+
+
+var config_cantidad_semanas
+var config_semana_renovar 
+
 
 $(document).ready(function(){
 
@@ -194,9 +199,6 @@ $(document).ready(function(){
                     var x = parseFloat(a) || 0;
                     var y = parseFloat(b) || 0;
                    
-                    console.log(x)
-                  console.log(y)  
-
                     return x + y;
                   }, 0);
                 $(this.footer()).html("$ " + formatearCantidadMX((Math.round(sum * 100) / 100).toFixed(2)));
@@ -289,6 +291,10 @@ function getPrestamosCliente(cliente_id){
                 }
                 else{
                     select_clientes_prestamos_filtro.prop('disabled', true)
+                    select_clientes_prestamos_filtro.empty()
+                    select_clientes_prestamos_filtro.append(`
+                        <option value="0" >General</option>
+                    `)
                 }
 
     
@@ -494,8 +500,25 @@ function modalPagar(pago_id, prestamo_id, monto_multa, pago, cliente, ruta, pobl
     ec_poblacion.text(poblacion)
     ec_monto.text(`$ ${monto}`)
     span_fecha_prestamo.text(fecha_prestamo)
-    semanaRenovar = semana
-    modalidadPagoSeleccionado = modalidad
+    /*semanaRenovar = semana
+    modalidadPagoSeleccionado = modalidad*/
+
+    semana_renovar_pago_seleccionado = semana
+    modalidad_id_pago_seleccionado = modalidad
+
+    console.log(semana)
+    console.log(modalidad)
+
+
+    getSemanaConfiguracionId(modalidad);
+    /*config_cantidad_semanas = config.data.cantidad
+    config_semana_renovar = config.data.semana_renovacion*/
+
+    
+    
+
+
+
    
     pagoId = pago_id
     prestamoId = prestamo_id
@@ -691,7 +714,8 @@ function hacerPago(pago_id, prestamo_id, pago_recibido, pago_multa, concepto, fe
             if(response.status == "success"){
 
 
-                if(semanaRenovar == 10 && modalidadPagoSeleccionado == 15 || semanaRenovar == 15 && modalidadPagoSeleccionado == 20){
+                if(semana_renovar_pago_seleccionado == config_semana_renovar){
+                //if(semanaRenovar == 10 && modalidadPagoSeleccionado == 15 || semanaRenovar == 15 && modalidadPagoSeleccionado == 20){
 
                     Swal.fire({
                         icon: 'question',
@@ -988,7 +1012,6 @@ function getPagosPrestamoPagados(prestamo_id){
         data: JSON.stringify(datasend),
         success : function(response){
 
-            console.log(response)
             if(response.status == 'success'){
 
                 tabla_ec_pagos.clear()
@@ -1038,5 +1061,40 @@ function getPagosPrestamoPagados(prestamo_id){
             $.unblockUI();
         }
     });
+
+}
+
+
+
+function getSemanaConfiguracionId(id){
+
+    var datasend = {
+        func: "buscarSemana",
+        id
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'php/Configuraciones/App.php',
+        dataType: 'json',
+        data: JSON.stringify(datasend),
+        success : function(response){
+
+            config_cantidad_semanas = response.data.cantidad
+            config_semana_renovar = response.data.semana_renovacion
+            console.log(response)
+            console.log(config_cantidad_semanas)
+            console.log(config_semana_renovar)
+
+
+        },
+        error : function(e){
+
+            console.log(e)
+
+        }
+    });
+
 
 }

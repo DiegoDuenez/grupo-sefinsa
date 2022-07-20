@@ -1,4 +1,7 @@
 
+window.top.config_cantidad_semanas
+window.top.config_semana_renovar
+
 $(document).ready(function(){
     getMultaPorDefecto();
     getSemanasActivasConfiguracion();
@@ -45,6 +48,7 @@ function getMultaPorDefecto(){
 
 
 }
+
 
 
 function getSemanasActivasConfiguracion(){

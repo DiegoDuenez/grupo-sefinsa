@@ -130,4 +130,11 @@ switch($func){
 
     break;
 
+    case 'buscarSemana':
+
+        $id = $_DATA['id'];
+        echo $Configuracion->buscarSemana($id);
+
+    break;
+
 }

@@ -185,7 +185,7 @@ class Prestamo extends Database{
         clientes.telefono, clientes.garantias , 
         avales.nombre_completo as 'nombre_aval', 
         avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval'
+        avales.telefono as 'telefono_aval',
         configuracion_semanas.cantidad as 'semanas'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
