@@ -39,6 +39,18 @@ $(document).ready(function(){
     tabla_ec_pagos = $('#tabla_ec_pagos').DataTable({
         bFilter: false,
         bInfo: false,
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontro ningún registro",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "sSearch": "Buscar",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        },
         pageLength : 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
         "aaSorting": [],

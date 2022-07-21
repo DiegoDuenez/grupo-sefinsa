@@ -63,6 +63,11 @@ var table
 var tableExcel
 var prestamo = ""
 var modalidadSemanasRenovar = ""
+var tipoAbono =""
+var cantidadDeAbono = ""
+var de_abono= ""
+var por_cada_abono = ""
+
 
 $(document).ready(function(){
 
@@ -1869,7 +1874,12 @@ function getPrestamo(prestamo_id){
             if(response.status == 'success'){
 
                 console.log(response.data)
-                modalidadSemanasRenovar = response.data.modalidad_semanas
+                modalidadSemanasRenovar = response.data.semanas_cantidad
+                tipoAbono = response.data.tipo_abono
+                cantidadDeAbono = response.data.cantidad_abono
+                de_abono = response.data.de
+                por_cada_abono = response.data.por_cada
+
                 inp_debe_renovar.val(response.data.debe)
             }
             
@@ -1890,7 +1900,31 @@ function getPrestamo(prestamo_id){
 
 btn_renovar.click(function(){
 
-    var interes = 0
+    //var interes = $('#select_modalidad option:selected').attr('data-tipo-abono')
+    //var abono = $('#select_modalidad option:selected').attr('data-cantidad-abono')
+
+    //console.log($('#select_modalidad option:selected').attr('data-tipo-abono'))
+
+    console.log('abono', cantidadDeAbono)
+    //console.log('interes', interes)
+
+    if(tipoAbono == "%"){
+        pago_semanal = (inp_monto_renovar.val() * cantidadDeAbono) / 100
+        console.log(`formula % (inp_monto_prestar.val() * ${cantidadDeAbono}) / 100`)
+    }
+    else if(tipoAbono == "$"){
+        pago_semanal = cantidadDeAbono * (inp_monto_renovar.val() / parseInt(por_cada_abono))
+        console.log(`formula $ ${cantidadDeAbono} * (${inp_monto_renovar.val()} / ${parseInt(por_cada_abono)})`)
+
+    }
+
+    console.log('pago_semanal',pago_semanal)
+
+    renovarPrestamo(prestamo, inp_tarjeton_renovar.val(), inp_monto_renovar.val(), pago_semanal, inp_fecha_renovacion.val(),inp_debe_renovar.val() )
+
+   // inp_pago_semana.val(pago_semanal)
+
+    /*var interes = 0
     var abono = 0
     if(modalidadSemanasRenovar == 15){
         interes = 50
@@ -1913,7 +1947,7 @@ btn_renovar.click(function(){
 
     //console.log('pago_semanal',pago_semanal)
 
-    renovarPrestamo(prestamo, inp_tarjeton_renovar.val(), inp_monto_renovar.val(), pago_semanal, inp_fecha_renovacion.val(),inp_debe_renovar.val() )
+    renovarPrestamo(prestamo, inp_tarjeton_renovar.val(), inp_monto_renovar.val(), pago_semanal, inp_fecha_renovacion.val(),inp_debe_renovar.val() )*/
 
 })
 
@@ -1942,9 +1976,9 @@ function renovarPrestamo(prestamo_id, tarjeton, monto_renovar, pago_semanal, fec
             if(response.status == 'success'){
 
                 Swal.fire({
-                    icon: 'warning',
-                    title: 'Campos vacios',
-                    text: 'Necesitas llenar todos los campos',
+                    icon: 'success',
+                    title: 'Prestamo renovado',
+                    text: 'Se ha renovado el prestamo',
                     timer: 1000,
                     showCancelButton: false,
                     showConfirmButton: false
@@ -1970,3 +2004,4 @@ function renovarPrestamo(prestamo_id, tarjeton, monto_renovar, pago_semanal, fec
     });
     
 }
+

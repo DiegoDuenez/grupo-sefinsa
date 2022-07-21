@@ -43,6 +43,11 @@ class Prestamo extends Database{
         avales.telefono as 'telefono_aval',
         rutas.nombre_ruta,
         poblaciones.nombre_poblacion,
+        configuracion_semanas.cantidad as 'semanas_cantidad',
+        configuracion_abonos.tipo_cantidad as 'tipo_abono',
+        configuracion_abonos.cantidad as 'cantidad_abono',
+        configuracion_abonos.de as 'de',
+        configuracion_abonos.por_cada as 'por_cada',
         sum(cantidad_esperada_pago) as debe
         FROM prestamos
         INNER JOIN clientes ON prestamos.cliente_id = clientes.id
@@ -50,8 +55,10 @@ class Prestamo extends Database{
         INNER JOIN rutas ON prestamos.ruta_id = rutas.id
         INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id
         INNER JOIN pagos ON prestamos.id = pagos.prestamo_id
+        INNER JOIN configuracion_semanas ON configuracion_semanas.id = prestamos.modalidad_semanas
+        INNER JOIN configuracion_abonos ON configuracion_abonos.id = configuracion_semanas.tipo_abono
 		WHERE prestamo_id = '$prestamo_id' and pagos.status = 0
-        ORDER BY prestamos.id desc";
+        ORDER BY prestamos.id desc;";
 
         return json([
             'status' => 'success', 
