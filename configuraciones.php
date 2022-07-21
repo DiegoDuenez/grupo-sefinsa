@@ -79,7 +79,7 @@
                                         <table class="table " id="tabla_semanas">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Cantidad</th>
+                                                    <th scope="col">Cantidad semanas</th>
                                                     <th scope="col">Interes</th>
                                                     <th scope="col">Tipo de abono</th>
                                                     <th scope="col">Semana de renovación</th>
