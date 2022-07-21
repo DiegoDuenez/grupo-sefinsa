@@ -179,7 +179,7 @@ $(document).ready(function(){
     }
     else{
        titulo_cliente.hide()
-       modal_prestamos_label.text('Registrar cliente y aval')
+       modal_prestamos_label.text('Registrar cliente y aval (Prestamo)')
     }
 
     if(prestamo){
@@ -783,7 +783,7 @@ btn_anterior_usuario.click(function(){
     btn_anterior_usuario.prop('disabled', true)
     btn_siguiente_usuario.removeClass('d-none')
     btn_guardar_prestamo.addClass('d-none')
-    modal_prestamos_label.text('Registrar cliente y aval')
+    modal_prestamos_label.text('Registrar cliente y aval (Prestamo)')
     $('#modal_dialog').addClass('modal-xl')
 
 
@@ -932,7 +932,7 @@ btn_guardar_prestamo.click(function(){
                     btn_anterior_usuario.prop('disabled', true)
                     btn_siguiente_usuario.removeClass('d-none')
                     btn_guardar_prestamo.addClass('d-none')
-                    modal_prestamos_label.text('Registrar cliente y aval')
+                    modal_prestamos_label.text('Registrar cliente y aval (Prestamo)')
                     $('#modal_dialog').addClass('modal-xl')
 
                     
@@ -1059,7 +1059,7 @@ btn_guardar_prestamo.click(function(){
                     btn_anterior_usuario.prop('disabled', true)
                     btn_siguiente_usuario.removeClass('d-none')
                     btn_guardar_prestamo.addClass('d-none')
-                    modal_prestamos_label.text('Registrar cliente y aval')
+                    modal_prestamos_label.text('Registrar cliente y aval (Prestamo)')
                     $('#modal_dialog').addClass('modal-xl')
 
                     Swal.fire({
@@ -1181,7 +1181,7 @@ btn_guardar_prestamo.click(function(){
                     btn_anterior_usuario.prop('disabled', true)
                     btn_siguiente_usuario.removeClass('d-none')
                     btn_guardar_prestamo.addClass('d-none')
-                    modal_prestamos_label.text('Registrar cliente y aval')
+                    modal_prestamos_label.text('Registrar cliente y aval (Prestamo)')
                     $('#modal_dialog').addClass('modal-xl')
 
                     Swal.fire({

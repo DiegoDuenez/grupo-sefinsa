@@ -190,16 +190,13 @@ class Pago extends Database{
                 $query = "SELECT * FROM $this->table WHERE id = '$pago_id'";
                 $queryPago = $this->SelectOne($query);
 
-            
                 $queryPrestamo = "SELECT monto_prestado FROM prestamos WHERE id = '$prestamo_id'";
                 $prestamo = $this->SelectOne($queryPrestamo);
-
 
                 $update = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_multa = ?, cantidad_total_pagada = ?, 
                 concepto = ?, status = ?, fecha_pago_realizada = ?, folio = ? WHERE $this->table.id = '$pago_id'";
                 $pago = $this->ExecuteQuery($update, [$pago_recibido, $pago_multa, $pago_total, $concepto , $status, $fecha_pago, $folio]);
 
-               
 
 
                 if($pago) {
@@ -208,7 +205,7 @@ class Pago extends Database{
                     $query = "SELECT sum(cantidad_normal_pagada) as 'sumatoria' FROM $this->table WHERE prestamo_id = '$prestamo_id'";
                     $sumatoria = $this->SelectOne($query);
 
-                    $queryPrestamo = "SELECT monto_prestado FROM prestamos WHERE id = '$prestamo_id'";
+                    $queryPrestamo = "SELECT monto_prestado, pago_semanal FROM prestamos WHERE id = '$prestamo_id'";
                     $prestamo = $this->SelectOne($queryPrestamo);
 
                     $queryPago = "SELECT cantidad_esperada_pago FROM $this->table WHERE id = '$pago_id'";
@@ -224,6 +221,7 @@ class Pago extends Database{
                     WHERE pagos.prestamo_id = '$prestamo_id' limit 1";
                     $pagoCantidadSemanas =  $this->SelectOne($pagoCantidadSemanas);
 
+                    
 
                     if($pago_recibido < $pago['cantidad_esperada_pago']){
 
@@ -237,31 +235,41 @@ class Pago extends Database{
 
                         $update = "UPDATE $this->table SET cantidad_esperada_pago = cantidad_esperada_pago + '$diferencia' WHERE $this->table.id = '".$siguientePago['id']."'";
                         $updateSiguientePago = $this->ExecuteQuery($update, []);
+
                     }
                     else if($pago_recibido > $pago['cantidad_esperada_pago']){
 
-                        /*$a = $pago_recibido / $pagoCantidadSemanas['cantidad_semanas'];
-                        $p = $a / $pagoCantidadSemanas['cantidad_semanas'];
-                        $c = $a * $p;*/
 
-                        /*$queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
-                        $siguientePago = $this->SelectOne($queryNextRow);
+                        /*$balanceFijo = $prestamo['pago_semanal'] * $pagoCantidadSemanas['cantidad_semanas'];;
+                        $a = $pago_recibido / $balanceFijo * $pagoCantidadSemanas['cantidad_semanas'];
 
-                        $update = "UPDATE $this->table SET cantidad_esperada_pago = $calculoBalance WHERE $this->table.id = '".$siguientePago['id']."'";
-                        $updateSiguientePago = $this->ExecuteQuery($update, []);*/
+                        if($this->containsDecimal($a) == false){
+
+                            $pagoSemana = "SELECT * FROM pagos WHERE id = '$pago_id'";
+                            $pagoSemanaResult = $this->SelectOne($pagoSemana);
+
+                            $queryUpdatePagos = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_total_pagada = ?, status = ? WHERE prestamo_id = '$prestamo_id' 
+                            and semana >= ". $pagoSemanaResult['semana'] ." AND semana < $a and status = 0";
+                            $this->ExecuteQuery($queryUpdatePagos , [0, 0, 1]);
+
+                        }
+                        else{
+
+                            $diferencia = $pago_recibido - $pago['cantidad_esperada_pago'];
+
+                            $cantidad_esperada = $pago['cantidad_esperada_pago'] - $diferencia;
+
+                            $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
+                            $siguientePago = $this->SelectOne($queryNextRow);
+
+                            $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '".$siguientePago['id']."'";
+                            $updateSiguientePago = $this->ExecuteQuery($update, [$cantidad_esperada]);
+
+                        }
+                        */
+
 
                     }
-
-
-                    
-
-                    /*if($sumatoria['sumatoria'] >= $prestamo['monto_prestado']){
-                        return json([
-                            'status' => 'success', 
-                            'data'=> null, 
-                            'message'=> 'Se ha hecho el pago correctamente y se finalizo el prestamo'
-                        ], 200);
-                    }*/
 
                     //PENDIENTE CHECAR SI TIENE MULTAS
                     $queryCantidadMultas = "SELECT count(id) as cantidad_multas FROM $this->table WHERE prestamo_id = '$prestamo_id' and cantidad_multa != 0;";
@@ -283,22 +291,7 @@ class Pago extends Database{
                         ], 200);
                         
                     } 
-                    /*else if($cantidadSemanas['cantidad_semanas']  == 20){
-
-                        $update = "UPDATE prestamos set status = ? WHERE prestamos.id = '$prestamo_id'";
-                        $this->ExecuteQuery($update, [1]);
-
-                        return json([
-                            'status' => 'success', 
-                            'data'=> true, 
-                            'message'=> 'Se ha hecho el pago correctamente y finalizado prestamo de 20 semanas'
-                        ], 200);
-
-                    }*/
-
-                    /*$queryBalance = "select sum(cantidad_esperada_pago) as debe from pagos WHERE prestamo_id = '$prestamo_id' and status = 0; ";
-                    $balance = $this->SelectOne($queryBalance);*/
-
+             
                     if($pago_recibido == $balance['balance']){
 
                         $queryUpdatePagos = "UPDATE $this->table SET cantidad_esperada_pago = 0, cantidad_normal_pagada = 0, cantidad_total_pagada = 0, status = ? WHERE prestamo_id = '$prestamo_id' and id > '$pago_id' and status = 0";
@@ -307,16 +300,11 @@ class Pago extends Database{
                         $queryUpdatePrestamo = "UPDATE prestamos  SET prestamos.status = ? WHERE prestamos.id = '$prestamo_id'";
                         $update = $this->ExecuteQuery($queryUpdatePrestamo, [1]);
 
-                        /*$update = "UPDATE $this->table SET cantidad_esperada_pago = $calculoBalance  WHERE id > $pago_id";
-                        $updateSiguientesPagos = $this->ExecuteQuery($update, []);*/
-
                     }
 
 
-    
                     $update = "UPDATE $this->table SET balance = ? WHERE prestamo_id = '$prestamo_id'";
                     $pago2 = $this->ExecuteQuery($update, [$calculoBalance]);
-                    
 
                     return json([
                         'status' => 'success', 
@@ -341,6 +329,13 @@ class Pago extends Database{
             die();
 
         }
+    }
+
+    function containsDecimal( $value ) {
+        if ( strpos( $value, "." ) !== false ) {
+            return true;
+        }
+        return false;
     }
 
 
