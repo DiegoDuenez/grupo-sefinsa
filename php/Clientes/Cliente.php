@@ -23,7 +23,6 @@ class Cliente extends Database{
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion' 
         FROM $this->table 
-        /*LEFT JOIN avales ON $this->table.aval_id = avales.id*/
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id

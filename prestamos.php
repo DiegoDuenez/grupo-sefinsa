@@ -525,7 +525,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input  class="form-control" id="inp_monto_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                                <input  class="form-control" id="inp_monto_renovar" type="number" placeholder="0.00" required name="price" min="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
                             </div>
                         </div>
                     </div>
