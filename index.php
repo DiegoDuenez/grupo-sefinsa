@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
-
 </head>
 
 <body class="hold-transition login-page">
