@@ -25,7 +25,6 @@
         <?php include 'templates/navbar.php' ?>
         <?php include 'templates/sidebar.php' ?>
 
-
         <div class="content-wrapper">
             <section class="content">
                 <div class="container-fluid">
@@ -79,7 +78,6 @@
                                                 <th scope="col">Colocadora</th>
                                                 <th scope="col">Acciones</th>
                                                 <th scope="col">Fecha de registro</th>
-
                                             </tr>
                                         </thead>
                                         <tbody id="table_body">
@@ -141,7 +139,6 @@
                                     <option value="0">Seleccionar colocadora</option>
                                 </select>
                             </div>
-
                         </div>
 
                         <div class="form-row">
@@ -296,8 +293,6 @@
                                 <label for="inp_editar_otras_referencias_cliente">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <textarea class="form-control" id="inp_editar_otras_referencias_cliente" rows="3" required></textarea>
                             </div>
-
-
 
                         </div>
 

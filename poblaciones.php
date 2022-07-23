@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,27 +40,26 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                            <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Poblaciones registradas</h3>
-                            </div>
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Poblaciones registradas</h3>
+                                </div>
                                 <div class="card-body">
                                     <table class="table" id="tabla_localidades">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Ruta</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Grupo</th>
-                                            <th scope="col">Hora limite de cobro </th>
-                                            <th scope="col">Monto de multa</th>
-                                            <th scope="col">Acciones</th>
-                                            <th scope="col">Fecha de registro</th>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Ruta</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Grupo</th>
+                                                <th scope="col">Hora limite de cobro </th>
+                                                <th scope="col">Monto de multa</th>
+                                                <th scope="col">Acciones</th>
+                                                <th scope="col">Fecha de registro</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table_body">
 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="table_body">
-                                    
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -74,12 +74,12 @@
     <div class="modal fade" id="modal_registrar_localidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar población</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Registrar población</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
 
 
@@ -87,28 +87,31 @@
 
                         <div class="form-group col mt-2">
                             <label for="inp_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                            <input class="form-control" id="inp_nombre_localidad" placeholder="Nombre población" autofocus required />
                         </div>
 
                         <div class="form-group col mt-2">
                             <label for="select_rutas_registrar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <select class="form-control select_rutas" id="select_rutas_registrar" >
-                                <option selected value="0" >Seleccionar ruta</option>
+                            <select class="form-control select_rutas" id="select_rutas_registrar">
+                                <option selected value="0">Seleccionar ruta</option>
                             </select>
                         </div>
 
                     </div>
 
                     <div class="form-row">
+
                         <div class="form-group col mt-2">
                             <label for="inp_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_grupo"  type="number" placeholder="Grupo" value="1" required min="1" />
+                            <input class="form-control" id="inp_grupo" type="number" placeholder="Grupo" value="1" required min="1" />
                         </div>
+
                     </div>
-                   
+
 
                     <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
+
                         <div class="form-group col mt-2">
                             <select class="form-control" name="select_primer_dia" id="select_primer_dia">
                                 <option value="Lunes">Lunes</option>
@@ -119,29 +122,32 @@
                                 <option value="Sabado">Sabado</option>
                             </select>
                         </div>
+
                     </div>
 
                     <label for="inp_primer_hora">Horario de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
+
                         <div class="form-group col mt-2">
-                            <input class="form-control" id="inp_primer_hora" required  />
+                            <input class="form-control" id="inp_primer_hora" required />
                         </div>
                         <div class="form-group col mt-2">
-                            <input class="form-control" id="inp_segunda_hora" required/>
+                            <input class="form-control" id="inp_segunda_hora" required />
                         </div>
+
                     </div>
 
                     <div class="form-group mt-2">
+
                         <label for="inp_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>
-                    
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                             </div>
-                            <input  class="form-control" id="inp_monto_multa"  type="number" placeholder="0.00" required name="price" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            <input class="form-control" id="inp_monto_multa" type="number" placeholder="0.00" required name="price" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
                         </div>
-                    </div>
 
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -155,25 +161,25 @@
     <div class="modal fade" id="modal_editar_localidad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar población</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar población</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
 
                     <div class="form-row">
 
                         <div class="form-group col mt-2">
                             <label for="inp_editar_nombre_localidad">Nombre población <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required/>
+                            <input class="form-control" id="inp_editar_nombre_localidad" placeholder="Nombre población" autofocus required />
                         </div>
 
                         <div class="form-group col mt-2">
                             <label for="select_rutas_editar">Ruta <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <select class="form-control select_rutas editar" id="select_rutas_editar">
-                                <option selected value="0" >Seleccionar ruta</option>
+                                <option selected value="0">Seleccionar ruta</option>
                             </select>
                         </div>
 
@@ -183,12 +189,14 @@
 
                         <div class="form-group col mt-2">
                             <label for="inp_editar_grupo">Grupo <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_editar_grupo"  type="number" placeholder="Grupo" required min="1" />
+                            <input class="form-control" id="inp_editar_grupo" type="number" placeholder="Grupo" required min="1" />
                         </div>
+
                     </div>
 
                     <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
+
                         <div class="form-group col mt-2">
                             <select class="form-control" name="select_editar_primer_dia" id="select_editar_primer_dia">
                                 <option value="Lunes">Lunes</option>
@@ -199,29 +207,33 @@
                                 <option value="Sabado">Sabado</option>
                             </select>
                         </div>
+
                     </div>
 
                     <label for="inp_editar_primer_hora">Horario de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
+
                         <div class="form-group col mt-2">
-                            <input class="form-control" id="inp_editar_primer_hora" required  />
+                            <input class="form-control" id="inp_editar_primer_hora" required />
                         </div>
                         <div class="form-group col mt-2">
-                            <input class="form-control" id="inp_editar_segunda_hora" required/>
+                            <input class="form-control" id="inp_editar_segunda_hora" required />
                         </div>
+
                     </div>
+
                     <div class="form-group mt-2">
+
                         <label for="inp_editar_monto_multa">Monto de multa <span class="text-danger" title="Campo obligatorio">*</span></label>
-                   
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                             </div>
-                            <input  class="form-control" id="inp_editar_monto_multa"  type="number" placeholder="0.00" required name="price" min="0.00" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
+                            <input class="form-control" id="inp_editar_monto_multa" type="number" placeholder="0.00" required name="price" min="0.00" value="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
                         </div>
+
                     </div>
 
-                    
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_localidad">Guardar</button>
@@ -232,19 +244,7 @@
 
 
     <?php include 'templates/footer.php' ?>
-  </div>
-
-   <!--<script src="plugins/jquery/jquery.min.js"></script>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/js/adminlte.min.js"></script>
-    <script src="plugins/select2/js/select2.full.min.js"></script>
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/moment/moment-with-locales.js"></script>
-    <script src="plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-    <script src="plugins/toastr/toastr.min.js"></script>
-    <script src="plugins/blockui/jquery.blockui.min.js"></script>
-    <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
+    </div>
 
     <?php include 'templates/scripts.php' ?>
     <script src="js/auth.js"></script>

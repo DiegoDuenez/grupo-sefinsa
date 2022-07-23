@@ -68,7 +68,7 @@ class Prestamo extends Database{
 
     }
 
-    public function renovarPrestamo($prestamo_id, $tarjeton, $monto_renovar, $pago_semanal, $fecha_prestamo, $monto_debe){
+    public function renovarPrestamo($prestamo_id, $tarjeton, $monto_renovar, $pago_semanal, $fecha_prestamo, $monto_debe, $modalidad_semanas){
 
 
         $monto_prestado = $monto_renovar - $monto_debe;
@@ -77,13 +77,13 @@ class Prestamo extends Database{
         $prestamo = $this->SelectOne($queryPrestamo);
 
         $this->create($prestamo['cliente_id'], $prestamo['direccion_cliente'], $prestamo['telefono_cliente'], $prestamo['ruta_id'], $prestamo['poblacion_id'],
-        $prestamo['colocadora_id'], $prestamo['aval_id'], $monto_renovar, $pago_semanal, $fecha_prestamo, $prestamo['modalidad_semanas'], 0, $tarjeton);
+        $prestamo['colocadora_id'], $prestamo['aval_id'], $monto_renovar, $pago_semanal, $fecha_prestamo, $modalidad_semanas, 0, $tarjeton);
 
         $queryUpdatePrestamo = "UPDATE $this->table SET $this->table.status = ? WHERE $this->table.id = '$prestamo_id'";
         $update = $this->ExecuteQuery($queryUpdatePrestamo, [2]);
 
-        $queryUpdatePagos = "UPDATE pagos SET cantidad_normal_pagada = cantidad_esperada_pago, cantidad_total_pagada = cantidad_normal_pagada, status = ? WHERE prestamo_id = '$prestamo_id' and status = 0";
-        $this->ExecuteQuery($queryUpdatePagos , [1]);
+        $queryUpdatePagos = "UPDATE pagos SET cantidad_normal_pagada = cantidad_esperada_pago, cantidad_total_pagada = cantidad_normal_pagada, balance = ?, status = ? WHERE prestamo_id = '$prestamo_id' and status = 0";
+        $this->ExecuteQuery($queryUpdatePagos , [0,1]);
 
         return json([
             'status' => 'success', 

@@ -56,20 +56,6 @@ function addZero(number) {
 
 function logout() {
   if (loggedIn()) {
-    /*Swal.fire({
-            title: '¿Esta seguro de salir de la plataforma?',
-            showCancelButton: true,
-            allowOutsideClick: false
-        }).then((result) => {
-            
-            if (result.isConfirmed) {
-                localStorage.removeItem('usuario')
-                window.location = "index.php";
-            } 
-            else if (result.isDenied) {
-            }
-        })*/
-
     localStorage.removeItem("usuario");
     window.location = "index.php";
   }

@@ -50,6 +50,7 @@ class Database{
 	}
 
 	function SelectOne($q){
+		
 		try{
 			$sth = $this->dbh->prepare($q);
 			$sth->execute();
@@ -59,13 +60,13 @@ class Database{
 			$result = json_encode($result);
 			$obj = json_decode($result, true);
 			return $obj;
-
 		}
 		catch(PDOException $e){
 			error_log('PDOException - ' . $e->getMessage(), 0);
 			http_response_code(500);
 			die($e->getMessage());
 		}
+
 	}
 
 	function SelectNoClose($q){

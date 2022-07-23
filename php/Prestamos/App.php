@@ -47,8 +47,10 @@ switch($func){
         $pago_semanal = $_DATA['pago_semanal'];
         $fecha_prestamo = $_DATA['fecha_prestamo'];
         $monto_debe = $_DATA['monto_debe'];
+        $modalidad_semanas = $_DATA['modalidad_semanas'];
 
-        echo $Prestamo->renovarPrestamo($prestamo_id, $tarjeton, $monto_renovar, $pago_semanal, $fecha_prestamo, $monto_debe);
+
+        echo $Prestamo->renovarPrestamo($prestamo_id, $tarjeton, $monto_renovar, $pago_semanal, $fecha_prestamo, $monto_debe, $modalidad_semanas);
 
     break;
 
