@@ -23,9 +23,10 @@
     color: rgb(152, 152, 152);
     cursor: pointer;
     transition: 400ms;
+    text-transform: capitalize;
 }
 
 .modulo--select{
-    border: 1px solid rgb(0, 0, 0);
-    color: black;
+    border: 1px solid rgb(7, 170, 110);
+    color: rgb(7, 170, 110);
 }
