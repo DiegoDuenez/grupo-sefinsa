@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -83,6 +85,7 @@
                                 <option selected value="0">Seleccionar empleado</option>
                             </select>
                         </div>
+                       
 
                     </div>
                     <div class="form-group mt-2 ml-2 mr-2">

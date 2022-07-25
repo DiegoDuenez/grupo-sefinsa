@@ -19,7 +19,7 @@
     <div class="login-box">
         <div class="login-logo">
             <span class="fw-bold h1">
-                <img src="resources/assets/logo.png" alt="Grupo SEFINSA" class="" title="GRUPO SEFINSA" style="/*opacity: .8;*/ width: 15rem;">
+                <img src="resources/assets/logo.png" alt="Grupo SEFINSA" class="" title="GRUPO SEFINSA" style="width: 15rem;">
             </span>
         </div>
         <!-- /.login-logo -->
