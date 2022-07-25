@@ -52,6 +52,18 @@ var inp_garantias_aval = $("#inp_garantias_aval");
 var inp_archivos_garantias_aval = $("#inp_archivos_garantias_aval");
 var inp_archivos_aval = $("#inp_archivos_aval");
 
+// CLIENTE-AVAL INPUTS
+var inp_direccion_cliente_aval = $("#inp_direccion_cliente_aval");
+var inp_telefono_cliente_aval = $("#inp_telefono_cliente_aval");
+var inp_otras_referencias_cliente_aval = $(
+  "#inp_otras_referencias_cliente_aval"
+);
+var inp_garantias_cliente_aval = $("#inp_garantias_cliente_aval");
+var inp_archivos_garantias_cliente_aval = $(
+  "#inp_archivos_garantias_cliente_aval"
+);
+var inp_archivos_cliente_aval = $("#inp_archivos_cliente_aval");
+
 // PRESTAMO INPUTS
 var inp_fecha_prestamo = $("#inp_fecha_prestamo");
 var inp_monto_prestar = $("#inp_monto_prestar");
@@ -194,6 +206,11 @@ $(document).ready(function () {
     width: "100%",
     dropdownParent: $("#modal_registrar_prestamo"),
   });
+  $("#select_clientes_aval").select2({
+    theme: "bootstrap4",
+    width: "100%",
+    dropdownParent: $("#modal_registrar_prestamo"),
+  });
 
   $("#select_rutas_filtro").select2({ theme: "bootstrap4", width: "100%" });
   $("#select_poblaciones_filtro").select2({
@@ -204,6 +221,7 @@ $(document).ready(function () {
     theme: "bootstrap4",
     width: "100%",
   });
+
   /*inp_fecha_prestamo.datetimepicker({
 		format:'YYYY:MM:DD',
 		date : globalFechaInicial,
@@ -295,6 +313,12 @@ select_clientes_registrar.on("change", function () {
   clienteID = this.value;
 
   traerCliente(clienteID);
+});
+
+$("#select_clientes_aval").on("change", function () {
+  clienteID = this.value;
+
+  traerCliente(clienteID, true);
 });
 
 inp_monto_prestar.on("input", function () {
@@ -1513,6 +1537,9 @@ function traerCliente(id) {
           console.log(response.data);
 
           var tabSelecionado = $(".tab-content .active").attr("id");
+          var tabSeleccionado2 = $("#prestamosAvalTabContent .active").attr(
+            "id"
+          );
 
           if (tabSelecionado == "cliente-existente") {
             getRutas(response.data.nombre_ruta);
@@ -1528,6 +1555,15 @@ function traerCliente(id) {
             inp_direccion_cliente_existente.val(response.data.direccion);
             inp_telefono_cliente_existente.val(response.data.telefono);
             inp_garantias_cliente_existente.val(response.data.garantias);
+          }
+
+          if (tabSeleccionado2 == "cliente-aval") {
+            inp_direccion_cliente_aval.val(response.data.direccion);
+            inp_telefono_cliente_aval.val(response.data.telefono);
+            inp_otras_referencias_cliente_aval.val(
+              response.data.otras_referencias
+            );
+            inp_garantias_cliente_aval.val(response.data.garantias);
           }
         } else {
           if (id != 0) {

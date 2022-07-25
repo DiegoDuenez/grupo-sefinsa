@@ -371,6 +371,133 @@
                             </div>
 
                         </div>
+                        <!--<ul class="nav nav-tabs" id="prestamosAvalTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="nuevo-aval-tab" data-toggle="tab" href="#nuevo-aval" role="tab" aria-controls="nuevo-aval" aria-selected="true">Nuevo aval</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="cliente-aval-tab" data-toggle="tab" href="#cliente-aval" role="tab" aria-controls="cliente-aval" aria-selected="false">Cliente-Aval</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="prestamosAvalTabContent">
+
+                            <div class="tab-pane fade show active" id="nuevo-aval" role="tabpanel" aria-labelledby="nuevo-aval-tab">
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_nombre_aval">Nombre completo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <input class="form-control" id="inp_nombre_aval" placeholder="Nombre aval" autofocus required />
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_direccion_aval">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <input class="form-control" id="inp_direccion_aval" placeholder="Dirección aval" required />
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_telefono_aval">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <input class="form-control" type="number" min="0" id="inp_telefono_aval" placeholder="Teléfono aval" required />
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_otras_referencias_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <textarea class="form-control" id="inp_otras_referencias_aval" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_garantias_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group col ml-3 mt-2">
+                                        <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_archivos_aval">Comprobante de domicilio e INE </label>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control-file" id="inp_archivos_aval" required multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="tab-pane fade show" id="cliente-aval" role="tabpanel" aria-labelledby="cliente-aval-tab">
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="select_clientes_aval">Cliente <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <select class="form-control select_clientes" id="select_clientes_aval">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_direccion_cliente_aval">Dirección <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <input class="form-control" id="inp_direccion_cliente_aval" placeholder="Dirección aval" required />
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_telefono_cliente_aval">Teléfono <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <input class="form-control" type="number" min="0" id="inp_telefono_cliente_aval" placeholder="Teléfono aval" required />
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_otras_referencias_cliente_aval">Otras referencias <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <textarea class="form-control" id="inp_otras_referencias_cliente_aval" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_garantias_cliente_aval">Garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                        <textarea class="form-control" id="inp_garantias_cliente_aval" rows="3" required></textarea>
+                                    </div>
+                                    <div class="form-group col ml-3 mt-2">
+                                        <label for="inp_archivos_garantias_cliente_aval">Archivos de garantiás </label>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente_aval" required multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col mt-2">
+                                        <label for="inp_archivos_cliente_aval">Comprobante de domicilio e INE </label>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <input type="file" class="form-control-file" id="inp_archivos_cliente_aval" required multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                        
+                            </div>
+                        
+
+                        </div>-->
+
+
 
                     </div>
 
@@ -404,19 +531,6 @@
                             </div>
 
                         </div>
-
-                        <!--<div class="form-row d-none">
-                        <div class="form-group col mt-2">
-                            <label for="inp_monto_prestar_intereses">Monto a prestar con intereses <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input  class="form-control" id="inp_monto_prestar_intereses" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" disabled/>
-                            </div>
-                        </div>
-                    </div>-->
 
                         <div class="form-row">
 
@@ -462,16 +576,6 @@
                 </div>
                 <div class="modal-body">
 
-                    <!--<div class="d-flex w-100">
-                        <div class="card">
-                            <h5 class="card-header">Featured</h5>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                        
-                    </div>-->
                     <table class="table" id="tabla_pagos">
                         <thead>
                             <tr>
@@ -504,45 +608,6 @@
                 </div>
                 <div class="modal-body">
 
-                    <!--<div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_fecha_renovacion" class="d-none">Fecha de renovación <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_fecha_renovacion" type="hidden" value="<?php echo date('Y-m-d'); ?>" required />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_tarjeton_renovar">Número de tarjetón <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input  class="form-control" id="inp_tarjeton_renovar" type="number" placeholder="Número de tarjetón" required " min="0" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_monto_renovar">Monto <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input  class="form-control" id="inp_monto_renovar" type="number" placeholder="0.00" required name="price" min="0.00" step="0.01" pattern="^\d+(?:\.\d{1,2})?$"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_debe_renovar">Debe <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input  class="form-control" id="inp_debe_renovar" type="number" placeholder="0.00" required name="price" min="0.00" value="0.00" step="0.01" disabled pattern="^\d+(?:\.\d{1,2})?$"/>
-                            </div>
-                        </div>
-                    </div>-->
 
                     <div class="form-row">
 
