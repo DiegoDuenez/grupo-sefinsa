@@ -147,6 +147,14 @@ function modalEditarPerfil(e, id, nombre_perfil, tipo_perfil, modulos_id, modulo
   idPerfilEditar = id;
   perfilTipo = tipo_perfil;
 
+  $("#select_editar_tipo_perfil > option").each(function () {
+    if (this.value == tipo_perfil) {
+      $(this).attr("selected", "selected");
+    } else {
+      $(this).attr("selected", false);
+    }
+  });
+
   $('.modulo').removeClass('modulo--select')
 
   for (var i = 0; i < modulos_id.split(",").length; i++) {
@@ -157,6 +165,8 @@ function modalEditarPerfil(e, id, nombre_perfil, tipo_perfil, modulos_id, modulo
         
       })
   }
+
+  
 
 }
 
