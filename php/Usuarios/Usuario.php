@@ -136,15 +136,21 @@ class Usuario extends Database{
     public function login($usuario, $password){
 
 
-        $query = "SELECT * FROM $this->table WHERE usuario = '$usuario' and status = 1 limit 1";
-        $user =  $this->SelectOne($query);
+        $query = "SELECT *,
+        GROUP_CONCAT(modulos.nombre_modulo SEPARATOR ', ') as modulos
+        FROM $this->table
+        INNER JOIN perfiles ON perfiles.id = $this->table.perfil_id
+        INNER JOIN perfiles_modulos ON perfiles_modulos.perfil_id = perfiles.id
+        INNER JOIN modulos ON perfiles_modulos.modulo_id = modulos.id
+        WHERE usuario = '$usuario' and $this->table.status = 1 limit 1";
+        $user = $this->SelectOne($query);
 
         if($user){
             if(password_verify($password, $user['password'])){
                 return json(
                     [
                         'status' => 'success',
-                        'data' => $this->Select($query),
+                        'data' => $this->SelectOne($query),
                         'message' => ''
                     ]
                 , 200);

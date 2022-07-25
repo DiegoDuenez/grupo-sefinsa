@@ -27,10 +27,11 @@ function iniciarSesion() {
       data: JSON.stringify(datasend),
       success: function (response) {
         if (response.status == "success") {
-          localStorage.setItem("usuario", JSON.stringify(response.data[0]));
+          localStorage.setItem("usuario", JSON.stringify(response.data));
+          localStorage.setItem("modulos", response.data.modulos.split());
           Swal.fire({
             icon: "success",
-            title: `Bienvenid@ ${response.data[0].nombre_completo}`,
+            title: `Bienvenid@ ${response.data.nombre_completo}`,
             allowOutsideClick: false,
             timer: 1000,
             showCancelButton: false,

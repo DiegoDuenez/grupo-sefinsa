@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -96,17 +97,15 @@
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label for="select_modulos_registrar_0">Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <select class="form-control select_modulos" id="select_modulos_registrar_0">
-                                <option selected value="0">Seleccionar modulo</option>
-                            </select>
+                            <label>Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <div class="modulos_container" id="box_modulos"> 
+                            
+                            </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="form-group mt-2 ml-2 mr-2">
-                    <button class="btn btn-success btn-block" id="btn_agregar_modulo">Agregar modulo</button>
-                </div>
+                
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_perfil">Guardar</button>
                 </div>
@@ -139,11 +138,14 @@
                         </select>
                     </div>
 
-                </div>
-
-                <div class="form-group mt-2 ml-2 mr-2">
-                        <button class="btn btn-success btn-block" id="btn_editar_agregar_modulo">Agregar modulo</button>
+                    <div class="form-group col mt-2" id="contenedor_personal">
+                        <label>Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <div class="modulos_container" id="box_modulos_editar"> 
+                        
+                        </div>
                     </div>
+
+                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_perfil">Guardar</button>
                 </div>

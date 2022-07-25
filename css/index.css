@@ -1,0 +1,31 @@
+
+
+.modulos_container{
+    display: flex;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 0.8rem;
+    height: max-content;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 5px;
+
+}
+
+.modulo{
+    display: flex;
+    width: max-content;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 10px;
+    height: max-content;
+    padding: 0.3rem 0.5rem;
+    color: rgb(152, 152, 152);
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.modulo--select{
+    border: 1px solid rgb(0, 0, 0);
+    color: black;
+}

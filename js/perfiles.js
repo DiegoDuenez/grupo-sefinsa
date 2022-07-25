@@ -9,6 +9,8 @@ var btn_guardar_editar_perfil = $("#btn_guardar_editar_perfil");
 var btn_agregar_modulo = $('#btn_agregar_modulo')
 var btn_editar_agregar_modulo = $('#btn_editar_agregar_modulo')
 
+var modulos_container = $('.modulos_container')
+
 var table;
 var idPerfilEditar = 0;
 var perfilTipo = "";
@@ -93,67 +95,10 @@ function getPerfiles() {
   });
 }
 
-function modalEditarPerfil(e, id, nombre_perfil, tipo_perfil, modulos_id, modulos) {
-
-  inp_editar_nombre_perfil.val($.trim(nombre_perfil));
-  idPerfilEditar = id;
-  perfilTipo = tipo_perfil;
-
-  /*$(`#select_editar_tipo_perfil option[value='${tipo_perfil}']`).prop(
-    "selected",
-    true
-  );*/
-
-  $("#modal_body_editar_perfil")
-    .children()
-    .not("#contenedor_inp_editar_nombre_perfil")
-    .not('#contenedor_select_editar_tipo_perfil')
-    .empty();
-  $("#modal_body_editar_perfil").append(`
-        <div class="form-group mt-2">
-            <label for="select_modulos_editar">Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
-            <select class="form-control select_modulos_editar" id="select_modulos_editar_0" >
-                <option selected value="0" >Seleccionar modulo</option>
-            </select>
-        </div>
-    `);
-
-  for (var i = 0; i < modulos_id.split(",").length; i++) {
-    if (i > 0) {
-      $("#modal_body_editar_perfil").append(`
-                <div class="form-group mt-2" >
-                    <div class="d-flex flex-row "id="contenedor_select_${i}" >
-                        <select class="form-control select_modulos_editar" style="width: 80%" id="select_modulos_editar_${i}" >
-                        <option selected value="0" >Seleccionar modulo ${i}</option>
-                        </select>
-                        <button class="btn btn-light btn-block btn-sm remover" style="width: 20%" >Remover</button>
-                    </div>
-                </div>
-            `);
-    }
-
-    $(`#select_modulos_editar_${i}`).select2({
-      theme: "bootstrap4",
-      width: "100%",
-      dropdownParent: $("#modal_editar_perfil"),
-    });
-
-    llenarSelectEditar(`select_modulos_editar_${i}`, modulos.split(",")[i]);
-  }
-
-  if (
-    $(".select_empleados_perfil").toArray().length >
-    modulos_id.split(",").length
-  ) {
-    $(`#contenedor_select_${i}`).parent("div").remove();
-  }
 
 
-}
+function getModulos(){
 
-
-
-function llenarSelectEditar(select_id, optionSelect) {
   var datasend = {
     func: "modulosActivos",
   };
@@ -165,24 +110,24 @@ function llenarSelectEditar(select_id, optionSelect) {
     data: JSON.stringify(datasend),
     success: function (response) {
       if (response.status == "success") {
-        $(`#${select_id}`).empty();
-        $(`#${select_id}`).append(`
-                    <option value="0" >Seleccionar modulo</option>
-                `);
-        for (var i = 0; i < response.data.length; i++) {
-          $(`#${select_id}`).append(`
-                        <option name="${response.data[i].nombre_modulo}" value="${response.data[i].id}">${response.data[i].nombre_modulo} </option>
-                    `);
 
-          if ($.trim(optionSelect) == response.data[i].nombre_modulo) {
-            $(`#${select_id} option[name='${$.trim(optionSelect)}']`).attr(
-              "selected",
-              "selected"
-            );
-          }
-
+        modulos_container.empty()
+        for(var i = 0; i < response.data.length; i++){
+          modulos_container.append(`
+            <div class="modulo" id="${response.data[i].id}">
+              ${response.data[i].nombre_modulo}
+            </div>
+        `)
         }
-
+        $('.modulo').click(function(){
+          if($(this).hasClass('modulo--select')){
+            $(this).removeClass('modulo--select')
+          }
+          else{
+            $(this).addClass('modulo--select')
+          }
+        })
+        
       }
     },
     error: function (e) {
@@ -193,45 +138,53 @@ function llenarSelectEditar(select_id, optionSelect) {
       });
     },
   });
+
+}
+
+function modalEditarPerfil(e, id, nombre_perfil, tipo_perfil, modulos_id, modulos) {
+
+  inp_editar_nombre_perfil.val($.trim(nombre_perfil));
+  idPerfilEditar = id;
+  perfilTipo = tipo_perfil;
+
+  $('.modulo').removeClass('modulo--select')
+
+  for (var i = 0; i < modulos_id.split(",").length; i++) {
+      $('.modulo').each(function(){
+        if(this.id == $.trim(modulos_id.split(",")[i])){
+          $(this).addClass('modulo--select')
+        }
+        
+      })
+  }
+
 }
 
 
+
 btn_guardar_perfil.click(function () {
-  var arrayModulos = [];
-  var camposValidos = false;
+  let arrayModulos = [];
+  let modulosSeleccionados = $('#box_modulos .modulo--select').length
 
-  for (var i = 0; i < $(".select_modulos").toArray().length; i++) {
-    if (
-      inp_nombre_perfil.val() == "" ||
-      $(`#select_modulos_registrar_${i} option:selected`).val() == 0
-    ) {
-      Swal.fire({
-        icon: "warning",
-        title: "Campos vacios",
-        text: "Necesitas llenar todos los campos",
-        timer: 1000,
-        showCancelButton: false,
-        showConfirmButton: false,
-      });
-      camposValidos = false;
-
-    } else {
-      modulo_id = $(`#select_modulos_registrar_${i} option:selected`).val();
-
-      camposValidos = true;
-    }
-  }
-
-  if (camposValidos) {
-    $(".select_modulos option:selected").each(function () {
-      var id = $(this).val();
-      arrayModulos.push(id);
+  if (inp_nombre_perfil.val() == "" || modulosSeleccionados == 0) {
+    Swal.fire({
+      icon: "warning",
+      title: "Campos vacios",
+      text: "Necesitas llenar todos los campos",
+      timer: 1000,
+      showCancelButton: false,
+      showConfirmButton: false,
     });
-
-    tipo_perfil = $(`#select_tipo_perfil option:selected`).val();
+  } 
+  else {
+    $('#box_modulos .modulo--select').each(function(){
+      arrayModulos.push(this.id);
+    })
+    tipo_perfil = $(`#select_editar_tipo_perfil option:selected`).val();
     registrarPerfil(inp_nombre_perfil.val(), tipo_perfil, arrayModulos);
 
   }
+
 });
 
 function registrarPerfil(nombre_perfil, tipo_perfil, modulos) {
@@ -273,38 +226,27 @@ function registrarPerfil(nombre_perfil, tipo_perfil, modulos) {
 
 
 btn_guardar_editar_perfil.click(function () {
-  var arrayModulos = [];
-  var camposValidos = false;
+  let arrayModulos = [];
+  let modulosSeleccionados = $('#box_modulos_editar .modulo--select').length
 
-  for (var i = 0; i < $(".select_modulos_editar").toArray().length; i++) {
-    if (
-      inp_editar_nombre_perfil.val() == "" ||
-      $(`#select_modulos_editar_${i} option:selected`).val() == 0
-    ) {
-      Swal.fire({
-        icon: "warning",
-        title: "Campos vacios",
-        text: "Necesitas llenar todos los campos",
-        timer: 1000,
-        showCancelButton: false,
-        showConfirmButton: false,
-      });
-      camposValidos = false;
-    } else {
-      modulo_id = $(`#select_modulos_editar_${i} option:selected`).val();
-      camposValidos = true;
-    }
-  }
-
-  if (camposValidos) {
-    $(".select_modulos_editar option:selected").each(function () {
-      var id = $(this).val();
-      arrayModulos.push(id);
+  if (inp_editar_nombre_perfil.val() == "" || modulosSeleccionados == 0) {
+    Swal.fire({
+      icon: "warning",
+      title: "Campos vacios",
+      text: "Necesitas llenar todos los campos",
+      timer: 1000,
+      showCancelButton: false,
+      showConfirmButton: false,
     });
-
+  } 
+  else {
+    $('#box_modulos_editar .modulo--select').each(function(){
+      arrayModulos.push(this.id);
+    })
     tipo_perfil = $(`#select_editar_tipo_perfil option:selected`).val();
     editarPerfil(idPerfilEditar, inp_editar_nombre_perfil.val(), tipo_perfil, arrayModulos);
   }
+  
 
 });
 
@@ -332,8 +274,18 @@ function editarPerfil(id, nombre_perfil, tipo_perfil, modulos) {
           timer: 1000,
           showCancelButton: false,
           showConfirmButton: false,
+        }).then((response) => {
+
+          var usuario = JSON.parse(localStorage.getItem("usuario"));
+          if(id == usuario.perfil_id){
+            localStorage.removeItem("modulos");
+            getModulosPerfil(usuario.perfil_id)
+          }
+          getPerfiles();
+
         });
-        getPerfiles();
+       
+
       }
     },
     error: function (e) {
@@ -347,127 +299,24 @@ function editarPerfil(id, nombre_perfil, tipo_perfil, modulos) {
 }
 
 
-var x = 1;
-btn_agregar_modulo.click(function (e) {
-  e.preventDefault();
-
-  $("#modal_body_registrar_perfil").append(`
-            <div class="form-group mt-2">
-                <div class="d-flex flex-row">
-                    <select class="form-control select_modulos" style="width: 80%" id="select_modulos_registrar_${x}" >
-                    <option selected value="0" >Seleccionar modulo</option>
-                    </select>
-                    <button class="btn btn-light btn-block btn-sm remover" style="width: 20%" >Remover</button>
-                </div>
-            </div>
-        `);
-
-  $(`#select_modulos_registrar_${x}`).select2({
-    theme: "bootstrap4",
-    width: "100%",
-    dropdownParent: $("#modal_registrar_perfil"),
-  });
-
-  llenarSelect(`select_modulos_registrar_${x}`);
-  x++;
-});
-
-$("#modal_body_registrar_perfil").on("click", ".remover", function (e) {
-  e.preventDefault();
-  $(this).parent("div").remove();
-  x--;
-});
 
 
-var y;
-btn_editar_agregar_modulo.click(function (e) {
-  y = $(".select_modulos_editar").toArray().length;
+function getModulosPerfil(id){
 
-  e.preventDefault();
-
-  $("#modal_body_editar_perfil").append(`
-        <div class="form-group mt-2">
-            <div class="d-flex flex-row">
-                <select class="form-control select_modulos_editar" style="width: 80%" id="select_modulos_editar_${y}" >
-                <option selected value="0" >Seleccionar modulo</option>
-                </select>
-                <button class="btn btn-light btn-block btn-sm remover" style="width: 20%" >Remover</button>
-            </div>
-        </div>
-    `);
-
-  $(`#select_modulos_editar_${y}`).select2({
-    theme: "bootstrap4",
-    width: "100%",
-    dropdownParent: $("#modal_editar_perfil"),
-  });
-
-  llenarSelect(`select_modulos_editar_${y}`);
-  y++;
-});
-
-$("#modal_body_editar_perfil").on("click", ".remover", function (e) {
-  e.preventDefault();
-  $(this).parent("div").remove();
-  y--;
-});
-
-function llenarSelect(select_id) {
   var datasend = {
-    func: "modulosActivos",
+    func: "modulosPerfil",
+    id
   };
 
   $.ajax({
     type: "POST",
-    url: "php/Modulos/App.php",
+    url: "php/Perfiles/App.php",
     dataType: "json",
     data: JSON.stringify(datasend),
     success: function (response) {
       if (response.status == "success") {
-        $(`#${select_id}`).empty();
-        $(`#${select_id}`).append(`
-                    <option value="0" >Seleccionar modulo</option>
-                `);
-        for (var i = 0; i < response.data.length; i++) {
-          $(`#${select_id}`).append(`
-                        <option name="${response.data[i].nombre_modulo}" value="${response.data[i].id}">${response.data[i].nombre_modulo}</option>
-                    `);
-        }
-      }
-    },
-    error: function (e) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: e.responseJSON.message,
-      });
-    },
-  });
-}
-
-
-function getModulos(){
-
-  var datasend = {
-    func: "modulosActivos",
-  };
-
-  $.ajax({
-    type: "POST",
-    url: "php/Modulos/App.php",
-    dataType: "json",
-    data: JSON.stringify(datasend),
-    success: function (response) {
-      if (response.status == "success") {
-        $(`#select_modulos_registrar_0`).empty();
-        $(`#select_modulos_registrar_0`).append(`
-                    <option value="0" >Seleccionar modulo</option>
-                `);
-        for (var i = 0; i < response.data.length; i++) {
-          $(`#select_modulos_registrar_0`).append(`
-                        <option name="${response.data[i].nombre_modulo}" value="${response.data[i].id}">${response.data[i].nombre_modulo}</option>
-                    `);
-        }
+        localStorage.setItem("modulos", response.data.modulos.split());
+        document.location.reload()
       }
     },
     error: function (e) {
@@ -480,3 +329,5 @@ function getModulos(){
   });
 
 }
+
+

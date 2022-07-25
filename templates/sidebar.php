@@ -32,65 +32,65 @@ $ruta = basename($_SERVER['PHP_SELF']);
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                        <li class="nav-item">
-                            <a href="perfiles.php" class="nav-link <?php if ($ruta == 'perfiles.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-user"></i>
-                                <p>Perfiles</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="usuarios.php " class="nav-link <?php if ($ruta == 'usuarios.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-users"></i>
-                                <p>Usuarios</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="empleados.php" class="nav-link <?php if ($ruta == 'empleados.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-users"></i>
-                                <p>Empleados</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="rutas.php" class="nav-link <?php if ($ruta == 'rutas.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-route"></i>
-                                <p>Rutas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="poblaciones.php" class="nav-link <?php if ($ruta == 'poblaciones.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                                <p>Poblaciones</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="colocadoras.php" class="nav-link <?php if ($ruta == 'colocadoras.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-users"></i>
-                                <p>Colocadoras</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="clientes.php" class="nav-link <?php if ($ruta == 'clientes.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-handshake"></i>
-                                <p>Clientes</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="prestamos.php" class="nav-link <?php if ($ruta == 'prestamos.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-dollar-sign"></i>
-                                <p>Prestamos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pagos.php" class="nav-link <?php if ($ruta == 'pagos.php') echo ' active'; ?>">
-                                <i class="fa-solid fa-money-bill"></i>
-                                <p>Pagos</p>
-                            </a>
-                        </li>
-                </li>
+                            <li class="nav-item d-none" id="perfiles">
+                                <a href="perfiles.php" class="nav-link <?php if ($ruta == 'perfiles.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-user"></i>
+                                    <p>Perfiles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="usuarios">
+                                <a href="usuarios.php " class="nav-link <?php if ($ruta == 'usuarios.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-users"></i>
+                                    <p>Usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="empleados">
+                                <a href="empleados.php" class="nav-link <?php if ($ruta == 'empleados.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-users"></i>
+                                    <p>Empleados</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="rutas">
+                                <a href="rutas.php" class="nav-link <?php if ($ruta == 'rutas.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-route"></i>
+                                    <p>Rutas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="poblaciones">
+                                <a href="poblaciones.php" class="nav-link <?php if ($ruta == 'poblaciones.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <p>Poblaciones</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="colocadoras">
+                                <a href="colocadoras.php" class="nav-link <?php if ($ruta == 'colocadoras.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-users"></i>
+                                    <p>Colocadoras</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="clientes">
+                                <a href="clientes.php" class="nav-link <?php if ($ruta == 'clientes.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-handshake"></i>
+                                    <p>Clientes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="prestamos">
+                                <a href="prestamos.php" class="nav-link <?php if ($ruta == 'prestamos.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-dollar-sign"></i>
+                                    <p>Prestamos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none" id="pagos">
+                                <a href="pagos.php" class="nav-link <?php if ($ruta == 'pagos.php') echo ' active'; ?>">
+                                    <i class="fa-solid fa-money-bill"></i>
+                                    <p>Pagos</p>
+                                </a>
+                            </li>
+                    </li>
 
-            </ul>
+                </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none" id="configuraciones">
                 <a href="configuraciones.php" class="nav-link <?php if ($ruta == 'configuraciones.php') echo ' active'; ?>">
                     <i class="fa-solid fa-gears"></i>
                     <p>Configuraciones</p>
@@ -109,3 +109,5 @@ $ruta = basename($_SERVER['PHP_SELF']);
         </nav>
     </div>
 </aside>
+
+

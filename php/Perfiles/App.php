@@ -13,6 +13,11 @@ switch($func){
     case 'index':
         echo $Perfil->index();
     break;
+
+    case 'modulosPerfil':
+        $id = $_DATA['id'];
+        echo $Perfil->modulosPerfil($id);
+    break;
     
     case 'create':
         $nombre_perfil = $_DATA['nombre_perfil'];

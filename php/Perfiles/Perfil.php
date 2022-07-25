@@ -15,7 +15,7 @@ class Perfil extends Database{
         GROUP_CONCAT(modulos.id SEPARATOR ', ') as modulos_id
         FROM $this->table
         INNER JOIN perfiles_modulos ON perfiles_modulos.perfil_id = $this->table.id
-        LEFT JOIN modulos ON perfiles_modulos.modulo_id = modulos.id
+        INNER JOIN modulos ON perfiles_modulos.modulo_id = modulos.id
         GROUP BY $this->table.id
         ORDER BY $this->table.id DESC";
 
@@ -23,6 +23,28 @@ class Perfil extends Database{
             [
                 'status' => 'success',
                 'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
+
+    }
+
+    public function modulosPerfil($id){
+
+        $query = "SELECT $this->table.*,
+        GROUP_CONCAT(modulos.nombre_modulo SEPARATOR ', ') as modulos,
+        GROUP_CONCAT(modulos.id SEPARATOR ', ') as modulos_id
+        FROM $this->table
+        INNER JOIN perfiles_modulos ON perfiles_modulos.perfil_id = $this->table.id
+        INNER JOIN modulos ON perfiles_modulos.modulo_id = modulos.id
+        WHERE $this->table.id = '$id'
+        GROUP BY $this->table.id
+        ORDER BY $this->table.id DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->SelectOne($query),
                 'message' => ''
             ]
         , 200);

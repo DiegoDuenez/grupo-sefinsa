@@ -57,6 +57,7 @@ function addZero(number) {
 function logout() {
   if (loggedIn()) {
     localStorage.removeItem("usuario");
+    localStorage.removeItem("modulos");
     window.location = "index.php";
   }
 }
@@ -214,6 +215,14 @@ function clearInputs() {
   $("#inp_semana_cantidad").val("");
   $("#inp_semana_interes").val("");
   $("#inp_semana_semana_ren").val("");
+
+  $("#inp_nombre_perfil").val('')
+
+  $('.modulo').each(function(){
+    if($(this).hasClass('modulo--select')){
+      $(this).removeClass('modulo--select')
+    }
+  })
 }
 
 function formatearCantidadMX(cantidad) {
@@ -223,3 +232,11 @@ function formatearCantidadMX(cantidad) {
 }
 
 authGuard();
+
+
+var modulos_usuario = localStorage.getItem('modulos').split(',')
+
+for(var i = 0; i <= modulos_usuario.length; i++ ){
+
+    $('#' + $.trim(modulos_usuario[i])).removeClass('d-none')
+}
