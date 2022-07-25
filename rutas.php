@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="form-group mt-2">
-                            <label for="select_empleados_registrar">Empleado(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="select_empleados_registrar_0">Empleado(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <select class="form-control select_empleados" id="select_empleados_registrar_0">
                                 <option selected value="0">Seleccionar empleado</option>
                             </select>

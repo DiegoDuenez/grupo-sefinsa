@@ -45,6 +45,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nombre</th>
+                                                <th scope="col">Modulos</th>
                                                 <th scope="col">Tipo perfil</th>
                                                 <th scope="col">Acciones</th>
                                                 <th scope="col">Fecha de registro</th>
@@ -74,7 +75,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal_body_registrar_perfil">
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
@@ -93,6 +94,18 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group col mt-2">
+                            <label for="select_modulos_registrar_0">Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <select class="form-control select_modulos" id="select_modulos_registrar_0">
+                                <option selected value="0">Seleccionar modulo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group mt-2 ml-2 mr-2">
+                    <button class="btn btn-success btn-block" id="btn_agregar_modulo">Agregar modulo</button>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_perfil">Guardar</button>
@@ -111,26 +124,26 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal_body_editar_perfil">
 
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <label for="inp_editar_nombre_perfil">Nombre perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_editar_nombre_perfil" placeholder="Nombre perfil" autofocus required />
-                        </div>
+                    <div class="form-group col mt-2" id="contenedor_inp_editar_nombre_perfil">
+                        <label for="inp_editar_nombre_perfil">Nombre perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input class="form-control" id="inp_editar_nombre_perfil" placeholder="Nombre perfil" autofocus required />
                     </div>
 
-                    <label for="select_editar_tipo_perfil">Tipo de perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
-                    <div class="form-row">
-                        <div class="form-group col mt-2">
-                            <select class="form-control" name="select_editar_tipo_perfil" id="select_editar_tipo_perfil">
-                                <option value="usuario">Usuario</option>
-                                <option value="empleado">Empleado</option>
-                            </select>
-                        </div>
+                    <div class="form-group col mt-2" id="contenedor_select_editar_tipo_perfil">
+                        <label for="select_editar_tipo_perfil">Tipo de perfil <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control" name="select_editar_tipo_perfil" id="select_editar_tipo_perfil">
+                            <option value="usuario">Usuario</option>
+                            <option value="empleado">Empleado</option>
+                        </select>
                     </div>
 
                 </div>
+
+                <div class="form-group mt-2 ml-2 mr-2">
+                        <button class="btn btn-success btn-block" id="btn_editar_agregar_modulo">Agregar modulo</button>
+                    </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btn_guardar_editar_perfil">Guardar</button>
                 </div>

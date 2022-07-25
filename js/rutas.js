@@ -76,6 +76,7 @@ btn_agregar_empleado.click(function (e) {
   x++;
 });
 
+
 $("#modal_body_registrar_ruta").on("click", ".remover", function (e) {
   e.preventDefault();
   $(this).parent("div").remove();
@@ -317,7 +318,7 @@ function modalEditarRuta(e, id, empleados, empleados_id, nombre_ruta) {
     .empty();
   $("#modal_body_editar_ruta").append(`
         <div class="form-group mt-2">
-            <label for="select_empleados_editar">Empleado <span class="text-danger" title="Campo obligatorio">*</span></label>
+            <label for="select_empleados_editar">Empleado(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
             <select class="form-control select_empleados_editar" id="select_empleados_editar_0" >
                 <option selected value="0" >Seleccionar empleado</option>
             </select>

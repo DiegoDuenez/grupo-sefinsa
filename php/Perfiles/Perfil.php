@@ -10,7 +10,14 @@ class Perfil extends Database{
     public function index()
     {
 
-        $query = "SELECT * FROM $this->table ORDER BY $this->table.id DESC";
+        $query = "SELECT $this->table.*,
+        GROUP_CONCAT(modulos.nombre_modulo SEPARATOR ', ') as modulos,
+        GROUP_CONCAT(modulos.id SEPARATOR ', ') as modulos_id
+        FROM $this->table
+        INNER JOIN perfiles_modulos ON perfiles_modulos.perfil_id = $this->table.id
+        LEFT JOIN modulos ON perfiles_modulos.modulo_id = modulos.id
+        GROUP BY $this->table.id
+        ORDER BY $this->table.id DESC";
 
         return json(
             [
@@ -22,7 +29,7 @@ class Perfil extends Database{
 
     }
 
-    public function create($nombre_perfil, $tipo_perfil){
+    public function create($nombre_perfil, $tipo_perfil, $modulos){
 
         try{
 
@@ -31,7 +38,16 @@ class Perfil extends Database{
                 $insert = "INSERT INTO $this->table (nombre_perfil, tipo_perfil) VALUES (?, ?)";
                 $perfil = $this->ExecuteQuery($insert, [$nombre_perfil, $tipo_perfil]);
 
+                $query = "SELECT id FROM $this->table ORDER BY id DESC LIMIT 1";
+                $perfil = $this->SelectOne($query);
+
                if($perfil) {
+
+                    for($i = 0; $i < count($modulos); $i++)
+                    {
+                        $insertPM = "INSERT INTO perfiles_modulos (perfil_id, modulo_id) VALUES (?, ?)";
+                        $perfilInserta = $this->ExecuteQuery($insertPM, [$perfil['id'], $modulos[$i]]);
+                    }
 
                     return json([
                         'status' => 'success', 
@@ -71,7 +87,7 @@ class Perfil extends Database{
 
     }
 
-    public function edit($id, $nombre_perfil, $tipo_perfil){
+    public function edit($id, $nombre_perfil, $tipo_perfil, $modulos){
 
         try{
 
@@ -80,22 +96,22 @@ class Perfil extends Database{
                 $update = "UPDATE $this->table SET nombre_perfil = ?, tipo_perfil = ? WHERE $this->table.id = '$id'";
                 $user = $this->ExecuteQuery($update, [$nombre_perfil, $tipo_perfil]);
 
-                if($user) {
 
-                    return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha actualizado el perfil'
-                    ], 200);
+                $dropQuery = "DELETE FROM perfiles_modulos WHERE perfil_id = '$id'";
+                $p = $this->ExecuteQuery($dropQuery, []);
 
-                } else {
-
-                    return json([
-                        'status' => 'success', 
-                        'data'=>null, 
-                        'message'=>'No se actualizo nada nuevo'
-                    ], 200);
+                for($i = 0; $i < count($modulos); $i++)
+                {
+                    $insertPM = "INSERT INTO perfiles_modulos (perfil_id, modulo_id) VALUES (?, ?)";
+                    $perfilInserta = $this->ExecuteQuery($insertPM, [$id, $modulos[$i]]);
                 }
+
+
+                return json([
+                    'status' => 'success', 
+                    'data'=> null, 
+                    'message'=> 'Se ha actualizado el perfil'
+                ], 200);
 
 
             }
