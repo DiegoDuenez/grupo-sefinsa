@@ -243,7 +243,7 @@ btn_guardar_abono.click(function () {
   ) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,
@@ -371,7 +371,7 @@ btn_guardar_editar_abono.click(function () {
   ) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar sstodos los campos",
       timer: 1000,
       showCancelButton: false,

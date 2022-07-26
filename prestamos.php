@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prestamos</title>
+    <title>Préstamos</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!--<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.0/css/all.css">-->
     <link rel="stylesheet" href="css/fontawesome-free-6.1.1-web/css/all.min.css">
@@ -67,7 +67,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title"><i class="fa-solid fa-dollar-sign"></i> Prestamos registrados</h3>
+                                    <h3 class="card-title"><i class="fa-solid fa-dollar-sign"></i> Préstamos registrados</h3>
                                 </div>
                                 <div class="card-body">
                                     <table class="table" id="tabla_prestamos">
@@ -80,7 +80,7 @@
                                                 <th scope="col">Aval</th>
                                                 <th scope="col">Dirección del aval</th>
                                                 <th scope="col">Teléfono aval</th>
-                                                <th scope="col">Fecha de prestamo</th>
+                                                <th scope="col">Fecha de préstamo</th>
                                                 <th scope="col" class="sum_monto_prestado">Monto</th>
                                                 <th scope="col" class="sum_pago_semanal">Semanal</th>
                                                 <!-- <th scope="col">Semana 1</th>
@@ -222,7 +222,7 @@
                                         <textarea class="form-control" id="inp_garantias_cliente" rows="3" required></textarea>
                                     </div>
                                     <div class="form-group col ml-3 mt-2">
-                                        <label for="inp_archivos_garantias_cliente">Archivos de garantiás</label>
+                                        <label for="inp_archivos_garantias_cliente">Archivos de garantías</label>
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple>
@@ -296,7 +296,7 @@
                                     </div>
 
                                     <div class="form-group col ml-3 mt-2">
-                                        <label for="inp_archivos_garantias_cliente">Archivos de garantiás </label>
+                                        <label for="inp_archivos_garantias_cliente">Archivos de garantías </label>
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente_existente" required multiple>
@@ -351,7 +351,7 @@
                                 <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
                             </div>
                             <div class="form-group col ml-3 mt-2">
-                                <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
+                                <label for="inp_archivos_garantias_aval">Archivos de garantías </label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple>
@@ -413,7 +413,7 @@
                                         <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
                                     </div>
                                     <div class="form-group col ml-3 mt-2">
-                                        <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
+                                        <label for="inp_archivos_garantias_aval">Archivos de garantías </label>
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple>
@@ -470,7 +470,7 @@
                                         <textarea class="form-control" id="inp_garantias_cliente_aval" rows="3" required></textarea>
                                     </div>
                                     <div class="form-group col ml-3 mt-2">
-                                        <label for="inp_archivos_garantias_cliente_aval">Archivos de garantiás </label>
+                                        <label for="inp_archivos_garantias_cliente_aval">Archivos de garantías </label>
                                         <div class="form-row">
                                             <div class="form-group">
                                                 <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente_aval" required multiple>
@@ -507,7 +507,7 @@
 
                         <div class="form-row">
                             <div class="form-group col mt-2">
-                                <label for="inp_fecha_prestamo">Fecha de prestamo <span class="text-danger" title="Campo obligatorio">*</span></label>
+                                <label for="inp_fecha_prestamo">Fecha de préstamo <span class="text-danger" title="Campo obligatorio">*</span></label>
                                 <input class="form-control" id="inp_fecha_prestamo" type="date" value="<?php echo date('Y-m-d'); ?>" required />
                             </div>
                         </div>

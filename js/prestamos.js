@@ -875,7 +875,7 @@ btn_guardar_prestamo.click(function () {
     ) {
       Swal.fire({
         icon: "warning",
-        title: "Campos vacios",
+        title: "Campos vacíos",
         text: "Necesitas llenar todos los campos",
         timer: 1000,
         showCancelButton: false,
@@ -1006,7 +1006,7 @@ btn_guardar_prestamo.click(function () {
     ) {
       Swal.fire({
         icon: "warning",
-        title: "Campos vacios",
+        title: "Campos vacíos",
         text: "Necesitas llenar todos los campos",
         timer: 1000,
         showCancelButton: false,
@@ -1147,7 +1147,7 @@ btn_guardar_prestamo.click(function () {
     ) {
       Swal.fire({
         icon: "warning",
-        title: "Campos vacios",
+        title: "Campos vacíos",
         text: "Necesitas llenar todos los campos",
         timer: 1000,
         showCancelButton: false,
@@ -1886,7 +1886,7 @@ btn_renovar.click(function () {
   if (inp_tarjeton_renovar.val() == "" || inp_monto_renovar.val() == "") {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,

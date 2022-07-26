@@ -154,7 +154,7 @@
                             <!--
                     va en otro form 
                         <div class="form-group col ml-3 mt-2">
-                            <label for="inp_archivos_garantias_cliente">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_archivos_garantias_cliente">Archivos de garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple >
@@ -210,7 +210,7 @@
                             <textarea class="form-control" id="inp_garantias_aval" rows="3" required></textarea>
                         </div>
                         <div class="form-group col ml-3 mt-2">
-                            <label for="inp_archivos_garantias_aval">Archivos de garantiás <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label for="inp_archivos_garantias_aval">Archivos de garantías <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="form-row">
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple >
@@ -302,7 +302,7 @@
 
                         <div class="form-row">
                             <div class="form-group col mt-2">
-                                <label for="inp_archivos_garantias_cliente">Archivos de garantiás</label>
+                                <label for="inp_archivos_garantias_cliente">Archivos de garantías</label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_garantias_cliente" required multiple>
@@ -326,7 +326,7 @@
 
                         <div class="form-row">
                             <div class="form-group col mt-2">
-                                <label for="inp_archivos_garantias_aval">Archivos de garantiás </label>
+                                <label for="inp_archivos_garantias_aval">Archivos de garantías </label>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <input type="file" class="form-control-file" id="inp_archivos_garantias_aval" required multiple>

@@ -114,7 +114,7 @@ btn_guardar_editar_multa.click(function () {
   if (inp_multa_cantidad_editar.val() == "") {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,

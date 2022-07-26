@@ -35,7 +35,7 @@ $(document).ready(function () {
       },
     },
     columnDefs: [{ visible: false, targets: -1 }],
-    order: [[3, "desc"]],
+    order: [[4, "desc"]],
   });
 
   $(`#select_modulos_registrar_0`).select2({
@@ -179,7 +179,7 @@ btn_guardar_perfil.click(function () {
   if (inp_nombre_perfil.val() == "" || modulosSeleccionados == 0) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,
@@ -242,7 +242,7 @@ btn_guardar_editar_perfil.click(function () {
   if (inp_editar_nombre_perfil.val() == "" || modulosSeleccionados == 0) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,

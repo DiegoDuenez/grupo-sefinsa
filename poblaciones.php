@@ -109,7 +109,7 @@
                     </div>
 
 
-                    <label for="select_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <label for="select_primer_dia">Día de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
 
                         <div class="form-group col mt-2">
@@ -194,7 +194,7 @@
 
                     </div>
 
-                    <label for="select_editar_primer_dia">Dia de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
+                    <label for="select_editar_primer_dia">Día de cobro <span class="text-danger" title="Campo obligatorio">*</span></label>
                     <div class="form-row">
 
                         <div class="form-group col mt-2">

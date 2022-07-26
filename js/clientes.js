@@ -291,7 +291,7 @@ btn_guardar_cliente.click(function () {
   ) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,
@@ -608,7 +608,7 @@ btn_guardar_editar_cliente.click(function () {
   ) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
       timer: 1000,
       showCancelButton: false,

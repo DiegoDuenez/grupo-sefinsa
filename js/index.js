@@ -5,7 +5,7 @@ function iniciarSesion() {
   if (usuario == "" || password == "") {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Necesitas llenar todos los campos",
     });
   } else {

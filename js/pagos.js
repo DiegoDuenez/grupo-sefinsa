@@ -518,7 +518,7 @@ btn_guardar_pago.click(function () {
   if (inp_cantidad_pagada.val() == 0) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Se requiere una cantidad de pago valida",
       timer: 1000,
       showCancelButton: false,
@@ -531,7 +531,7 @@ btn_guardar_pago.click(function () {
   ) {
     Swal.fire({
       icon: "warning",
-      title: "Campos vacios",
+      title: "Campos vacíos",
       text: "Se necesitan llenar todos los campos",
       timer: 1000,
       showCancelButton: false,

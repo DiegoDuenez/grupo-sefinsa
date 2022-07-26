@@ -77,7 +77,7 @@ $ruta = basename($_SERVER['PHP_SELF']);
                             <li class="nav-item d-none" id="Prestamos">
                                 <a href="prestamos.php" class="nav-link <?php if ($ruta == 'prestamos.php') echo ' active'; ?>">
                                     <i class="fa-solid fa-dollar-sign"></i>
-                                    <p>Prestamos</p>
+                                    <p>Préstamos</p>
                                 </a>
                             </li>
                             <li class="nav-item d-none" id="Pagos">
