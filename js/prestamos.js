@@ -242,7 +242,7 @@ $(document).ready(function () {
     traerCliente(cliente);
   } else {
     titulo_cliente.hide();
-    modal_prestamos_label.text("Registrar cliente y aval (Prestamo)");
+    modal_prestamos_label.text("Registrar cliente y aval (Préstamo)");
   }
 
   if (prestamo) {
@@ -787,7 +787,7 @@ btn_siguiente_usuario.click(function () {
   $("#pago").removeClass("d-none");
   $("#cliente").addClass("d-none");
   btn_anterior_usuario.prop("disabled", false);
-  modal_prestamos_label.text("Prestamo");
+  modal_prestamos_label.text("Préstamo");
   btn_siguiente_usuario.addClass("d-none");
   btn_guardar_prestamo.removeClass("d-none");
   $("#modal_dialog").removeClass("modal-xl");
@@ -799,7 +799,7 @@ btn_anterior_usuario.click(function () {
   btn_anterior_usuario.prop("disabled", true);
   btn_siguiente_usuario.removeClass("d-none");
   btn_guardar_prestamo.addClass("d-none");
-  modal_prestamos_label.text("Registrar cliente y aval (Prestamo)");
+  modal_prestamos_label.text("Registrar cliente y aval (Préstamo)");
   $("#modal_dialog").addClass("modal-xl");
 });
 
@@ -957,7 +957,7 @@ btn_guardar_prestamo.click(function () {
           btn_anterior_usuario.prop("disabled", true);
           btn_siguiente_usuario.removeClass("d-none");
           btn_guardar_prestamo.addClass("d-none");
-          modal_prestamos_label.text("Registrar cliente y aval (Prestamo)");
+          modal_prestamos_label.text("Registrar cliente y aval (Préstamo)");
           $("#modal_dialog").addClass("modal-xl");
 
           Swal.fire({
@@ -1102,7 +1102,7 @@ btn_guardar_prestamo.click(function () {
           btn_anterior_usuario.prop("disabled", true);
           btn_siguiente_usuario.removeClass("d-none");
           btn_guardar_prestamo.addClass("d-none");
-          modal_prestamos_label.text("Registrar cliente y aval (Prestamo)");
+          modal_prestamos_label.text("Registrar cliente y aval (Préstamo)");
           $("#modal_dialog").addClass("modal-xl");
 
           Swal.fire({
@@ -1245,7 +1245,7 @@ btn_guardar_prestamo.click(function () {
           btn_anterior_usuario.prop("disabled", true);
           btn_siguiente_usuario.removeClass("d-none");
           btn_guardar_prestamo.addClass("d-none");
-          modal_prestamos_label.text("Registrar cliente y aval (Prestamo)");
+          modal_prestamos_label.text("Registrar cliente y aval (Préstamo)");
           $("#modal_dialog").addClass("modal-xl");
 
           Swal.fire({
