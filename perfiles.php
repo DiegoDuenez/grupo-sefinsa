@@ -98,7 +98,7 @@
 
                     <div class="form-row">
                         <div class="form-group col mt-2">
-                            <label>Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <label>Módulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
                             <div class="modulos_container" id="box_modulos"> 
                             
                             </div>
@@ -140,7 +140,7 @@
                     </div>
 
                     <div class="form-group col mt-2" id="contenedor_personal">
-                        <label>Modulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <label>Módulo(s) <span class="text-danger" title="Campo obligatorio">*</span></label>
                         <div class="modulos_container" id="box_modulos_editar"> 
                         
                         </div>

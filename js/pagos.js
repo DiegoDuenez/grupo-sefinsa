@@ -37,9 +37,9 @@ $(document).ready(function () {
     bFilter: false,
     bInfo: false,
     language: {
-      lengthMenu: "Mostrar _MENU_ registros por pagina",
+      lengthMenu: "Mostrar _MENU_ registros por página",
       zeroRecords: "No se encontro ningún registro",
-      info: "Mostrando pagina _PAGE_ de _PAGES_",
+      info: "Mostrando página _PAGE_ de _PAGES_",
       infoEmpty: "No hay registros disponibles",
       infoFiltered: "(filtrado de _MAX_ registros totales)",
       sSearch: "Buscar",
@@ -104,9 +104,9 @@ $(document).ready(function () {
       [5, 10, 20, "Todos"],
     ],
     language: {
-      lengthMenu: "Mostrar _MENU_ registros por pagina",
+      lengthMenu: "Mostrar _MENU_ registros por página",
       zeroRecords: "No se encontro ningún registro",
-      info: "Mostrando pagina _PAGE_ de _PAGES_",
+      info: "Mostrando página _PAGE_ de _PAGES_",
       infoEmpty: "No hay registros disponibles",
       infoFiltered: "(filtrado de _MAX_ registros totales)",
       sSearch: "Buscar",
