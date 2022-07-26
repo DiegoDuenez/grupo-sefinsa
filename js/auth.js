@@ -238,5 +238,8 @@ var modulos_usuario = localStorage.getItem('modulos').split(',')
 
 for(var i = 0; i <= modulos_usuario.length; i++ ){
 
-    $('#' + $.trim(modulos_usuario[i])).removeClass('d-none')
+    if($.trim(modulos_usuario[i]) != ""){
+      $(`#${$.trim(modulos_usuario[i])}`).removeClass('d-none')
+    }
+
 }
