@@ -1650,7 +1650,18 @@ btn_renovar.click(function () {
       showCancelButton: false,
       showConfirmButton: false,
     });
-  } else {
+  } 
+  else if(inp_monto_renovar.val() < inp_debe_renovar.val()){
+    Swal.fire({
+      icon: "warning",
+      title: "Cantidad invalida",
+      text: "La cantidad a prestar debe ser mayor a la que debe",
+      timer: 1000,
+      showCancelButton: false,
+      showConfirmButton: false,
+    });
+  }
+  else {
     modalidad_semanas = $("#select_modalidad_renovar option:selected").val();
 
     renovarPrestamo(

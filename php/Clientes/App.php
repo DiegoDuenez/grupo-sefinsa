@@ -213,33 +213,35 @@ switch($func){
         FileManager::createFolder('../../resources/garantias/clientes/'.$cliente['carpeta_garantias']);
 
         if($cantidad_archivos_garantias_aval > 0){
+            $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
+            FileManager::dropFiles($ruta_garantias_aval);
             for($i = 0; $i < $cantidad_archivos_garantias_aval; $i++){
-                $ruta_garantias_aval =  '../../resources/garantias/avales/'.$nueva_carpeta_aval.'/';
                 FileManager::moveTo(FileManager::get('garantia_aval_'.$i,'tmp_name'), $ruta_garantias_aval.FileManager::get('garantia_aval_'.$i,'name'));
             }
         }
 
         if($cantidad_archivos_garantias_cliente > 0){
+            $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
+            FileManager::dropFiles($ruta_garantias_cliente);
             for($i = 0; $i < $cantidad_archivos_garantias_cliente; $i++){
-                $ruta_garantias_cliente =  '../../resources/garantias/clientes/'.$cliente['carpeta_garantias'].'/';
                 FileManager::moveTo(FileManager::get('garantia_cliente_'.$i,'tmp_name'), $ruta_garantias_cliente.FileManager::get('garantia_cliente_'.$i,'name'));
             }
         }
 
 
         if($cantidad_archivos_cliente > 0){
-        
+            $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
+            FileManager::dropFiles($ruta_comprobantes_cliente);
             for($i = 0; $i < $cantidad_archivos_cliente; $i++){
-                $ruta_comprobantes_cliente =  '../../resources/comprobantes/clientes/'.$cliente['carpeta_comprobantes'].'/';
                 FileManager::moveTo(FileManager::get('archivo_cliente_'.$i,'tmp_name'), $ruta_comprobantes_cliente.FileManager::get('archivo_cliente_'.$i,'name'));
             }
                 
         }
         
         if($cantidad_archivos_aval > 0){
-        
+            $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
+            FileManager::dropFiles($ruta_comprobantes_aval);
             for($i = 0; $i < $cantidad_archivos_aval; $i++){
-                $ruta_comprobantes_aval =  '../../resources/comprobantes/avales/'.$nueva_carpeta_aval.'/';
                 FileManager::moveTo(FileManager::get('archivo_aval_'.$i,'tmp_name'), $ruta_comprobantes_aval.FileManager::get('archivo_aval_'.$i,'name'));
             }
 
