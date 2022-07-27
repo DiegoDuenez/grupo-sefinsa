@@ -58,17 +58,6 @@ function getSemanasActivasConfiguracion() {
                     value="${response.data[i].id}">${response.data[i].cantidad} semanas (${response.data[i].abono_descripcion})</option>
                 `);
       }
-
-      /*if(response.status == "success"){
-                
-                if(response.data.status == 1){
-                    $("#inp_monto_multa").val(response.data.cantidad)
-                }
-                else{
-                    $("#inp_monto_multa").val('')
-                }
-
-            }*/
     },
     error: function (e) {
       console.log(e);
