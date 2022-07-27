@@ -1619,7 +1619,6 @@ function getPrestamo(prestamo_id) {
     data: JSON.stringify(datasend),
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.data);
         modalidadSemanasRenovar = response.data.semanas_cantidad;
         tipoAbono = response.data.tipo_abono;
         cantidadDeAbono = response.data.cantidad_abono;
