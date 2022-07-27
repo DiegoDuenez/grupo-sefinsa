@@ -177,9 +177,7 @@ function llenarSelect(select_id) {
                         <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo} (${response.data[i].nombre_perfil})</option>
                     `);
 
-          /*if(rutaEmpleado != ""){
-                        $(`.select_empleados_editar option[name='${rutaEmpleado}']`).attr('selected','selected');
-                    }*/
+          
         }
       }
     },
@@ -221,30 +219,8 @@ function llenarSelectEditar(select_id, optionSelect) {
             );
           }
 
-          /*for(var x = 0; x < data.length; x++){
-                        
-                        
-                        if(response.data[x].nombre_completo == $.trim(data[x])){
-
-                            console.log("son iguales")
-                            console.log(response.data[i].nombre_completo)
-                            console.log($.trim(data[x]))
-                            $(`#${select_id} option[name='${$.trim(data[x])}']`).attr('selected','selected');
-                        }
-                        break;
-
-                    }*/
-
-          /* if(rutaEmpleado != ""){
-                        $(`.select_empleados_editar option[name='${rutaEmpleado}']`).attr('selected','selected');
-                    }*/
-          // $(`#select_empleados_editar_${i} option[name='${$.trim(empleados_id.split(',')[i])}']`).attr('selected','selected');
         }
 
-        /*for(var x = 0; x < data.length; x++){
-                    console.log(data[x])
-                    $(`#${select_id} option[name='${$.trim(data[x])}']`).attr('selected','selected');
-                }*/
       }
     },
     error: function (e) {
@@ -462,23 +438,7 @@ btn_guardar_editar_ruta.click(function () {
     editarRuta(inp_editar_nombre_ruta.val(), arrayEmpleados, idRutaEditar);
   }
 
-  /*if(inp_editar_nombre_ruta.val() == "" || $(`.select_empleados_editar option:selected`).val() == 0){
 
-        Swal.fire({
-            icon: 'warning',
-            title: 'Campos vacíos',
-            text: 'Necesitas llenar todos los campos',
-            timer: 1000,
-            showCancelButton: false,
-            showConfirmButton: false
-        })
-
-
-    }
-    else{
-        empleado_id = $(`.select_empleados_editar option:selected`).val()
-        editarRuta(inp_editar_nombre_ruta.val(), empleado_id, idRutaEditar)
-    }*/
 });
 
 function editarRuta(nombre_ruta, empleados, id) {

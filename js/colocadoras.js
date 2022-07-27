@@ -65,18 +65,9 @@ $(document).ready(function () {
     dropdownParent: $("#modal_editar_colocadora"),
   });
 
-  /*getRutas();
-    getPoblaciones();*/
+  
 });
 
-btn_modal_registrar_colocadora.click(function () {
-  /*$(`#select_rutass_registrar option[value="0"]`).attr('selected','selected');
-    $(`#select_poblaciones_registrar option[value="0"]`).attr('selected','selected');*/
-  /* $('#select_rutas_registrar option[value="0"]').prop('selected', true);
-    $('#select_poblaciones_registrar option[value="0"]').prop('selected', true);*/
-  /*$('#select_rutas_registrar').val(1).select2();
-    $('#select_poblaciones_registrar').val(1).select2();*/
-});
 
 function getColocadorasRutaPoblacion() {
   clearInputs();

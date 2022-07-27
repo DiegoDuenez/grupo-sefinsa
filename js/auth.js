@@ -91,7 +91,6 @@ function clearInputs() {
   $("#inp_nombre_completo").val("");
   $("#inp_usuario").val("");
   $("#inp_password").val("");
-
   $("#inp_editar_nombre_completo").val("");
   $("#inp_editar_usuario").val("");
   $("#inp_editar_password").val("");
@@ -167,18 +166,15 @@ function clearInputs() {
   $("#inp_archivos_garantias_cliente").val("");
   $("#inp_archivos_cliente").val("");
   $("#select_clientes_registrar").val(0).trigger("change.select2");
-
   $("#inp_garantias_cliente_existente").val("");
   $("#inp_archivos_garantias_cliente_existente").val("");
   $("#inp_archivos_cliente_existente").val("");
   $("#inp_archivos_cliente_existente").val("");
   $("#inp_direccion_cliente_existente").val("");
   $("#inp_telefono_cliente_existente").val("");
-
   $("#select_rutas_registrar_existente").prop("disabled", true);
   $("#select_poblaciones_registrar_existente").prop("disabled", true);
   $("#select_clientes_registrar_existente").prop("disabled", true);
-
   $("#select_rutas_registrar_existente").val(0).trigger("change.select2");
   $("#select_poblaciones_registrar_existente").val(0).trigger("change.select2");
   $("#select_clientes_registrar_existente").val(0).trigger("change.select2");
@@ -195,12 +191,9 @@ function clearInputs() {
   // PRESTAMO INPUTS
   $("#inp_monto_prestar").val("");
   $("#inp_pago_semana").val("");
-
   $("#inp_cantidad_pagada").val("");
   $("#inp_concepto").val("");
-
   $("#inp_folio").val("");
-
   $("#inp_tarjeton").val("");
 
   // ABONO
@@ -211,11 +204,9 @@ function clearInputs() {
   $("#inp_abono_cantidad_editar").val("");
 
   // SEMANAS
-
   $("#inp_semana_cantidad").val("");
   $("#inp_semana_interes").val("");
   $("#inp_semana_semana_ren").val("");
-
   $("#inp_nombre_perfil").val('')
 
   $('.modulo').each(function(){
@@ -223,6 +214,7 @@ function clearInputs() {
       $(this).removeClass('modulo--select')
     }
   })
+
 }
 
 function formatearCantidadMX(cantidad) {

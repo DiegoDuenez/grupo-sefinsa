@@ -42,16 +42,6 @@ var colocadoraCliente = "";
 var idClienteEditar = 0;
 var idAvalEditar = 0;
 
-/*
-var inp_domicilio_cliente = $('#inp_domicilio_cliente')
-var inp_ine_cliente = $('#inp_ine_cliente')
-var inp_tarjeton_cliente = $('#inp_tarjeton_cliente')
-var inp_contrato_cliente = $('#inp_contrato_cliente')
-var inp_pagare_cliente = $('#inp_pagare_cliente')
-
-var inp_domicilio_aval = $('#inp_domicilio_aval')
-var inp_ine_aval = $('#inp_ine_aval')
-*/
 var table;
 
 $(document).ready(function () {
@@ -204,65 +194,7 @@ function getClientes() {
         }
         table.draw();
 
-        /*$('#table_body').empty()
-                for(var i = 0; i < response.data.length; i++ ){
-
-                    var colocadoraTag = ""
-                    var colocadoraStatus = "";
-                    var colocadoraClass = ""
-
-                    if(response.data[i].status_colocadora == 0){
-                        colocadoraStatus = '(Colocadora deshabilitada)'
-                        colocadoraClass = 'text-danger'
-                    }
-                   
-
-                    if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente && response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
-                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ni a la población ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</>`
-                    }
-                    else if(response.data[i].ruta_colocadora != response.data[i].ruta_cliente){
-                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la ruta ${response.data[i].nombre_ruta} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
-                    
-                    }
-                    else if(response.data[i].poblacion_colocadora != response.data[i].poblacion_cliente){
-                        colocadoraTag = `<td class="colocadora text-danger" title='Esta colocadora no pertenece a la poblacion ${response.data[i].nombre_poblacion} ${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
-                    
-                    }
-                    else{
-                        colocadoraTag = `<td class="colocadora ${colocadoraClass}" title='${colocadoraStatus}'> ${response.data[i].nombre_colocadora}</td>`
-                    }
-                    
-
-                    $('#table_body').append(`
-                    <tr>
-                    <td class="id d-none"> ${response.data[i].id} </td>
-                    <td class="nombre_completo"> ${response.data[i].nombre_completo} </td>
-                    <td class="direccion"> ${response.data[i].direccion} </td>
-                    <td class="telefono"> ${response.data[i].telefono} </td>
-                    <td class="ruta"> ${response.data[i].nombre_ruta}  </td>
-                    <td class="poblacion"> ${response.data[i].nombre_poblacion}</td>
-                    ${colocadoraTag}
-                    
-                    <td class="or d-none"> ${response.data[i].otras_referencias}</td>
-                    <td class="garantias d-none"> ${response.data[i].garantias}</td>
-                    <td class="nombre_aval d-flex justify-content-between w-100"> ${response.data[i].nombre_aval} </td>
-                    <td class="direccion_aval d-none"> ${response.data[i].direccion_aval}</td>
-                    <td class="telefono_aval d-none"> ${response.data[i].telefono_aval}</td>
-                    <td class="or_aval d-none"> ${response.data[i].or_aval}</td>
-                    <td class="garantias_aval d-none"> ${response.data[i].garantias_aval}</td>
-
-                    <td > 
-                        <button class="btn btn-warning btn_editar_usuario" onclick="modalEditarCliente(this, ${response.data[i].id},  ${response.data[i].aval_id}, ${response.data[i].ruta_id}, ${response.data[i].poblacion_id})" title="Editar cliente" data-toggle="modal" data-target="#modal_editar_cliente"><i class="fa-solid fa-pen-to-square" ></i></button>
-                        <form action="php/PDF/pdf.php" method="POST" class="d-inline">
-                            <input type="hidden" value="${response.data[i].id}" name="id"/>
-                            <button class="btn btn-danger btn_pdf_usuario" type="submit" title="Generar pdf"><i class="fa-solid fa-file-pdf"></i></button>
-                        </form>
-                    </td>
-    
-                    </tr>
-                    `)
-    
-                }*/
+       
       }
     },
     error: function (e) {
@@ -298,26 +230,7 @@ btn_guardar_cliente.click(function () {
       showConfirmButton: false,
     });
   } else {
-  /*else if(inp_archivos_cliente.get(0).files.length < 5){
-        Swal.fire({
-            icon: 'warning',
-            title: 'Archivos faltantes',
-            text: 'Necesitas subir todos los archivos del cliente',
-            timer: 1500,
-            showCancelButton: false,
-            showConfirmButton: false
-        })
-    }
-    else if(inp_archivos_aval.get(0).files.length < 2){
-        Swal.fire({
-            icon: 'warning',
-            title: 'Archivos faltantes',
-            text: 'Necesitas subir todos los archivos del aval',
-            timer: 1500,
-            showCancelButton: false,
-            showConfirmButton: false
-        })
-    }*/
+ 
     var colocadora_id = $(".select_colocadoras option:selected").val();
     var ruta_id = $("#select_rutas_registrar option:selected").val();
     var poblacion_id = $(".select_poblaciones option:selected").val();

@@ -245,11 +245,6 @@ function modalEditarUsuario(e, id, perfil, nombre_completo, usuario) {
   getPerfiles();
 }
 
-/*
-$(`.select_perfiles editar`).on('change', function() {
-    empleadoPerfil = this.value
-});*/
-
 btn_guardar_editar_empleado.click(function () {
   if (
     inp_editar_nombre_completo.val() == "" ||

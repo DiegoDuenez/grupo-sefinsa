@@ -1490,22 +1490,8 @@ function getClientes() {
                         <option name="${response.data[i].nombre_completo}" value="${response.data[i].id}">${response.data[i].nombre_completo}</option>
                     `);
 
-          /*if(rutaCliente != ""){
-                        $(`.select_rutas.editar option[name='${rutaCliente}']`).attr('selected','selected');
-                    }*/
         }
 
-        /*$('#select_rutas_filtro').empty()
-                $('#select_rutas_filtro').append(`
-                    <option value="0" >General</option>
-                `)
-                for(var i = 0; i < response.data.length; i++ ){
-                    
-                    $('.select_rutas_filtro').append(`
-                        <option name="${response.data[i].nombre_ruta}" value="${response.data[i].id}">${response.data[i].nombre_ruta}</option>
-                    `)
-
-                }*/
       }
     },
     error: function (e) {
@@ -1617,223 +1603,8 @@ function traerCliente(id) {
   });
 }
 
-function generarSemanas(semanas, fecha_prestamo) {
-  fecha = moment(fecha_prestamo, "YYYY-MM-DD");
-  /* for(var i = 0; i < 20; i++){
-        console.log(fecha.add(i, 'weeks').format('YYYY-MM-DD'))
-    }*/
-  console.log(fecha.add(15, "weeks").format("YYYY-MM-DD"));
-  /*var fecha = new Date(fecha_prestamo);
-    var dias = 2; // Número de días a agregar
-    fecha.setDate(fecha.getDate() + dias);
-    console.info(fecha)*/
-}
 
-function getPrestamosExcel(prestamo_id) {
-  var datasend = {
-    func: "fechasPago",
-    prestamo_id,
-  };
 
-  $.ajax({
-    type: "POST",
-    url: "php/Pagos/App.php",
-    dataType: "json",
-    data: JSON.stringify(datasend),
-    success: function (response) {
-      if (response.status == "success") {
-        console.log(response.data);
-
-        //table.clear()
-        for (var i = 0; i < response.data.length; i++) {
-          var status;
-          if (response.data[i].status == 1) {
-            status = '<span class="badge badge-success">Pagado</span>';
-          } else if (response.data[i].status == 0) {
-            status = '<span class="badge badge-warning">Pagandose</span>';
-          } else if (response.data[i].status == -1) {
-            status = '<span class="badge badge-danger">No pagó</span>';
-          }
-
-          if (response.data[i].modalidad_semanas == "15") {
-            table.row.add([
-              response.data[i].nombre_completo,
-              response.data[i].direccion_cliente,
-              response.data[i].telefono_cliente,
-              response.data[i].nombre_aval,
-              response.data[i].direccion_aval,
-              response.data[i].telefono_aval,
-              "$ " + response.data[i].monto_prestado,
-              "$ " + response.data[i].pago_semanal,
-              moment(response.data[i].semana1).format("DD/MM/YYYY"),
-              moment(response.data[i].semana2).format("DD/MM/YYYY"),
-              moment(response.data[i].semana3).format("DD/MM/YYYY"),
-              moment(response.data[i].semana4).format("DD/MM/YYYY"),
-              moment(response.data[i].semana5).format("DD/MM/YYYY"),
-              moment(response.data[i].semana6).format("DD/MM/YYYY"),
-              moment(response.data[i].semana7).format("DD/MM/YYYY"),
-              moment(response.data[i].semana8).format("DD/MM/YYYY"),
-              moment(response.data[i].semana9).format("DD/MM/YYYY"),
-              moment(response.data[i].semana10).format("DD/MM/YYYY"),
-              moment(response.data[i].semana11).format("DD/MM/YYYY"),
-              moment(response.data[i].semana12).format("DD/MM/YYYY"),
-              moment(response.data[i].semana13).format("DD/MM/YYYY"),
-              moment(response.data[i].semana14).format("DD/MM/YYYY"),
-              moment(response.data[i].semana15).format("DD/MM/YYYY"),
-              "",
-              "",
-              "",
-              "",
-              "",
-              status,
-              `
-                            <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                            `,
-              response.data[i].fecha_prestamo,
-            ]);
-          } else if (response.data[i].modalidad_semanas == "20") {
-            table.row.add([
-              response.data[i].nombre_completo,
-              response.data[i].direccion_cliente,
-              response.data[i].telefono_cliente,
-              response.data[i].nombre_aval,
-              response.data[i].direccion_aval,
-              response.data[i].telefono_aval,
-              "$ " + response.data[i].monto_prestado,
-              "$ " + response.data[i].pago_semanal,
-              moment(response.data[i].semana1).format("DD/MM/YYYY"),
-              moment(response.data[i].semana2).format("DD/MM/YYYY"),
-              moment(response.data[i].semana3).format("DD/MM/YYYY"),
-              moment(response.data[i].semana4).format("DD/MM/YYYY"),
-              moment(response.data[i].semana5).format("DD/MM/YYYY"),
-              moment(response.data[i].semana6).format("DD/MM/YYYY"),
-              moment(response.data[i].semana7).format("DD/MM/YYYY"),
-              moment(response.data[i].semana8).format("DD/MM/YYYY"),
-              moment(response.data[i].semana9).format("DD/MM/YYYY"),
-              moment(response.data[i].semana10).format("DD/MM/YYYY"),
-              moment(response.data[i].semana11).format("DD/MM/YYYY"),
-              moment(response.data[i].semana12).format("DD/MM/YYYY"),
-              moment(response.data[i].semana13).format("DD/MM/YYYY"),
-              moment(response.data[i].semana14).format("DD/MM/YYYY"),
-              moment(response.data[i].semana15).format("DD/MM/YYYY"),
-              moment(response.data[i].semana16).format("DD/MM/YYYY"),
-              moment(response.data[i].semana17).format("DD/MM/YYYY"),
-              moment(response.data[i].semana18).format("DD/MM/YYYY"),
-              moment(response.data[i].semana19).format("DD/MM/YYYY"),
-              moment(response.data[i].semana20).format("DD/MM/YYYY"),
-              status,
-              `
-                            <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                            `,
-              response.data[i].fecha_prestamo,
-            ]);
-          }
-        }
-
-        table.draw();
-
-        /*for(var i = 0; i < response.data.length; i++ ){
-
-                    var status
-                    if(response.data[i].status == 1){
-                        status = '<span class="badge badge-success">Pagado</span>'
-                    }
-                    else if(response.data[i].status == 0){
-                        status = '<span class="badge badge-warning">Pagandose</span>'
-                    }
-                    else if(response.data[i].status == -1){
-                        status = '<span class="badge badge-danger">No pagó</span>'
-                    }
-                    
-                    if(response.data[i].modalidad_semanas == "15"){
-                        tableExcel.row.add([
-                            response.data[i].nombre_completo, 
-                            response.data[i].direccion,
-                            response.data[i].telefono,
-                            response.data[i].nombre_aval,
-                            response.data[i].direccion_aval,
-                            response.data[i].telefono_aval,
-                            response.data[i].monto_prestado,
-                            response.data[i].pago_semanal,
-                            response.data[i].modalidad_semanas,
-                            moment(response.data[i].semana1).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana2).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana3).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana4).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana5).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana6).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana7).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana8).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana9).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana10).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana11).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana12).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana13).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana14).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana15).format("DD/MM/YYYY"),
-                            '',
-                            '',
-                            '',
-                            '',
-                            '',
-                            status
-                        
-                        ]);
-                    }
-                    else if(response.data[i].modalidad_semanas == "20"){
-                        tableExcel.row.add([
-                            response.data[i].nombre_completo, 
-                            response.data[i].direccion,
-                            response.data[i].telefono,
-                            response.data[i].nombre_aval,
-                            response.data[i].direccion_aval,
-                            response.data[i].telefono_aval,
-                            response.data[i].monto_prestado,
-                            response.data[i].pago_semanal,
-                            response.data[i].modalidad_semanas,
-                            moment(response.data[i].semana1).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana2).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana3).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana4).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana5).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana6).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana7).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana8).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana9).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana10).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana11).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana12).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana13).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana14).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana15).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana16).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana17).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana18).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana19).format("DD/MM/YYYY"),
-                            moment(response.data[i].semana20).format("DD/MM/YYYY"),
-                            status
-                        
-                        ]);
-                    }
-                    
-
-                }
-
-                tableExcel.draw();*/
-      }
-    },
-    error: function (e) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: e.responseJSON.message,
-      });
-    },
-    complete: function () {
-      $.unblockUI();
-    },
-  });
-}
 
 function getPrestamo(prestamo_id) {
   var datasend = {
@@ -1869,19 +1640,6 @@ function getPrestamo(prestamo_id) {
 }
 
 btn_renovar.click(function () {
-  /*console.log('abono', cantidadDeAbono)
-
-    if(tipoAbono == "%"){
-        pago_semanal = (inp_monto_renovar.val() * cantidadDeAbono) / 100
-        console.log(`formula % (inp_monto_prestar.val() * ${cantidadDeAbono}) / 100`)
-    }
-    else if(tipoAbono == "$"){
-        pago_semanal = cantidadDeAbono * (inp_monto_renovar.val() / parseInt(por_cada_abono))
-        console.log(`formula $ ${cantidadDeAbono} * (${inp_monto_renovar.val()} / ${parseInt(por_cada_abono)})`)
-
-    }
-
-    console.log('pago_semanal',pago_semanal)*/
 
   if (inp_tarjeton_renovar.val() == "" || inp_monto_renovar.val() == "") {
     Swal.fire({
@@ -1968,20 +1726,12 @@ inp_monto_renovar.on("input", function () {
     "data-cantidad-abono"
   );
 
-  console.log(
-    $("#select_modalidad_renovar option:selected").attr("data-tipo-abono")
-  );
-
-  console.log("abono", abono);
-  console.log("interes", interes);
-  console.log(inp_monto_renovar.val());
 
   if (
     $("#select_modalidad_renovar option:selected").attr("data-tipo-abono") ==
     "%"
   ) {
     pago_semanal = (inp_monto_renovar.val() * abono) / 100;
-    console.log(`formula % (inp_monto_prestar.val() * ${abono}) / 100`);
   } else if (
     $("#select_modalidad_renovar option:selected").attr("data-tipo-abono") ==
     "$"
@@ -1992,14 +1742,8 @@ inp_monto_renovar.on("input", function () {
         parseInt(
           $("#select_modalidad_renovar option:selected").attr("data-por-cada")
         ));
-    console.log(
-      `formula $ ${abono} * (${inp_monto_renovar.val()} / ${parseInt(
-        $("#select_modalidad_renovar option:selected").attr("data-por-cada")
-      )})`
-    );
+    
   }
-
-  console.log("pago_semanal", pago_semanal);
 
   inp_pago_semana_renovar.val(pago_semanal);
 });
@@ -2012,19 +1756,11 @@ $("#select_modalidad_renovar").on("change", function () {
     "data-cantidad-abono"
   );
 
-  console.log(
-    $("#select_modalidad_renovar option:selected").attr("data-tipo-abono")
-  );
-
-  console.log("abono", abono);
-  console.log("interes", interes);
-
   if (
     $("#select_modalidad_renovar option:selected").attr("data-tipo-abono") ==
     "%"
   ) {
     pago_semanal = (inp_monto_renovar.val() * abono) / 100;
-    console.log(`formula % (inp_monto_prestar.val() * ${abono}) / 100`);
   } else if (
     $("#select_modalidad_renovar option:selected").attr("data-tipo-abono") ==
     "$"
@@ -2035,14 +1771,9 @@ $("#select_modalidad_renovar").on("change", function () {
         parseInt(
           $("#select_modalidad_renovar option:selected").attr("data-por-cada")
         ));
-    console.log(
-      `formula $ ${abono} * (${inp_monto_renovar.val()} / ${parseInt(
-        $("#select_modalidad_renovar option:selected").attr("data-por-cada")
-      )})`
-    );
+   
   }
 
-  console.log("pago_semanal", pago_semanal);
 
   inp_pago_semana_renovar.val(pago_semanal);
 });

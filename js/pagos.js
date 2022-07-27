@@ -240,7 +240,6 @@ $(document).ready(function () {
   const urlParams = new URLSearchParams(queryString);
   prestamo = urlParams.get("p");
   if (prestamo) {
-    //formClienteSoloArchivos.show()
     getPagosPrestamo(prestamo);
   }
   /*$('#select_rutas_registrar').select2({theme: 'bootstrap4', width: '100%', dropdownParent: $('#modal_registrar_cliente')});
@@ -484,35 +483,18 @@ function modalPagar(
   ec_poblacion.text(poblacion);
   ec_monto.text(`$ ${monto}`);
   span_fecha_prestamo.text(fecha_prestamo);
-  /*semanaRenovar = semana
-    modalidadPagoSeleccionado = modalidad*/
 
   semana_renovar_pago_seleccionado = semana;
   modalidad_id_pago_seleccionado = modalidad;
 
-  console.log(semana);
-  console.log(modalidad);
-
   getSemanaConfiguracionId(modalidad);
-  /*config_cantidad_semanas = config.data.cantidad
-    config_semana_renovar = config.data.semana_renovacion*/
-
+  
   pagoId = pago_id;
   prestamoId = prestamo_id;
   montoMulta = monto_multa;
   getPagosPrestamoPagados(prestamo_id);
   puedeOmitirUltimaSemana(prestamoId);
 }
-/*
-cb_multa.change(function() {
-
-    if(this.checked) {
-    }
-    else{
-        montoMulta = 0.00
-    }
-    alert(montoMulta)
-});*/
 
 btn_guardar_pago.click(function () {
   if (inp_cantidad_pagada.val() == 0) {
@@ -671,7 +653,6 @@ function hacerPago(
     success: function (response) {
       if (response.status == "success") {
         if (semana_renovar_pago_seleccionado == config_semana_renovar) {
-          //if(semanaRenovar == 10 && modalidadPagoSeleccionado == 15 || semanaRenovar == 15 && modalidadPagoSeleccionado == 20){
 
           Swal.fire({
             icon: "question",

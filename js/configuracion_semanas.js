@@ -127,10 +127,6 @@ function llenarSelectTipoAbonos() {
           $(".select_semana_tipo_abono").append(`
                         <option name="${response.data[i].descripcion}" value="${response.data[i].id}">${response.data[i].descripcion}</option>
                     `);
-
-          /*if(usuarioPerfil != ""){
-                        $(`.select_perfiles.editar option[name='${usuarioPerfil}']`).attr('selected','selected');
-                    }*/
         }
       }
     },
