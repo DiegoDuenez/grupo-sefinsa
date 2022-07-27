@@ -54,17 +54,6 @@ switch($func){
 
     break;
 
-    case 'create':
-
-        /*$cliente_id = $_DATA['cliente_id'];
-        $monto_prestado = $_DATA['monto_prestado'];
-        $pago_semanal = $_DATA['pago_semanal'];
-        $fecha_prestamo = $_DATA['fecha_prestamo'];
-
-        echo $Prestamo->create($cliente_id, $monto_prestado, $pago_semanal, $fecha_prestamo);*/
-
-    break;
-
     case 'prestamosRuta':
 
         $id = $_DATA['ruta_id'];

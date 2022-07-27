@@ -10,6 +10,7 @@ function sanitize($input){
     return trim(htmlspecialchars($input));
 }
 
+
 function json($data, $status_code = 200){
 
     http_response_code($status_code);

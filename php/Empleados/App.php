@@ -49,7 +49,6 @@ switch($func){
         echo $Empleado->edit($nombre, $user, $pwd, $perfil_id, $id, $changePassword);
 
     break;
-
     
     case 'activar':
         $id = $_DATA['id'];

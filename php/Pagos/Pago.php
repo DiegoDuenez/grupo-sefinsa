@@ -237,39 +237,7 @@ class Pago extends Database{
                         $updateSiguientePago = $this->ExecuteQuery($update, []);
 
                     }
-                    else if($pago_recibido > $pago['cantidad_esperada_pago']){
-
-
-                        /*$balanceFijo = $prestamo['pago_semanal'] * $pagoCantidadSemanas['cantidad_semanas'];;
-                        $a = $pago_recibido / $balanceFijo * $pagoCantidadSemanas['cantidad_semanas'];
-
-                        if($this->containsDecimal($a) == false){
-
-                            $pagoSemana = "SELECT * FROM pagos WHERE id = '$pago_id'";
-                            $pagoSemanaResult = $this->SelectOne($pagoSemana);
-
-                            $queryUpdatePagos = "UPDATE $this->table SET cantidad_normal_pagada = ?, cantidad_total_pagada = ?, status = ? WHERE prestamo_id = '$prestamo_id' 
-                            and semana >= ". $pagoSemanaResult['semana'] ." AND semana < $a and status = 0";
-                            $this->ExecuteQuery($queryUpdatePagos , [0, 0, 1]);
-
-                        }
-                        else{
-
-                            $diferencia = $pago_recibido - $pago['cantidad_esperada_pago'];
-
-                            $cantidad_esperada = $pago['cantidad_esperada_pago'] - $diferencia;
-
-                            $queryNextRow = "SELECT * FROM $this->table WHERE id > $pago_id ORDER BY id LIMIT 1";
-                            $siguientePago = $this->SelectOne($queryNextRow);
-
-                            $update = "UPDATE $this->table SET cantidad_esperada_pago = ? WHERE $this->table.id = '".$siguientePago['id']."'";
-                            $updateSiguientePago = $this->ExecuteQuery($update, [$cantidad_esperada]);
-
-                        }
-                        */
-
-
-                    }
+                    else if($pago_recibido > $pago['cantidad_esperada_pago']){}
 
                     //PENDIENTE CHECAR SI TIENE MULTAS
                     $queryCantidadMultas = "SELECT count(id) as cantidad_multas FROM $this->table WHERE prestamo_id = '$prestamo_id' and cantidad_multa != 0;";
@@ -329,13 +297,6 @@ class Pago extends Database{
             die();
 
         }
-    }
-
-    function containsDecimal( $value ) {
-        if ( strpos( $value, "." ) !== false ) {
-            return true;
-        }
-        return false;
     }
 
 
@@ -418,9 +379,6 @@ class Pago extends Database{
 
     public function fechasPagos($prestamo_id){
 
-        /*$queryIdPrestamos  = "SELECT group_concat(prestamos.id SEPARATOR ', ') as ids FROM prestamos ";
-        $ids = $this->SelectOne($queryIdPrestamos);
-        $id_arr= explode (",", $ids['ids']); */
 
         $queryFechas  = "SELECT group_concat(pagos.fecha_pago  SEPARATOR ', ') as fechas_pago FROM pagos WHERE prestamo_id = '$prestamo_id'";
         $fechas = $this->SelectOne($queryFechas);
@@ -453,89 +411,6 @@ class Pago extends Database{
             'data'=> $this->Select($query), 
             'message'=> ""
         ], 200);
-
-        /*for($i = 0; $i < count($id_arr); $i++){
-
-            
-            $queryFechas  = "SELECT group_concat(pagos.fecha_pago  SEPARATOR ', ') as fechas_pago FROM pagos WHERE prestamo_id = '$id_arr[$i]'";
-            $fechas = $this->SelectOne($queryFechas);
-
-            $str_arr = explode (",", $fechas['fechas_pago']);
-            $cases = [];
-            $casesWhen = "";
-
-            for($j = 0; $j < count($str_arr); $j++){
-                $semana = $j + 1;
-                if($j == count($str_arr) - 1){
-                    $casesWhen .= "MAX(CASE WHEN fecha_pago = '$str_arr[$j]' THEN fecha_pago END) semana$semana ";
-                    array_push($cases, $casesWhen);
-                    //echo $casesWhen;
-                    //$cases[] = $casesWhen;
-                }
-                else{
-                    $casesWhen .= "MAX(CASE WHEN fecha_pago = '$str_arr[$j]' THEN fecha_pago END) semana$semana, ";
-                }
-            }
-
-        }
-        for($x = 0; $x < count($cases); $x){
-            $query = "SELECT clientes.nombre_completo, clientes.direccion,clientes.telefono, clientes.garantias , 
-                avales.nombre_completo as 'nombre_aval', avales.direccion as 'direccion_aval',
-                avales.telefono as 'telefono_aval', prestamos.monto_prestado, prestamos.pago_semanal, pagos.prestamo_id, 
-                $cases[$x] FROM pagos
-                INNER JOIN prestamos on pagos.prestamo_id = prestamos.id
-                INNER JOIN clientes ON prestamos.cliente_id = clientes.id
-                INNER JOIN avales ON prestamos.aval_id = avales.id
-                INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id GROUP BY pagos.prestamo_id";
-                $data = $this->Select($query);
-                var_dump($data);
-
-                echo $cases[$x];
-        }*/
-
-        
-        
-
-            /*for($x = 0; $x < count($cases); $x){
-                $query = "SELECT clientes.nombre_completo, clientes.direccion,clientes.telefono, clientes.garantias , 
-                    avales.nombre_completo as 'nombre_aval', avales.direccion as 'direccion_aval',
-                    avales.telefono as 'telefono_aval', prestamos.monto_prestado, prestamos.pago_semanal, pagos.prestamo_id, 
-                    $cases[$x] FROM pagos
-                    INNER JOIN prestamos on pagos.prestamo_id = prestamos.id
-                    INNER JOIN clientes ON prestamos.cliente_id = clientes.id
-                    INNER JOIN avales ON prestamos.aval_id = avales.id
-                    INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id GROUP BY pagos.prestamo_id";
-                    $data = $this->Select($query);
-                    var_dump($data);
-            }*/
-        
-        
-
-        /*$casesWhen = "";
-
-        for($i = 0; $i < count($str_arr); $i++){
-            $semana = $i + 1;
-            if($i == count($str_arr) - 1){
-            $casesWhen .= "MAX(CASE WHEN fecha_pago = '$str_arr[$i]' THEN fecha_pago END) semana$semana";
-            }
-            else{
-                $casesWhen .= "MAX(CASE WHEN fecha_pago = '$str_arr[$i]' THEN fecha_pago END) semana$semana,";
-            }
-        }
-
-
-        $query = "SELECT clientes.nombre_completo, clientes.direccion,clientes.telefono, clientes.garantias , avales.nombre_completo as 'nombre_aval', avales.direccion as 'direccion_aval',
-        avales.telefono as 'telefono_aval', prestamos.monto_prestado, prestamos.pago_semanal, pagos.prestamo_id, $casesWhen FROM pagos
-        INNER JOIN prestamos on pagos.prestamo_id = prestamos.id
-        INNER JOIN clientes ON prestamos.cliente_id = clientes.id
-        INNER JOIN avales ON prestamos.aval_id = avales.id
-        INNER JOIN poblaciones ON prestamos.poblacion_id = poblaciones.id GROUP BY pagos.prestamo_id";
-
-        return json([
-            'status' => 'success', 
-            'data'=> $this->Select($query), 
-            'message'=> $query
-        ], 200);*/
 
     }
 

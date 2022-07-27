@@ -18,7 +18,6 @@ class Configuracion extends Database{
         }
         else{
             $query = "SELECT * FROM $this->table$tipo ORDER BY id DESC";
-
         }
 
         return json(

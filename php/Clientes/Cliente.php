@@ -330,7 +330,7 @@ class Cliente extends Database{
     }
 
 
-    public function createConAval($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
+    public function createPrestamoNuevo($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $carpeta_comp_cliente, $nombre_aval, 
     $direccion_aval, $telefono_aval, $or_aval, $carpeta_comp_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $ruta_id, $poblacion_id, $carpeta_gar_cliente, $carpeta_gar_aval,
     $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad,$monto_prestado_intereses, $tarjeton){
 
@@ -370,11 +370,6 @@ class Cliente extends Database{
                         ], 400);
                     }
 
-                   /* return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha creado al cliente'
-                    ], 200);*/
                 }
             
 
@@ -565,59 +560,5 @@ class Cliente extends Database{
         }
 
     }
-
-    
-   /* public function edit($nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $nombre_aval, 
-    $direccion_aval, $telefono_aval, $or_aval, $colocadora_id, $garantias_cliente, $garantias_aval, $cliente_id, $aval_id, $ruta_id, $poblacion_id){
-
-        try{
-
-            $updateAval = "UPDATE avales SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, 
-            carpeta_comprobantes = ?, carpeta_garantias = ?
-            WHERE id = '$aval_id'";
-            $aval = $this->ExecuteQuery($updateAval, [$nombre_aval, $direccion_aval, $telefono_aval, $or_aval, $garantias_aval, $aval_id.'_'.$nombre_aval, $aval_id.'_'.$nombre_aval]);
-
-
-            if($aval) {
-
-                $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ?, ruta_id = ?, poblacion_id = ?,
-                carpeta_comprobantes = ?, carpeta_garantias = ?
-                WHERE id = '$cliente_id'";
-                $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id, $ruta_id, $poblacion_id, $cliente_id.'_'.$nombre_cliente, $cliente_id.'_'.$nombre_cliente]);
-
-
-                if($cliente){
-                    return json([
-                        'status' => 'success', 
-                        'data'=> null, 
-                        'message'=> 'Se ha actualizado al cliente'
-                    ], 200);
-                }
-            
-
-            } else {
-
-                $updateCliente = "UPDATE clientes SET nombre_completo = ?, direccion = ?, telefono = ?, otras_referencias = ?, garantias = ?, colocadora_id = ?, ruta_id = ?, poblacion_id = ?,
-                carpeta_comprobantes = ?, carpeta_garantias = ?
-                WHERE id = '$cliente_id'";
-                $cliente = $this->ExecuteQuery($updateCliente, [$nombre_cliente, $direccion_cliente, $telefono_cliente, $or_cliente, $garantias_cliente, $colocadora_id, $ruta_id, $poblacion_id, $cliente_id.'_'.$nombre_cliente, $cliente_id.'_'.$nombre_cliente]);
-                
-                return json([
-                    'status' => 'success', 
-                    'data'=> null, 
-                    'message'=> 'No se actualizo nada nuevo'
-                ], 200);
-
-            }
-
-        } catch(Exception $e) {
-
-            return $e->getMessage();
-            die();
-
-        }
-
-
-    }*/
 
 }
