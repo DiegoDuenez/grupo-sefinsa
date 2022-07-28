@@ -25,7 +25,7 @@ var table;
 var clienteIdFiltro;
 var prestamoIdFiltro;
 var tabla_ec_pagos;
-var tabla_pagos
+//var tabla_pagos
 var semana_renovar_pago_seleccionado;
 var modalidad_id_pago_seleccionado;
 
@@ -343,8 +343,7 @@ function getPagosPrestamo(prestamo_id, cliente_id) {
     success: function (response) {
       if (response.status == "success") {
 
-
-        $(`#tabla_pagos_${cliente_id}`).DataTable().clear().destroy();
+        $(`#tabla_pagos_${cliente_id}`).DataTable().clear().destroy()
 
         let tabla_pagos = $(`#tabla_pagos_${cliente_id}`).DataTable({
             pageLength: 5,
@@ -505,9 +504,9 @@ function getPagosPrestamo(prestamo_id, cliente_id) {
             status,
             response.data[i].status == 0
               ? `
-                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
+                        <button class="btn btn-success btn_pagar btn-sm" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
                         , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\', ${response.data[i].modalidad_semanas}, ${response.data[i].balance})" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
-                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar btn-sm" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         `
               : "",
           ]);
@@ -578,9 +577,9 @@ function getPagos() {
             status,
             response.data[i].status == 0
               ? `
-                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
+                        <button class="btn btn-success btn_pagar btn-sm" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
                         , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\', ${response.data[i].modalidad_semanas}, ${response.data[i].balance})" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
-                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar mt-1 btn-sm" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         `
               : "",
           ]);
@@ -824,15 +823,18 @@ function hacerPago(
             showCancelButton: false,
             showConfirmButton: false,
           }).then((result) => {
-            if (clienteIdFiltro) {
+            /*if (clienteIdFiltro) {
               if (prestamoId) {
                 getPagosPrestamo(prestamoIdFiltro);
               } else {
                 getPagosCliente(clienteIdFiltro);
               }
+              getClientes();
+
             } else {
-              getPagos();
-            }
+              getClientes();
+            }*/
+            getClientes();
           });
         }
       }
@@ -863,6 +865,9 @@ function getClientes() {
         select_clientes_filtro.append(`
                     <option value="0" >General</option>
                 `);
+          
+                card_body_pagos.empty();
+
         for (var i = 0; i < response.data.length; i++) {
 
           select_clientes_filtro.append(`
@@ -872,12 +877,12 @@ function getClientes() {
             card_body_pagos.append(`
                 <div id="accordion">
                     <div class="card">
-                        <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${response.data[i].id}" aria-expanded="true" aria-controls="collapse${response.data[i].id}">
-                            <i class="fa-solid fa-handshake"></i> ${response.data[i].nombre_completo}
-                            </button>
-                        </h5>
+                        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapse${response.data[i].id}" aria-expanded="true" aria-controls="collapse${response.data[i].id}">
+                          <h5 class="mb-0">
+                              <button class="btn btn-link" >
+                              <i class="fa-solid fa-handshake"></i> ${response.data[i].nombre_completo}
+                              </button>
+                          </h5>
                         </div>
     
                         <div id="collapse${response.data[i].id}" data-prestamo="${response.data[i].prestamo_id}" data-cliente="${response.data[i].id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
@@ -892,6 +897,9 @@ function getClientes() {
         }
 
         $('.collapse').on('show.bs.collapse', function (e) {
+          prestamo = $(e.target).attr('data-prestamo')
+          cliente = $(e.target).attr('data-cliente')
+
             idCollapse = $(e.target).attr('id')
             dataCliente = $(e.target).attr('data-cliente')
             $(`#card-body-collapse-${dataCliente}`).empty();
@@ -957,7 +965,7 @@ function getPagosCliente(cliente_id) {
                 <tbody id="table_body" style="font-size: 0.9rem !important;">
                     
                 </tbody>
-                <tfoot>
+                <tfoot style="font-size: 0.8rem !important;">
                     <tr class="thead-dark">
                         <th>Totales</th>
                         <th></th>
@@ -1139,9 +1147,9 @@ function getPagosCliente(cliente_id) {
             status,
             response.data[i].status == 0
               ? `
-                        <button class="btn btn-success btn_pagar" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
+                        <button class="btn btn-success btn_pagar btn-sm" onclick="modalPagar(\'${response.data[i].id}\', \'${response.data[i].prestamo_id}\', \'${response.data[i].monto_multa}\', \'${response.data[i].cantidad_esperada_pago}\', \'${response.data[i].nombre_completo}\', \'${response.data[i].nombre_ruta}\',\'${response.data[i].nombre_poblacion}\'
                         , \'${response.data[i].monto_prestado}\', \'${response.data[i].fecha_prestamo}\', \'${response.data[i].semana}\', ${response.data[i].modalidad_semanas}, ${response.data[i].balance})" title="Pagar" data-toggle="modal" data-target="#modal_pagar"><i class="fa-solid fa-hand-holding-dollar"></i></button>
-                        <button class="btn btn-danger btn_no_pagar mt-1" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
+                        <button class="btn btn-danger btn_no_pagar btn-sm" onclick="noPagar(\'${response.data[i].id}\', \'${response.data[i].monto_multa}\', ${response.data[i].semana})" title="No pagó" ><i class="fa-solid fa-ban"></i></button>
                         `
               : "",
           ]);

@@ -61,7 +61,7 @@ class Cliente extends Database{
         INNER JOIN prestamos ON prestamos.cliente_id = $this->table.id
         INNER JOIN pagos ON pagos.prestamo_id = prestamos.id
         GROUP BY $this->table.id
-        ORDER BY prestamos.fecha_prestamo DESC";
+        ORDER BY prestamos.id DESC";
 
         return json(
             [
