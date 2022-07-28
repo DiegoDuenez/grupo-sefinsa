@@ -76,7 +76,7 @@
                                                 <th scope="col">Tarjetón</th>
                                                 <th scope="col">Cliente</th>
                                                 <th scope="col">Dirección del cliente</th>
-                                                <th scope="col">Teléfono cliente</th>
+                                                <th scope="col">Teléfono</th>
                                                 <th scope="col">Aval</th>
                                                 <th scope="col">Dirección del aval</th>
                                                 <th scope="col">Teléfono aval</th>

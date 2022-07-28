@@ -877,7 +877,7 @@ function getClientes() {
             card_body_pagos.append(`
                 <div id="accordion">
                     <div class="card">
-                        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapse${response.data[i].id}" aria-expanded="true" aria-controls="collapse${response.data[i].id}">
+                        <div class="card-header" style="cursor: pointer;" id="headingOne" data-toggle="collapse" data-target="#collapse${response.data[i].id}" aria-expanded="true" aria-controls="collapse${response.data[i].id}">
                           <h5 class="mb-0">
                               <button class="btn btn-link" >
                               <i class="fa-solid fa-handshake"></i> ${response.data[i].nombre_completo}
@@ -1201,7 +1201,7 @@ function noPagar(pago_id, pago_multa, semana) {
               showCancelButton: false,
               showConfirmButton: false,
             }).then((result) => {
-              if (clienteIdFiltro) {
+              /*if (clienteIdFiltro) {
                 if (prestamoId) {
                   getPagosPrestamo(prestamoIdFiltro);
                 } else {
@@ -1209,7 +1209,8 @@ function noPagar(pago_id, pago_multa, semana) {
                 }
               } else {
                 getPagos();
-              }
+              }*/
+              getClientes();
             });
           }
         },
