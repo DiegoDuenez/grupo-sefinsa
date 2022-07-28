@@ -50,7 +50,7 @@
                                                 <th scope="col">Ruta</th>
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col">Grupo</th>
-                                                <th scope="col">Hora limite de cobro </th>
+                                                <th scope="col">Hora límite de cobro </th>
                                                 <th scope="col">Monto de multa</th>
                                                 <th scope="col">Acciones</th>
                                                 <th scope="col">Fecha de registro</th>

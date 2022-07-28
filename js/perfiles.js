@@ -158,7 +158,7 @@ function modalEditarPerfil(e, id, nombre_perfil, tipo_perfil, modulos_id, modulo
   $('.modulo').removeClass('modulo--select')
 
   for (var i = 0; i < modulos_id.split(",").length; i++) {
-      $('.modulo').each(function(){
+      $('#box_modulos_editar .modulo').each(function(){
         if(this.id == $.trim(modulos_id.split(",")[i])){
           $(this).addClass('modulo--select')
         }

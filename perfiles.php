@@ -47,7 +47,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Modulos</th>
+                                                <th scope="col">Módulos</th>
                                                 <th scope="col">Tipo perfil</th>
                                                 <th scope="col">Acciones</th>
                                                 <th scope="col">Fecha de registro</th>

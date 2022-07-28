@@ -35,7 +35,41 @@ class Cliente extends Database{
                 'message' => ''
             ]
         , 200);
- 
+
+    }
+
+    public function getClientes()
+    {
+
+        $query  = "SELECT 
+        $this->table.*,  
+        $this->table.ruta_id as 'ruta_cliente', 
+        $this->table.poblacion_id as 'poblacion_cliente',
+        $this->table.ruta_id  as 'ruta_cliente',
+        colocadoras.id as 'colocadora_id', 
+        colocadoras.nombre_completo as 'nombre_colocadora', 
+        colocadoras.status as 'status_colocadora', 
+        colocadoras.ruta_id as 'ruta_colocadora',
+        colocadoras.poblacion_id as 'poblacion_colocadora',
+        rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
+        poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion',
+        prestamos.id as 'prestamo_id'
+        FROM $this->table 
+        INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
+        INNER JOIN rutas ON rutas.id = $this->table.ruta_id
+        INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
+        LEFT JOIN prestamos ON prestamos.cliente_id = $this->table.id
+        LEFT JOIN pagos ON pagos.prestamo_id = prestamos.id
+        GROUP BY $this->table.id
+        ORDER BY prestamos.fecha_prestamo DESC";
+
+        return json(
+            [
+                'status' => 'success',
+                'data' => $this->Select($query),
+                'message' => ''
+            ]
+        , 200);
 
     }
 

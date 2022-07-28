@@ -29,6 +29,10 @@ switch($func){
         echo $Cliente->index();
     break;
 
+    case 'getClientes':
+        echo $Cliente->getClientes();
+    break;
+
     case 'clientesRuta':
         $id = $_DATA['ruta_id'];
         echo $Cliente->clientesRuta($id);

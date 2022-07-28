@@ -76,6 +76,7 @@ var clienteID = "";
 var table;
 var tableExcel;
 var prestamo = "";
+var cliente = ""
 var modalidadSemanasRenovar = "";
 var tipoAbono = "";
 var cantidadDeAbono = "";
@@ -108,7 +109,9 @@ $(document).ready(function () {
         visible: false,
         targets: [
           2,
-          5 /*-1, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/,
+          4,
+          5,
+          6/*-1, 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27*/,
         ],
       },
     ],
@@ -553,16 +556,16 @@ function getPrestamos() {
             response.data[i].nombre_aval,
             response.data[i].direccion_aval,
             response.data[i].telefono_aval,
-            response.data[i].fecha_prestamo,
+            moment(response.data[i].fecha_prestamo).format("DD/MM/YYYY"),
             "$ " + response.data[i].monto_prestado,
             "$ " + response.data[i].pago_semanal,
             response.data[i].semanas,
-            status,
-            `
-                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                        `,
             response.data[i].nombre_ruta,
             response.data[i].nombre_poblacion,
+            status,
+            `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
+                        `,
           ]);
         }
 
@@ -621,16 +624,16 @@ function getPrestamosRuta(ruta_id) {
             response.data[i].nombre_aval,
             response.data[i].direccion_aval,
             response.data[i].telefono_aval,
-            response.data[i].fecha_prestamo,
+            moment(response.data[i].fecha_prestamo).format("DD/MM/YYYY"),
             "$ " + response.data[i].monto_prestado,
             "$ " + response.data[i].pago_semanal,
             response.data[i].semanas,
-            status,
-            `
-                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                        `,
             response.data[i].nombre_ruta,
             response.data[i].nombre_poblacion,
+            status,
+            `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
+                        `,
           ]);
         }
         table.draw();
@@ -688,16 +691,16 @@ function getPrestamosPoblacion(poblacion_id) {
             response.data[i].nombre_aval,
             response.data[i].direccion_aval,
             response.data[i].telefono_aval,
-            response.data[i].fecha_prestamo,
+            moment(response.data[i].fecha_prestamo).format("DD/MM/YYYY"),
             "$ " + response.data[i].monto_prestado,
             "$ " + response.data[i].pago_semanal,
             response.data[i].semanas,
-            status,
-            `
-                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                        `,
             response.data[i].nombre_ruta,
             response.data[i].nombre_poblacion,
+            status,
+            `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
+                        `,
           ]);
         }
         table.draw();
@@ -755,16 +758,16 @@ function getPrestamosColocadora(colocadora_id) {
             response.data[i].nombre_aval,
             response.data[i].direccion_aval,
             response.data[i].telefono_aval,
-            response.data[i].fecha_prestamo,
+            moment(response.data[i].fecha_prestamo).format("DD/MM/YYYY"),
             "$ " + response.data[i].monto_prestado,
             "$ " + response.data[i].pago_semanal,
             response.data[i].semanas,
-            status,
-            `
-                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?p=${response.data[i].id}"><i class="fa-solid fa-eye"></i></a>
-                        `,
             response.data[i].nombre_ruta,
             response.data[i].nombre_poblacion,
+            status,
+            `
+                        <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
+                        `,
           ]);
         }
         table.draw();

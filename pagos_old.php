@@ -34,16 +34,23 @@
                     <div class="row p-2">
                         <div class="d-flex mt-2 w-100" style="gap: 1rem;">
                             <div class="form-group" style="width: 30%">
-                                <label for="search_filter">Filtrar por cliente</label>
-                                <input class="form-control" id="search_filter" type="text" placeholder="Buscar..." required />
+                                <label for="select_clientes_filtro">Filtrar por cliente</label>
+                                <select class="form-control select_clientes_filtro" id="select_clientes_filtro" style="width:50%;">
+                                    <option value="0">General</option>
+                                </select>
                             </div>
 
+                            <div class="form-group" style="width: 30%">
+                                <label for="select_clientes_prestamos_filtro">Filtrar por prestamo</label>
+                                <select class="form-control select_clientes_prestamos_filtro" id="select_clientes_prestamos_filtro" style="width:50%;" disabled>
+                                    <option value="0">General</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row p-3">
                         <div class="d-flex w-100 flex-row justify-content-end" style="gap: 1rem;">
-                            <button type="button" id="btn_limpiar_filtros" class="btn btn-primary" title="Mostrar todo"><i class="fa-solid fa-eye"></i></button>
                             <button type="button" id="btn_excel" class="btn btn-success" title="Exportar pagos a excel" onclick="tableToExcel('tabla_pagos', 'Hoja1')"><i class="fa-solid fa-file-excel"></i></button>
                         </div>
                     </div>
@@ -54,96 +61,8 @@
                                 <div class="card-header">
                                     <h3 class="card-title"><i class="fa-solid fa-money-bill"></i> Pagos registrados</h3>
                                 </div>
-                                <div class="card-body" id="card_body_pagos">
-
-                                
-
-                                <!--
-                                    EJEMPLO EMPIEZA AQUI    
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                Collapsible Group Item #1
-                                                </button>
-                                            </h2>
-                                        </div>
-
-                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <table class="table" id="tabla_pagos">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Sem.</th>
-                                                        <th scope="col">Folio</th>
-                                                        <th scope="col">Cliente</th>
-                                                        <th scope="col">Monto</th>
-                                                        <th scope="col" class="sum_pago_esperado">Pago</th>
-                                                        <th scope="col" class="sum_pago_recibido">Pagado</th>
-                                                        <th scope="col" class="sum_pago_multa">Multa</th>
-                                                        <th scope="col" class="sum_pago_pendiente">Pendiente</th>
-                                                        <th scope="col" class="sum_pago_total">Total</th>
-                                                        <th scope="col">Fecha</th>
-                                                        <th scope="col" class="sum_balance">Balance</th>
-                                                        <th scope="col">Estatus</th>
-                                                        <th scope="col">Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="table_body" style="font-size: 0.9rem !important;">
-                                                    
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr class="thead-dark">
-                                                        <th>Totales</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                </tfoot>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Collapsible Group Item #2
-                                            </button>
-                                        </h2>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            Some placeholder content for the second accordion panel. This panel is hidden by default.
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Collapsible Group Item #3
-                                            </button>
-                                        </h2>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>-->
-                                    <!--<table class="table" id="tabla_pagos">
+                                <div class="card-body">
+                                    <table class="table" id="tabla_pagos">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Sem.</th>
@@ -181,7 +100,7 @@
                                                 <th></th>
                                             </tr>
                                         </tfoot>
-                                    </table>-->
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -337,7 +256,7 @@
 
     <?php include 'templates/scripts.php' ?>
     <script src="js/auth.js"></script>
-    <script src="js/pagos2.js"></script>
+    <script src="js/pagos.js"></script>
     <script>
         var tableToExcel = (function() {
             var uri = 'data:application/vnd.ms-excel;base64,',

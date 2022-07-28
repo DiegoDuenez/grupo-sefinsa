@@ -104,10 +104,10 @@
                                             <th scope="col">Semana 19</th>
                                             <th scope="col">Semana 20</th>-->
                                                 <th scope="col">Modalidad</th>
-                                                <th scope="col">Estatus</th>
-                                                <th scope="col">Historial</th>
                                                 <th scope="col">Ruta</th>
                                                 <th scope="col">Población</th>
+                                                <th scope="col">Estatus</th>
+                                                <th scope="col">Historial</th>
                                             </tr>
                                         </thead>
                                         <tbody id="table_body">

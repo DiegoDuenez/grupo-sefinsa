@@ -357,7 +357,7 @@ function getPagosPrestamo(prestamo_id) {
             "$ " + response.data[i].cantidad_multa,
             `$ ${response.data[i].cantidad_pendiente}`,
             "$ " + response.data[i].cantidad_total_pagada,
-            response.data[i].fecha_pago,
+            moment(response.data[i].fecha_pago).format('DD/MM/YYYY'),
             "$ " + response.data[i].balance,
             status,
             response.data[i].status == 0
@@ -430,7 +430,7 @@ function getPagos() {
             "$ " + response.data[i].cantidad_multa,
             `$ ${response.data[i].cantidad_pendiente}`,
             "$ " + response.data[i].cantidad_total_pagada,
-            response.data[i].fecha_pago,
+            moment(response.data[i].fecha_pago).format('DD/MM/YYYY'),
             "$ " + response.data[i].balance,
             status,
             response.data[i].status == 0
@@ -778,7 +778,7 @@ function getPagosCliente(cliente_id) {
             "$ " + response.data[i].cantidad_multa,
             `$ ${response.data[i].cantidad_pendiente}`,
             "$ " + response.data[i].cantidad_total_pagada,
-            response.data[i].fecha_pago,
+            moment(response.data[i].fecha_pago).format('DD/MM/YYYY'),
             "$ " + response.data[i].balance,
             status,
             response.data[i].status == 0

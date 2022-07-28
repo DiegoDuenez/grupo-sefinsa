@@ -16,7 +16,8 @@ class Prestamo extends Database{
         avales.telefono as 'telefono_aval',
         rutas.nombre_ruta,
         poblaciones.nombre_poblacion,
-        configuracion_semanas.cantidad as 'semanas'
+        configuracion_semanas.cantidad as 'semanas',
+        clientes.id as 'cliente_id'
         FROM $this->table
         INNER JOIN clientes ON $this->table.cliente_id = clientes.id
         INNER JOIN avales ON prestamos.aval_id = avales.id
