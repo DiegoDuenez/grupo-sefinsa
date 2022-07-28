@@ -337,7 +337,7 @@
 
     <?php include 'templates/scripts.php' ?>
     <script src="js/auth.js"></script>
-    <script src="js/pagos2.js"></script>
+    <script src="js/pagos.js"></script>
     <script>
         var tableToExcel = (function() {
             var uri = 'data:application/vnd.ms-excel;base64,',
