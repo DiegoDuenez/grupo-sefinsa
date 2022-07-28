@@ -58,8 +58,8 @@ class Cliente extends Database{
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id
         INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id
-        LEFT JOIN prestamos ON prestamos.cliente_id = $this->table.id
-        LEFT JOIN pagos ON pagos.prestamo_id = prestamos.id
+        INNER JOIN prestamos ON prestamos.cliente_id = $this->table.id
+        INNER JOIN pagos ON pagos.prestamo_id = prestamos.id
         GROUP BY $this->table.id
         ORDER BY prestamos.fecha_prestamo DESC";
 

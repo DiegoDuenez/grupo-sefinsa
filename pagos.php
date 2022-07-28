@@ -55,9 +55,6 @@
                                     <h3 class="card-title"><i class="fa-solid fa-money-bill"></i> Pagos registrados</h3>
                                 </div>
                                 <div class="card-body" id="card_body_pagos">
-
-                                
-
                                 <!--
                                     EJEMPLO EMPIEZA AQUI    
                                 <div class="accordion" id="accordionExample">
