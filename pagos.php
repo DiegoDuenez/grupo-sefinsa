@@ -199,7 +199,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" >
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -260,7 +260,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="cuenta" role="tabpanel" aria-labelledby="cuenta-tab">
+                        <div class="tab-pane fade" id="cuenta" role="tabpanel" aria-labelledby="cuenta-tab" >
 
                             <div class="form-row mt-3">
                                 <p class="font-weight-bold" id="ec_cliente">Juan Perez</p>
@@ -325,7 +325,50 @@
     </div>
 
     <?php include 'templates/scripts.php' ?>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.25/dist/jspdf.plugin.autotable.js"></script>
     <script src="js/auth.js"></script>
+    <script>
+       
+         
+ 
+        let btn = document.getElementById('ec_cliente');
+
+        let conteudo = $('#cuenta')[0];
+
+        btn.addEventListener('click', function() {
+
+            /*doc.addHTML(conteudo).then(()=> {
+                var blob = doc.output("blob");
+                window.open((window.URL ? URL : webkitURL).createObjectURL(blob));
+                doc.save('pdfTable.pdf');
+            });*/
+           // doc.autoTable({ html: '#tabla_ec_pagos'})
+           /*doc.fromHTML($('#cuenta').get(0), 15, 15, {
+                'width': 170
+            });*/
+            /*doc.addHTML($('#cuenta').get(0)).then(()=> {
+                doc.save('pdfTable.pdf');
+            });*/
+            genPdf();
+
+        })
+
+        function genPdf(){
+            html2canvas($('#cuenta')[0], {
+                width: 800,
+                height: 800
+                }).then(function (canvas) {
+                var img = canvas.toDataURL("image/png");
+                var doc = new jsPDF({
+                        orientation: 'l', // landscape
+                        unit: 'pt', // points, pixels won't work properly
+                        format: [canvas.width, canvas.height] // set needed dimensions for any element
+                });
+                doc.addImage(img, 'JPEG', 55, 55);
+                doc.save('test.pdf');        
+            });
+        }
+    </script>
     <script src="js/pagos.js"></script>
     <script>
         var tableToExcel = (function() {
@@ -352,6 +395,11 @@
                 a.click();
             }
         })()
+
+        //var pdf = new jsPDF();
+
+       
+
     </script>
 
 </body>

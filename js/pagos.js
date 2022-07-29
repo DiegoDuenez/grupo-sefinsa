@@ -1,4 +1,4 @@
-URL = "php/Pagos/App.php";
+var DIRECCION = "php/Pagos/App.php";
 
 var btn_guardar_pago = $("#btn_guardar_pago");
 var inp_cantidad_pagada = $("#inp_cantidad_pagada");
@@ -33,6 +33,7 @@ var config_cantidad_semanas;
 var config_semana_renovar;
 
 var card_body_pagos = $('#card_body_pagos')
+
 
 $(document).ready(function () {
   tabla_ec_pagos = $("#tabla_ec_pagos").DataTable({
@@ -337,7 +338,7 @@ function getPagosPrestamo(prestamo_id, cliente_id) {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     dataType: "json",
     data: JSON.stringify(datasend),
     success: function (response) {
@@ -542,7 +543,7 @@ function getPagos() {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     dataType: "json",
     data: JSON.stringify(datasend),
     success: function (response) {
@@ -696,7 +697,7 @@ function omitirSemanaPago(pago_id) {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     data: JSON.stringify(datasend),
     dataType: "json",
     success: function (response) {
@@ -742,7 +743,7 @@ function puedeOmitirUltimaSemana(prestamo_id) {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     data: JSON.stringify(datasend),
     dataType: "json",
     success: function (response) {
@@ -789,7 +790,7 @@ function hacerPago(
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     data: JSON.stringify(datasend),
     dataType: "json",
     success: function (response) {
@@ -925,7 +926,7 @@ function getPagosCliente(cliente_id) {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     dataType: "json",
     data: JSON.stringify(datasend),
     success: function (response) {
@@ -1177,7 +1178,7 @@ function noPagar(pago_id, pago_multa, semana) {
 
       $.ajax({
         type: "POST",
-        url: URL,
+        url: DIRECCION,
         data: JSON.stringify(datasend),
         dataType: "json",
         success: function (response) {
@@ -1223,7 +1224,7 @@ function getPagosPrestamoPagados(prestamo_id) {
 
   $.ajax({
     type: "POST",
-    url: URL,
+    url: DIRECCION,
     dataType: "json",
     data: JSON.stringify(datasend),
     success: function (response) {

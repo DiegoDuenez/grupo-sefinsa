@@ -681,6 +681,13 @@ function getPrestamosRuta(ruta_id) {
             `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
                         `,
+                        `
+            <button class="btn btn-info btn_ver_info" onclick="modalVerInformacion(${response.data[i].numero_tarjeton},
+            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion_cliente}\', ${response.data[i].telefono_cliente},
+            \'${response.data[i].nombre_aval}\', \'${response.data[i].direccion_aval}\', \'${response.data[i].telefono_aval}\',
+            \'${response.data[i].or_aval}\',\'${response.data[i].garantias_aval}\'
+            )" title="Vista rapida" data-toggle="modal" data-target="#modal_ver_informacion"><i class="fa-solid fa-magnifying-glass"></i></button>
+            `,
           ]);
         }
         table.draw();
@@ -748,6 +755,13 @@ function getPrestamosPoblacion(poblacion_id) {
             `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
                         `,
+                        `
+            <button class="btn btn-info btn_ver_info" onclick="modalVerInformacion(${response.data[i].numero_tarjeton},
+            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion_cliente}\', ${response.data[i].telefono_cliente},
+            \'${response.data[i].nombre_aval}\', \'${response.data[i].direccion_aval}\', \'${response.data[i].telefono_aval}\',
+            \'${response.data[i].or_aval}\',\'${response.data[i].garantias_aval}\'
+            )" title="Vista rapida" data-toggle="modal" data-target="#modal_ver_informacion"><i class="fa-solid fa-magnifying-glass"></i></button>
+            `,
           ]);
         }
         table.draw();
@@ -815,6 +829,13 @@ function getPrestamosColocadora(colocadora_id) {
             `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
                         `,
+                        `
+            <button class="btn btn-info btn_ver_info" onclick="modalVerInformacion(${response.data[i].numero_tarjeton},
+            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion_cliente}\', ${response.data[i].telefono_cliente},
+            \'${response.data[i].nombre_aval}\', \'${response.data[i].direccion_aval}\', \'${response.data[i].telefono_aval}\',
+            \'${response.data[i].or_aval}\',\'${response.data[i].garantias_aval}\'
+            )" title="Vista rapida" data-toggle="modal" data-target="#modal_ver_informacion"><i class="fa-solid fa-magnifying-glass"></i></button>
+            `,
           ]);
         }
         table.draw();
@@ -1025,7 +1046,7 @@ btn_guardar_prestamo.click(function () {
             "c"
           );
 
-          getPrestamos();
+          getPrestamos($('#select_estatus_filtro option:selected').val());
         },
         error: function (e) {
           Swal.fire({
@@ -1165,7 +1186,8 @@ btn_guardar_prestamo.click(function () {
           });
 
           getClientes();
-          getPrestamos();
+          getPrestamos($('#select_estatus_filtro option:selected').val());
+
         },
         error: function (e) {
           Swal.fire({
@@ -1307,7 +1329,7 @@ btn_guardar_prestamo.click(function () {
             showConfirmButton: false,
           });
 
-          getPrestamos();
+          getPrestamos($('#select_estatus_filtro option:selected').val());
         },
         error: function (e) {
           var eString = JSON.parse(e.responseText);

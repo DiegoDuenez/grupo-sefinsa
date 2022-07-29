@@ -108,11 +108,13 @@ class Prestamo extends Database{
 
         $monto_prestado = $monto_renovar - $monto_debe;
 
-        $queryPrestamo = "SELECT * FROM $this->table WHERE id = '$prestamo_id'";
+        $queryPrestamo = "SELECT *, poblaciones.grupo FROM $this->table 
+        INNER JOIN poblaciones ON poblaciones.id = $this->table.poblacion_id 
+        WHERE id = '$prestamo_id'";
         $prestamo = $this->SelectOne($queryPrestamo);
 
         $this->create($prestamo['cliente_id'], $prestamo['direccion_cliente'], $prestamo['telefono_cliente'], $prestamo['ruta_id'], $prestamo['poblacion_id'],
-        $prestamo['colocadora_id'], $prestamo['aval_id'], $monto_renovar, $pago_semanal, $fecha_prestamo, $modalidad_semanas, 0, $tarjeton);
+        $prestamo['colocadora_id'], $prestamo['aval_id'], $monto_renovar, $pago_semanal, $fecha_prestamo, $modalidad_semanas, 0, $tarjeton, $prestamo['grupo']);
 
         $queryUpdatePrestamo = "UPDATE $this->table SET $this->table.status = ? WHERE $this->table.id = '$prestamo_id'";
         $update = $this->ExecuteQuery($queryUpdatePrestamo, [2]);
@@ -247,7 +249,7 @@ class Prestamo extends Database{
         ], 200);
     }
 
-    public function create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton){
+    public function create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton, $grupo){
 
         try{
 
@@ -255,9 +257,9 @@ class Prestamo extends Database{
 
             
 
-                $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, monto_prestado_intereses, pago_semanal, fecha_prestamo, modalidad_semanas, numero_tarjeton)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $monto_prestado_intereses, $pago_semanal, $fecha_prestamo, $modalidad, $tarjeton]);
+                $insert= "INSERT INTO $this->table (cliente_id, direccion_cliente, telefono_cliente, ruta_id, poblacion_id, colocadora_id, aval_id, monto_prestado, monto_prestado_intereses, pago_semanal, fecha_prestamo, modalidad_semanas, numero_tarjeton, grupo_poblacion)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $prestamo = $this->ExecuteQuery($insert, [$cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $monto_prestado_intereses, $pago_semanal, $fecha_prestamo, $modalidad, $tarjeton, $grupo]);
 
                 $prestamo_id = $this->lastId();
 

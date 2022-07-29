@@ -387,8 +387,12 @@ class Cliente extends Database{
                 if($cliente){
 
                     $cliente_id = $this->lastId();
+
+                    $queryPoblacion = "SELECT grupo FROM poblaciones WHERE id = '$poblacion_id'";
+                    $q = $this->SelectOne($queryPoblacion);
+
                     $Prestamo = new Prestamo();
-                    $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                    $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente,  $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton, $q['grupo']);
                    
                     if($p){
                         return json([
@@ -501,9 +505,11 @@ class Cliente extends Database{
                 WHERE $this->table.id = '$cliente_id' ";
                 $cliente = $this->ExecuteQuery($updateCliente, [$direccion_cliente, $telefono_cliente, $garantias_cliente, $ruta_id, $poblacion_id, $colocadora_id]);
 
+                $queryPoblacion = "SELECT grupo FROM poblaciones WHERE id = '$poblacion_id'";
+                $q = $this->SelectOne($queryPoblacion);
 
                 $Prestamo = new Prestamo();
-                $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                $p = $Prestamo->create($cliente_id, $direccion_cliente, $telefono_cliente, $ruta_id, $poblacion_id, $colocadora_id, $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton, $q['grupo']);
                 if($p){
                     return json([
                         'status' => 'success', 
@@ -559,8 +565,11 @@ class Cliente extends Database{
 
                 $clienteArray = $this->getCliente($cliente_id);
 
+                $queryPoblacion = "SELECT grupo FROM poblaciones WHERE id = '$poblacion_id'";
+                $q = $this->SelectOne($queryPoblacion);
+
                 $Prestamo = new Prestamo();
-                $p = $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton);
+                $p = $Prestamo->create($cliente_id, $clienteArray['direccion'], $clienteArray['telefono'], $clienteArray['ruta_id'], $clienteArray['poblacion_id'], $clienteArray['colocadora_id'], $aval_id, $monto_prestado, $pago_semanal, $fecha_prestamo, $modalidad, $monto_prestado_intereses, $tarjeton, $q['grupo']);
                 if($p){
                     return json([
                         'status' => 'success', 
