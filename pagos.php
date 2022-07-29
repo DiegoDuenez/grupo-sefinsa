@@ -365,7 +365,7 @@
                         format: [canvas.width, canvas.height] // set needed dimensions for any element
                 });
                 doc.addImage(img, 'JPEG', 55, 55);
-                doc.save('test.pdf');        
+                doc.save('Estado_de_Cuenta.pdf');        
             });
         }
     </script>

@@ -82,7 +82,7 @@ CREATE TABLE `avales` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `avales` (
 
 LOCK TABLES `avales` WRITE;
 /*!40000 ALTER TABLE `avales` DISABLE KEYS */;
-INSERT INTO `avales` VALUES (1,'Alondra Juarez','calle #2222','8711223529','television','1_Alondra Juarez','1_Alondra Juarez','casada','2022-07-20 22:05:30','2022-07-20 22:05:30'),(2,'Alberto Escobedo','calle #1292','8711223529','refrigerador','2_Alberto Escobedo','2_Alberto Escobedo','casado','2022-07-20 22:13:35','2022-07-20 22:13:35'),(3,'Vianey Lopez','calle #1292','8711223529','ss','3_Vianey Lopez','3_Vianey Lopez','cc','2022-07-20 22:15:31','2022-07-20 22:15:31'),(4,'Alondra Juarez','calle #1292','8711223529','celular','4_Alondra Juarez','4_Alondra Juarez','casada','2022-07-21 14:24:58','2022-07-21 14:24:58'),(5,'Vianey Lopez','calle #1292','8711223529','celular','5_Vianey Lopez','5_Vianey Lopez','Casada','2022-07-21 14:52:00','2022-07-21 14:52:00'),(6,'Alondra Juarez','calle #1292','8711223529','celular','6_Alondra Juarez','6_Alondra Juarez','casada','2022-07-21 15:03:46','2022-07-21 15:03:46'),(7,'Alondra Juarez','calle #4442','8711223529','cel\r\npantalla \r\ncel','7_Alondra Juarez','7_Alondra Juarez','vive fte a la iglesia ','2022-07-21 15:57:34','2022-07-21 15:57:34'),(8,'Hugo Dueñez','calle #1292','8711223529','celular','8_Hugo Dueñez','8_Hugo Dueñez','casado','2022-07-21 17:07:53','2022-07-21 17:07:53'),(9,'Alondra Juarez','asads','8711223529','as','9_Alondra Juarez','9_Alondra Juarez','sas','2022-07-21 17:19:19','2022-07-21 17:19:19'),(10,'dd','sdds','123','sd','10_dd','10_dd','sdsx','2022-07-21 17:21:09','2022-07-21 17:21:09'),(11,'Alondra Juarez','calle #1292','8711223529','celular','11_Alondra Juarez','11_Alondra Juarez','Casada','2022-07-21 17:30:38','2022-07-21 17:30:38'),(12,'sas','sas','8711223529','asa','12_sas','12_sas','asas','2022-07-21 17:36:34','2022-07-21 17:36:34'),(13,'Alberto Escobedo','calle #2222','8711223529','asas','13_Alberto Escobedo','13_Alberto Escobedo','asas','2022-07-21 17:52:45','2022-07-21 17:52:45'),(14,'asd','sas','8711223529','asa','14_asd','14_asd','saas','2022-07-21 17:54:33','2022-07-21 17:54:33'),(15,'asa','sasas','1','sas','15_asa','15_asa','sasa','2022-07-21 17:56:36','2022-07-21 17:56:36'),(16,'ssa','asas','8711223529','asa','16_ssa','16_ssa','asas','2022-07-21 17:57:59','2022-07-21 17:57:59'),(17,'Alondra Juarez','calle #2222','8711223529','sas','17_Alondra Juarez','17_Alondra Juarez','asa','2022-07-21 18:00:39','2022-07-21 18:00:39'),(18,'Alberto Escobedo','calle #1292','123','asas','18_Alberto Escobedo','18_Alberto Escobedo','asa','2022-07-21 18:07:58','2022-07-21 18:07:58'),(19,'asas','asa','2','sasa','19_asas','19_asas','asa','2022-07-21 18:26:20','2022-07-21 18:26:20'),(20,'Alberto Escobedos','sasa','8711223529','asas','20_Alberto Escobedos','20_Alberto Escobedos','saas','2022-07-21 18:44:48','2022-07-21 18:44:48'),(21,'sds','as','8711223529','sas','21_sds','21_sds','asa','2022-07-21 20:31:58','2022-07-21 20:31:58'),(22,'ss','asa','8711223529','asa','22_ss','22_ss','as','2022-07-21 20:36:47','2022-07-21 20:36:47'),(23,'Alondra Juarez','calle #1292','8711223529','csc','23_Alondra Juarez','23_Alondra Juarez','cscs','2022-07-21 20:44:51','2022-07-21 20:44:51'),(24,'asa','asa','8711223529','as','24_asa','24_asa','asa','2022-07-21 21:26:01','2022-07-21 21:26:01'),(25,'dsd','dsdd','3','sds','25_dsd','25_dsd','sds','2022-07-23 16:14:20','2022-07-23 16:14:20');
+INSERT INTO `avales` VALUES (1,'Hugo Dueñez','calle #1292','8711223529','celular','1_Hugo Dueñez','1_Hugo Dueñez','sd','2022-07-27 15:27:50','2022-07-27 15:27:50'),(2,'Alondra Juarez','calle #1292','8711223529','celular','2_Alondra Juarez','2_Alondra Juarez','casada','2022-07-27 16:34:18','2022-07-27 16:34:18'),(3,'Vianey Lopez','calle #1292','8711223529','television','3_Vianey Lopez','3_Vianey Lopez','casada','2022-07-28 14:44:23','2022-07-28 14:44:23'),(4,'Kelly Vazquez','calle #1292','8711223529','celular','4_Kelly Vazquez','4_Kelly Vazquez','casada','2022-07-28 17:13:37','2022-07-28 17:13:37'),(5,'Vianey Lopez','calle #1292','8711223529','television','5_Vianey Lopez','5_Vianey Lopez','soltero','2022-07-28 21:06:47','2022-07-28 21:06:47'),(6,'Saul Salas','calle #1292','8711223529','television','6_Saul Salas','6_Saul Salas','soltero','2022-07-28 21:07:45','2022-07-28 21:07:45'),(7,'Alondra Juarez','calle #1292','8711223529','television','7_Alondra Juarez','7_Alondra Juarez','casada','2022-07-28 21:09:33','2022-07-28 21:09:33'),(8,'Alondra Juarez','calle #1292','23','television','8_Alondra Juarez','8_Alondra Juarez','casada','2022-07-28 21:11:14','2022-07-28 21:11:14'),(9,'Saul Salas','calle #1292','8711223529','television','9_Saul Salas','9_Saul Salas','soltero','2022-07-28 21:12:06','2022-07-28 21:12:06'),(10,'Maria Gomez','calle #1292','8711223529','celular','10_Maria Gomez','10_Maria Gomez','casada','2022-07-28 23:05:16','2022-07-28 23:05:16'),(11,'Hugo Dueñez','calle #1292','8711223529','television','11_Hugo Dueñez','11_Hugo Dueñez','casado','2022-07-29 20:40:25','2022-07-29 20:40:25'),(12,'Maria Gomez','calle #1292','8711223529','sds','12_Maria Gomez','12_Maria Gomez','casada','2022-07-29 20:43:03','2022-07-29 20:43:03'),(13,'Alberto Escobedo','calle #1292','8711223529','as','13_Alberto Escobedo','13_Alberto Escobedo','casado','2022-07-29 20:44:48','2022-07-29 20:44:48'),(14,'Vianey Lopez','calle #1292','8711223529','television','14_Vianey Lopez','14_Vianey Lopez','soltera','2022-07-29 20:51:34','2022-07-29 20:51:34'),(15,'Vianey Lopez','calle #1292','8711223529','asa','15_Vianey Lopez','15_Vianey Lopez','asa','2022-07-29 21:02:51','2022-07-29 21:02:51');
 /*!40000 ALTER TABLE `avales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `clientes` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Diego Dueñez','calle #111','8711223529','celular','1_Diego Dueñez','1_Diego Dueñez','casado',1,2,17,'2022-07-20 22:05:30','2022-07-20 22:05:30'),(2,'Eduardo Corona','calle #191001','8711223529','celular','2_Eduardo Corona','2_Eduardo Corona','casado',1,2,17,'2022-07-21 14:52:00','2022-07-21 14:52:00'),(3,'Kevin Perez','calle #9191','8711223529','cel \r\npantalla\r\ntanque de gas','3_Kevin Perez','3_Kevin Perez','vive fte al campo',1,1,1,'2022-07-21 15:57:34','2022-07-21 15:57:34');
+INSERT INTO `clientes` VALUES (1,'Diego Dueñez','calle #111','8711223529','celular','1_Diego Dueñez','1_Diego Dueñez','casado',1,2,17,'2022-07-20 22:05:30','2022-07-20 22:05:30'),(2,'Eduardo Corona','calle #191001','8711223529','celular','2_Eduardo Corona','2_Eduardo Corona','casado',1,2,17,'2022-07-21 14:52:00','2022-07-21 14:52:00'),(3,'Kevin Perez','calle #9191','8711223529','cel \r\npantalla\r\ntanque de gas','3_Kevin Perez','3_Kevin Perez','vive fte al campo',1,1,1,'2022-07-21 15:57:34','2022-07-21 15:57:34'),(4,'Mario Rivera','calle #111','8711223529','celular','4_Mario Rivera','4_Mario Rivera','casado',1,4,19,'2022-07-28 23:05:16','2022-07-28 23:05:16'),(5,'Francisco Escobedo','calle #111','8711223529','celular','5_Francisco Escobedo','5_Francisco Escobedo','soltero',1,1,1,'2022-07-29 20:40:25','2022-07-29 20:40:25'),(6,'Mireya Esquivel','calle #191001','8711223529','celular','6_Mireya Esquivel','6_Mireya Esquivel','casada',1,4,19,'2022-07-29 20:51:34','2022-07-29 20:51:34');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ CREATE TABLE `colocadoras` (
   KEY `colocadoras_poblacion_id_foreign` (`poblacion_id`),
   CONSTRAINT `colocadoras_poblacion_id_foreign` FOREIGN KEY (`poblacion_id`) REFERENCES `poblaciones` (`id`),
   CONSTRAINT `colocadoras_ruta_id_foreign` FOREIGN KEY (`ruta_id`) REFERENCES `rutas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `colocadoras` (
 
 LOCK TABLES `colocadoras` WRITE;
 /*!40000 ALTER TABLE `colocadoras` DISABLE KEYS */;
-INSERT INTO `colocadoras` VALUES (1,'Juanita Perez','Calle #555','8711223529',1,1,1,'2022-06-18 17:06:42','2022-06-18 17:06:42'),(17,'Maria Ramirez','calle #9919','8711223529',1,1,2,'2022-07-07 18:53:19','2022-07-07 18:53:19');
+INSERT INTO `colocadoras` VALUES (1,'Juanita Perez','Calle #555','8711223529',1,1,1,'2022-06-18 17:06:42','2022-06-18 17:06:42'),(17,'Maria Ramirez','calle #9919','8711223529',1,1,2,'2022-07-07 18:53:19','2022-07-07 18:53:19'),(19,'Luisa Perez','calle #567','8711223529',1,1,4,'2022-07-28 23:04:21','2022-07-28 23:04:21');
 /*!40000 ALTER TABLE `colocadoras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `configuracion_multa` (
 
 LOCK TABLES `configuracion_multa` WRITE;
 /*!40000 ALTER TABLE `configuracion_multa` DISABLE KEYS */;
-INSERT INTO `configuracion_multa` VALUES (1,200.00,1);
+INSERT INTO `configuracion_multa` VALUES (1,50.00,1);
 /*!40000 ALTER TABLE `configuracion_multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +324,7 @@ CREATE TABLE `modulos` (
   `nombre_modulo` varchar(250) NOT NULL,
   `status` int(1) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -333,6 +333,7 @@ CREATE TABLE `modulos` (
 
 LOCK TABLES `modulos` WRITE;
 /*!40000 ALTER TABLE `modulos` DISABLE KEYS */;
+INSERT INTO `modulos` VALUES (1,'Perfiles',1),(2,'Usuarios',1),(3,'Empleados',1),(4,'Rutas',1),(5,'Poblaciones',1),(6,'Colocadoras',1),(7,'Clientes',1),(8,'Prestamos',1),(9,'Pagos',1),(10,'Configuraciones',1);
 /*!40000 ALTER TABLE `modulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,11 +357,11 @@ CREATE TABLE `pagos` (
   `fecha_pago_realizada` date DEFAULT NULL,
   `folio` int(11) DEFAULT NULL,
   `semana` int(11) DEFAULT NULL,
-  `balance` int(11) DEFAULT NULL,
+  `balance` decimal(10,2) DEFAULT NULL,
   `status` int(1) DEFAULT 0,
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,7 +370,7 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (1,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-07-30',NULL,NULL,1,0,1,'2022-07-23 11:15:10'),(2,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-08-06',NULL,NULL,2,0,1,'2022-07-23 11:15:10'),(3,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-08-13',NULL,NULL,3,0,1,'2022-07-23 11:15:10'),(4,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-08-20',NULL,NULL,4,0,1,'2022-07-23 11:15:10'),(5,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-08-27',NULL,NULL,5,0,1,'2022-07-23 11:15:10'),(6,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-09-03',NULL,NULL,6,0,1,'2022-07-23 11:15:10'),(7,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-09-10',NULL,NULL,7,0,1,'2022-07-23 11:15:10'),(8,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-09-17',NULL,NULL,8,0,1,'2022-07-23 11:15:10'),(9,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-09-24',NULL,NULL,9,0,1,'2022-07-23 11:15:10'),(10,1,500.00,500.00,0.00,0.00,500.00,'pago 500','2022-10-01','2022-07-23',9898989,10,7000,1,'2022-07-23 11:15:00'),(11,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-10-08',NULL,NULL,11,0,1,'2022-07-23 11:15:10'),(12,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-10-15',NULL,NULL,12,0,1,'2022-07-23 11:15:10'),(13,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-10-22',NULL,NULL,13,0,1,'2022-07-23 11:15:10'),(14,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-10-29',NULL,NULL,14,0,1,'2022-07-23 11:15:10'),(15,1,500.00,500.00,0.00,0.00,500.00,NULL,'2022-11-05',NULL,NULL,15,0,1,'2022-07-23 11:15:10'),(16,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-07-30',NULL,NULL,1,12000,0,'2022-07-23 11:15:10'),(17,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-06',NULL,NULL,2,12000,0,'2022-07-23 11:15:10'),(18,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-13',NULL,NULL,3,12000,0,'2022-07-23 11:15:10'),(19,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-20',NULL,NULL,4,12000,0,'2022-07-23 11:15:10'),(20,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-08-27',NULL,NULL,5,12000,0,'2022-07-23 11:15:10'),(21,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-03',NULL,NULL,6,12000,0,'2022-07-23 11:15:10'),(22,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-10',NULL,NULL,7,12000,0,'2022-07-23 11:15:10'),(23,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-17',NULL,NULL,8,12000,0,'2022-07-23 11:15:10'),(24,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-09-24',NULL,NULL,9,12000,0,'2022-07-23 11:15:10'),(25,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-01',NULL,NULL,10,12000,0,'2022-07-23 11:15:10'),(26,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-08',NULL,NULL,11,12000,0,'2022-07-23 11:15:10'),(27,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-15',NULL,NULL,12,12000,0,'2022-07-23 11:15:10'),(28,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-22',NULL,NULL,13,12000,0,'2022-07-23 11:15:10'),(29,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-10-29',NULL,NULL,14,12000,0,'2022-07-23 11:15:10'),(30,2,800.00,0.00,0.00,0.00,0.00,NULL,'2022-11-05',NULL,NULL,15,12000,0,'2022-07-23 11:15:10');
+INSERT INTO `pagos` VALUES (1,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-08-05',NULL,NULL,1,10500.00,0,'2022-07-29 15:51:34'),(2,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-08-12',NULL,NULL,2,10500.00,0,'2022-07-29 15:51:34'),(3,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-08-19',NULL,NULL,3,10500.00,0,'2022-07-29 15:51:34'),(4,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-08-26',NULL,NULL,4,10500.00,0,'2022-07-29 15:51:34'),(5,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-09-02',NULL,NULL,5,10500.00,0,'2022-07-29 15:51:34'),(6,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-09-09',NULL,NULL,6,10500.00,0,'2022-07-29 15:51:34'),(7,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-09-16',NULL,NULL,7,10500.00,0,'2022-07-29 15:51:35'),(8,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-09-23',NULL,NULL,8,10500.00,0,'2022-07-29 15:51:35'),(9,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-09-30',NULL,NULL,9,10500.00,0,'2022-07-29 15:51:35'),(10,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-10-07',NULL,NULL,10,10500.00,0,'2022-07-29 15:51:35'),(11,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-10-14',NULL,NULL,11,10500.00,0,'2022-07-29 15:51:35'),(12,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-10-21',NULL,NULL,12,10500.00,0,'2022-07-29 15:51:35'),(13,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-10-28',NULL,NULL,13,10500.00,0,'2022-07-29 15:51:35'),(14,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-11-04',NULL,NULL,14,10500.00,0,'2022-07-29 15:51:35'),(15,1,700.00,0.00,0.00,0.00,0.00,NULL,'2022-11-11',NULL,NULL,15,10500.00,0,'2022-07-29 15:51:35'),(16,2,640.00,640.00,0.00,0.00,640.00,'abono 640','2022-08-05','2022-07-30',6675,1,12160.00,1,'2022-07-29 17:13:15'),(17,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-08-12',NULL,NULL,2,12160.00,0,'2022-07-29 17:13:15'),(18,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-08-19',NULL,NULL,3,12160.00,0,'2022-07-29 17:13:15'),(19,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-08-26',NULL,NULL,4,12160.00,0,'2022-07-29 17:13:15'),(20,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-09-02',NULL,NULL,5,12160.00,0,'2022-07-29 17:13:15'),(21,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-09-09',NULL,NULL,6,12160.00,0,'2022-07-29 17:13:15'),(22,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-09-16',NULL,NULL,7,12160.00,0,'2022-07-29 17:13:15'),(23,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-09-23',NULL,NULL,8,12160.00,0,'2022-07-29 17:13:15'),(24,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-09-30',NULL,NULL,9,12160.00,0,'2022-07-29 17:13:15'),(25,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-10-07',NULL,NULL,10,12160.00,0,'2022-07-29 17:13:15'),(26,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-10-14',NULL,NULL,11,12160.00,0,'2022-07-29 17:13:15'),(27,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-10-21',NULL,NULL,12,12160.00,0,'2022-07-29 17:13:15'),(28,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-10-28',NULL,NULL,13,12160.00,0,'2022-07-29 17:13:15'),(29,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-11-04',NULL,NULL,14,12160.00,0,'2022-07-29 17:13:15'),(30,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-11-11',NULL,NULL,15,12160.00,0,'2022-07-29 17:13:15'),(31,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-11-18',NULL,NULL,16,12160.00,0,'2022-07-29 17:13:15'),(32,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-11-25',NULL,NULL,17,12160.00,0,'2022-07-29 17:13:15'),(33,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-12-02',NULL,NULL,18,12160.00,0,'2022-07-29 17:13:15'),(34,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-12-09',NULL,NULL,19,12160.00,0,'2022-07-29 17:13:15'),(35,2,640.00,0.00,0.00,0.00,0.00,NULL,'2022-12-16',NULL,NULL,20,12160.00,0,'2022-07-29 17:13:15');
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +388,7 @@ CREATE TABLE `perfiles` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +397,7 @@ CREATE TABLE `perfiles` (
 
 LOCK TABLES `perfiles` WRITE;
 /*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
-INSERT INTO `perfiles` VALUES (1,'administrador','usuario','2022-06-15 15:09:13','2022-06-15 15:09:13'),(2,'cobrador','empleado','2022-06-15 19:23:50','2022-06-15 19:23:50'),(3,'secretario','usuario','2022-06-30 16:45:54','2022-06-30 16:45:54'),(4,'otro','usuario','2022-07-06 19:36:18','2022-07-06 19:36:18');
+INSERT INTO `perfiles` VALUES (1,'administrador','usuario','2022-06-15 15:09:13','2022-06-15 15:09:13'),(2,'cobrador','usuario','2022-06-15 19:23:50','2022-06-15 19:23:50'),(3,'secretario','empleado','2022-06-30 16:45:54','2022-06-30 16:45:54'),(8,'unperfil','usuario','2022-07-25 18:21:31','2022-07-25 18:21:31'),(9,'mario','usuario','2022-07-28 22:30:10','2022-07-28 22:30:10');
 /*!40000 ALTER TABLE `perfiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,7 +413,7 @@ CREATE TABLE `perfiles_modulos` (
   `perfil_id` int(11) DEFAULT NULL,
   `modulo_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,6 +422,7 @@ CREATE TABLE `perfiles_modulos` (
 
 LOCK TABLES `perfiles_modulos` WRITE;
 /*!40000 ALTER TABLE `perfiles_modulos` DISABLE KEYS */;
+INSERT INTO `perfiles_modulos` VALUES (11,5,2),(12,5,4),(59,4,5),(60,4,9),(61,4,10),(62,6,1),(63,6,7),(64,6,8),(65,7,2),(131,3,4),(134,2,7),(137,8,3),(138,8,4),(139,8,7),(140,8,10),(169,9,2),(170,9,3),(171,9,6),(172,1,1),(173,1,2),(174,1,3),(175,1,4),(176,1,5),(177,1,6),(178,1,7),(179,1,8),(180,1,9),(181,1,10);
 /*!40000 ALTER TABLE `perfiles_modulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +445,7 @@ CREATE TABLE `poblaciones` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,7 +454,7 @@ CREATE TABLE `poblaciones` (
 
 LOCK TABLES `poblaciones` WRITE;
 /*!40000 ALTER TABLE `poblaciones` DISABLE KEYS */;
-INSERT INTO `poblaciones` VALUES (1,'Poblacion1','14:00:00','18:59:59','Lunes',50.00,1,1,'2022-07-06 17:27:54','2022-07-06 17:27:54'),(2,'Poblacion2','10:00:00','14:30:00','Lunes',50.00,1,1,'2022-07-07 17:32:20','2022-07-07 17:32:20'),(3,'Hormiguero','15:00:00','18:59:59','Martes',50.00,1,2,'2022-07-07 20:27:54','2022-07-07 20:27:54');
+INSERT INTO `poblaciones` VALUES (1,'Poblacion1','14:00:00','18:59:59','Lunes',50.00,1,1,'2022-07-06 17:27:54','2022-07-06 17:27:54'),(2,'Poblacion2','10:00:00','14:30:00','Lunes',50.00,1,1,'2022-07-07 17:32:20','2022-07-07 17:32:20'),(4,'Hormiguero','17:00:00','23:59:59','Lunes',50.00,67,1,'2022-07-28 23:03:20','2022-07-28 23:03:20');
 /*!40000 ALTER TABLE `poblaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,6 +474,7 @@ CREATE TABLE `prestamos` (
   `poblacion_id` int(10) DEFAULT NULL,
   `colocadora_id` int(10) DEFAULT NULL,
   `aval_id` int(10) DEFAULT NULL,
+  `grupo_poblacion` int(11) DEFAULT 0,
   `monto_prestado` double(10,2) NOT NULL,
   `monto_prestado_intereses` double(10,2) DEFAULT 0.00,
   `pago_semanal` double(10,2) NOT NULL,
@@ -491,7 +494,7 @@ CREATE TABLE `prestamos` (
 
 LOCK TABLES `prestamos` WRITE;
 /*!40000 ALTER TABLE `prestamos` DISABLE KEYS */;
-INSERT INTO `prestamos` VALUES (1,1,'calle #111','8711223529',1,2,17,25,5000.00,0.00,500.00,'2022-07-23',1,12345,2,'2022-07-23 16:14:20','2022-07-23 11:15:10'),(2,1,'calle #111','8711223529',1,2,17,25,8000.00,0.00,800.00,'2022-07-23',1,4567876,0,'2022-07-23 16:15:09','2022-07-23 11:15:09');
+INSERT INTO `prestamos` VALUES (1,6,'calle #191001','8711223529',1,4,19,14,67,7000.00,0.00,700.00,'2022-07-29',1,12234,0,'2022-07-29 20:51:34','2022-07-29 15:51:34'),(2,2,'calle #191001','8711223529',1,2,17,15,1,8000.00,0.00,640.00,'2022-07-29',2,5665,0,'2022-07-29 21:02:51','2022-07-29 16:02:51');
 /*!40000 ALTER TABLE `prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -565,7 +568,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -574,7 +577,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Diego Dueñez','diego03',1,'$2y$10$SuXZ7k7.FZZtXc56XhxoHuzgjMMrj3HW3Nj0un6JojK5iq6tswxXW',1,'2022-06-13 16:56:23','2022-06-13 16:56:23');
+INSERT INTO `users` VALUES (1,'Diego Dueñez','diego03',1,'$2y$10$SuXZ7k7.FZZtXc56XhxoHuzgjMMrj3HW3Nj0un6JojK5iq6tswxXW',1,'2022-06-13 16:56:23','2022-06-13 16:56:23'),(51,'Mario Rivera','mrivera',1,'$2y$10$SuXZ7k7.FZZtXc56XhxoHuzgjMMrj3HW3Nj0un6JojK5iq6tswxXW',1,'2022-07-27 18:54:14','2022-07-27 18:54:14'),(52,'Mario Rivera','mrivera2',9,'$2y$10$/ERTEq0.ESyxfmWFw59rDe9I5KysOrHbTNfKZ2L7q3DOsT3RKzbMO',1,'2022-07-28 22:31:18','2022-07-28 22:31:18');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -587,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-23 13:58:22
+-- Dump completed on 2022-07-29 17:39:52
