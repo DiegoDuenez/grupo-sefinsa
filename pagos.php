@@ -308,11 +308,6 @@
                         </div>
                     </div>
 
-
-
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-secondary d-none" id="btn_omitir_pago">Omitir pago</button>
@@ -321,6 +316,9 @@
             </div>
         </div>
     </div>
+
+
+    <
 
 
     <?php include 'templates/footer.php' ?>

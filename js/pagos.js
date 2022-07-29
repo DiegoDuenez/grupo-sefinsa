@@ -810,7 +810,7 @@ function hacerPago(
               window.location.href = `${env.local.url}prestamos.php?p=${prestamo_id}`;
             } else {
               $("#modal_pagar").modal("toggle");
-              getPagos();
+              getClientes();
             }
           });
         } else {
@@ -823,17 +823,6 @@ function hacerPago(
             showCancelButton: false,
             showConfirmButton: false,
           }).then((result) => {
-            /*if (clienteIdFiltro) {
-              if (prestamoId) {
-                getPagosPrestamo(prestamoIdFiltro);
-              } else {
-                getPagosCliente(clienteIdFiltro);
-              }
-              getClientes();
-
-            } else {
-              getClientes();
-            }*/
             getClientes();
           });
         }

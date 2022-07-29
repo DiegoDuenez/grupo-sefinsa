@@ -41,6 +41,7 @@ $(document).ready(function () {
   $("#search_filter").on("keyup", function () {
     var value = $(this).val().toLowerCase();
     $("#accordion .card").filter(function () {
+      //alert($(this).text().toLowerCase())
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
   });

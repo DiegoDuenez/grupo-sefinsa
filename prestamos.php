@@ -58,7 +58,10 @@
                                 <select class="form-control select_estatus_filtro" id="select_estatus_filtro" style="width:auto;">
                                     <option value="0">Pagandose</option>
                                     <option value="1">Pagado</option>
-                                    <option value="2">General</option>
+                                    <option value="2">Renovado</option>
+                                    <option value="-1">Vencido</option>
+                                    <option value="3">General</option>
+
                                 </select>
                             </div>
 
@@ -118,6 +121,8 @@
                                                 <th scope="col">Población</th>
                                                 <th scope="col">Estatus</th>
                                                 <th scope="col">Historial</th>
+                                                <th scope="col">Info.</th>
+
                                             </tr>
                                         </thead>
                                         <tbody id="table_body">
@@ -126,6 +131,7 @@
                                         <tfoot>
                                             <tr class="thead-dark">
                                                 <th>Totales</th>
+                                                <th></th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
@@ -668,7 +674,7 @@
 
                         <div class="form-group col mt-2">
                             <label for="inp_tarjeton_renovar">Número de tarjetón <span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input class="form-control" id="inp_tarjeton_renovar" type="number" placeholder="Número de tarjetón" required " min=" 0" />
+                            <input class="form-control" id="inp_tarjeton_renovar" type="number" placeholder="Número de tarjetón" required min=" 0" />
                         </div>
 
                     </div>
@@ -695,6 +701,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Ver Informacion  -->
+    <div class="modal fade" id="modal_ver_informacion" tabindex="-1" aria-labelledby="modal_ver_informacion_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal_ver_informacion_label">Información préstamo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Nombre cliente:</p>
+                            <p id="info_nombre_cliente"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Dirección cliente:</p>
+                            <p id="info_direccion_cliente"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Télefono cliente:</p>
+                            <p id="info_telefono_cliente"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Nombre aval:</p>
+                            <p id="info_nombre_aval"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Dirección aval:</p>
+                            <p id="info_direccion_aval"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Teléfono aval:</p>
+                            <p id="info_telefono_aval"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Otras referencias aval:</p>
+                            <p id="info_or_aval"></p>
+                        </div>
+                        <div class="d-flex w-100" style="gap: 0.5rem;">
+                            <p class="text-bold">Garantias aval:</p>
+                            <p id="info_garantias_aval"></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     <?php include 'templates/footer.php' ?>

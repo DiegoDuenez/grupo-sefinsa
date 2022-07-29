@@ -319,7 +319,7 @@ $("#select_colocadoras_filtro").on("change", function () {
 $("#select_estatus_filtro").on("change", function () {
   $("#select_poblaciones_filtro").val(0).trigger("change.select2");
   $("#select_rutas_filtro").val(0).trigger("change.select2");
-  if(this.value == 2){
+  if(this.value == 3){
     getPrestamos()
   }
   else{
@@ -592,6 +592,13 @@ function getPrestamos(estatus = null) {
             `
                         <a class="btn btn-info btn_ver_semanas" title="Ver pagos" href="${env.local.url}pagos.php?c=${response.data[i].cliente_id}&p=${response.data[i].id}"><i class="fa-solid fa-money-bill"></i></a>
                         `,
+            `
+            <button class="btn btn-info btn_ver_info" onclick="modalVerInformacion(${response.data[i].numero_tarjeton},
+            \'${response.data[i].nombre_completo}\', \'${response.data[i].direccion_cliente}\', ${response.data[i].telefono_cliente},
+            \'${response.data[i].nombre_aval}\', \'${response.data[i].direccion_aval}\', \'${response.data[i].telefono_aval}\',
+            \'${response.data[i].or_aval}\',\'${response.data[i].garantias_aval}\'
+            )" title="Vista rapida" data-toggle="modal" data-target="#modal_ver_informacion"><i class="fa-solid fa-magnifying-glass"></i></button>
+            `,
           ]);
         }
 
@@ -609,6 +616,20 @@ function getPrestamos(estatus = null) {
       $.unblockUI();
     },
   });
+}
+
+function modalVerInformacion(tarjeton, nombre_cliente, direccion_cliente, telefono_cliente, nombre_aval, direccion_aval, telefono_aval, otras_referencias_aval, garantias_aval)
+{
+  $('#modal_ver_informacion_label').text(`Información préstamo ${tarjeton}`)
+  $('#info_nombre_cliente').text(nombre_cliente)
+  $('#info_direccion_cliente').text(direccion_cliente)
+  $('#info_telefono_cliente').text(telefono_cliente)
+  $('#info_nombre_aval').text(nombre_aval)
+  $('#info_direccion_aval').text(direccion_aval)
+  $('#info_telefono_aval').text(telefono_aval)
+  $('#info_or_aval').text(otras_referencias_aval)
+  $('#info_garantias_aval').text(garantias_aval)
+
 }
 
 function getPrestamosRuta(ruta_id) {
@@ -962,7 +983,7 @@ btn_guardar_prestamo.click(function () {
       });
 
       var alerta = Swal.fire({
-        title: "Guardando prestamo",
+        title: "Guardando préstamo",
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
@@ -991,8 +1012,8 @@ btn_guardar_prestamo.click(function () {
 
           Swal.fire({
             icon: "success",
-            title: "Nuevo prestamo",
-            text: "Se ha registrado un nuevo prestamo",
+            title: "Nuevo préstamo",
+            text: "Se ha registrado un nuevo préstamo",
             timer: 1000,
             showCancelButton: false,
             showConfirmButton: false,
@@ -1108,7 +1129,7 @@ btn_guardar_prestamo.click(function () {
       });
 
       var alerta = Swal.fire({
-        title: "Guardando prestamo",
+        title: "Guardando préstamo",
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
@@ -1136,8 +1157,8 @@ btn_guardar_prestamo.click(function () {
 
           Swal.fire({
             icon: "success",
-            title: "Nuevo prestamo",
-            text: "Se ha registrado un nuevo prestamo",
+            title: "Nuevo préstamo",
+            text: "Se ha registrado un nuevo préstamo",
             timer: 1000,
             showCancelButton: false,
             showConfirmButton: false,
@@ -1251,7 +1272,7 @@ btn_guardar_prestamo.click(function () {
       );
 
       var alerta = Swal.fire({
-        title: "Guardando prestamo",
+        title: "Guardando préstamo",
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
@@ -1279,8 +1300,8 @@ btn_guardar_prestamo.click(function () {
 
           Swal.fire({
             icon: "success",
-            title: "Nuevo prestamo",
-            text: "Se ha registrado un nuevo prestamo",
+            title: "Nuevo préstamo",
+            text: "Se ha registrado un nuevo préstamo",
             timer: 1000,
             showCancelButton: false,
             showConfirmButton: false,
@@ -1733,8 +1754,8 @@ function renovarPrestamo(
       if (response.status == "success") {
         Swal.fire({
           icon: "success",
-          title: "Prestamo renovado",
-          text: "Se ha renovado el prestamo",
+          title: "Préstamo renovado",
+          text: "Se ha renovado el préstamo",
           timer: 1000,
           showCancelButton: false,
           showConfirmButton: false,
