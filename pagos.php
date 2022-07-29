@@ -260,49 +260,58 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="cuenta" role="tabpanel" aria-labelledby="cuenta-tab" >
+                        <div class="tab-pane fade" id="cuenta" role="tabpanel" aria-labelledby="cuenta-tab"  >
 
                             <div class="form-row mt-3">
-                                <p class="font-weight-bold" id="ec_cliente">Juan Perez</p>
+                                <button type="submit" class="btn btn-danger " style="width: fit-content;" id="btn_pdf" title="Exportar a PDF"><i class="fa-solid fa-file-pdf"></i></button>
                             </div>
-                            <div class="form-row">
-                                <div class="d-flex flex-row w-100" style="gap: 2rem;">
-                                    <p id="ec_ruta">R1</p>
-                                    <p id="ec_poblacion">Población 1</p>
-                                    <p id="ec_monto">$8000.00</p>
+
+                            
+                            <div id="data-pdf">
+                                <div class="form-row mt-3">
+                                    <p class="font-weight-bold" id="ec_cliente">Juan Perez</p>
                                 </div>
-                            </div>
+                                
+                                <div class="form-row">
+                                    <div class="d-flex flex-row w-100" style="gap: 2rem;">
+                                        <p id="ec_ruta">R1</p>
+                                        <p id="ec_poblacion">Población 1</p>
+                                        <p id="ec_monto">$8000.00</p>
+                                    </div>
+                                </div>
 
-                            <div class="form-row mt-3">
-                                <p class="font-weight-bold" id="ec_fecha_prestamo">Fecha prestamo: <span class="font-weight-normal" id="span_fecha_prestamo">19/12/2022</span></p>
-                            </div>
+                                <div class="form-row mt-3">
+                                    <p class="font-weight-bold" id="ec_fecha_prestamo">Fecha prestamo: <span class="font-weight-normal" id="span_fecha_prestamo">19/12/2022</span></p>
+                                </div>
 
 
-                            <div class="mt3">
-                                <p class="font-weight-bold">Pagos recibidos </p>
-                                <table class="table" id="tabla_ec_pagos">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Semana</th>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col" class="sum_ec_abono">Abono</th>
-                                            <th scope="col" class="sum_ec_multa">Multa</th>
-                                            <th scope="col">Estatus</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="table_ec_body">
+                                <div class="mt3">
+                                    <p class="font-weight-bold">Pagos recibidos </p>
+                                    <table class="table" id="tabla_ec_pagos">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Semana</th>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col" class="sum_ec_abono">Abono</th>
+                                                <th scope="col" class="sum_ec_multa">Multa</th>
+                                                <th scope="col">Estatus</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table_ec_body">
 
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="thead-dark">
-                                            <th>Totales</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="thead-dark">
+                                                <th>Totales</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
                             </div>
 
                         </div>
@@ -331,9 +340,9 @@
        
          
  
-        let btn = document.getElementById('ec_cliente');
+        let btn = document.getElementById('btn_pdf');
 
-        let conteudo = $('#cuenta')[0];
+        let conteudo = $('#data-pdf')[0];
 
         btn.addEventListener('click', function() {
 
@@ -354,7 +363,7 @@
         })
 
         function genPdf(){
-            html2canvas($('#cuenta')[0], {
+            html2canvas($('#data-pdf')[0], {
                 width: 800,
                 height: 800
                 }).then(function (canvas) {
