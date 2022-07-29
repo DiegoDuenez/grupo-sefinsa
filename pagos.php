@@ -231,9 +231,7 @@
                                         <input class="form-control" id="inp_cantidad_pagada" type="number" placeholder="0.00" required name="price" min="0.00" value="" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-row">
                                 <div class="form-group col mt-2">
                                     <label for="inp_folio">Folio <span class="text-danger" title="Campo obligatorio">*</span></label>
                                     <input class="form-control" id="inp_folio" type="number" placeholder="Folio de pago" required min="0" />
@@ -245,15 +243,11 @@
                                     <label for="inp_fecha_pago">Fecha de pago <span class="text-danger" title="Campo obligatorio">*</span></label>
                                     <input class="form-control" id="inp_fecha_pago" type="date" value="<?php echo date('Y-m-d'); ?>" required />
                                 </div>
-                            </div>
-
-                            <div class="form-row">
                                 <div class="form-group col mt-2" id="group_or_client">
                                     <label for="inp_concepto">Concepto <span class="text-danger" title="Campo obligatorio">*</span></label>
                                     <textarea class="form-control" id="inp_concepto" rows="3" required></textarea>
                                 </div>
                             </div>
-
 
                             <div class="form-row">
                                 <div class="form-group mt-2">

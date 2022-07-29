@@ -619,12 +619,12 @@ function modalPagar(
   cb_multa.prop("checked", false);
   label_multa.text(`Aplicar multa de $${monto_multa}`);
   span_pago.text(`$ ${pago}`);
-  span_balance.text(`$ ${balance}`);
+  span_balance.text(`$ ${balance.toFixed(2)}`);
   ec_cliente.text(cliente);
   ec_ruta.text(ruta);
   ec_poblacion.text(poblacion);
   ec_monto.text(`$ ${monto}`);
-  span_fecha_prestamo.text(fecha_prestamo);
+  span_fecha_prestamo.text(moment(fecha_prestamo).format("DD/MM/YYYY"),);
 
   semana_renovar_pago_seleccionado = semana;
   modalidad_id_pago_seleccionado = modalidad;
@@ -880,7 +880,7 @@ function getClientes() {
                         <div class="card-header" style="cursor: pointer;" id="headingOne" data-toggle="collapse" data-target="#collapse${response.data[i].id}" aria-expanded="true" aria-controls="collapse${response.data[i].id}">
                           <h5 class="mb-0">
                               <button class="btn btn-link" >
-                              <i class="fa-solid fa-handshake"></i> ${response.data[i].nombre_completo}
+                              <i class="fa-solid fa-handshake"></i> ${response.data[i].nombre_completo} (${response.data[i].prestamo_tarjeton})
                               </button>
                           </h5>
                         </div>

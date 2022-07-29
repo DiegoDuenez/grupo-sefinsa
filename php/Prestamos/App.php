@@ -25,6 +25,11 @@ switch($func){
         echo $Prestamo->getPrestamo($prestamo_id);
     break;
 
+    case 'prestamosEstatus':
+        $estatus = $_DATA['estatus'];
+        echo $Prestamo->prestamosEstatus($estatus);
+    break;
+
     case 'generarPagos':
 
         $prestamo_id = $_DATA['prestamo_id'];

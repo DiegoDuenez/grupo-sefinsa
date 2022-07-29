@@ -53,7 +53,8 @@ class Cliente extends Database{
         colocadoras.poblacion_id as 'poblacion_colocadora',
         rutas.id as 'ruta_id', rutas.nombre_ruta as 'nombre_ruta',
         poblaciones.id as 'poblacion_id', poblaciones.nombre_poblacion as 'nombre_poblacion',
-        prestamos.id as 'prestamo_id'
+        prestamos.id as 'prestamo_id',
+        prestamos.numero_tarjeton as 'prestamo_tarjeton'
         FROM $this->table 
         INNER JOIN colocadoras ON $this->table.colocadora_id = colocadoras.id
         INNER JOIN rutas ON rutas.id = $this->table.ruta_id

@@ -167,7 +167,7 @@ $(document).ready(function () {
     bPaginate: false,
   });
 
-  getPrestamos();
+  getPrestamos(0);
   getRutas();
   getClientes();
   getPoblaciones();
@@ -221,6 +221,10 @@ $(document).ready(function () {
     width: "100%",
   });
   $("#select_colocadoras_filtro").select2({
+    theme: "bootstrap4",
+    width: "100%",
+  });
+  $("#select_estatus_filtro").select2({
     theme: "bootstrap4",
     width: "100%",
   });
@@ -286,7 +290,7 @@ $("#select_rutas_filtro").on("change", function () {
   $("#select_poblaciones_filtro").val(0).trigger("change.select2");
   $("#select_colocadoras_filtro").val(0).trigger("change.select2");
   if (this.value == 0) {
-    getPrestamos();
+    getPrestamos(0);
   } else {
     getPrestamosRuta(this.value);
   }
@@ -296,7 +300,7 @@ $("#select_poblaciones_filtro").on("change", function () {
   $("#select_colocadoras_filtro").val(0).trigger("change.select2");
   $("#select_rutas_filtro").val(0).trigger("change.select2");
   if (this.value == 0) {
-    getPrestamos();
+    getPrestamos(0);
   } else {
     getPrestamosPoblacion(this.value);
   }
@@ -306,10 +310,23 @@ $("#select_colocadoras_filtro").on("change", function () {
   $("#select_poblaciones_filtro").val(0).trigger("change.select2");
   $("#select_rutas_filtro").val(0).trigger("change.select2");
   if (this.value == 0) {
-    getPrestamos();
+    getPrestamos(0);
   } else {
     getPrestamosColocadora(this.value);
   }
+});
+
+$("#select_estatus_filtro").on("change", function () {
+  $("#select_poblaciones_filtro").val(0).trigger("change.select2");
+  $("#select_rutas_filtro").val(0).trigger("change.select2");
+  if(this.value == 2){
+    getPrestamos()
+  }
+  else{
+    getPrestamos(this.value);
+
+  }
+
 });
 
 select_clientes_registrar.on("change", function () {
@@ -510,7 +527,7 @@ function getColocadoras() {
   });
 }
 
-function getPrestamos() {
+function getPrestamos(estatus = null) {
   clearInputs();
 
   $.blockUI({
@@ -518,9 +535,18 @@ function getPrestamos() {
     css: { backgroundColor: null, color: "#fff", border: null },
   });
 
-  var datasend = {
-    func: "index",
-  };
+  if(estatus == null){
+    var datasend = {
+      func: "index",
+    };
+  }
+  else{
+    var datasend = {
+      func: "prestamosEstatus",
+      estatus
+    };
+  }
+  
 
   $.ajax({
     type: "POST",
